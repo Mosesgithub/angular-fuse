@@ -1,34 +1,24 @@
 import {Inject, Injectable} from 'angular2/src/core/di';
 import {RenderComponentTemplate} from 'angular2/src/core/render/api';
 import {createRenderView, NodeFactory} from 'angular2/src/core/render/view_factory';
-import {
-Renderer,
-RenderEventDispatcher,
-RenderElementRef,
-RenderProtoViewRef,
-RenderViewRef,
-RenderFragmentRef,
-RenderViewWithFragments,
-RenderTemplateCmd
-} from 'angular2/src/core/render/api';
+import {Renderer, RenderEventDispatcher, RenderElementRef, RenderProtoViewRef, RenderViewRef, RenderFragmentRef, RenderViewWithFragments, RenderTemplateCmd} from 'angular2/src/core/render/api';
 import {isBlank} from 'angular2/src/facade/lang';
-import {
-DefaultProtoViewRef,
-DefaultRenderView,
-DefaultRenderFragmentRef
-} from 'angular2/src/core/render/view';
+import {DefaultProtoViewRef, DefaultRenderView, DefaultRenderFragmentRef} from 'angular2/src/core/render/view';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import {ViewNode, DummyViewNode} from './view_node';
 
-//var console = {log: function(msg) {}}
-
-
+import {resolveInternalFuseView, FuseViewRef, FuseView} from './view';
+import {FuseElement, FuseFragmentRef, resolveInternalFuseFragment} from './fuse_element';
 
 @Injectable()
 export class FuseRenderer extends Renderer {
     constructor() {
         super();
-        console.log('FuseRenderer created');
+        console.log("FuseRenderer.constructor", arguments);
+    }
+
+    setBindingDebugInfo(location: RenderElementRef, propertyName: string, propertyValue: string): void {
+        //let node = resolveBoundNode(location);
+        //console.log('FuseRenderer.setBindingDebugInfo: ' + node.viewName + ', ' + propertyName + ' = ' + propertyValue, arguments);
     }
 
     public createProtoView(componentTemplateId: string, cmds: RenderTemplateCmd[]): RenderProtoViewRef {
@@ -36,152 +26,10 @@ export class FuseRenderer extends Renderer {
         return new DefaultProtoViewRef(this._componentTemplates.get(componentTemplateId), cmds);
     }
 
-    public createRootHostView(hostProtoViewRef: RenderProtoViewRef, fragmentCount: number, hostElementSelector: string): RenderViewWithFragments {
-        console.log("FuseRenderer.createRootHostView", arguments);
-        let rootViewWithFragments = this._createView(hostProtoViewRef, null);
-        let rootView = resolveInternalDomView(rootViewWithFragments.viewRef);
-        let rootNode = rootView.boundElements[0];
-        rootNode.attachToView();
-        return rootViewWithFragments;
-    }
-
-    public createView(protoViewRef: RenderProtoViewRef, fragmentCount: number): RenderViewWithFragments {
-        console.log("FuseRenderer.createView", arguments);
-        return this._createView(protoViewRef, null);
-    }
-
-    private _createView(protoViewRef: RenderProtoViewRef, inplaceElement: HTMLElement): RenderViewWithFragments {
-        var dpvr = <DefaultProtoViewRef>protoViewRef;
-        var view = createRenderView(dpvr.template, dpvr.cmds, inplaceElement, this);
-        return new RenderViewWithFragments(view, view.fragments);
-    }
-
-    public destroyView(viewRef: RenderViewRef) {
-        console.log("FuseRenderer.destroyView", arguments);
-        // Seems to be called on component dispose only (router outlet)
-        //TODO: handle this when we resolve routing and navigation.
-    }
-
-    // public getRootNodes(fragment: RenderFragmentRef): ViewNode[] {
-    //     return resolveInternalDomFragment(fragment);
-    // }
-
-    public attachFragmentAfterFragment(previousFragmentRef: RenderFragmentRef, fragmentRef: RenderFragmentRef) {
-        console.log("FuseRenderer.attachFragmentAfterFragment", arguments);
-
-        var previousFragmentNodes = resolveInternalDomFragment(previousFragmentRef);
-        if (previousFragmentNodes.length > 0) {
-            var sibling = previousFragmentNodes[previousFragmentNodes.length - 1];
-            let nodes = resolveInternalDomFragment(fragmentRef);
-            this.attachFragmentAfter(sibling, nodes);
-        }
-    }
-
-    public attachFragmentAfterElement(location: RenderElementRef, fragmentRef: RenderFragmentRef) {
-        console.log("FuseRenderer.attachFragmentAfterElement", arguments);
-
-        let element = resolveBoundNode(location);
-        let nodes = resolveInternalDomFragment(fragmentRef);
-        this.attachFragmentAfter(element, nodes);
-    }
-
-    private attachFragmentAfter(anchorNode: ViewNode, fragmentNodes: ViewNode[]) {
-        console.log("FuseRenderer.attachFragmentAfter", arguments);
-        var startIndex = anchorNode.parentNode.getChildIndex(anchorNode) + 1;
-
-        fragmentNodes.forEach((node, index) => {
-            console.log('attachFragmentAfterElement: child: ' + node.viewName + ' after: ' + anchorNode.viewName + ' startIndex: ' + startIndex + ' index: ' + index);
-            anchorNode.parentNode.insertChildAt(startIndex + index, node);
-            node.attachToView(startIndex + index);
-        });
-    }
-
-    detachFragment(fragmentRef: RenderFragmentRef) {
-        console.log('FuseRenderer.detachFragment', arguments);
-
-        var fragmentNodes = resolveInternalDomFragment(fragmentRef);
-        fragmentNodes.forEach((node) => {
-            console.log('detaching fragment child: ' + node.viewName);
-            if (node.parentNode)
-                node.parentNode.removeChild(node);
-        });
-    }
-
-    hydrateView(viewRef: RenderViewRef) {
-        console.log("FuseRenderer.hydrateView", arguments);
-        //DOING nothing -- the view init code happens on attach: ViewNode#createUI
-    }
-
-    dehydrateView(viewRef: RenderViewRef) {
-        console.log("FuseRenderer.dehydrateView", arguments);
-        //TODO: detach events
-    }
-
-    setElementProperty(location: RenderElementRef, propertyName: string, propertyValue: any) {
-        console.log("FuseRenderer.setElementProperty " + propertyName + " = " + propertyValue, arguments);
-        let node = resolveBoundNode(location);
-        node.setProperty(propertyName, propertyValue);
-    }
-
-    setElementAttribute(location: RenderElementRef, attributeName: string, attributeValue: string) {
-        console.log("FuseRenderer.setElementAttribute " + attributeName + " = " + attributeValue, arguments);
-        return this.setElementProperty(location, attributeName, attributeValue);
-    }
-
-    setElementClass(location: RenderElementRef, className: string, isAdd: boolean): void {
-        console.log("FuseRenderer.setElementClass " + className + " - " + isAdd, arguments);
-
-        let node = resolveBoundNode(location);
-        if (isAdd) {
-            node.addClass(className);
-        } else {
-            node.removeClass(className);
-        }
-    }
-
-    setElementStyle(location: RenderElementRef, styleName: string, styleValue: string): void {
-        console.log("FuseRenderer.setElementStyle " + styleName + "=" + styleValue, arguments);
-        let node = resolveBoundNode(location);
-        node.setStyleProperty(styleName, styleValue);
-    }
-
-    /**
-    * Used only in debug mode to serialize property changes to comment nodes,
-    * such as <template> placeholders.
-    */
-    setBindingDebugInfo(location: RenderElementRef, propertyName: string, propertyValue: string): void {
-        let node = resolveBoundNode(location);
-        console.log('FuseRenderer.setBindingDebugInfo: ' + node.viewName + ', ' + propertyName + ' = ' + propertyValue, arguments);
-    }
-
-
-    getNativeElementSync(location: RenderElementRef): any {
-        console.log("FuseRenderer.getNativeElementSync", arguments);
-        let node = resolveBoundNode(location);
-        return node.nativeView;
-    }
-
-    /**
-    * Calls a method on an element.
-    */
-    invokeElementMethod(location: RenderElementRef, methodName: string, args: Array<any>) {
-        console.log("FuseRenderer.invokeElementMethod " + methodName + " " + args, arguments);
-    }
-
-    setText(viewRef: RenderViewRef, textNodeIndex: number, text: string) {
-        console.log("FuseRenderer.setText ", arguments);
-    }
-
-    setEventDispatcher(viewRef: RenderViewRef, dispatcher: RenderEventDispatcher) {
-        console.log("FuseRenderer.setEventDispatcher ", arguments);
-        var view = resolveInternalDomView(viewRef);
-        view.eventDispatcher = dispatcher;
-    }
-
     private _componentTemplates: Map<string, RenderComponentTemplate> = new Map<string, RenderComponentTemplate>();
 
     public registerComponentTemplate(template: RenderComponentTemplate) {
-        console.log('FuseRenderer.registerComponentTemplate: ' + template.id), arguments;
+        console.log('FuseRenderer.registerComponentTemplate: ' + template.id, arguments);
         this._componentTemplates.set(template.id, template);
     }
 
@@ -190,66 +38,236 @@ export class FuseRenderer extends Renderer {
         return this._componentTemplates.get(templateId);
     }
 
-    public createRootContentInsertionPoint(): ViewNode {
-        console.log('FuseRenderer.createRootContentInsertionPoint', arguments);
-        return this.createTemplateAnchor([]);
+    createRootHostView(hostProtoViewRef: RenderProtoViewRef, fragmentCount: number, hostElementSelector: string): RenderViewWithFragments {
+        console.log("FuseRenderer.createRootHostView", arguments);
+        //var hostProtoView = resolveInternalDomProtoView(hostProtoViewRef);
+        return this._createView(hostProtoViewRef, true);
     }
 
-    public createTemplateAnchor(attrNameAndValues: string[]): ViewNode {
-        console.log('FuseRenderer.createTemplateAnchor', arguments);
-        return new ViewNode(null, 'template', attrNameAndValues);
+    detachFreeHostView(parentHostViewRef: RenderViewWithFragments, hostViewRef: RenderViewWithFragments) {
+        console.log("FuseRenderer.detachFreeHostView", arguments);
     }
 
-    public createElement(name: string, attrNameAndValues: string[]): ViewNode {
-        console.log('FuseRenderer.createElement: ' + name, arguments);
-        return new ViewNode(null, name, attrNameAndValues);
+    createView(protoViewRef: RenderProtoViewRef, fragmentCount: number): RenderViewWithFragments {
+        console.log("FuseRenderer.createView", arguments);
+        //var protoView = resolveInternalDomProtoView(protoViewRef);
+        return this._createView(protoViewRef);
     }
 
-    public mergeElement(existing: ViewNode, attrNameAndValues: string[]) {
-        console.log('FuseRenderer.mergeElement: ' + existing.viewName, arguments);
-        existing.clearChildren();
-        existing.setAttributeValues(attrNameAndValues);
+    destroyView(viewRef: RenderViewRef) {
+        console.log("FuseRenderer.destroyView", arguments);
     }
 
-    public createShadowRoot(host: ViewNode, templateId: string): ViewNode {
-         throw new Error('FuseRenderer.createShadowRoot Not implemented.');
+    attachFragmentAfterFragment(previousFragmentRef: RenderFragmentRef, fragmentRef: RenderFragmentRef) {
+        console.log("FuseRenderer.attachFragmentAfterFragment", arguments);
+        var previousFragmentNodes = resolveInternalFuseFragment(previousFragmentRef);
+        var sibling = previousFragmentNodes[previousFragmentNodes.length - 1];
+        moveNodesAfterSibling(sibling, resolveInternalFuseFragment(fragmentRef));
     }
 
-    public createText(value: string): ViewNode {
-        console.log('FuseRenderer.createText', arguments);
-        return new DummyViewNode(null);
+    attachFragmentAfterElement(elementRef: RenderElementRef, fragmentRef: RenderFragmentRef) {
+        console.log("FuseRenderer.attachFragmentAfterElement", arguments);
+        var view = resolveInternalFuseView(elementRef.renderView);
+        var internalBoundIndex = (<any>elementRef).boundElementIndex;
+        var element = view.boundElements[internalBoundIndex];
+        moveNodesAfterSibling(element, resolveInternalFuseFragment(fragmentRef));
     }
 
-    public appendChild(parent: ViewNode, child: ViewNode) {
-        console.log('FuseRenderer.appendChild: ' + parent.viewName + ' -> ' + child.viewName, arguments);
-        parent.appendChild(child);
+    detachFragment(fragmentRef: RenderFragmentRef) {
+        console.log("FuseRenderer.detachFragment", arguments);
+        var fragment = resolveInternalFuseFragment(fragmentRef);
+        for (var i = 0; i < fragment.length; i++) {
+            var element = fragment[i];
+            element.parent.removeAtIndex(element.parent.children.indexOf(element));
+        }
+        var item = fragment[0];
+        var text = item.children[1].children[0].props.text;
     }
 
-    public on(element: ViewNode, eventName: string, callback: Function) {
-        console.log('FuseRenderer.on: ' + eventName, arguments);
-        //let zonedCallback = global.zone.bind(callback);
-        //element.on(eventName, zonedCallback);
+    hydrateView(viewRef: RenderViewRef) {
+        console.log("FuseRenderer.hydrateView", arguments);
+        var view = resolveInternalFuseView(viewRef);
+        if (view.hydrated) throw 'The view is already hydrated.';
+        view.hydrated = true;
+        //TODO: actually hydrate anything.
     }
 
-    public globalOn(target: string, eventName: string, callback: Function): Function {
-        throw new Error('FuseRenderer.globalOn: ' + eventName +'Not implemented.');
+    dehydrateView(viewRef: RenderViewRef) {
+        console.log("FuseRenderer.dehydrateView", arguments);
+        var view = resolveInternalFuseView(viewRef);
+        view.hydrated = false;
+        //TODO: actually dehydrate anything.
+    }
+
+    getNativeElementSync(location: RenderElementRef): any {
+        console.log("FuseRenderer.getNativeElementSync", arguments);
+        var view = resolveInternalFuseView(location.renderView);
+        var internalBoundIndex = (<any>location).boundElementIndex;
+        return view.boundElements[internalBoundIndex];
+    }
+
+    setElementProperty(location: RenderElementRef, propertyName: string, propertyValue: any) {
+        console.log("FuseRenderer.setElementProperty", arguments);
+        var view = resolveInternalFuseView(location.renderView);
+        var internalBoundIndex = (<any>location).boundElementIndex;
+        var element = view.boundElements[internalBoundIndex];
+        element.setProperty(propertyName, propertyValue);
+    }
+
+    setElementAttribute(location: RenderElementRef, attributeName: string, attributeValue: string) {
+        console.log("FuseRenderer.setElementAttribute", arguments);
+    }
+
+    setElementClass(location: RenderElementRef, className: string, isAdd: boolean) {
+        console.log("FuseRenderer.setElementClass", arguments);
+    }
+
+    setElementStyle(location: RenderElementRef, styleName: string, styleValue: string) {
+        console.log("FuseRenderer.setElementStyle", arguments);
+    }
+
+    invokeElementMethod(location: RenderElementRef, methodName: string, args: Array<any>) {
+        console.log("FuseRenderer.invokeElementMethod", arguments);
+    }
+
+    setText(viewRef: RenderViewRef, textNodeIndex: number, text: string) {
+        console.log("FuseRenderer.setText", arguments);
+        var view = resolveInternalFuseView(viewRef);
+        view.boundTextNodes[textNodeIndex].setProperty("text", text);
+    }
+
+    setEventDispatcher(viewRef: RenderViewRef, dispatcher: RenderEventDispatcher) {
+        console.log("FuseRenderer.setEventDispatcher", arguments);
+        var view = resolveInternalFuseView(viewRef);
+        view.eventDispatcher = dispatcher;
+    }
+
+    _createView(protoViewRef: RenderProtoViewRef, isRoot = false): RenderViewWithFragments {
+        console.log('FuseRenderer._createView', arguments);
+
+        var dpvr = <DefaultProtoViewRef>protoViewRef;
+        var view1 = createRenderView(dpvr.template, dpvr.cmds, null, null);
+
+        console.log(view1);
+     
+        // var nativeElements;
+        // var boundElements = [];
+        // if (proto.rootElement.tagName == "template") {
+        //     nativeElements = this._dfsAndCreateNativeElements(proto.rootElement.childNodes[0].childNodes, boundElements);
+        // } else {
+        //     nativeElements = this._dfsAndCreateNativeElements([proto.rootElement], boundElements);
+        // }
+
+        // var fragments = [];
+        // var currentRootIndex = 0;
+        // for (var i = 0; i < proto.fragmentsRootNodeCount.length; i++) {
+        //     var rootNodeCount = proto.fragmentsRootNodeCount[i];
+        //     var fragmentElements = [];
+        //     for (var j = 0; j < rootNodeCount; j++) {
+        //         fragmentElements.push(nativeElements[currentRootIndex++])
+        //     }
+        //     fragments.push(new FuseFragmentRef(fragmentElements));
+        // }
+
+        // if (isRoot) {
+        //     nativeElements[0].attachToNative();
+        // }
+        // var boundTextNodes = this._createBoundTextNodes(proto, boundElements);
+        // var view = new FuseView(proto, nativeElements, boundElements, boundTextNodes);
+
+        // for (var i = 0; i < view.boundElements.length; i++) {
+        //     this._initElementEventListener(i, view.boundElements[i], view);
+        // }
+
+
+        var view = new FuseView(protoViewRef, null, null, null);
+        var fragments = [];
+        return new RenderViewWithFragments(new FuseViewRef(view), fragments);
+    }
+
+    _createBoundTextNodes(proto: RenderProtoViewRef, boundElements) {
+        //expecting boundElements to already be filled out, and be an array of FuseElements
+        console.log('FuseRenderer._createBoundTextNodes', arguments);
+        var boundTextNodes = [];
+        // var elementBinders = proto.elementBinders;
+        // for (var i = 0; i < elementBinders.length; i++) {
+        //     var indicies = elementBinders[i].textNodeIndices;
+        //     var nativeNodes = boundElements[i].children;
+        //     for (var j = 0; j < indicies.length; j++) {
+        //         var index = indicies[j];
+        //         boundTextNodes.push(nativeNodes[index]);
+        //     }
+        // }
+        return boundTextNodes;
+    }
+
+    _dfsAndCreateNativeElements(childrenParam, boundElements) {
+        console.log('FuseRenderer._dfsAndCreateNativeElements', arguments);
+        var resultingNativeChildren = [];
+        for (var i = 0; i < childrenParam.length; i++) {
+            var node = childrenParam[i];
+            var nativeElement;
+            if (node.type == "tag") {
+                nativeElement = new FuseElement(node.name, node.attribs);
+            } else if (node.type == "text") {
+                nativeElement = new FuseElement("rawtext", { text: node.data });
+            }
+
+            // if (DOM.hasClass(node, NG_BINDING_CLASS)) {
+            //     boundElements.push(nativeElement);
+            // }
+
+            //create and then attach children
+            if (node.children && node.name != "template") {
+                var children = this._dfsAndCreateNativeElements(node.children, boundElements);
+                for (var j = 0; j < children.length; j++) {
+                    var child = children[j];
+                    nativeElement.insertChildAtIndex(child, j);
+                }
+            }
+            resultingNativeChildren.push(nativeElement)
+        }
+        return resultingNativeChildren;
+    }
+
+    _initElementEventListener(bindingIndex: number, element: FuseElement, view: FuseView) {
+        console.log('FuseRenderer._initElementEventListener', arguments);
+       // element.setEventListener(global.zone.bind(function(name, event) {
+        //     var locals = new Map<string, any>();
+        //     locals.set('$event', event);
+        //     view.eventDispatcher.dispatchRenderEvent(bindingIndex, name, locals);
+        //     // console.log("%cEvent dispatched: ", "color: #22dd22", name, locals);
+        // }));
+    }
+
+
+}
+
+
+function moveNodesAfterSibling(sibling: FuseElement, nodes: FuseElement[]) {
+    console.log('FuseRenderer.moveNodesAfterSibling', arguments);
+    if (sibling.parent) {
+        var destIndex = sibling.parent.children.indexOf(sibling) + 1;
+        for (var i = 0; i < nodes.length; i++) {
+            sibling.parent.insertChildAtIndex(nodes[i], destIndex);
+        }
     }
 }
 
-function resolveInternalDomView(viewRef: RenderViewRef): DefaultRenderView<ViewNode> {
-    console.log('resolveInternalDomView', arguments);
-    return <DefaultRenderView<ViewNode>>viewRef;
-}
+// function resolveInternalDomView(viewRef: RenderViewRef): DefaultRenderView<ViewNode> {
+//     console.log('resolveInternalDomView', arguments);
+//     return <DefaultRenderView<ViewNode>>viewRef;
+// }
 
-function resolveBoundNode(elementRef: RenderElementRef): ViewNode {
-    console.log('resolveBoundNode', arguments);
-    let view = resolveInternalDomView(elementRef.renderView);
-    //Using an Angular internal API to get the index of the bound element.
-    let internalBoundIndex = (<any>elementRef).boundElementIndex;
-    return view.boundElements[internalBoundIndex]
-}
+// function resolveBoundNode(elementRef: RenderElementRef): ViewNode {
+//     console.log('resolveBoundNode', arguments);
+//     let view = resolveInternalDomView(elementRef.renderView);
+//     //Using an Angular internal API to get the index of the bound element.
+//     let internalBoundIndex = (<any>elementRef).boundElementIndex;
+//     return view.boundElements[internalBoundIndex]
+// }
 
-function resolveInternalDomFragment(fragmentRef: RenderFragmentRef): ViewNode[] {
-    console.log('resolveInternalDomFragment', arguments);
-    return (<DefaultRenderFragmentRef<ViewNode>>fragmentRef).nodes;
-}
+// function resolveInternalDomFragment(fragmentRef: RenderFragmentRef): ViewNode[] {
+//     console.log('resolveInternalDomFragment', arguments);
+//     return (<DefaultRenderFragmentRef<ViewNode>>fragmentRef).nodes;
+// }
