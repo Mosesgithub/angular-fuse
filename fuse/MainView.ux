@@ -1,0 +1,6 @@
+<App Theme="Basic">
+    <JavaScript File="../dist/angular2.js" ux:Global="angular2" />
+    <JavaScript File="../dist/bundle.js" ux:Global="bundle" />
+    <AngularRenderer ux:Global="AngularRenderer" />
+  <JavaScript File="MainView.js" />  
+</App>
