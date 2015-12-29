@@ -1,7 +1,7 @@
 import {View} from './view';
 import {ViewClass, getViewClass, isKnownView} from './element-registry';
 
-class EventData {}
+class EventData { }
 
 type EventHandler = (args: EventData) => void;
 
@@ -17,7 +17,7 @@ export class ViewNode {
 
     public children: Array<ViewNode> = [];
 
-    constructor(public parentNode: ViewNode,  public viewName: string, attrNameAndValues: string[]) {
+    constructor(public parentNode: ViewNode, public viewName: string, attrNameAndValues: string[]) {
         console.log('ViewNode.constructor', arguments);
         this.setAttributeValues(attrNameAndValues);
 
@@ -82,17 +82,18 @@ export class ViewNode {
 
     private createUI(attachAtIndex: number): boolean {
         console.log('ViewNode.createUI', this.viewName);
-        if (!isKnownView(this.viewName))
-            return;
-
+        // if (!isKnownView(this.viewName))
+        //     return;
+        //if(this){
         console.log('createUI: ' + this.viewName +
-            ', attachAt: ' + attachAtIndex +
-            ', parent: ' + this.parentNode.viewName +
-            ', parent UI ' + (<any>this.parentNativeView.constructor).name);
+            ', attachAt: ' + attachAtIndex + '');
+                    //', parent: ' + this.parentNode ? this.parentNode.viewName : 'null' +
+                    //', parent UI ' + this.parentNativeView ? this.parentNativeView.type : 'null');}
 
-        let viewClass = getViewClass(this.viewName);
+        //let viewClass = getViewClass(this.viewName);
+              // console.log(viewClass);
         if (!this.nativeView) {
-            this.nativeView = new viewClass();
+            this.nativeView = new View(this.viewName, '1');
         } else {
             console.log('Reattaching old view: ' + this.viewName);
         }
@@ -119,10 +120,23 @@ export class ViewNode {
         //     // complex property - we will deal with this in postAttachUI()            
         // }
         // else {
-            console.log('parentNativeView: ' + this.parentNativeView);
-            //throw new Error("Parent view can't have children! " + this.parentNativeView);
+        console.log('parentNativeView: ' + this.parentNativeView);
+        //throw new Error("Parent view can't have children! " + this.parentNativeView);
         //}
+        return true;
     }
+
+    private configureUI() {
+        console.log('ViewNode.configureUI', arguments);
+        if (this.attributes.size == 0)
+            return;
+
+        this.attributes.forEach((value, name) => {
+            this.setAttribute(name, value);
+        });
+        this.syncClasses();
+    }
+
 
     private postAttachUI() {
         console.log('ViewNode.postAttachUI', arguments);
@@ -179,23 +193,13 @@ export class ViewNode {
         var name: string;
 
         //if (isString(fullName)) {
-            var names = fullName.split(".");
-            name = names[names.length - 1];
+        var names = fullName.split(".");
+        name = names[names.length - 1];
         //}
 
         return name;
     }
 
-    private configureUI() {
-        console.log('ViewNode.configureUI', arguments);
-        if (this.attributes.size == 0)
-            return;
-
-        this.attributes.forEach((value, name) => {
-            this.setAttribute(name, value);
-        });
-        this.syncClasses();
-    }
 
     public setAttributeValues(attrNameAndValues: string[]) {
         console.log('ViewNode.attrNameAndValues', arguments);
@@ -278,7 +282,7 @@ export class ViewNode {
 
     private resolveNativeEvent(parsedEventName: string): string {
         console.log('ViewNode.resolveNativeEvent', arguments);
-       //TODO: actually resolve the event...
+        //TODO: actually resolve the event...
         return parsedEventName;
     }
 

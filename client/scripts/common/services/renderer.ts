@@ -1,28 +1,11 @@
 import {Inject, Injectable} from 'angular2/src/core/di';
 import {RenderComponentTemplate} from 'angular2/src/core/render/api';
 import {createRenderView, NodeFactory} from 'angular2/src/core/render/view_factory';
-import {
-Renderer,
-RenderEventDispatcher,
-RenderElementRef,
-RenderProtoViewRef,
-RenderViewRef,
-RenderFragmentRef,
-RenderViewWithFragments,
-RenderTemplateCmd
-} from 'angular2/src/core/render/api';
+import {Renderer,RenderEventDispatcher,RenderElementRef,RenderProtoViewRef,RenderViewRef,RenderFragmentRef,RenderViewWithFragments,RenderTemplateCmd} from 'angular2/src/core/render/api';
 import {isBlank} from 'angular2/src/facade/lang';
-import {
-DefaultProtoViewRef,
-DefaultRenderView,
-DefaultRenderFragmentRef
-} from 'angular2/src/core/render/view';
+import {DefaultProtoViewRef,DefaultRenderView,DefaultRenderFragmentRef} from 'angular2/src/core/render/view';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {ViewNode, DummyViewNode} from './view_node';
-
-//var console = {log: function(msg) {}}
-
-
 
 @Injectable()
 export class FuseRenderer extends Renderer {
@@ -62,9 +45,10 @@ export class FuseRenderer extends Renderer {
         //TODO: handle this when we resolve routing and navigation.
     }
 
-    // public getRootNodes(fragment: RenderFragmentRef): ViewNode[] {
-    //     return resolveInternalDomFragment(fragment);
-    // }
+    public getRootNodes(fragment: RenderFragmentRef): ViewNode[] {
+        console.log("FuseRenderer.getRootNodes", arguments);
+        return resolveInternalDomFragment(fragment);
+    }
 
     public attachFragmentAfterFragment(previousFragmentRef: RenderFragmentRef, fragmentRef: RenderFragmentRef) {
         console.log("FuseRenderer.attachFragmentAfterFragment", arguments);
@@ -155,11 +139,12 @@ export class FuseRenderer extends Renderer {
     }
 
 
-    getNativeElementSync(location: RenderElementRef): any {
-        console.log("FuseRenderer.getNativeElementSync", arguments);
-        let node = resolveBoundNode(location);
-        return node.nativeView;
-    }
+     getNativeElementSync(location: RenderElementRef): any {
+         console.log("FuseRenderer.getNativeElementSync", arguments);
+         // let node = resolveBoundNode(location);
+         // return node.nativeView;
+         return null;
+     }
 
     /**
     * Calls a method on an element.
@@ -216,7 +201,7 @@ export class FuseRenderer extends Renderer {
     }
 
     public createText(value: string): ViewNode {
-        console.log('FuseRenderer.createText', arguments);
+        //console.log('FuseRenderer.createText', arguments);
         return new DummyViewNode(null);
     }
 

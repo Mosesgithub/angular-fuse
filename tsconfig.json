@@ -6,19 +6,20 @@
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
+    "removeComments": true,
+    "noEmitHelpers": false,
     "noImplicitAny": false
   },
   "compileOnSave": false,
   "buildOnSave": false,
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
   ],
-  "files": [
+  "xfiles": [
     "client/scripts/app/bootstrap.ts"
   ],
   "filesGlob": [
-    "client/**/*.ts"
+    "client/**/*.ts",
+    "!./node_modules/**/*.ts"
   ]
 }

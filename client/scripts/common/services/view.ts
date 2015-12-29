@@ -1,5 +1,5 @@
 export class View {
-	View(){
+	constructor(public type: string, public id: string) {
 
 	}
 }

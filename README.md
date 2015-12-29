@@ -2,12 +2,24 @@
 Starter project with angular2 and webpack
 
 ## Commands
-`npm start`:  compile and open a live reload browser
-You can pass a different target using the following command:
+`npm browsersync`:  compile and open a live reload browser
+You can pass a different TARGET or MODE using the following command:
 ```sh
-TARGET=newtarget npm start
+[TARGET=newtarget MODE=dev] npm browsersync
 ```
 
+`npm run lint`:  Run lint
+```sh
+npm run lint
+```
+
+`npm test`:  Run unit tests
+```sh
+npm test
+```
 
 ## TODOS
 * https://www.npmjs.com/package/html-webpack-plugin    
+* Protractor    
+
+

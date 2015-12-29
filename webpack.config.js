@@ -12,6 +12,7 @@ var host = process.env.HOST || 'localhost';
 var mode = process.env.MODE || 'dev';
 var clientFolder = 'client';
 var distFolder = 'dist';
+var distFolder = 'dist' + '/' + target + '/' + mode;
 var suffix = gulpMux.targets.targetToSuffix(target);
 
 
@@ -33,16 +34,8 @@ module.exports = {
     devtool: 'source-map',
     debug: true,
     entry: {
-        'angular2': [
-            'rxjs',
-            'reflect-metadata',
-            'angular2/bundles/angular2-polyfills',
-            'angular2/core',
-            'angular2/router',
-            'angular2/http',
-            'parse5'
-        ],
-        'bundle': './' + clientFolder + '/scripts/' + target + '/bootstrap.ts'
+        //'vendor':  './' + clientFolder + '/scripts/' + target + '/vendor',
+        'bundle': './' + clientFolder + '/scripts/' + target + '/bootstrap'
     },
 
     output: {
@@ -112,8 +105,8 @@ module.exports = {
         noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/]
     },
     tslint: {
-        emitErrors: true,
-        failOnHint: false// true
+        emitErrors: false,
+        failOnHint: false
     },
     devServer: {
         historyApiFallback: true,
@@ -129,15 +122,17 @@ module.exports = {
         port: port
     },
     plugins: [
-        new CommonsChunkPlugin({
-            name: 'angular2',
-            filename: 'angular2.js',
-            minChunks: Infinity
-        }),
-        new CommonsChunkPlugin({
-            name: 'common',
-            filename: 'common.js'
-        }),
+        // new CommonsChunkPlugin({
+        //     name: 'vendor',
+        //     filename: 'vendor.js',
+        //     minChunks: Infinity
+        // }),
+        // new CommonsChunkPlugin({
+        //     name: 'common',
+        //     filename: 'common.js',
+        //     minChunks: 2,
+        //     chunks: ['vendor'] //'bundle', 
+        // }),
         new CopyWebpackPlugin([{
             from: clientFolder + '/index' + suffix + '.html'
         }], {
