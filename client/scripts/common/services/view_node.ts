@@ -56,10 +56,10 @@ export class ViewNode {
         return this._parentView;
     }
 
-    get isComplexProperty(): boolean {
-        console.log('ViewNode.isComplexProperty', arguments);
-        return ViewNode.isComplexProperty(this.viewName);
-    }
+    // get isComplexProperty(): boolean {
+    //     console.log('ViewNode.isComplexProperty', arguments);
+    //     return ViewNode.isComplexProperty(this.viewName);
+    // }
 
     public attachToView(atIndex: number = -1) {
         console.log('ViewNode.attachToView ' + this.viewName, arguments);
@@ -77,7 +77,7 @@ export class ViewNode {
             child.attachToView();
         });
 
-        this.postAttachUI();
+        //this.postAttachUI();
     }
 
     private createUI(attachAtIndex: number): boolean {
@@ -138,31 +138,31 @@ export class ViewNode {
     }
 
 
-    private postAttachUI() {
-        console.log('ViewNode.postAttachUI', arguments);
-        if (this.isComplexProperty) {
-            let nativeParent = <any>this.parentNativeView;
-            if (!nativeParent) {
-                return;
-            }
+    // private postAttachUI() {
+    //     console.log('ViewNode.postAttachUI', arguments);
+    //     if (this.isComplexProperty) {
+    //         let nativeParent = <any>this.parentNativeView;
+    //         if (!nativeParent) {
+    //             return;
+    //         }
 
-            let propertyName = ViewNode.getComplexPropertyName(this.viewName);
-            let realChildren = [];
-            for (let child of this.children) {
-                if (child.nativeView) {
-                    realChildren.push(child.nativeView);
-                }
-            }
-            if (realChildren.length > 0) {
-                if (nativeParent._addArrayFromBuilder) {
-                    nativeParent._addArrayFromBuilder(propertyName, realChildren);
-                }
-                else {
-                    this.parentNode.setAttribute(propertyName, realChildren[0]);
-                }
-            }
-        }
-    }
+    //         let propertyName = ViewNode.getComplexPropertyName(this.viewName);
+    //         let realChildren = [];
+    //         for (let child of this.children) {
+    //             if (child.nativeView) {
+    //                 realChildren.push(child.nativeView);
+    //             }
+    //         }
+    //         if (realChildren.length > 0) {
+    //             if (nativeParent._addArrayFromBuilder) {
+    //                 nativeParent._addArrayFromBuilder(propertyName, realChildren);
+    //             }
+    //             else {
+    //                 this.parentNode.setAttribute(propertyName, realChildren[0]);
+    //             }
+    //         }
+    //     }
+    // }
 
     private static propertyMaps: Map<Function, Map<string, string>> = new Map<Function, Map<string, string>>();
 
@@ -183,10 +183,10 @@ export class ViewNode {
         return ViewNode.propertyMaps.get(type);
     }
 
-    private static isComplexProperty(name: string): boolean {
-        console.log('ViewNode.isComplexProperty', arguments);
-        return name.indexOf(".") !== -1; //isString(name) && 
-    }
+    // private static isComplexProperty(name: string): boolean {
+    //     console.log('ViewNode.isComplexProperty', arguments);
+    //     return name.indexOf(".") !== -1; //isString(name) && 
+    // }
 
     private static getComplexPropertyName(fullName: string): string {
         console.log('ViewNode.getComplexPropertyName', arguments);
@@ -212,16 +212,16 @@ export class ViewNode {
         }
     }
 
-    private isXMLAttribute(name: string): boolean {
-        console.log('ViewNode.isXMLAttribute', arguments);
-        switch (name) {
-            case "style": return true;
-            case "rows": return true;
-            case "columns": return true;
-            case "fontAttributes": return true;
-            default: return false;
-        }
-    }
+    // private isXMLAttribute(name: string): boolean {
+    //     console.log('ViewNode.isXMLAttribute', arguments);
+    //     switch (name) {
+    //         case "style": return true;
+    //         case "rows": return true;
+    //         case "columns": return true;
+    //         case "fontAttributes": return true;
+    //         default: return false;
+    //     }
+    // }
 
     public setAttribute(attributeName: string, value: any): void {
         console.log('ViewNode.setAttribute', arguments);
