@@ -7,7 +7,7 @@ import {DefaultProtoViewRef,DefaultRenderView,DefaultRenderFragmentRef} from 'an
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {ViewNode, DummyViewNode} from './view_node';
 
-@Injectable()
+//@Injectable()
 export class FuseRenderer extends Renderer {
     constructor() {
         super();

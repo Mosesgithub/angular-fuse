@@ -1,5 +1,6 @@
 <App Theme="Basic">
+     <JavaScript File="../node_modules/es6-shim/es6-shim.js" ux:Global="es6Shim" />
     <JavaScript File="../dist/app/dev/bundle.js" ux:Global="bundle" />
     <AngularRenderer ux:Global="AngularRenderer" />
-    <JavaScript File="MainView.js" /> 
+    <JavaScript File="MainView.js" />
 </App>

@@ -1,9 +1,9 @@
 'use strict';
-var argv = require('yargs').argv;
+//var argv = require('yargs').argv;
 var path = require('path');
 var webpack = require('webpack');
 var gulpMux = require('gulp-mux');
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+//var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var target = process.env.TARGET || 'app';
@@ -14,7 +14,6 @@ var clientFolder = 'client';
 var distFolder = 'dist';
 var distFolder = 'dist' + '/' + target + '/' + mode;
 var suffix = gulpMux.targets.targetToSuffix(target);
-
 
 var pluginsProd = mode === 'prod' ? [
     new webpack.optimize.DedupePlugin(),
@@ -39,7 +38,7 @@ module.exports = {
     },
 
     output: {
-        path: __dirname + '/' + distFolder + '/',
+        path: path.join(__dirname, distFolder),
         publicPath: distFolder + '/',
         filename: '[name].js',
         sourceMapFilename: '[name].js.map',
@@ -122,21 +121,10 @@ module.exports = {
         port: port
     },
     plugins: [
-        // new CommonsChunkPlugin({
-        //     name: 'vendor',
-        //     filename: 'vendor.js',
-        //     minChunks: Infinity
-        // }),
-        // new CommonsChunkPlugin({
-        //     name: 'common',
-        //     filename: 'common.js',
-        //     minChunks: 2,
-        //     chunks: ['vendor'] //'bundle', 
-        // }),
         new CopyWebpackPlugin([{
             from: clientFolder + '/index' + suffix + '.html'
         }], {
             ignore: ['*.ts']
         })
     ].concat(pluginsProd)
-}
+};

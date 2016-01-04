@@ -6,6 +6,13 @@
 // bootstrap(AppComponent);
 import './vendor';
 
+//HACK: Unhack our global lazy loaded functions hack to make zone monkey patching work.
+// var __dummy_setTimeout = global.setTimeout;
+// var __dummy_clearTimeout = global.clearTimeout;
+// var __dummy_setInterval = global.setInterval;
+// var __dummy_clearInterval = global.clearInterval;
+//import '../common/services/zone';
+
 import {isPresent, Type} from 'angular2/src/facade/lang';
 import {Promise} from 'angular2/src/facade/async';
 //import {Promise, PromiseWrapper} from 'angular2/src/facade/async';
@@ -33,8 +40,7 @@ export type ProviderArray = Array<Type | Provider | any[]>;
 export function fuseBootstrap(appComponentType: any, customProviders: ProviderArray = null): Promise<ComponentRef> {
   FuseDomAdapter.makeCurrent();
 
-  console.log('fusebootstrap');
-
+ 
   let fuseProviders: ProviderArray = [
       FuseRenderer,
       provide(Renderer, {useClass: FuseRenderer}),
@@ -55,8 +61,15 @@ export function fuseBootstrap(appComponentType: any, customProviders: ProviderAr
       appProviders.push(customProviders);
   }
 
-  return platform(fuseProviders).application(appProviders).bootstrap(appComponentType);
+  var app = platform(fuseProviders).application(appProviders);
+  console.log('fusebootstrap');
+  return app.bootstrap(appComponentType);
 }
 
 import {AppComponent} from './app.component';
-fuseBootstrap(AppComponent);
+
+  console.log('bootstrap is starting');
+  fuseBootstrap(AppComponent).then(function() {
+    console.log('bootstrap is done');
+  });
+
