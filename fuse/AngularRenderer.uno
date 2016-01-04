@@ -7,18 +7,18 @@ using Fuse.Controls;
 using Fuse.Gestures;
 
 
-private class ClickHandlerClosure {
-		Function _f;
-		public ClickHandlerClosure(Function f)
-		{
-			_f = f;
-		}
-		public void Handler(object sender,  Fuse.Gestures.ClickedArgs args)
-		{
-			// here you have to dispatch a call to _f onto the
-			// JS thread, which isn't possible in the current version
-		}
-	}
+// private class ClickHandlerClosure {
+// 		Function _f;
+// 		public ClickHandlerClosure(Function f)
+// 		{
+// 			_f = f;
+// 		}
+// 		public void Handler(object sender,  Fuse.Gestures.ClickedArgs args)
+// 		{
+// 			// here you have to dispatch a call to _f onto the
+// 			// JS thread, which isn't possible in the current version
+// 		}
+// 	}
 
 
 public class Reflection {
@@ -164,7 +164,7 @@ public class AngularRenderer : NativeModule
 		debug_log(args[2]);
 
 		Node node = FindNode(name);
-		Fuse.Gestures.Clicked.AddHandler(node, new ClickHandlerClosure((Function)args[2]));
+		//Fuse.Gestures.Clicked.AddHandler(node, new ClickHandlerClosure((Function)args[2]));
 
 		return true;
 	}
