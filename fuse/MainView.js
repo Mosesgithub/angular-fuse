@@ -1,22 +1,28 @@
 //var Observable = require('FuseJS/Observable');
 'use strict';
+var angularLoaded = false;
 
-if (!window.angularLoaded) {
+if (!angularLoaded) {
     console.log('loading');
     var es6Shim = require('es6Shim');
+
+
     window.RegExp = RegExp;
     window.Map = Map;
     window.Set = Set;
     window.Reflect = Reflect;
     window.Promise = Promise;
     window.Math = Math;
+
+    //window.EventTarget=null;
     console.warn = console.log;
     console.error = console.log;
 
     var AngularRenderer = require('AngularRenderer');
+
     require('bundle');
     console.log('bundle is loaded');
-    window.angularLoaded = true;
+    angularLoaded = true;
 }
 
 // // var dockPanelId = AngularRenderer.addElement('DockPanel');
