@@ -67,8 +67,10 @@ export function fuseBootstrap(appComponentType: any, customProviders: ProviderAr
 }
 
 import {AppComponent} from './app.component';
+import {enableProdMode} from 'angular2/core';
 
   console.log('bootstrap is starting');
+  enableProdMode();
   fuseBootstrap(AppComponent).then(function() {
     console.log('bootstrap is done');
   });

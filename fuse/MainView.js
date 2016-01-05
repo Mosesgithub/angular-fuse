@@ -11,8 +11,7 @@ if (!window.angularLoaded) {
     window.Reflect = Reflect;
     window.Promise = Promise;
     window.Math = Math;
-    window.EventTarget = null;
-
+   
     var old = EventTarget;
     EventTarget = {};
     EventTarget.prototype = {
@@ -28,7 +27,7 @@ if (!window.angularLoaded) {
     // console.log(JSON.stringify(window.EventTarget));
     // console.dir(es6Shim);
 
-    var AngularRenderer = require('AngularRenderer');
+    window.AngularRenderer = require('AngularRenderer');
     require('bundle');
     console.log('bundle is loaded');
     window.angularLoaded = true;

@@ -63,30 +63,38 @@ public class Reflection {
 		if (type == "DockPanel") {
 			return new DockPanel();
 		}
+		if (type == "Panel" || type=="app") {
+			return new Panel();
+		}
 		return null;
 	}
 
-	public static bool SetAttribute(object node, string attribute, object value) {
+	public static string SetAttribute(object node, string attribute, object value) {
 		if (node != null) {
+			debug_log(attribute+' '+value);
 			if (attribute == "Background") {
 				((Rectangle)node).Background = GetBrush(value.ToString()) ;
+				return "ok";
 			}
 			if (attribute == "Dock") {
-				if (value == "Top") {
+				if (value.ToString() == "Top") {
+					debug_log("value found top");
 					Fuse.Controls.DockPanel.SetDock((Rectangle)node, Fuse.Layouts.Dock.Top);
+					return "ok";
 				}
-				if (value == "Bottom") {
+				if (value.ToString() == "Bottom") {
 					Fuse.Controls.DockPanel.SetDock((Rectangle)node, Fuse.Layouts.Dock.Bottom);
+					return "ok";
 				}
 			}
-			if (attribute == "Height") {
-				debug_log(value);
-				((Rectangle)node).Height = 60;// (float)value;
+			if (attribute == "Height") {				
+				((Rectangle)node).Height = int.Parse(value.ToString());// 60;// (float)value;
+				return "ok";
 			}
-			return true;
+			return "attribute not supported "+attribute;
 		}
 		else {
-			return false;
+			return "object not found";
 		}
 	}
 }
