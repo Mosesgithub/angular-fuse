@@ -5,7 +5,7 @@ using Fuse.Scripting;
 using Fuse.Reactive;
 using Fuse.Controls;
 using Fuse.Gestures;
-
+using Fuse.Scripting;
 
 // private class ClickHandlerClosure {
 // 		Function _f;
@@ -104,10 +104,15 @@ public class AngularRenderer : NativeModule
 
 		Tree = new Dictionary<string, Node>();
 
-		if (App.Current.RootNode == null) {
-			App.Current.RootNode = new Fuse.Controls.Panel();
-		}
+		Evaluated += OnJsInitialized;
 	}
+
+	void OnJsInitialized(object sender, Uno.EventArgs args)
+    {
+        if (App.Current.RootNode == null) {
+            App.Current.RootNode = new Fuse.Controls.Panel();
+        }
+    }
 
 	private Node FindNode(string name) {
 		if (name != null  && Tree.ContainsKey(name)) {

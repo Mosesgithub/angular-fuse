@@ -1,11 +1,9 @@
 //var Observable = require('FuseJS/Observable');
 'use strict';
-var angularLoaded = false;
 
-if (!angularLoaded) {
+if (!window.angularLoaded) {
     console.log('loading');
     var es6Shim = require('es6Shim');
-
 
     window.RegExp = RegExp;
     window.Map = Map;
@@ -13,16 +11,27 @@ if (!angularLoaded) {
     window.Reflect = Reflect;
     window.Promise = Promise;
     window.Math = Math;
+    window.EventTarget = null;
+
+    var old = EventTarget;
+    EventTarget = {};
+    EventTarget.prototype = {
+        addEventListener: old.addEventListener,
+        removeEventListener: old.removeEventListener,
+        dispatchEvent: old.dispatchEvent
+    };
+    window.EventTarget = EventTarget;
 
     //window.EventTarget=null;
     console.warn = console.log;
     console.error = console.log;
+    // console.log(JSON.stringify(window.EventTarget));
+    // console.dir(es6Shim);
 
     var AngularRenderer = require('AngularRenderer');
-
     require('bundle');
     console.log('bundle is loaded');
-    angularLoaded = true;
+    window.angularLoaded = true;
 }
 
 // // var dockPanelId = AngularRenderer.addElement('DockPanel');
