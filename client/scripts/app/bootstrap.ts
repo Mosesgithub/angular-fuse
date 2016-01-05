@@ -11,7 +11,7 @@ import './vendor';
 // var __dummy_clearTimeout = global.clearTimeout;
 // var __dummy_setInterval = global.setInterval;
 // var __dummy_clearInterval = global.clearInterval;
-//import '../common/services/zone';
+import '../common/services/zone';
 
 import {isPresent, Type} from 'angular2/src/facade/lang';
 import {Promise} from 'angular2/src/facade/async';
