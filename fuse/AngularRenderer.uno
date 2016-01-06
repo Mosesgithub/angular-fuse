@@ -6,7 +6,15 @@ using Fuse.Reactive;
 using Fuse.Controls;
 using Fuse.Gestures;
 using Fuse.Scripting;
+using Fuse.Animations;
 
+//Why do i need to create this
+public class Height_Property: Uno.UX.Property<float> {
+	Fuse.Elements.Element _obj;
+	public Height_Property(Fuse.Elements.Element obj) { _obj = obj; }
+	protected override float OnGet() { return _obj.Height; }
+	protected override void OnSet(float v, object origin) { _obj.Height = v; }
+}
 
 public class Reflection {
 
@@ -38,7 +46,7 @@ public class Reflection {
 		}
 	}
 
-	public static Node CreateFromType(string type) {
+	public static object CreateFromType(string type, object parent) {
 
 		if (type == "Rectangle") {
 			return new Rectangle();
@@ -61,9 +69,21 @@ public class Reflection {
 		if (type == "TextInput") {
 			return new TextInput();
 		}
-		// if (type == "WhilePressed") {
-		// 	return new Fuse.Gestures.WhilePressed();
-		// }
+		if (type == "WhilePressed") {
+			return new WhilePressed();
+		}
+		if (type == "Change") {
+			if (parent != null) {
+				debug_log(parent.GetType());
+				var rect_Height_inst = new Height_Property((Rectangle)parent);
+				var change = new Fuse.Animations.Change<float>(rect_Height_inst);
+				change.Value = 400f;
+				change.Duration = 0.2;
+				debug_log(change.GetType());
+
+				return change;
+			}
+		}
 		return null;
 	}
 
@@ -108,18 +128,26 @@ public class Reflection {
 		}
 	}
 
-	public static void InsertChild(Node parent, Node child) {
+	public static void InsertChild(object parent, object child) {
 		var parentType = parent.GetType();
+		var childType = child.GetType();
+
 		if (parentType == typeof(ScrollView)) {
 			((ScrollView)parent).Content = (Fuse.Elements.Element)child;
 		}
+		else if (childType == typeof(WhilePressed)) {
+			((Panel)parent).Behaviors.Add((WhilePressed)child);
+		}
+		else if (parentType == typeof(WhilePressed)) {
+			((WhilePressed)parent).Animators.Add((Fuse.Animations.Animator)child);
+		}
 		else {
-			((Panel)parent).Children.Add(child);
+			((Panel)parent).Children.Add((Node)child);
 		}
 	}
 
-	public static void SetEventHandler(Node node,object[] args, NativeEvent nativeEvent ){
-		var clicked=new Fuse.Gestures.Clicked();
+	public static void SetEventHandler(object node, object[] args, NativeEvent nativeEvent ) {
+		var clicked = new Fuse.Gestures.Clicked();
 		((Rectangle)node).Behaviors.Add(clicked);
 		clicked.Handler += new EventHandlerAction(args, nativeEvent).Trigger;
 	}
@@ -129,9 +157,9 @@ public class EventHandlerAction {
 	private object[] Arg;
 	private NativeEvent NativeEvent;
 
-	public EventHandlerAction(object[] arg, NativeEvent nativeEvent){
-		Arg=arg;
-		NativeEvent=nativeEvent;
+	public EventHandlerAction(object[] arg, NativeEvent nativeEvent) {
+		Arg = arg;
+		NativeEvent = nativeEvent;
 	}
 
 	public void Trigger(object sender, ClickedArgs args) {
@@ -141,11 +169,9 @@ public class EventHandlerAction {
 
 
 public class InsertChildUIAction {
-
-	private Node Parent;
-	private Node Child;
-
-	public InsertChildUIAction(Node parent, Node child) {
+	private object Parent;
+	private object Child;
+	public InsertChildUIAction(object parent, object child) {
 		Parent = parent;
 		Child = child;
 	}
@@ -158,8 +184,8 @@ public class InsertChildUIAction {
 
 public class AngularRenderer : NativeModule
 {
-
-	public static Dictionary<string, Node> Tree;
+	public static Dictionary<string, object> Tree;
+	public static Dictionary<string, string> Parents;
 	private int NodeCounter = 0;
 	private NativeEvent _nativeEvent;
 
@@ -171,7 +197,8 @@ public class AngularRenderer : NativeModule
 		_nativeEvent = new NativeEvent("onEventTriggered");
 		AddMember(_nativeEvent);
 
-		Tree = new Dictionary<string, Node>();
+		Tree = new Dictionary<string, object>();
+		Parents = new Dictionary<string, string>();
 
 		Evaluated += OnJsInitialized;
 	}
@@ -183,11 +210,11 @@ public class AngularRenderer : NativeModule
 		}
 	}
 
-	private Node FindNode(string name) {
-		if (name != null  && Tree.ContainsKey(name)) {
-			return Tree[name];
+	private object FindNode(string id) {
+		if (id != null  && Tree.ContainsKey(id)) {
+			return Tree[id];
 		}
-		else if (name == null) {
+		else if (id == null) {
 			return App.Current.RootNode;
 		}
 		else {
@@ -197,12 +224,20 @@ public class AngularRenderer : NativeModule
 
 	string AddElement(Context c, object[] args) {
 		var type = args[0] as string;
-		Node node = Reflection.CreateFromType(type);
+		var parentId = args[1] as string;
+		if (type == "Change") {
+			parentId = Parents[parentId];
+			debug_log("Change real parent id " + parentId);
+		}
+		var parent = FindNode(parentId);
+
+		object node = Reflection.CreateFromType(type, parent);
 
 		if (node != null) {
-			node.Name = "obj_" + NodeCounter++;
-			Tree.Add(node.Name, node);
-			return node.Name;
+			var id = "obj_" + NodeCounter++;
+			Tree.Add(id, node);
+			Parents.Add(id, parentId);
+			return id;
 		}
 		else {
 			return "Type not found :" + type;
@@ -210,48 +245,48 @@ public class AngularRenderer : NativeModule
 	}
 
 	string RenderElement(Context c , object[] args) {
-		var name = args[0] as string;
-		var parentName = args[1] as string;
-		var node = FindNode(name);
-		var parent = FindNode(parentName);
+		var id = args[0] as string;
+		var parentId = args[1] as string;
+		var node = FindNode(id);
+		var parent = FindNode(parentId);
 
 		if (parent != null && node != null ) {
 			//Reflection.InsertChild(parent, node);
 			Fuse.UpdateManager.PostAction(new InsertChildUIAction(parent, node).Insert);
-			return name + " insert in " + parentName;
+			return id + " insert in " + parentId;
 		}
 		else {
 			if (parent == null) {
-				debug_log("parent not found " + parentName);
+				debug_log("parent not found " + parentId);
 			}
 			if (node == null) {
-				debug_log("node not found " + name);
+				debug_log("node not found " + id);
 			}
 			return "could not find node or parent";
 		}
 	}
 
 	object SetAttribute(Context c, object[] args) {
-		var name = args[0] as string;
+		var id = args[0] as string;
 		var attribute = args[1] as string;
 		var value = args[2] as object;
 
-		Node node = FindNode(name);
+		var node = FindNode(id);
 		return Reflection.SetAttribute(node, attribute, value);
 	}
 
 
 
 	object SetEventListener(Context c, object[] args) {
-		var name = args[0] as string;
+		var id = args[0] as string;
 		//var eventName = args[1] as string;
 		//var callback = args[2] as object;
 		//debug_log("SetEventListener " + name + " " + eventName); //+' '+args[2].GetType().ToString());
 
-		Node node = FindNode(name);
+		var node = FindNode(id);
 		Reflection.SetEventHandler(node, args, _nativeEvent);
 
-		
+
 		//Node node = FindNode(name);
 		//Fuse.Gestures.Clicked.AddHandler(node, new ClickHandlerClosure((Function)args[2]));
 

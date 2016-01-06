@@ -23,9 +23,9 @@ export class AppComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.getHeroes();
-		setInterval(() => {
-			this.clickCount++;
-		}, 1000);
+		// setInterval(() => {
+		// 	this.clickCount++;
+		// }, 1000);
 	}
 	getHeroes() {
 		this.heroes = this.heroService.getHeroes();
@@ -35,13 +35,13 @@ export class AppComponent implements OnInit {
 	}
 	onHeaderClick() {
 		this.clickCount++;
-		this.height += 40;
 		if (this.background === 'Red') {
+			this.height += 40;
 			this.background = 'Blue';
 		}
 		else {
+			this.height -= 40;
 			this.background = 'Red';
 		}
-		console.log('onHeaderClick ' + this.clickCount + ' ' + this.height + ' ' + this.background);
 	}
 }

@@ -93,10 +93,11 @@ export class ViewNode {
 
         // //let viewClass = getViewClass(this.viewName);
         // //console.log(viewClass);
+        var parentId = this.parentNativeView ? this.parentNativeView.id : null;
         if (!this.nativeView) {
             if (typeof window.AngularRenderer !== 'undefined') {
                 //console.log('AngularRenderer is defined');
-                var id = window.AngularRenderer.addElement(this.viewName);
+                var id = window.AngularRenderer.addElement(this.viewName, parentId);
             } else {
                 var id = this.objectCount++;
             }

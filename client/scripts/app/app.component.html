@@ -2,15 +2,20 @@
     <Rectangle Dock="Top" [Height]="height" [Background]="background" (click)="onHeaderClick()"></Rectangle>
     <!--  <TextInput (topchange)="name = $event.text" height="40" fontSize="30" placeholder="name"></TextInput>
       (click)="onSelect(hero)"-->
-   <ScrollView>
+    <ScrollView>
         <StackPanel>
-        	<!-- <TextInput #myname (keyup)></TextInput>
+            <!-- <TextInput #myname (keyup)></TextInput>
         	<Text Value="{{myname.value}}" ></Text> -->
-        	<Text Value="Hello, {{title}}. I have been clicked {{clickCount}} times."></Text>
-            <Rectangle Width="200" Height="200" Background="Blue" Margin="20"></Rectangle>
-           <!--   <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40">
+            <Text Value="Hello, {{title}}. I have been clicked {{clickCount}} times."></Text>
+            <Rectangle Width="200" Height="200" Background="Blue" Margin="20">
+            	<!--#Find a way to manage names and behaviors properly -->
+            	<WhilePressed>
+					<Change HHeight="200" DDuration="0.3"></Change>
+            	</WhilePressed>
+            </Rectangle>
+            <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40" Margin="5">
                 <Text Value="{{hero.id}} {{hero.name}}"></Text>
-            </Rectangle>-->
+            </Rectangle>
         </StackPanel>
-    </ScrollView> 
+    </ScrollView>
 </DockPanel>
