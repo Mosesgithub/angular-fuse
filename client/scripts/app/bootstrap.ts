@@ -27,7 +27,7 @@ import {APPLICATION_COMMON_PROVIDERS} from 'angular2/src/core/application_common
 import {COMPILER_PROVIDERS} from 'angular2/src/compiler/compiler';
 import {PLATFORM_COMMON_PROVIDERS} from 'angular2/src/core/platform_common_providers';
 import {COMMON_DIRECTIVES, COMMON_PIPES, FORM_PROVIDERS} from 'angular2/common';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {HTTP_PROVIDERS, JSONP_PROVIDERS} from 'angular2/http';
 
 //import {bootstrap} from 'angular2/bootstrap';
 
@@ -47,13 +47,14 @@ export function fuseBootstrap(appComponentType: any, customProviders: ProviderAr
       provide(PLATFORM_DIRECTIVES, {useValue: COMMON_DIRECTIVES, multi: true}),
 
       HTTP_PROVIDERS,
+      JSONP_PROVIDERS,
       APPLICATION_COMMON_PROVIDERS,
       COMPILER_PROVIDERS,
       PLATFORM_COMMON_PROVIDERS,
       FORM_PROVIDERS,
   ];
 
-  let appProviders = [HTTP_PROVIDERS];
+  let appProviders = [];
   if (isPresent(customProviders)) {
       appProviders.push(customProviders);
   }
