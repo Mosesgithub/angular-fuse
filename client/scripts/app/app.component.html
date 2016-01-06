@@ -1,11 +1,11 @@
 <DockPanel>
-    <Rectangle Dock="Top" [Height]="height"  Background="Red"></Rectangle>
+    <Rectangle Dock="Top" [Height]="height" Background="Red"></Rectangle>
     <!--  <TextInput (topchange)="name = $event.text" height="40" fontSize="30" placeholder="name"></TextInput>
     <Text Value="Hello, {{title}}."></Text>
-    <Rectangle Width="200" Height="200"></Rectangle>
-    <StackPanel>
-        <Rectangle *ngFor="#hero of heroes" (click)="onSelect(hero)">
-            <Text Value="{{hero.id}} {{hero.name}}"></Text>
-        </Rectangle>
-    </StackPanel> -->
+    <StackPanel>-->
+    <Rectangle Width="200" Height="200" Background="Blue"></Rectangle>
+    <Rectangle *ngFor="#hero of heroes" (click)="onSelect(hero)" Background="Yellow" Height="10">
+        <Text Value="{{hero.id}} {{hero.name}}"></Text>
+    </Rectangle>
+    </StackPanel>
 </DockPanel>

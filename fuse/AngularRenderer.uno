@@ -63,15 +63,18 @@ public class Reflection {
 		if (type == "DockPanel") {
 			return new DockPanel();
 		}
-		if (type == "Panel" || type=="app") {
+		if (type == "Panel" || type == "app") {
 			return new Panel();
+		}
+		if (type == "Text") {
+			return new Text();
 		}
 		return null;
 	}
 
 	public static string SetAttribute(object node, string attribute, object value) {
 		if (node != null) {
-			debug_log(attribute+' '+value);
+			debug_log(attribute + ' ' + value);
 			if (attribute == "Background") {
 				((Rectangle)node).Background = GetBrush(value.ToString()) ;
 				return "ok";
@@ -87,11 +90,14 @@ public class Reflection {
 					return "ok";
 				}
 			}
-			if (attribute == "Height") {				
+			if (attribute == "Height") {
 				((Rectangle)node).Height = int.Parse(value.ToString());// 60;// (float)value;
 				return "ok";
 			}
-			return "attribute not supported "+attribute;
+			if (attribute == "Value") {
+				((Text)node).Value = value.ToString();
+			}
+			return "attribute not supported " + attribute;
 		}
 		else {
 			return "object not found";
@@ -116,11 +122,11 @@ public class AngularRenderer : NativeModule
 	}
 
 	void OnJsInitialized(object sender, Uno.EventArgs args)
-    {
-        if (App.Current.RootNode == null) {
-            App.Current.RootNode = new Fuse.Controls.Panel();
-        }
-    }
+	{
+		if (App.Current.RootNode == null) {
+			App.Current.RootNode = new Fuse.Controls.Panel();
+		}
+	}
 
 	private Node FindNode(string name) {
 		if (name != null  && Tree.ContainsKey(name)) {

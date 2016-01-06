@@ -11,7 +11,7 @@ import {HeroService} from '../common/services/hero.service';
  export class AppComponent implements OnInit {
  	public title = 'Tour Of Heroes';
 	public dock = 'Top';
-	public height = 60;
+	public height = 160;
  	public heroes;
  	
  	public selectedHero: IHero;

@@ -6,12 +6,7 @@
 // bootstrap(AppComponent);
 import './vendor';
 
-//HACK: Unhack our global lazy loaded functions hack to make zone monkey patching work.
-// var __dummy_setTimeout = global.setTimeout;
-// var __dummy_clearTimeout = global.clearTimeout;
-// var __dummy_setInterval = global.setInterval;
-// var __dummy_clearInterval = global.clearInterval;
-import '../common/services/zone';
+//import '../common/services/zone';
 
 import {isPresent, Type} from 'angular2/src/facade/lang';
 import {Promise} from 'angular2/src/facade/async';
