@@ -1,16 +1,16 @@
 <DockPanel>
-    <Rectangle Dock="Top" [Height]="height" Background="Red"></Rectangle>
+    <Rectangle Dock="Top" [Height]="height" [Background]="background" (click)="onHeaderClick()"></Rectangle>
     <!--  <TextInput (topchange)="name = $event.text" height="40" fontSize="30" placeholder="name"></TextInput>
-    <Text Value="Hello, {{title}}."></Text>  (click)="onSelect(hero)"-->
-    <ScrollView>
+      (click)="onSelect(hero)"-->
+   <ScrollView>
         <StackPanel>
-            <Rectangle Width="200" Height="200" Background="Blue" Margin="20">
-            	
-            	
-            </Rectangle>
-            <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40">
+        	<!-- <TextInput #myname (keyup)></TextInput>
+        	<Text Value="{{myname.value}}" ></Text> -->
+        	<Text Value="Hello, {{title}}. I have been clicked {{clickCount}} times."></Text>
+            <Rectangle Width="200" Height="200" Background="Blue" Margin="20"></Rectangle>
+           <!--   <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40">
                 <Text Value="{{hero.id}} {{hero.name}}"></Text>
-            </Rectangle>
+            </Rectangle>-->
         </StackPanel>
-    </ScrollView>
+    </ScrollView> 
 </DockPanel>

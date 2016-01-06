@@ -92,7 +92,7 @@ export class ViewNode {
         //             //', parent UI ' + this.parentNativeView ? this.parentNativeView.type : 'null');}
 
         // //let viewClass = getViewClass(this.viewName);
-              // //console.log(viewClass);
+        // //console.log(viewClass);
         if (!this.nativeView) {
             if (typeof window.AngularRenderer !== 'undefined') {
                 //console.log('AngularRenderer is defined');
@@ -148,7 +148,7 @@ export class ViewNode {
 
     private postAttachUI() {
         var parentId = this.parentNativeView ? this.parentNativeView.id : null;
-      
+
         console.log('render ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + parentId);
         if (typeof window.AngularRenderer !== 'undefined') {
             //console.log('AngularRenderer is defined');
@@ -156,29 +156,29 @@ export class ViewNode {
             console.log(retVal);
         } 
 
-           //console.log('ViewNode.postAttachUI', arguments);
-    //     if (this.isComplexProperty) {
-    //         let nativeParent = <any>this.parentNativeView;
-    //         if (!nativeParent) {
-    //             return;
-    //         }
+        //console.log('ViewNode.postAttachUI', arguments);
+        //     if (this.isComplexProperty) {
+        //         let nativeParent = <any>this.parentNativeView;
+        //         if (!nativeParent) {
+        //             return;
+        //         }
 
-    //         let propertyName = ViewNode.getComplexPropertyName(this.viewName);
-    //         let realChildren = [];
-    //         for (let child of this.children) {
-    //             if (child.nativeView) {
-    //                 realChildren.push(child.nativeView);
-    //             }
-    //         }
-    //         if (realChildren.length > 0) {
-    //             if (nativeParent._addArrayFromBuilder) {
-    //                 nativeParent._addArrayFromBuilder(propertyName, realChildren);
-    //             }
-    //             else {
-    //                 this.parentNode.setAttribute(propertyName, realChildren[0]);
-    //             }
-    //         }
-    //     }
+        //         let propertyName = ViewNode.getComplexPropertyName(this.viewName);
+        //         let realChildren = [];
+        //         for (let child of this.children) {
+        //             if (child.nativeView) {
+        //                 realChildren.push(child.nativeView);
+        //             }
+        //         }
+        //         if (realChildren.length > 0) {
+        //             if (nativeParent._addArrayFromBuilder) {
+        //                 nativeParent._addArrayFromBuilder(propertyName, realChildren);
+        //             }
+        //             else {
+        //                 this.parentNode.setAttribute(propertyName, realChildren[0]);
+        //             }
+        //         }
+        //     }
     }
 
     private static propertyMaps: Map<Function, Map<string, string>> = new Map<Function, Map<string, string>>();
@@ -205,17 +205,17 @@ export class ViewNode {
     //     return name.indexOf(".") !== -1; //isString(name) && 
     // }
 
-    private static getComplexPropertyName(fullName: string): string {
-        //console.log('ViewNode.getComplexPropertyName', arguments);
-        var name: string;
+    // private static getComplexPropertyName(fullName: string): string {
+    //     //console.log('ViewNode.getComplexPropertyName', arguments);
+    //     var name: string;
 
-        //if (isString(fullName)) {
-        var names = fullName.split(".");
-        name = names[names.length - 1];
-        //}
+    //     //if (isString(fullName)) {
+    //     var names = fullName.split(".");
+    //     name = names[names.length - 1];
+    //     //}
 
-        return name;
-    }
+    //     return name;
+    // }
 
 
     public setAttributeValues(attrNameAndValues: string[]) {
@@ -248,9 +248,9 @@ export class ViewNode {
             return;
         }
 
-        if (typeof window.AngularRenderer!=='undefined') {
-            console.log('Setting attribute: id:' + this.nativeView.id+' att:' + attributeName+' value:'+value);
-            var retVal=window.AngularRenderer.setAttribute(this.nativeView.id, attributeName, value);
+        if (typeof window.AngularRenderer !== 'undefined') {
+            console.log('Setting attribute: id:' + this.nativeView.id + ' att:' + attributeName + ' value:' + value);
+            var retVal = window.AngularRenderer.setAttribute(this.nativeView.id, attributeName, value);
             console.log(retVal);
         }
         //
@@ -302,17 +302,17 @@ export class ViewNode {
         });
     }
 
-    private resolveNativeEvent(parsedEventName: string): string {
-        //console.log('ViewNode.resolveNativeEvent', arguments);
-        //TODO: actually resolve the event...
-        return parsedEventName;
-    }
+    // private resolveNativeEvent(parsedEventName: string): string {
+    //     //console.log('ViewNode.resolveNativeEvent', arguments);
+    //     //TODO: actually resolve the event...
+    //     return parsedEventName;
+    // }
 
-    private isGesture(eventName: string): boolean {
-        //console.log('ViewNode.eventName', arguments);
-        return false;
-        //return gestures.fromString(name.toLowerCase()) !== undefined;
-    }
+    // private isGesture(eventName: string): boolean {
+    //     //console.log('ViewNode.eventName', arguments);
+    //     return false;
+    //     //return gestures.fromString(name.toLowerCase()) !== undefined;
+    // }
 
     public on(eventName, callback) {
         //console.log('ViewNode.on: ' + this.viewName + ' -> ' + eventName);
@@ -324,14 +324,17 @@ export class ViewNode {
     }
 
     private attachNativeEvent(eventName, callback) {
-        //console.log('attachNativeEvent ' + eventName);
-        let resolvedEvent = this.resolveNativeEvent(eventName);
+        if (typeof window.AngularRenderer !== 'undefined') {
+            console.log('attachNativeEvent ' + this.nativeView.id + ' ' + eventName);
+            window.AngularRenderer.setEventListener(this.nativeView.id, eventName, callback);
+        }
+        //let resolvedEvent = this.resolveNativeEvent(eventName);
         //this.nativeView.addEventListener(resolvedEvent, callback);
     }
 
     private detachNativeEvent(eventName, callback) {
         //console.log('detachNativeEvent ' + eventName);
-        let resolvedEvent = this.resolveNativeEvent(eventName);
+        //let resolvedEvent = this.resolveNativeEvent(eventName);
         //this.nativeView.removeEventListener(resolvedEvent, callback);
     }
 

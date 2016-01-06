@@ -7,19 +7,6 @@ using Fuse.Controls;
 using Fuse.Gestures;
 using Fuse.Scripting;
 
-// private class ClickHandlerClosure {
-// 		Function _f;
-// 		public ClickHandlerClosure(Function f)
-// 		{
-// 			_f = f;
-// 		}
-// 		public void Handler(object sender,  Fuse.Gestures.ClickedArgs args)
-// 		{
-// 			// here you have to dispatch a call to _f onto the
-// 			// JS thread, which isn't possible in the current version
-// 		}
-// 	}
-
 
 public class Reflection {
 
@@ -29,7 +16,6 @@ public class Reflection {
 
 	private static Fuse.Drawing.Brush GetBrush(string color) {
 		object res;
-		debug_log(color);
 		//not working
 		var found = Uno.UX.Resource.TryFindGlobal(color, Acceptor, out res);
 		if (found) {
@@ -72,6 +58,9 @@ public class Reflection {
 		if (type == "Text") {
 			return new Text();
 		}
+		if (type == "TextInput") {
+			return new TextInput();
+		}
 		// if (type == "WhilePressed") {
 		// 	return new Fuse.Gestures.WhilePressed();
 		// }
@@ -80,37 +69,37 @@ public class Reflection {
 
 	public static string SetAttribute(object node, string attribute, object value) {
 		if (node != null) {
-			debug_log(attribute + ' ' + value);
+			//debug_log(attribute + ' ' + value);
 			if (attribute == "Background") {
 				((Rectangle)node).Background = GetBrush(value.ToString()) ;
-				return "ok";
+				return "";
 			}
 			if (attribute == "Dock") {
 				if (value.ToString() == "Top") {
 					debug_log("value found top");
 					Fuse.Controls.DockPanel.SetDock((Rectangle)node, Fuse.Layouts.Dock.Top);
-					return "ok";
+					return "";
 				}
 				if (value.ToString() == "Bottom") {
 					Fuse.Controls.DockPanel.SetDock((Rectangle)node, Fuse.Layouts.Dock.Bottom);
-					return "ok";
+					return "";
 				}
 			}
 			if (attribute == "Height") {
 				((Rectangle)node).Height = int.Parse(value.ToString());// 60;// (float)value;
-				return "ok";
+				return "";
 			}
 			if (attribute == "Width") {
 				((Rectangle)node).Width = int.Parse(value.ToString());// 60;// (float)value;
-				return "ok";
+				return "";
 			}
 			if (attribute == "Margin") {
 				((Rectangle)node).Margin = float4(float.Parse(value.ToString()));// 60;// (float)value;
-				return "ok";
+				return "";
 			}
 			if (attribute == "Value") {
 				((Text)node).Value = value.ToString();
-				return "ok";
+				return "";
 			}
 			return "attribute not supported " + attribute;
 		}
@@ -128,15 +117,35 @@ public class Reflection {
 			((Panel)parent).Children.Add(child);
 		}
 	}
+
+	public static void SetEventHandler(Node node,object[] args, NativeEvent nativeEvent ){
+		var clicked=new Fuse.Gestures.Clicked();
+		((Rectangle)node).Behaviors.Add(clicked);
+		clicked.Handler += new EventHandlerAction(args, nativeEvent).Trigger;
+	}
+}
+
+public class EventHandlerAction {
+	private object[] Arg;
+	private NativeEvent NativeEvent;
+
+	public EventHandlerAction(object[] arg, NativeEvent nativeEvent){
+		Arg=arg;
+		NativeEvent=nativeEvent;
+	}
+
+	public void Trigger(object sender, ClickedArgs args) {
+		NativeEvent.RaiseAsync(Arg);
+	}
 }
 
 
-public class InsertChildUIClass {
+public class InsertChildUIAction {
 
 	private Node Parent;
 	private Node Child;
 
-	public InsertChildUIClass(Node parent, Node child) {
+	public InsertChildUIAction(Node parent, Node child) {
 		Parent = parent;
 		Child = child;
 	}
@@ -152,12 +161,15 @@ public class AngularRenderer : NativeModule
 
 	public static Dictionary<string, Node> Tree;
 	private int NodeCounter = 0;
+	private NativeEvent _nativeEvent;
 
 	public AngularRenderer() {
 		AddMember(new NativeFunction("addElement", (NativeCallback)AddElement));
 		AddMember(new NativeFunction("renderElement", (NativeCallback)RenderElement));
 		AddMember(new NativeFunction("setAttribute", (NativeCallback)SetAttribute));
 		AddMember(new NativeFunction("setEventListener", (NativeCallback)SetEventListener));
+		_nativeEvent = new NativeEvent("onEventTriggered");
+		AddMember(_nativeEvent);
 
 		Tree = new Dictionary<string, Node>();
 
@@ -185,11 +197,6 @@ public class AngularRenderer : NativeModule
 
 	string AddElement(Context c, object[] args) {
 		var type = args[0] as string;
-		string parentName = null;
-		if (args.Length > 1) {
-			parentName = args[1] as string;
-		}
-
 		Node node = Reflection.CreateFromType(type);
 
 		if (node != null) {
@@ -210,7 +217,7 @@ public class AngularRenderer : NativeModule
 
 		if (parent != null && node != null ) {
 			//Reflection.InsertChild(parent, node);
-			Fuse.UpdateManager.PostAction(new InsertChildUIClass(parent, node).Insert);
+			Fuse.UpdateManager.PostAction(new InsertChildUIAction(parent, node).Insert);
 			return name + " insert in " + parentName;
 		}
 		else {
@@ -237,12 +244,17 @@ public class AngularRenderer : NativeModule
 
 	object SetEventListener(Context c, object[] args) {
 		var name = args[0] as string;
-		var ev = args[1] as string;
-		debug_log(args[2]);
+		//var eventName = args[1] as string;
+		//var callback = args[2] as object;
+		//debug_log("SetEventListener " + name + " " + eventName); //+' '+args[2].GetType().ToString());
 
 		Node node = FindNode(name);
+		Reflection.SetEventHandler(node, args, _nativeEvent);
+
+		
+		//Node node = FindNode(name);
 		//Fuse.Gestures.Clicked.AddHandler(node, new ClickHandlerClosure((Function)args[2]));
 
-		return true;
+		return "ok";
 	}
 }

@@ -11,16 +11,16 @@ import {ViewNode, DummyViewNode} from './view_node';
 export class FuseRenderer extends Renderer {
     constructor() {
         super();
-        console.log('FuseRenderer created');
+        ////console.log('FuseRenderer created');
     }
 
     public createProtoView(componentTemplateId: string, cmds: RenderTemplateCmd[]): RenderProtoViewRef {
-        //console.log('FuseRenderer.createProtoView: ', arguments);
+        ////console.log('FuseRenderer.createProtoView: ', arguments);
         return new DefaultProtoViewRef(this._componentTemplates.get(componentTemplateId), cmds);
     }
 
     public createRootHostView(hostProtoViewRef: RenderProtoViewRef, fragmentCount: number, hostElementSelector: string): RenderViewWithFragments {
-        //console.log("FuseRenderer.createRootHostView", arguments);
+        ////console.log("FuseRenderer.createRootHostView", arguments);
         let rootViewWithFragments = this._createView(hostProtoViewRef, null);
         let rootView = resolveInternalDomView(rootViewWithFragments.viewRef);
         let rootNode = rootView.boundElements[0];
@@ -29,7 +29,7 @@ export class FuseRenderer extends Renderer {
     }
 
     public createView(protoViewRef: RenderProtoViewRef, fragmentCount: number): RenderViewWithFragments {
-        //console.log("FuseRenderer.createView", arguments);
+        ////console.log("FuseRenderer.createView", arguments);
         return this._createView(protoViewRef, null);
     }
 
@@ -74,7 +74,7 @@ export class FuseRenderer extends Renderer {
         var startIndex = anchorNode.parentNode.getChildIndex(anchorNode) + 1;
 
         fragmentNodes.forEach((node, index) => {
-            //console.log('attachFragmentAfterElement: child: ' + node.viewName + ' after: ' + anchorNode.viewName + ' startIndex: ' + startIndex + ' index: ' + index);
+            ////console.log('attachFragmentAfterElement: child: ' + node.viewName + ' after: ' + anchorNode.viewName + ' startIndex: ' + startIndex + ' index: ' + index);
             anchorNode.parentNode.insertChildAt(startIndex + index, node);
             node.attachToView(startIndex + index);
         });
@@ -85,7 +85,7 @@ export class FuseRenderer extends Renderer {
 
         var fragmentNodes = resolveInternalDomFragment(fragmentRef);
         fragmentNodes.forEach((node) => {
-            //console.log('detaching fragment child: ' + node.viewName);
+            ////console.log('detaching fragment child: ' + node.viewName);
             if (node.parentNode)
                 node.parentNode.removeChild(node);
         });
@@ -139,12 +139,12 @@ export class FuseRenderer extends Renderer {
     }
 
 
-     getNativeElementSync(location: RenderElementRef): any {
-         //console.log("FuseRenderer.getNativeElementSync", arguments);
-         // let node = resolveBoundNode(location);
-         // return node.nativeView;
-         return null;
-     }
+    getNativeElementSync(location: RenderElementRef): any {
+        //console.log("FuseRenderer.getNativeElementSync", arguments);
+        // let node = resolveBoundNode(location);
+        // return node.nativeView;
+        return null;
+    }
 
     /**
     * Calls a method on an element.
@@ -197,11 +197,11 @@ export class FuseRenderer extends Renderer {
     }
 
     public createShadowRoot(host: ViewNode, templateId: string): ViewNode {
-         throw new Error('FuseRenderer.createShadowRoot Not implemented.');
+        throw new Error('FuseRenderer.createShadowRoot Not implemented.');
     }
 
     public createText(value: string): ViewNode {
-        ////console.log('FuseRenderer.createText', arguments);
+        //console.log('FuseRenderer.createText', arguments);
         return new DummyViewNode(null);
     }
 
@@ -211,13 +211,13 @@ export class FuseRenderer extends Renderer {
     }
 
     public on(element: ViewNode, eventName: string, callback: Function) {
-        //console.log('FuseRenderer.on: ' + eventName, arguments);
-        //let zonedCallback = global.zone.bind(callback);
-        //element.on(eventName, zonedCallback);
+        ////console.log('FuseRenderer.on: ' + eventName, arguments);
+        let zonedCallback = global.zone.bind(callback);
+        element.on(eventName, zonedCallback);
     }
 
     public globalOn(target: string, eventName: string, callback: Function): Function {
-        throw new Error('FuseRenderer.globalOn: ' + eventName +'Not implemented.');
+        throw new Error('FuseRenderer.globalOn: ' + eventName + 'Not implemented.');
     }
 }
 
@@ -227,7 +227,7 @@ function resolveInternalDomView(viewRef: RenderViewRef): DefaultRenderView<ViewN
 }
 
 function resolveBoundNode(elementRef: RenderElementRef): ViewNode {
-    //console.log('resolveBoundNode', arguments);
+    ////console.log('resolveBoundNode', arguments);
     let view = resolveInternalDomView(elementRef.renderView);
     //Using an Angular internal API to get the index of the bound element.
     let internalBoundIndex = (<any>elementRef).boundElementIndex;

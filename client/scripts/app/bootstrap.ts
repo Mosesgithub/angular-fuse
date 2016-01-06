@@ -6,7 +6,7 @@
 // bootstrap(AppComponent);
 import './vendor';
 
-//import '../common/services/zone';
+import '../common/services/zone';
 
 import {isPresent, Type} from 'angular2/src/facade/lang';
 import {Promise} from 'angular2/src/facade/async';
@@ -35,25 +35,25 @@ export type ProviderArray = Array<Type | Provider | any[]>;
 export function fuseBootstrap(appComponentType: any, customProviders: ProviderArray = null): Promise<ComponentRef> {
   FuseDomAdapter.makeCurrent();
 
- 
+
   let fuseProviders: ProviderArray = [
-      FuseRenderer,
-      provide(Renderer, {useClass: FuseRenderer}),
-      provide(XHR, {useClass: FileSystemXHR}),
-      provide(ExceptionHandler, {useFactory: () => new ExceptionHandler(DOM, true), deps: []}),
+    FuseRenderer,
+    provide(Renderer, { useClass: FuseRenderer }),
+    provide(XHR, { useClass: FileSystemXHR }),
+    provide(ExceptionHandler, { useFactory: () => new ExceptionHandler(DOM, true), deps: [] }),
 
-      provide(PLATFORM_PIPES, {useValue: COMMON_PIPES, multi: true}),
-      provide(PLATFORM_DIRECTIVES, {useValue: COMMON_DIRECTIVES, multi: true}),
+    provide(PLATFORM_PIPES, { useValue: COMMON_PIPES, multi: true }),
+    provide(PLATFORM_DIRECTIVES, { useValue: COMMON_DIRECTIVES, multi: true }),
 
-      APPLICATION_COMMON_PROVIDERS,
-      COMPILER_PROVIDERS,
-      PLATFORM_COMMON_PROVIDERS,
-      FORM_PROVIDERS,
+    APPLICATION_COMMON_PROVIDERS,
+    COMPILER_PROVIDERS,
+    PLATFORM_COMMON_PROVIDERS,
+    FORM_PROVIDERS,
   ];
 
   let appProviders = [];
   if (isPresent(customProviders)) {
-      appProviders.push(customProviders);
+    appProviders.push(customProviders);
   }
 
   var app = platform(fuseProviders).application(appProviders);
@@ -62,11 +62,7 @@ export function fuseBootstrap(appComponentType: any, customProviders: ProviderAr
 }
 
 import {AppComponent} from './app.component';
-import {enableProdMode} from 'angular2/core';
-
-  console.log('bootstrap is starting');
-  enableProdMode();
-  fuseBootstrap(AppComponent).then(function() {
-    console.log('bootstrap is done');
-  });
+//import {enableProdMode} from 'angular2/core';
+//enableProdMode();
+fuseBootstrap(AppComponent);
 

@@ -2,7 +2,7 @@
 'use strict';
 
 if (!window.angularLoaded) {
-    console.log('loading');
+    //console.log('loading');
     var es6Shim = require('es6Shim');
 
     window.RegExp = RegExp;
@@ -12,12 +12,12 @@ if (!window.angularLoaded) {
     window.Promise = Promise;
     window.Math = Math;
     assert = function() {};
-    var old = EventTarget;
+    var EventTargetOld = EventTarget;
     EventTarget = {};
     EventTarget.prototype = {
-        addEventListener: old.addEventListener,
-        removeEventListener: old.removeEventListener,
-        dispatchEvent: old.dispatchEvent
+        addEventListener: EventTargetOld.addEventListener,
+        removeEventListener: EventTargetOld.removeEventListener,
+        dispatchEvent: EventTargetOld.dispatchEvent
     };
     window.EventTarget = EventTarget;
 
@@ -28,8 +28,13 @@ if (!window.angularLoaded) {
     // console.dir(es6Shim);
 
     window.AngularRenderer = require('AngularRenderer');
+    window.AngularRenderer.onEventTriggered = function(viewName, eventName, callback) {
+        //console.log('onEventTriggered ' + viewName + ' ' + eventName);
+        callback();
+    };
+
     require('bundle');
-    console.log('bundle is loaded');
+    //console.log('bundle is loaded');
     window.angularLoaded = true;
 }
 

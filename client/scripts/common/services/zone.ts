@@ -6,6 +6,6 @@ var core = require('zone.js/lib/core.js');
 var microtask = require('zone.js/lib/microtask.js');
 microtask.addMicrotaskSupport(core.Zone);
 global.Zone = core.Zone;
-global.zone = new core.Zone();
+window.zone = global.zone = new core.Zone();
 
 ZoneScriptPatch.apply();
