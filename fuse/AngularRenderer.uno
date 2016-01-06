@@ -53,7 +53,7 @@ public class Reflection {
 	}
 
 	public static Node CreateFromType(string type) {
-		//var type2 = Uno.Type.GetType(type);
+
 		if (type == "Rectangle") {
 			return new Rectangle();
 		}
@@ -66,7 +66,7 @@ public class Reflection {
 		if (type == "Panel" || type == "app") {
 			return new Panel();
 		}
-		if(type=="ScrollView"){
+		if (type == "ScrollView") {
 			return new ScrollView();
 		}
 		if (type == "Text") {
@@ -113,6 +113,16 @@ public class Reflection {
 		}
 		else {
 			return "object not found";
+		}
+	}
+
+	public static void InsertChild(Node parent, Node child) {
+		var parentType = parent.GetType();
+		if (parentType == typeof(ScrollView)) {
+			((ScrollView)parent).Content = (Fuse.Elements.Element)child;
+		}
+		else {
+			((Panel)parent).Children.Add(child);
 		}
 	}
 }
@@ -179,7 +189,7 @@ public class AngularRenderer : NativeModule
 		var parent = FindNode(parentName);
 
 		if (parent != null && node != null ) {
-			((Panel)parent).Children.Add(node);
+			Reflection.InsertChild(parent, node);
 			return name + " insert in " + parentName;
 		}
 		else {
