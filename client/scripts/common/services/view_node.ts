@@ -219,7 +219,7 @@ export class ViewNode {
 
 
     public setAttributeValues(attrNameAndValues: string[]) {
-        //console.log('ViewNode.attrNameAndValues', arguments);
+        console.log('ViewNode.attrNameAndValues', JSON.stringify(arguments));
         if (attrNameAndValues) {
             for (let i = 0; i < attrNameAndValues.length; i += 2) {
                 let name = attrNameAndValues[i];

@@ -102,13 +102,13 @@ export class FuseRenderer extends Renderer {
     }
 
     setElementProperty(location: RenderElementRef, propertyName: string, propertyValue: any) {
-        //console.log("FuseRenderer.setElementProperty " + propertyName + " = " + propertyValue, arguments);
+        console.log("FuseRenderer.setElementProperty " + propertyName + " = " + propertyValue, arguments);
         let node = resolveBoundNode(location);
         node.setProperty(propertyName, propertyValue);
     }
 
     setElementAttribute(location: RenderElementRef, attributeName: string, attributeValue: string) {
-        //console.log("FuseRenderer.setElementAttribute " + attributeName + " = " + attributeValue, arguments);
+        console.log("FuseRenderer.setElementAttribute " + attributeName + " = " + attributeValue, arguments);
         return this.setElementProperty(location, attributeName, attributeValue);
     }
 
@@ -211,9 +211,9 @@ export class FuseRenderer extends Renderer {
     }
 
     public on(element: ViewNode, eventName: string, callback: Function) {
-        //console.log('FuseRenderer.on: ' + eventName, arguments);
-        //let zonedCallback = global.zone.bind(callback);
-        //element.on(eventName, zonedCallback);
+        console.log('FuseRenderer.on: ' + eventName + " on " +element.viewName);
+        let zonedCallback = global.zone.bind(callback);
+        element.on(eventName, zonedCallback);
     }
 
     public globalOn(target: string, eventName: string, callback: Function): Function {

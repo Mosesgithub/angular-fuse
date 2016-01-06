@@ -2,7 +2,6 @@ import {Component, OnInit} from 'angular2/core';
 import {IHero} from '../common/interfaces/ihero';
 import {HeroService} from '../common/services/hero.service';
 
-
 @Component({
     selector: 'app',
     providers: [HeroService],
@@ -15,16 +14,20 @@ import {HeroService} from '../common/services/hero.service';
  	public heroes;
  	
  	public selectedHero: IHero;
- 	 constructor(private heroService: HeroService) {
-		   console.log('AppComponent constructor');
- 	 }
- 	 ngOnInit() {
- 	 	this.getHeroes();
- 	 }
- 	 getHeroes() {
- 	 	this.heroes = this.heroService.getHeroes();
- 	 }
- 	 onSelect(hero: IHero) {
- 	 	this.selectedHero = hero;
- 	 }
+	constructor(private heroService: HeroService) {
+		console.log('AppComponent constructor');
+	}
+	ngOnInit() {
+		this.getHeroes();
+	}
+	getHeroes() {
+		this.heroes = this.heroService.getData();
+		console.log(this.heroes);
+	}
+	onSelect(hero: IHero) {
+		this.selectedHero = hero;
+	}
+	onClickRectangle() {
+		console.log('Rectangle clicked');
+	}
 }

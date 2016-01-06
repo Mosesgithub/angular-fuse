@@ -1,4 +1,5 @@
  import {Injectable} from 'angular2/core';
+ import {Http} from 'angular2/http';
  import {IHero} from '../interfaces/ihero';
 
  let heroes: IHero[] = [
@@ -16,7 +17,10 @@
 
  @Injectable()
  export class HeroService {
- 	getHeroes(): IHero[] {
- 		return heroes;
- 	}
+	constructor(private http: Http) {
+	}
+	getData() {
+		//return null;
+		return this.http.get('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.digg.com/rss/index.xml').map(function(a) { console.log(a) })
+	}
  }
