@@ -72,6 +72,9 @@ public class Reflection {
 		if (type == "Text") {
 			return new Text();
 		}
+		// if (type == "WhilePressed") {
+		// 	return new Fuse.Gestures.WhilePressed();
+		// }
 		return null;
 	}
 
@@ -127,10 +130,27 @@ public class Reflection {
 	}
 }
 
+
+public class InsertChildUIClass {
+
+	private Node Parent;
+	private Node Child;
+
+	public InsertChildUIClass(Node parent, Node child) {
+		Parent = parent;
+		Child = child;
+	}
+
+	public void Insert() {
+		Reflection.InsertChild(Parent, Child);
+	}
+}
+
+
 public class AngularRenderer : NativeModule
 {
 
-	private Dictionary<string, Node> Tree;
+	public static Dictionary<string, Node> Tree;
 	private int NodeCounter = 0;
 
 	public AngularRenderer() {
@@ -189,7 +209,8 @@ public class AngularRenderer : NativeModule
 		var parent = FindNode(parentName);
 
 		if (parent != null && node != null ) {
-			Reflection.InsertChild(parent, node);
+			//Reflection.InsertChild(parent, node);
+			Fuse.UpdateManager.PostAction(new InsertChildUIClass(parent, node).Insert);
 			return name + " insert in " + parentName;
 		}
 		else {

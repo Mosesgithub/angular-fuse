@@ -4,7 +4,10 @@
     <Text Value="Hello, {{title}}."></Text>  (click)="onSelect(hero)"-->
     <ScrollView>
         <StackPanel>
-            <Rectangle Width="200" Height="200" Background="Blue" Margin="20"></Rectangle>
+            <Rectangle Width="200" Height="200" Background="Blue" Margin="20">
+            	
+            	
+            </Rectangle>
             <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40">
                 <Text Value="{{hero.id}} {{hero.name}}"></Text>
             </Rectangle>
