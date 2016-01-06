@@ -11,9 +11,7 @@ if (!window.angularLoaded) {
     window.Reflect = Reflect;
     window.Promise = Promise;
     window.Math = Math;
-    window.assert = function() {
-
-    }
+    assert = function() {};
     var old = EventTarget;
     EventTarget = {};
     EventTarget.prototype = {

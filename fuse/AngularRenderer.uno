@@ -66,6 +66,9 @@ public class Reflection {
 		if (type == "Panel" || type == "app") {
 			return new Panel();
 		}
+		if(type=="ScrollView"){
+			return new ScrollView();
+		}
 		if (type == "Text") {
 			return new Text();
 		}
@@ -94,8 +97,17 @@ public class Reflection {
 				((Rectangle)node).Height = int.Parse(value.ToString());// 60;// (float)value;
 				return "ok";
 			}
+			if (attribute == "Width") {
+				((Rectangle)node).Width = int.Parse(value.ToString());// 60;// (float)value;
+				return "ok";
+			}
+			if (attribute == "Margin") {
+				((Rectangle)node).Margin = float4(float.Parse(value.ToString()));// 60;// (float)value;
+				return "ok";
+			}
 			if (attribute == "Value") {
 				((Text)node).Value = value.ToString();
+				return "ok";
 			}
 			return "attribute not supported " + attribute;
 		}
@@ -113,6 +125,7 @@ public class AngularRenderer : NativeModule
 
 	public AngularRenderer() {
 		AddMember(new NativeFunction("addElement", (NativeCallback)AddElement));
+		AddMember(new NativeFunction("renderElement", (NativeCallback)RenderElement));
 		AddMember(new NativeFunction("setAttribute", (NativeCallback)SetAttribute));
 		AddMember(new NativeFunction("setEventListener", (NativeCallback)SetEventListener));
 
@@ -151,18 +164,32 @@ public class AngularRenderer : NativeModule
 
 		if (node != null) {
 			node.Name = "obj_" + NodeCounter++;
-			var parent = FindNode(parentName);
-			if (parent != null ) {
-				((Panel)parent).Children.Add(node);
-				Tree.Add(node.Name, node);
-			}
-			else {
-				throw new Error("error");
-			}
+			Tree.Add(node.Name, node);
 			return node.Name;
 		}
 		else {
 			return "Type not found :" + type;
+		}
+	}
+
+	string RenderElement(Context c , object[] args) {
+		var name = args[0] as string;
+		var parentName = args[1] as string;
+		var node = FindNode(name);
+		var parent = FindNode(parentName);
+
+		if (parent != null && node != null ) {
+			((Panel)parent).Children.Add(node);
+			return name + " insert in " + parentName;
+		}
+		else {
+			if (parent == null) {
+				debug_log("parent not found " + parentName);
+			}
+			if (node == null) {
+				debug_log("node not found " + name);
+			}
+			return "could not find node or parent";
 		}
 	}
 

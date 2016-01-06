@@ -78,7 +78,7 @@ export class ViewNode {
             child.attachToView();
         });
 
-        //this.postAttachUI();
+        this.postAttachUI();
     }
 
     private createUI(attachAtIndex: number): boolean {
@@ -94,15 +94,14 @@ export class ViewNode {
         // //let viewClass = getViewClass(this.viewName);
               // //console.log(viewClass);
         if (!this.nativeView) {
-            var parentId = this.parentNativeView ? this.parentNativeView.id : null;
             if (typeof window.AngularRenderer !== 'undefined') {
                 //console.log('AngularRenderer is defined');
-                var id = window.AngularRenderer.addElement(this.viewName, parentId);
+                var id = window.AngularRenderer.addElement(this.viewName);
             } else {
                 var id = this.objectCount++;
             }
             this.nativeView = new View(this.viewName, id);
-            console.log('create ui ' + this.viewName + ' id:' + id+' parentId:'+parentId);
+            console.log('create ui ' + this.viewName + ' id:' + id);
         } else {
             //console.log('Reattaching old view: ' + this.viewName);
         }
@@ -147,8 +146,17 @@ export class ViewNode {
     }
 
 
-    // private postAttachUI() {
-    //     //console.log('ViewNode.postAttachUI', arguments);
+    private postAttachUI() {
+        var parentId = this.parentNativeView ? this.parentNativeView.id : null;
+      
+        console.log('render ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + parentId);
+        if (typeof window.AngularRenderer !== 'undefined') {
+            //console.log('AngularRenderer is defined');
+            var retVal = window.AngularRenderer.renderElement(this.nativeView.id, parentId);
+            console.log(retVal);
+        } 
+
+           //console.log('ViewNode.postAttachUI', arguments);
     //     if (this.isComplexProperty) {
     //         let nativeParent = <any>this.parentNativeView;
     //         if (!nativeParent) {
@@ -171,7 +179,7 @@ export class ViewNode {
     //             }
     //         }
     //     }
-    // }
+    }
 
     private static propertyMaps: Map<Function, Map<string, string>> = new Map<Function, Map<string, string>>();
 
