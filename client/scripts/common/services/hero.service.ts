@@ -17,14 +17,13 @@
 
  @Injectable()
  export class HeroService {
-	 public responseData;
 	constructor(private jsonp: Jsonp) {
 	}
 	getData() {
 		//return null;
 		return this.jsonp.get('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.digg.com/rss/index.xml&callback=JSONP_CALLBACK')
 		.map(res => res.json())
-		.subscribe(responseData => { this.responseData = responseData; console.log(this.responseData); });
+		.toPromise();
 
 		// return this.http.get('https://yoobic-ims.herokuapp.com/api/Vehicles?filter=%7B%22limit%22%3A20%7D')
 		// .map(res => res.json())
