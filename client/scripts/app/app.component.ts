@@ -21,7 +21,8 @@ import {HeroService} from '../common/services/hero.service';
 		this.getHeroes();
 	}
 	getHeroes() {
-		this.heroService.getData().then(h => { this.heroes = h; console.log(this.heroes); });
+		this.heroService.getData().then(data => { console.log(data) });
+		this.heroService.getData().then(h => { this.heroes = h.responseData.feed.entries; console.log(this.heroes); });
 	}
 	onSelect(hero: IHero) {
 		this.selectedHero = hero;

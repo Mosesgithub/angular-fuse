@@ -7,9 +7,9 @@
             <Rectangle Width="200" Height="200" Background="Blue" Margin="20" (click)="onClickRectangle()">
 
             </Rectangle>
-            <!-- <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40">
-                <Text Value="{{hero.id}} {{hero.name}}"></Text>
-            </Rectangle> -->
+            <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40">
+                <Text Value="{{hero.title}}"></Text>
+            </Rectangle>
         </StackPanel>
     </ScrollView>
 </DockPanel>
