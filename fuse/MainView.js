@@ -32,7 +32,6 @@ if (!window.angularLoaded) {
         //console.log('onEventTriggered ' + viewName + ' ' + eventName);
         callback();
     };
-
     require('bundle');
     //console.log('bundle is loaded');
     window.angularLoaded = true;

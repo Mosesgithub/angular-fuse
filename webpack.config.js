@@ -3,7 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var gulpMux = require('gulp-mux');
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+//var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 //var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 
@@ -33,12 +33,12 @@ module.exports = {
     devtool: 'source-map', //'eval-source-map',
     debug: true,
     cache: true,
+    //target: 'node',
     context: path.resolve(path.join(clientFolder, 'scripts', target)), // the base directory for resolving the entry option
     entry: {
         //'vendor': './vendor', // clientFolder + '/scripts/' + target  + '/vendor', // path.resolve(path.join('.', clientFolder, 'scripts', target, 'vendor')),
         'bundle': './bootstrap' //clientFolder + '/scripts/' + target  + '/bootstrap',  // path.resolve(path.join('.', clientFolder, 'scripts', target, 'bootstrap'))
     },
-
     output: {
         path: path.resolve(distFolder),
 
@@ -170,17 +170,18 @@ module.exports = {
         port: port
     },
     plugins: [
-        new CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor.js',
-            minChunks: Infinity
-        }),
-        new CommonsChunkPlugin({
-            name: 'common',
-            filename: 'common.js',
-            minChunks: 2,
-            chunks: ['bundle', 'vendor']
-        }),
+        //new webpack.optimize.DedupePlugin(),
+        // new CommonsChunkPlugin({
+        //     name: 'vendor',
+        //     filename: 'vendor.js',
+        //     minChunks: Infinity
+        // }),
+        // new CommonsChunkPlugin({
+        //     name: 'common',
+        //     filename: 'common.js',
+        //     minChunks: 2,
+        //     chunks: ['bundle', 'vendor']
+        // }),
         new HtmlwebpackPlugin({
             title: 'App - ' + target,
             template: clientFolder + '/index' + suffix + '.html',

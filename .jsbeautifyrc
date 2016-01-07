@@ -1,6 +1,6 @@
 {
    "html": {
-    "allowed_file_extensions": ["htm", "html", "xhtml", "shtml", "xml", "svg"],
+    "allowed_file_extensions": ["htm", "html", "xhtml", "shtml", "xml", "svg", "ux"],
     "brace_style": "collapse",
     "indent_char": " ",
     "indent_handlebars": false,

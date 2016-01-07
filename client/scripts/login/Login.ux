@@ -1,7 +1,7 @@
 <DockPanel ux:Class="LoginUX">
-    <Panel Background="Red">
-    	   <Video File="../../ressources/market.mp4" Layer="Background" AutoPlay="true" IsLooping="true" StretchMode="UniformToFill" Background="#1d1f35" Opacity="0.3" Padding="-10"></Video>
-    </Panel>
+    <Panel Background="Blue">
+   		<Video File="../../ressources/market.mp4" Layer="Background" AutoPlay="true" IsLooping="true" StretchMode="UniformToFill" Background="#1d1f35" Opacity="0.3" Padding="-10"></Video>
+     </Panel>
     <Rectangle Dock="Bottom" Height="60" Fill="Blue">
     </Rectangle>
 </DockPanel>
