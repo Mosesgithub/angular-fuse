@@ -24,16 +24,24 @@ export class AppComponent implements OnInit {
 
     public selectedHero: IHero;
     constructor(private heroService: HeroService) {
-        console.log('AppComponent constructor');
+        //console.log('AppComponent constructor');
     }
     ngOnInit() {
         this.getHeroes();
         // setInterval(() => {
-        // 	this.clickCount++;
+        //     this.clickCount++;
         // }, 1000);
     }
     getHeroes() {
-        this.heroes = this.heroService.getHeroes();
+        this.heroService.getHeroes().subscribe(function(resp) {
+            console.log(JSON.stringify(resp));
+            this.heroes = resp;
+        });
+
+        // .then(resp => {
+        //     console.log('resp ' + JSON.stringify(resp));
+        //     this.heroes = resp.responseData.feed.entries;
+        // }).catch(err => console.error('error ' + JSON.stringify(err)));
     }
     onSelect(hero: IHero) {
         this.selectedHero = hero;

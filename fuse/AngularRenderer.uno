@@ -25,18 +25,6 @@ public class EventHandlerAction {
 }
 
 
-public class InsertChildUIAction {
-	private object Parent;
-	private object Child;
-	public InsertChildUIAction(object parent, object child) {
-		Parent = parent;
-		Child = child;
-	}
-
-	public void Insert() {
-		Reflection.InsertChild(Parent, Child);
-	}
-}
 
 
 public class AngularRenderer : NativeModule
@@ -109,7 +97,7 @@ public class AngularRenderer : NativeModule
 
 		if (parent != null && node != null ) {
 			//Reflection.InsertChild(parent, node);
-			Fuse.UpdateManager.PostAction(new InsertChildUIAction(parent, node).Insert);
+			Fuse.UpdateManager.PostAction(new RenderElementAction(parent, node).Execute);
 			return id + " insert in " + parentId;
 		}
 		else {
@@ -129,7 +117,9 @@ public class AngularRenderer : NativeModule
 		var value = args[2] as object;
 
 		var node = FindNode(id);
-		return Reflection.SetAttribute(node, attribute, value);
+		Fuse.UpdateManager.PostAction(new SetAttributeAction(node, attribute, value).Execute);
+		return "";
+		//return Reflection.SetAttribute(node, attribute, value);
 	}
 
 
@@ -150,3 +140,34 @@ public class AngularRenderer : NativeModule
 		return "ok";
 	}
 }
+
+
+public class RenderElementAction {
+	private object Parent;
+	private object Child;
+	public RenderElementAction(object parent, object child) {
+		Parent = parent;
+		Child = child;
+	}
+
+	public void Execute() {
+		Reflection.InsertChild(Parent, Child);
+	}
+}
+
+public class SetAttributeAction {
+	private object Node;
+	private string Attribute;
+	private object Value;
+
+	public SetAttributeAction(object node, string attribute, object value) {
+		Node = node;
+		Attribute = attribute;
+		Value = value;
+	}
+
+	public void Execute() {
+		Reflection.SetAttribute(Node, Attribute, Value);
+	}
+}
+

@@ -1,5 +1,4 @@
 /* beautify ignore:start */
-
 import './vendor';
 
 import {AppComponent} from './app.component';

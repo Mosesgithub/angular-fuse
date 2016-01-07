@@ -139,10 +139,12 @@ public class Reflection {
 				((Text)node).Value = value.ToString();
 				return "";
 			}
-			return "attribute not supported " + attribute;
+			debug_log("attribute not supported " + attribute);
+			return "";
 		}
 		else {
-			return "object not found";
+			debug_log("object not found");
+			return "";
 		}
 	}
 

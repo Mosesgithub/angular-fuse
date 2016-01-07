@@ -108,8 +108,7 @@ export class ViewNode {
 
         if (typeof window.AngularRenderer !== 'undefined') {
             console.log('Setting attribute: id:' + this.nativeView.id + ' att:' + attributeName + ' value:' + value);
-            let retVal = window.AngularRenderer.setAttribute(this.nativeView.id, attributeName, value);
-            console.log(retVal);
+            window.AngularRenderer.setAttribute(this.nativeView.id, attributeName, value);
         }
     }
 
@@ -222,7 +221,7 @@ export class ViewNode {
                 //console.log('AngularRenderer is defined');
                 id = window.AngularRenderer.addElement(this.viewName, parentId);
             } else {
-                id = this.objectCount++;
+                id = '' + this.objectCount++;
             }
             this.nativeView = new View(this.viewName, id);
             console.log('create ui ' + this.viewName + ' id:' + id);
@@ -392,15 +391,15 @@ export class DummyViewNode extends ViewNode {
         super(parentNode, null, []);
     }
     public attachToView(atIndex: number = -1) {
-        console.log('dummyviewnode attachtoview');
+        return;
     }
     public insertChildAt(index: number, childNode: ViewNode) {
-        console.log('dummyviewnode insertChildAt');
+        return;
     }
     public removeChild(childNode: ViewNode) {
-        console.log('dummyviewnode removeChild');
+        return;
     }
     setProperty(name: string, value: any) {
-        console.log('dummyviewnode setProperty');
+        return;
     }
 }

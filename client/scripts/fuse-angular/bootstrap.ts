@@ -1,3 +1,4 @@
+/* beautify ignore:start */
 import {isPresent, Type} from 'angular2/src/facade/lang';
 import {Promise} from 'angular2/src/facade/async';
 //import {Promise, PromiseWrapper} from 'angular2/src/facade/async';
@@ -17,6 +18,7 @@ import {APPLICATION_COMMON_PROVIDERS} from 'angular2/src/core/application_common
 import {COMPILER_PROVIDERS} from 'angular2/src/compiler/compiler';
 import {PLATFORM_COMMON_PROVIDERS} from 'angular2/src/core/platform_common_providers';
 import {COMMON_DIRECTIVES, COMMON_PIPES, FORM_PROVIDERS} from 'angular2/common';
+import {HTTP_PROVIDERS, JSONP_PROVIDERS} from 'angular2/http';
 /* beautify ignore:end */
 
 export type ProviderArray = Array < Type | Provider | any[] > ;
@@ -50,6 +52,8 @@ export function fuseBootstrap(appComponentType: any, customProviders: ProviderAr
         COMPILER_PROVIDERS,
         PLATFORM_COMMON_PROVIDERS,
         FORM_PROVIDERS,
+        HTTP_PROVIDERS,
+        JSONP_PROVIDERS
     ];
 
     let appProviders = [];
@@ -58,6 +62,5 @@ export function fuseBootstrap(appComponentType: any, customProviders: ProviderAr
     }
 
     let app = platform(fuseProviders).application(appProviders);
-    console.log('starting bootstrap');
     return app.bootstrap(appComponentType);
 }
