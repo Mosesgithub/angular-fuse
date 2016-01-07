@@ -1,5 +1,3 @@
-import './zone';
-
 import {isPresent, Type} from 'angular2/src/facade/lang';
 import {Promise} from 'angular2/src/facade/async';
 //import {Promise, PromiseWrapper} from 'angular2/src/facade/async';
