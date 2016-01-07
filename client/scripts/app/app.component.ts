@@ -2,10 +2,12 @@ import {Component, OnInit} from 'angular2/core';
 import {IHero} from '../common/interfaces/ihero';
 import {HeroService} from '../common/services/hero.service';
 
+import {Login} from '../login/login.component';
 
 @Component({
     selector: 'app',
     providers: [HeroService],
+    directives:[Login],
     template: require('./app.component.html')
 })
 export class AppComponent implements OnInit {
@@ -14,6 +16,7 @@ export class AppComponent implements OnInit {
 	public height = 160;
 	public clickCount = 0;
 	public background = 'Red';
+	public mywidth = 100;
 
 	public heroes;
 

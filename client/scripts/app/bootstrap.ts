@@ -1,9 +1,4 @@
-// import {bootstrap} from 'angular2/platform/browser';
-
-// //import {enableProdMode} from 'angular2/core';
-// //enableProdMode();
-
-// bootstrap(AppComponent);
+/* beautify ignore:start */
 import './vendor';
 
 import '../common/services/zone';
@@ -27,42 +22,52 @@ import {APPLICATION_COMMON_PROVIDERS} from 'angular2/src/core/application_common
 import {COMPILER_PROVIDERS} from 'angular2/src/compiler/compiler';
 import {PLATFORM_COMMON_PROVIDERS} from 'angular2/src/core/platform_common_providers';
 import {COMMON_DIRECTIVES, COMMON_PIPES, FORM_PROVIDERS} from 'angular2/common';
+import {AppComponent} from './app.component';
+/* beautify ignore:end */
 
-//import {bootstrap} from 'angular2/bootstrap';
+export type ProviderArray = Array < Type | Provider | any[] > ;
 
-export type ProviderArray = Array<Type | Provider | any[]>;
+export function fuseBootstrap(appComponentType: any, customProviders: ProviderArray = null): Promise < ComponentRef > {
+    FuseDomAdapter.makeCurrent();
 
-export function fuseBootstrap(appComponentType: any, customProviders: ProviderArray = null): Promise<ComponentRef> {
-  FuseDomAdapter.makeCurrent();
+    let fuseProviders: ProviderArray = [
+        FuseRenderer,
+        provide(Renderer, {
+            useClass: FuseRenderer
+        }),
+        provide(XHR, {
+            useClass: FileSystemXHR
+        }),
+        provide(ExceptionHandler, {
+            useFactory: () => new ExceptionHandler(DOM, true),
+            deps: []
+        }),
 
+        provide(PLATFORM_PIPES, {
+            useValue: COMMON_PIPES,
+            multi: true
+        }),
+        provide(PLATFORM_DIRECTIVES, {
+            useValue: COMMON_DIRECTIVES,
+            multi: true
+        }),
 
-  let fuseProviders: ProviderArray = [
-    FuseRenderer,
-    provide(Renderer, { useClass: FuseRenderer }),
-    provide(XHR, { useClass: FileSystemXHR }),
-    provide(ExceptionHandler, { useFactory: () => new ExceptionHandler(DOM, true), deps: [] }),
+        APPLICATION_COMMON_PROVIDERS,
+        COMPILER_PROVIDERS,
+        PLATFORM_COMMON_PROVIDERS,
+        FORM_PROVIDERS,
+    ];
 
-    provide(PLATFORM_PIPES, { useValue: COMMON_PIPES, multi: true }),
-    provide(PLATFORM_DIRECTIVES, { useValue: COMMON_DIRECTIVES, multi: true }),
+    let appProviders = [];
+    if (isPresent(customProviders)) {
+        appProviders.push(customProviders);
+    }
 
-    APPLICATION_COMMON_PROVIDERS,
-    COMPILER_PROVIDERS,
-    PLATFORM_COMMON_PROVIDERS,
-    FORM_PROVIDERS,
-  ];
-
-  let appProviders = [];
-  if (isPresent(customProviders)) {
-    appProviders.push(customProviders);
-  }
-
-  var app = platform(fuseProviders).application(appProviders);
-  console.log('fusebootstrap');
-  return app.bootstrap(appComponentType);
+    let app = platform(fuseProviders).application(appProviders);
+    console.log('fusebootstrap');
+    return app.bootstrap(appComponentType);
 }
 
-import {AppComponent} from './app.component';
 //import {enableProdMode} from 'angular2/core';
 //enableProdMode();
 fuseBootstrap(AppComponent);
-

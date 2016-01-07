@@ -19,9 +19,11 @@
         "Fuse.Android",
         "Fuse.Desktop",
         "Fuse.iOS",
+        "Fuse.Scripting",
         "FuseCore",
         "Uno.Collections",
-        "Uno.Geometry"
+        "Uno.Geometry",
+        "Experimental.iOS"
   ],
   "Includes": [
     "*"

@@ -1,5 +1,6 @@
 'use strict';
 var path = require('path');
+var webpackConfig = require('./webpack.config');
 
 module.exports = function(config) {
     var _config = {
@@ -31,36 +32,15 @@ module.exports = function(config) {
         },
 
         webpack: {
-
+            debug: false,
             resolve: {
                 cache: false,
                 root: __dirname,
-                extensions: ['', '.ts', '.js', '.json', '.css', '.html']
+                extensions: ['', '.ts', '.js', '.json', '.css', '.html', '.scss', '.sass']
             },
             devtool: 'inline-source-map',
             module: {
-                loaders: [{
-                    test: /\.ts$/,
-                    loader: 'ts-loader',
-                    query: {
-                        'ignoreDiagnostics': [
-                            2403, // 2403 -> Subsequent variable declarations
-                            2300, // 2300 Duplicate identifier
-                            2374, // 2374 -> Duplicate number index signature
-                            2375 // 2375 -> Duplicate string index signature
-                        ]
-                    },
-                    exclude: [/\.e2e\.ts$/, /node_modules/]
-                }, {
-                    test: /\.json$/,
-                    loader: 'json-loader'
-                }, {
-                    test: /\.html$/,
-                    loader: 'raw-loader'
-                }, {
-                    test: /\.css$/,
-                    loader: 'raw-loader'
-                }],
+                loaders: webpackConfig.module.loaders,
                 postLoaders: [
                     // instrument only testing sources with Istanbul
                     {
@@ -75,12 +55,7 @@ module.exports = function(config) {
                 colors: true,
                 reasons: true
             },
-            debug: false,
-            noParse: [
-                /zone\.js\/dist\/zone-microtask\.js/,
-                /zone\.js\/dist\/long-stack-trace-zone\.js/,
-                /zone\.js\/dist\/jasmine-patch\.js/
-            ]
+            noParse: webpackConfig.noParse
         },
         coverageReporter: {
             dir: 'coverage/unit',
