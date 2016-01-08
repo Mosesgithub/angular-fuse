@@ -102,7 +102,7 @@ export class FuseRenderer extends Renderer {
     }
 
     public createText(value: string): ViewNode {
-        console.log('FuseRenderer.createText', arguments);
+        //console.log('FuseRenderer.createText', arguments);
         return new DummyViewNode(null);
     }
 
@@ -171,7 +171,7 @@ export class FuseRenderer extends Renderer {
 
     setBindingDebugInfo(location: RenderElementRef, propertyName: string, propertyValue: string): void {
         //let node = resolveBoundNode(location);
-        console.log('FuseRenderer.setBindingDebugInfo: ' + node.viewName + ', ' + propertyName + ' = ' + propertyValue, arguments);
+        console.log('FuseRenderer.setBindingDebugInfo');
     }
 
     getNativeElementSync(location: RenderElementRef): any {

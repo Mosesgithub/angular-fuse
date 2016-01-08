@@ -4,12 +4,14 @@
       (click)="onSelect(hero)"-->
     <ScrollView>
         <StackPanel>
+            <Panel>
+                <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40">
+                    <Text Value="{{hero.id}}"></Text>
+                </Rectangle>
+            </Panel>
             <Text Value="Hello, {{title}}. I have been clicked {{clickCount}} times."></Text>
             <MyRectangle [MyWidth]="mywidth"></MyRectangle>
-            <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40">
-                <Text Value="{{hero.id}}"></Text>
-            </Rectangle>
+
         </StackPanel>
     </ScrollView>
 </DockPanel>
-

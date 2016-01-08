@@ -2,7 +2,7 @@
 	
 </Rectangle>
  -->
-<Panel ux:Name="self" ux:Class="MyRectangle" Background="#FF5C3A" Height="500">
+<Panel ux:Name="self" ux:Class="MyRectangle" Background="#FF5C3A" Height="300">
     <float ux:Property="MyWidth" ux:Value="200" />
     <StackPanel Orientation="Horizontal" Alignment="Center">
         <Style>

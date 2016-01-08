@@ -20,7 +20,10 @@ export class AppComponent implements OnInit {
     public background = 'Red';
     public mywidth = 100;
 
-    public heroes = new Array < IHero > ();
+    public heroes: Array < IHero > ; //= [{
+    //id: '',
+    //name: ''
+    //}];
 
     public selectedHero: IHero;
     constructor(private heroService: HeroService) {
@@ -28,14 +31,12 @@ export class AppComponent implements OnInit {
     }
     ngOnInit() {
         //this.getHeroes();
-
-        this.heroService.getHeroes().subscribe(
-            res => {
-                //debugger;
-                console.log(this);
+        setTimeout(() => {
+            this.heroService.getHeroes().subscribe(res => {
+                console.log('heroes updated');
                 this.heroes = res;
-            }
-        );
+            });
+        }, 4000);
     }
     getHeroes() {
         // setTimeout(() => {
@@ -43,14 +44,14 @@ export class AppComponent implements OnInit {
         //         id: '3'
         //     }];
         // }, 5000);
-         setTimeout(() => {
-             // this.heroService.getHeroes().subscribe(
-             //     res => {
-             //         debugger;
-             //         this.heroes = res;
-             //     }
-             // );
-         }, 4000);
+        setTimeout(() => {
+            // this.heroService.getHeroes().subscribe(
+            //     res => {
+            //         debugger;
+            //         this.heroes = res;
+            //     }
+            // );
+        }, 4000);
     }
     onSelect(hero: IHero) {
         this.selectedHero = hero;
