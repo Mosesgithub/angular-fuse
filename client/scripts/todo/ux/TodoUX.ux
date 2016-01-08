@@ -1,4 +1,6 @@
-<Grid ux:Class="TodoUX" ux:Name="itemPanel" Columns="auto,1*,auto" Alignment="Top" Height="60" Opacity="1" BoxSizing="Limit" LimitHeight="100%">
+<Grid ux:Class="TodoUX" ux:Name="todo" Columns="auto,1*,auto" Alignment="Top" Height="60" Opacity="1" BoxSizing="Limit" LimitHeight="100%">
+    <string ux:Property="Title" ux:Value=""></string>
+    <bool ux:Property="Completed" ux:Value="false"></bool>
     <Button Clicked="{toggleItem}" Alignment="CenterLeft" Width="60" Height="60">
         <Panel ux:Name="checkedIcon" Opacity="0">
             <Style>
@@ -25,11 +27,11 @@
     <Panel>
         <Panel Alignment="Left">
             <Rectangle ux:Name="textLine" Height="1" Opacity="0" Margin="30,0,0,0" Fill="#bbb" />
-            <Text ux:Name="itemText" Value="{title}" Alignment="CenterLeft" TextAlignment="Left" />
+            <Text ux:Name="itemText" Value="{Property todo.Title}" Alignment="CenterLeft" TextAlignment="Left" />
         </Panel>
     </Panel>
 
-    <WhileTrue Value="{checked}">
+    <WhileTrue Value="{Property todo.Completed}">
         <Change checkedCircleColor.Color="#50ac9a" Duration="0.3" />
         <Change checkedIcon.Opacity="1" Duration="0.3" />
         <Change textLine.Opacity="1" Duration="0.3" />

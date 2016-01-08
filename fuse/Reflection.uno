@@ -75,7 +75,18 @@ public class Reflection {
 
 	public static string SetAttribute(object node, string attribute, object value) {
 		if (node != null) {
+			var type = node.GetType();
 			//debug_log(attribute + ' ' + value);
+			if (type == typeof(TodoUX)) {
+				if (attribute == "Title") {
+					((TodoUX)node).Title = value.ToString();
+					return "";
+				}
+				if (attribute == "Completed") {
+					((TodoUX)node).Completed = value.ToString() == "True";
+					return "";
+				}
+			}
 			if (attribute == "Background") {
 				((Rectangle)node).Background = GetBrush(value.ToString()) ;
 				return "";
