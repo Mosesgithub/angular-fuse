@@ -4,7 +4,8 @@
 if (!window.angularLoaded) {
     //console.log('loading');
     var es6Shim = require('es6Shim');
-
+    //console.log(typeof JSON + 'typeof JSON');
+    window.JSON = JSON;
     window.RegExp = RegExp;
     window.Map = Map;
     window.Set = Set;

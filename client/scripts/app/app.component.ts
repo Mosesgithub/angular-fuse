@@ -20,28 +20,37 @@ export class AppComponent implements OnInit {
     public background = 'Red';
     public mywidth = 100;
 
-    public heroes;
+    public heroes = new Array < IHero > ();
 
     public selectedHero: IHero;
     constructor(private heroService: HeroService) {
         //console.log('AppComponent constructor');
     }
     ngOnInit() {
-        this.getHeroes();
-        // setInterval(() => {
-        //     this.clickCount++;
-        // }, 1000);
+        //this.getHeroes();
+
+        this.heroService.getHeroes().subscribe(
+            res => {
+                //debugger;
+                console.log(this);
+                this.heroes = res;
+            }
+        );
     }
     getHeroes() {
-        this.heroService.getHeroes().subscribe(function(resp) {
-            console.log(JSON.stringify(resp));
-            this.heroes = resp;
-        });
-
-        // .then(resp => {
-        //     console.log('resp ' + JSON.stringify(resp));
-        //     this.heroes = resp.responseData.feed.entries;
-        // }).catch(err => console.error('error ' + JSON.stringify(err)));
+        // setTimeout(() => {
+        //     this.heroes = < IHero[] > [{
+        //         id: '3'
+        //     }];
+        // }, 5000);
+         setTimeout(() => {
+             // this.heroService.getHeroes().subscribe(
+             //     res => {
+             //         debugger;
+             //         this.heroes = res;
+             //     }
+             // );
+         }, 4000);
     }
     onSelect(hero: IHero) {
         this.selectedHero = hero;
