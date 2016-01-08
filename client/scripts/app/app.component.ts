@@ -20,10 +20,10 @@ export class AppComponent implements OnInit {
     public background = 'Red';
     public mywidth = 100;
 
-    public heroes: Array < IHero > ; //= [{
-    //id: '',
-    //name: ''
-    //}];
+    public heroes: IHero[] = [{
+        id: 'item1',
+        name: 'item1'
+    }];
 
     public selectedHero: IHero;
     constructor(private heroService: HeroService) {
@@ -32,10 +32,17 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         //this.getHeroes();
         setTimeout(() => {
-            this.heroService.getHeroes().subscribe(res => {
-                console.log('heroes updated');
-                this.heroes = res;
-            });
+
+            console.log('heroes updated');
+            this.heroes = [{
+                id: 'item 2',
+                name: 'item 2'
+            }];
+
+            // this.heroService.getHeroes().subscribe(res => {
+            //     console.log('heroes updated');
+            //     this.heroes = res;
+            // });
         }, 4000);
     }
     getHeroes() {

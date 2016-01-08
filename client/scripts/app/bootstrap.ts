@@ -1,8 +1,8 @@
 /* beautify ignore:start */
 import './vendor';
-
-import {AppComponent} from './app.component';
 import {fuseBootstrap} from '../fuse-angular/bootstrap';
+//import {AppComponent} from './app.component';
+import {TodoAppComponent} from '../todo/components/todoapp.component';
 /* beautify ignore:end */
-console.log('fuseBootStrap AppComponent');
-fuseBootstrap(AppComponent);
+//fuseBootstrap(AppComponent);
+fuseBootstrap(TodoAppComponent);

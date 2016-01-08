@@ -24,5 +24,3 @@ import '../fuse-angular/renderer';
 import '../fuse-angular/dom_adapter';
 import '../fuse-angular/zone';
 import '../fuse-angular/xhr';
-
-console.log('vendor');

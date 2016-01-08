@@ -4,6 +4,8 @@
 if (!window.angularLoaded) {
     //console.log('loading');
     var es6Shim = require('es6Shim');
+    assert = function() {};
+
     //console.log(typeof JSON + 'typeof JSON');
     window.JSON = JSON;
     window.RegExp = RegExp;
@@ -12,7 +14,7 @@ if (!window.angularLoaded) {
     window.Reflect = Reflect;
     window.Promise = Promise;
     window.Math = Math;
-    assert = function() {};
+
     var EventTargetOld = EventTarget;
     EventTarget = {};
     EventTarget.prototype = {
@@ -21,6 +23,17 @@ if (!window.angularLoaded) {
         dispatchEvent: EventTargetOld.dispatchEvent
     };
     window.EventTarget = EventTarget;
+
+    var xhrHack = window.XMLHttpRequest;
+    xhrHack.prototype.addEventListener = function(e, func) {
+        if (e === 'load') {
+            this.onload = func;
+        }
+        if (e === 'error') {
+            this.onerror = func;
+        }
+    };
+    XMLHttpRequest = window.XMLHttpRequest = xhrHack;
 
     //window.EventTarget=null;
     console.warn = console.log;

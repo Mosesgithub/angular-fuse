@@ -1,0 +1,61 @@
+<Grid ux:Class="TodoUX" ux:Name="itemPanel" Columns="auto,1*,auto" Alignment="Top" Height="60" Opacity="1" BoxSizing="Limit" LimitHeight="100%">
+    <Button Clicked="{toggleItem}" Alignment="CenterLeft" Width="60" Height="60">
+        <Panel ux:Name="checkedIcon" Opacity="0">
+            <Style>
+            <Rectangle> <Stroke Brush="#50ac9a" Width="1"/> </Rectangle>
+            </Style>
+            <Rectangle Height="1" Width="6">
+                <Rotation Degrees="45" />
+                <Translation X="-0.5" RelativeTo="Size" />
+            </Rectangle>
+            <Rectangle Height="1" Width="14">
+                <Rotation Degrees="-45" />
+                <Translation X="0.5" RelativeTo="Size" />
+            </Rectangle>
+            <Translation Y="0.1" X="-0.05" RelativeTo="Size" />
+        </Panel>
+
+        <Circle Layer="Background" HitTestMode="LocalVisualAndChildren" Width="32" Height="32" Fill="#fff">
+            <Stroke Width="1">
+                <SolidColor ux:Name="checkedCircleColor" Color="#ddd" />
+            </Stroke>
+        </Circle>
+    </Button>
+
+    <Panel>
+        <Panel Alignment="Left">
+            <Rectangle ux:Name="textLine" Height="1" Opacity="0" Margin="30,0,0,0" Fill="#bbb" />
+            <Text ux:Name="itemText" Value="{title}" Alignment="CenterLeft" TextAlignment="Left" />
+        </Panel>
+    </Panel>
+
+    <WhileTrue Value="{checked}">
+        <Change checkedCircleColor.Color="#50ac9a" Duration="0.3" />
+        <Change checkedIcon.Opacity="1" Duration="0.3" />
+        <Change textLine.Opacity="1" Duration="0.3" />
+        <Change itemText.TextColor="#ddd" Duration="0.3" />
+    </WhileTrue>
+
+    <Button Alignment="CenterRight" Clicked="{deleteItem}" Width="60" Height="60" HitTestMode="LocalBoundsAndChildren">
+        <Panel Layer="Background" Height="16">
+            <Panel Width="20" Height="1" Background="#ddd">
+                <Rotation Degrees="45" />
+            </Panel>
+            <Panel Width="20" Height="1" Background="#ddd">
+                <Rotation Degrees="-45" />
+            </Panel>
+        </Panel>
+    </Button>
+
+    <LayoutAnimation>
+        <Move RelativeTo="LayoutChange" Y="1" Duration="0.6" Easing="BounceIn" />
+    </LayoutAnimation>
+    <AddingAnimation>
+        <Move RelativeTo="Size" X="1" Duration="0.3" Easing="CircularInOut" />
+    </AddingAnimation>
+    <RemovingAnimation>
+        <Move RelativeTo="Size" X="1" Duration="0.3" Easing="CircularInOut" />
+    </RemovingAnimation>
+
+    <Rectangle Height="1" ColumnSpan="3" Row="0" Alignment="Bottom" Fill="#ddd" />
+</Grid>

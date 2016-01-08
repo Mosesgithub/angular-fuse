@@ -25,24 +25,10 @@ export class ViewNode {
     constructor(public parentNode: ViewNode, public viewName: string, attrNameAndValues: string[]) {
         ////console.log('ViewNode.constructor', arguments);
         this.setAttributeValues(attrNameAndValues);
-
         if (this.parentNode) {
             this.parentNode.children.push(this);
         }
     }
-
-    // print(depth: number = 0) {
-    //     let line = "";
-
-    //     for (let i = 0; i < depth; i++)
-    //         line += "    "
-
-    //     //console.log(line + this.viewName + '(' + this.attachedToView + ') ');
-
-    //     this.children.forEach(child => {
-    //         child.print(depth + 1);
-    //     });
-    // }
 
     get parentNativeView(): View {
         //console.log('ViewNode.parentNativeView', arguments);
@@ -84,7 +70,32 @@ export class ViewNode {
             child.attachToView();
         });
 
-        this.postAttachUI();
+        let parentId = this.getParentId();
+        console.log('render ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + parentId);
+        if (typeof window.AngularRenderer !== 'undefined') {
+            //console.log('AngularRenderer is defined');
+            let retVal = window.AngularRenderer.renderElement(this.nativeView.id, parentId);
+            console.log(retVal);
+        }
+    }
+
+    public detachFromView(): void {
+        this.attachedToView = false;
+        //console.log('detachFromView', arguments);
+        this.detachUIEvents();
+        debugger;
+        let parentId = this.getParentId();
+        console.log('remove ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + parentId);
+        if (typeof window.AngularRenderer !== 'undefined') {
+            //console.log('AngularRenderer is defined');
+            if (this.nativeView) {
+                window.AngularRenderer.removeElement(this.nativeView.id, parentId);
+            }
+        }
+
+        this.children.forEach((childNode) => {
+            childNode.detachFromView();
+        });
     }
 
     public setAttributeValues(attrNameAndValues: string[]) {
@@ -142,34 +153,10 @@ export class ViewNode {
 
     public removeChild(childNode: ViewNode): void {
         //console.log('ViewNode.removeChild', arguments);
+        childNode.detachFromView();
         childNode.parentNode = null;
         childNode.parentView = null;
         this.children = this.children.filter((item) => item !== childNode);
-
-        childNode.detachFromView();
-    }
-
-    public detachFromView(): void {
-        this.attachedToView = false;
-        //console.log('detachFromView', arguments);
-        this.detachUIEvents();
-        // if (this.nativeView) {
-        //     let nativeParent = this.nativeView.parent;
-        //     if (nativeParent) {
-        //         if (nativeParent instanceof LayoutBase) {
-        //             (<LayoutBase>nativeParent).removeChild(this.nativeView);
-        //         } else if (nativeParent instanceof ContentView) {
-        //             (<ContentView>nativeParent).content = undefined;
-        //         }
-        //         else {
-        //             nativeParent._removeView(this.nativeView);
-        //         }
-        //     }
-        // }
-
-        this.children.forEach((childNode) => {
-            childNode.detachFromView();
-        });
     }
 
     public clearChildren() {
@@ -212,9 +199,13 @@ export class ViewNode {
         this.syncClasses();
     }
 
+    private getParentId(): string {
+        return this.parentNativeView ? this.parentNativeView.id : null;
+    }
+
     private createUI(attachAtIndex: number): boolean {
         //console.log('ViewNode.createUI', this.viewName);
-        let parentId = this.parentNativeView ? this.parentNativeView.id : null;
+        let parentId = this.getParentId();
         let id = '';
         if (!this.nativeView) {
             if (typeof window.AngularRenderer !== 'undefined') {
@@ -243,41 +234,6 @@ export class ViewNode {
             this.setAttribute(name, value);
         });
         this.syncClasses();
-    }
-
-    private postAttachUI() {
-        let parentId = this.parentNativeView ? this.parentNativeView.id : null;
-
-        console.log('render ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + parentId);
-        if (typeof window.AngularRenderer !== 'undefined') {
-            //console.log('AngularRenderer is defined');
-            let retVal = window.AngularRenderer.renderElement(this.nativeView.id, parentId);
-            console.log(retVal);
-        }
-
-        //console.log('ViewNode.postAttachUI', arguments);
-        //     if (this.isComplexProperty) {
-        //         let nativeParent = <any>this.parentNativeView;
-        //         if (!nativeParent) {
-        //             return;
-        //         }
-
-        //         let propertyName = ViewNode.getComplexPropertyName(this.viewName);
-        //         let realChildren = [];
-        //         for (let child of this.children) {
-        //             if (child.nativeView) {
-        //                 realChildren.push(child.nativeView);
-        //             }
-        //         }
-        //         if (realChildren.length > 0) {
-        //             if (nativeParent._addArrayFromBuilder) {
-        //                 nativeParent._addArrayFromBuilder(propertyName, realChildren);
-        //             }
-        //             else {
-        //                 this.parentNode.setAttribute(propertyName, realChildren[0]);
-        //             }
-        //         }
-        //     }
     }
 
     // private static getProperties(instance: any): Map < string, string > {
@@ -391,6 +347,9 @@ export class DummyViewNode extends ViewNode {
         super(parentNode, null, []);
     }
     public attachToView(atIndex: number = -1) {
+        return;
+    }
+    public detachFromView(atIndex: number = -1) {
         return;
     }
     public insertChildAt(index: number, childNode: ViewNode) {

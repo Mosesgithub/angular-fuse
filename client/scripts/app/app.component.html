@@ -1,7 +1,11 @@
+<StackPanel>
+    <Rectangle *ngFor="#hero of heroes" Background="Yellow" Height="40" Background="Grey" Margin="0">
+        <Text Value="{{hero.id}}"></Text>
+    </Rectangle>
+</StackPanel>
+<!-- 
 <DockPanel>
     <Rectangle Dock="Top" [Height]="height" [Background]="background" (click)="onHeaderClick()"></Rectangle>
-    <!--  <TextInput (topchange)="name = $event.text" height="40" fontSize="30" placeholder="name"></TextInput>
-      (click)="onSelect(hero)"-->
     <ScrollView>
         <StackPanel>
             <Panel>
@@ -14,4 +18,4 @@
 
         </StackPanel>
     </ScrollView>
-</DockPanel>
+</DockPanel> -->

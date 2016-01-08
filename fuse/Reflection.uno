@@ -19,51 +19,25 @@ public class Height_Property: Uno.UX.Property<float> {
 
 public class Reflection {
 
-	private static bool Acceptor(object obj) {
-		return true;
-	}
 
-	private static Fuse.Drawing.Brush GetBrush(string color) {
-		object res;
-		//not working
-		var found = Uno.UX.Resource.TryFindGlobal(color, Acceptor, out res);
-		if (found) {
-			return (Fuse.Drawing.Brush)res;
-		}
-		else {
-			if (color == "Red") {
-				return Fuse.Drawing.Brushes.Red;
-			}
-			if (color == "Green") {
-				return Fuse.Drawing.Brushes.Green;
-			}
-			if (color == "Blue") {
-				return Fuse.Drawing.Brushes.Blue;
-			}
-			if (color == "Yellow") {
-				return Fuse.Drawing.Brushes.Yellow;
-			}
-			return Fuse.Drawing.Brushes.Black;
-		}
-	}
 
 	public static object CreateFromType(string type, object parent) {
 		//CUSTOM
-
-		if(type=="Login"){
+		if (type == "Login") {
 			return new Panel();
 		}
 		if (type == "LoginUX") {
 			return new LoginUX();
 		}
+		if (type == "TodoUX") {
+			return new TodoUX();
+		}
 		if (type == "MyRectangle") {
 			return new MyRectangle();
 		}
-
 		if (type == "Rectangle") {
 			return new Rectangle();
 		}
-
 		if (type == "StackPanel") {
 			return new StackPanel();
 		}
@@ -93,7 +67,6 @@ public class Reflection {
 				change.Value = 400f;
 				change.Duration = 0.2;
 				debug_log(change.GetType());
-
 				return change;
 			}
 		}
@@ -106,6 +79,12 @@ public class Reflection {
 			if (attribute == "Background") {
 				((Rectangle)node).Background = GetBrush(value.ToString()) ;
 				return "";
+			}
+			if (attribute == "Orientation") {
+				if (value.ToString() == "Horizontal") {
+					((StackPanel)node).Orientation = Fuse.Layouts.Orientation.Horizontal;
+					return "";
+				}
 			}
 			if (attribute == "Dock") {
 				if (value.ToString() == "Top") {
@@ -126,7 +105,6 @@ public class Reflection {
 				((Rectangle)node).Width = int.Parse(value.ToString());// 60;// (float)value;
 				return "";
 			}
-
 			if (attribute == "MyWidth") {
 				((MyRectangle)node).MyWidth = (float.Parse(value.ToString()));// 60;// (float)value;
 				return "";
@@ -141,8 +119,7 @@ public class Reflection {
 			}
 			debug_log("attribute not supported " + attribute);
 			return "";
-		}
-		else {
+		} else {
 			debug_log("object not found");
 			return "";
 		}
@@ -151,18 +128,29 @@ public class Reflection {
 	public static void InsertChild(object parent, object child) {
 		var parentType = parent.GetType();
 		var childType = child.GetType();
-
 		if (parentType == typeof(ScrollView)) {
 			((ScrollView)parent).Content = (Fuse.Elements.Element)child;
-		}
-		else if (childType == typeof(WhilePressed)) {
+		} else if (childType == typeof(WhilePressed)) {
 			((Panel)parent).Behaviors.Add((WhilePressed)child);
-		}
-		else if (parentType == typeof(WhilePressed)) {
+		} else if (parentType == typeof(WhilePressed)) {
 			((WhilePressed)parent).Animators.Add((Fuse.Animations.Animator)child);
-		}
-		else {
+		} else {
 			((Panel)parent).Children.Add((Node)child);
+		}
+	}
+
+
+	public static void RemoveChild(object parent, object child) {
+		var parentType = parent.GetType();
+		var childType = child.GetType();
+		if (parentType == typeof(ScrollView)) {
+			((ScrollView)parent).Content = null;
+		} else if (childType == typeof(WhilePressed)) {
+			((Panel)parent).Behaviors.Remove((WhilePressed)child);
+		} else if (parentType == typeof(WhilePressed)) {
+			((WhilePressed)parent).Animators.Remove((Fuse.Animations.Animator)child);
+		} else {
+			((Panel)parent).Children.Remove((Node)child);
 		}
 	}
 
@@ -170,5 +158,32 @@ public class Reflection {
 		var clicked = new Fuse.Gestures.Clicked();
 		((Rectangle)node).Behaviors.Add(clicked);
 		clicked.Handler += new EventHandlerAction(args, nativeEvent).Trigger;
+	}
+
+	private static bool Acceptor(object obj) {
+		return true;
+	}
+
+	private static Fuse.Drawing.Brush GetBrush(string color) {
+		object res;
+		//not working
+		var found = Uno.UX.Resource.TryFindGlobal(color, Acceptor, out res);
+		if (found) {
+			return (Fuse.Drawing.Brush)res;
+		} else {
+			if (color == "Red") {
+				return Fuse.Drawing.Brushes.Red;
+			}
+			if (color == "Green") {
+				return Fuse.Drawing.Brushes.Green;
+			}
+			if (color == "Blue") {
+				return Fuse.Drawing.Brushes.Blue;
+			}
+			if (color == "Yellow") {
+				return Fuse.Drawing.Brushes.Yellow;
+			}
+			return Fuse.Drawing.Brushes.Black;
+		}
 	}
 }
