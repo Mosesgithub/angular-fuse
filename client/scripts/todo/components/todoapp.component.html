@@ -1,7 +1,7 @@
 <DockPanel>
     <ScrollView>
         <StackPanel>
-            <StackPanel Orientation="Horizontal" *ngFor="#todo of todoStore.todos">
+<!--              <StackPanel Orientation="Horizontal" *ngFor="#todo of todoStore.todos">
                 <Rectangle Width="40" Height="40" [Background]="(todo.completed ? 'Green' : 'Red')" Margin="10" (click)="toggleCompletion(todo)"></Rectangle>
                 <Rectangle (click)="toggleSelected(todo)" Background="Yellow" Height="40" Margin="10">
                     <Text [Value]="((todo.completed ? 'Completed ' : '') + todo.title)"></Text>
@@ -12,8 +12,8 @@
                 <Rectangle *ngIf="todo.selected && !todo.editing" Width="50" Height="40" Margin="10" (click)="delete(todo)">
                     <Text Value="Delete"></Text>
                 </Rectangle>
-            </StackPanel>
-            <!-- <TodoUX *ngFor="#todo of todoStore.todos" [Title]="todo.title" [Completed]="todo.completed"></TodoUX> -->
+            </StackPanel>  -->
+            <TodoUX *ngFor="#todo of todoStore.todos" [Title]="todo.title" [Completed]="todo.completed"></TodoUX>
         </StackPanel>
     </ScrollView>
     <Rectangle Dock="Bottom" Height="60" Background="Green" (click)="addNew($eclickt)">

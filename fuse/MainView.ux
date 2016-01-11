@@ -1,6 +1,13 @@
-<App Theme="Basic">
-    <JavaScript File="../node_modules/es6-shim/es6-shim.js" ux:Global="es6Shim" />
+<App Theme="Basic" Behaviors="AngularRenderer">
+    <JavaScript File="../dist/app/dev/common.js" ux:Global="common" />
+    <JavaScript File="../dist/app/dev/vendor.js" ux:Global="vendor" />
     <JavaScript File="../dist/app/dev/bundle.js" ux:Global="bundle" />
-    <AngularRenderer ux:Global="AngularRenderer" />
+    <JavaScript File="AngularRenderer.js"  ux:Global="AngularRenderer"/>
+    
+
+
+    <!-- <AngularRenderer ux:Global="AngularRenderer" /> -->
     <JavaScript File="MainView.js" />
+
+    <MyApp /> 
 </App>

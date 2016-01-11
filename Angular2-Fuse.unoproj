@@ -26,7 +26,6 @@
         "Experimental.iOS"
   ],
   "Includes": [
-    "client/scripts/todo/ux/*",
     "*"
   ],
   "Projects": []

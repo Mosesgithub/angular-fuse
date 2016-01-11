@@ -1,0 +1,5 @@
+<Panel ux:Class="MyApp" [Width]="amount" [Background]="background" Height="300" >
+<!-- <Panel *ngFor="#f in foo">
+        <Rectangle [Fill]="f.background" />
+    </Panel> -->
+</Panel>

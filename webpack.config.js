@@ -3,7 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var gulpMux = require('gulp-mux');
-//var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 //var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 
@@ -36,7 +36,7 @@ module.exports = {
     //target: 'node',
     context: path.resolve(path.join(clientFolder, 'scripts', target)), // the base directory for resolving the entry option
     entry: {
-        //'vendor': './vendor', // clientFolder + '/scripts/' + target  + '/vendor', // path.resolve(path.join('.', clientFolder, 'scripts', target, 'vendor')),
+        'vendor': './vendor', // clientFolder + '/scripts/' + target  + '/vendor', // path.resolve(path.join('.', clientFolder, 'scripts', target, 'vendor')),
         'bundle': './bootstrap' //clientFolder + '/scripts/' + target  + '/bootstrap',  // path.resolve(path.join('.', clientFolder, 'scripts', target, 'bootstrap'))
     },
     output: {
@@ -171,17 +171,23 @@ module.exports = {
     },
     plugins: [
         //new webpack.optimize.DedupePlugin(),
-        // new CommonsChunkPlugin({
-        //     name: 'vendor',
-        //     filename: 'vendor.js',
-        //     minChunks: Infinity
-        // }),
-        // new CommonsChunkPlugin({
-        //     name: 'common',
-        //     filename: 'common.js',
-        //     minChunks: 2,
-        //     chunks: ['bundle', 'vendor']
-        // }),
+        new webpack.BannerPlugin(
+            'if (typeof window === "undefined") {window = global;}\n' +
+            'if (typeof window["webpackJsonp"]) {webpackJsonp = window.webpackJsonp;}\n', {
+                raw: true,
+                entryOnly: true
+            }),
+        new CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.js',
+            minChunks: Infinity
+        }),
+        new CommonsChunkPlugin({
+            name: 'common',
+            filename: 'common.js',
+            minChunks: 2,
+            chunks: ['bundle', 'vendor']
+        }),
         new HtmlwebpackPlugin({
             title: 'App - ' + target,
             template: clientFolder + '/index' + suffix + '.html',

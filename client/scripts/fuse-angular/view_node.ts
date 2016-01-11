@@ -83,12 +83,12 @@ export class ViewNode {
         this.attachedToView = false;
         //console.log('detachFromView', arguments);
         this.detachUIEvents();
-        debugger;
         let parentId = this.getParentId();
         console.log('remove ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + parentId);
         if (typeof window.AngularRenderer !== 'undefined') {
             //console.log('AngularRenderer is defined');
             if (this.nativeView) {
+                //console.log()
                 window.AngularRenderer.removeElement(this.nativeView.id, parentId);
             }
         }
@@ -110,7 +110,7 @@ export class ViewNode {
     }
 
     public setAttribute(attributeName: string, value: any): void {
-        //console.log('ViewNode.setAttribute', arguments);
+        console.log('ViewNode.setAttribute', arguments);
         if (!this.nativeView) {
             //console.log('Native view not created. Delaying attribute set: ' + attributeName);
             this.attributes.set(attributeName, value);
@@ -204,12 +204,13 @@ export class ViewNode {
     }
 
     private createUI(attachAtIndex: number): boolean {
-        //console.log('ViewNode.createUI', this.viewName);
+        console.log('ViewNode.createUI', this.viewName);
         let parentId = this.getParentId();
         let id = '';
         if (!this.nativeView) {
             if (typeof window.AngularRenderer !== 'undefined') {
-                //console.log('AngularRenderer is defined');
+                //window.AngularRender
+                console.log('AngularRenderer is defined');
                 id = window.AngularRenderer.addElement(this.viewName, parentId);
             } else {
                 id = '' + this.objectCount++;

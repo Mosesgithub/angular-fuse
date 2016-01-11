@@ -1,6 +1,7 @@
 <Grid ux:Class="TodoUX" ux:Name="todo" Columns="auto,1*,auto" Alignment="Top" Height="60" Opacity="1" BoxSizing="Limit" LimitHeight="100%">
     <string ux:Property="Title" ux:Value=""></string>
     <bool ux:Property="Completed" ux:Value="false"></bool>
+
     <Button Clicked="{toggleItem}" Alignment="CenterLeft" Width="60" Height="60">
         <Panel ux:Name="checkedIcon" Opacity="0">
             <Style>

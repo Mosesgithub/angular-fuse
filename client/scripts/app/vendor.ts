@@ -1,4 +1,5 @@
 // Polyfills
+import '../fuse-angular/fuse_polyfill';
 import 'angular2/bundles/angular2-polyfills';
 // External
 import 'rxjs';

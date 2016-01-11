@@ -1,0 +1,11 @@
+<Panel>
+    <Each Items="{children}">
+        <Panel Width="{var1}" Background="Green" Height="300" ux:Class="MyApp">
+            <!--   <Each Items="{ngfor1}">
+        <Panel>
+            <Rectangle Fill="{var2}" />
+        </Panel>
+    </Each> -->
+        </Panel>
+    </Each>
+</Panel>
