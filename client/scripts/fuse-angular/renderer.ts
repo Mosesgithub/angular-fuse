@@ -214,7 +214,7 @@ export class FuseRenderer extends Renderer {
 
 function consoleLog(...a: any []) {
     if (false) {
-        console.log(a);
+        console.log(a[0].toString());
     }
 }
 

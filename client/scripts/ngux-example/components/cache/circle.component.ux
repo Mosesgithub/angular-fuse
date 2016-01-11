@@ -1,0 +1,3 @@
+<Circle ux:Class="MyCircle" Width="100" Height="100" Fill="Red">
+	<Text Value="{var5}" />
+</Circle>

@@ -1,13 +1,11 @@
-<App Theme="Basic" Behaviors="AngularRenderer">
+<App Theme="Basic">
     <JavaScript File="../dist/app/dev/common.js" ux:Global="common" />
     <JavaScript File="../dist/app/dev/vendor.js" ux:Global="vendor" />
     <JavaScript File="../dist/app/dev/bundle.js" ux:Global="bundle" />
-    <JavaScript File="AngularRenderer.js"  ux:Global="AngularRenderer"/>
-    
-
-
+    <JavaScript File="AngularRenderer.js" ux:Global="AngularRenderer" />
+    <!-- <JavaScript File="AngularContext.js" ux:Global="AngularContext" />
+ -->
     <!-- <AngularRenderer ux:Global="AngularRenderer" /> -->
     <JavaScript File="MainView.js" />
-
-    <MyApp /> 
+    <MyApp />
 </App>

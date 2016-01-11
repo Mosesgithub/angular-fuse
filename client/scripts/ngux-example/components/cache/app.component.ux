@@ -1,11 +1,14 @@
-<Panel>
+<StackPanel ux:Class="MyApp">
     <Each Items="{children}">
-        <Panel Width="{var1}" Background="Green" Height="300" ux:Class="MyApp">
-            <!--   <Each Items="{ngfor1}">
-        <Panel>
-            <Rectangle Fill="{var2}" />
-        </Panel>
-    </Each> -->
-        </Panel>
+        <StackPanel Width="{var1}" Background="Green" Height="300" Clicked="{callback1}">
+            <Each Items="{children}">
+                <Text Value="{var2}" />
+                <Panel>
+                    <Each Items="{children}">
+                        <MyCircle />
+                    </Each>
+                </Panel>
+            </Each>
+        </StackPanel>
     </Each>
-</Panel>
+</StackPanel>

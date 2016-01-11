@@ -8,6 +8,7 @@ webpackJsonp([0],{
 
 	var bootstrap_1 = __webpack_require__(1);
 	var app_component_1 = __webpack_require__(249);
+	console.log('bootstrapping app');
 	bootstrap_1.fuseBootstrap(app_component_1.AppComponent);
 
 
@@ -86,19 +87,23 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
+	var circle_component_1 = __webpack_require__(483);
 	var AppComponent = (function () {
 	    function AppComponent() {
 	        this.amount = 30;
-	        this.background = 'Green';
-	        this.foo = [{
-	                background: 'Red'
-	            }, {
-	                background: 'Blue'
-	            }];
+	        this.background = 'Yellow';
+	        this.textvalue = 'Hello World';
+	        this.foo = [];
 	    }
+	    AppComponent.prototype.clickHandler = function (amount) {
+	        this.amount += amount;
+	        this.textvalue += ' ' + amount;
+	        console.log('you clicked me ' + amount);
+	    };
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'MyApp',
+	            directives: [circle_component_1.MyCircle],
 	            template: __webpack_require__(482)
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -113,7 +118,45 @@ webpackJsonp([0],{
 /***/ 482:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope1 [var1]=\"amount\"\t[var2]=\"background\">\n    <!-- <Scope2 *ngFor=\"#f of foo\" [var2]=\"f.background\">\n        \n    </Scope2> -->\n</Scope1>";
+	module.exports = "<Scope1 [var1]=\"amount\" [var3]=\"textvalue\" (callback1)=\"clickHandler(amount)\">\n    <Scope2 *ngFor=\"#f of foo\" [var2]=\"f.background\">\n    \t<MyCircleComponent></MyCircleComponent>\n    </Scope2>\n</Scope1>\n";
+
+/***/ },
+
+/***/ 483:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(3);
+	var MyCircle = (function () {
+	    function MyCircle() {
+	        this.message = 'Circle binding';
+	    }
+	    MyCircle = __decorate([
+	        core_1.Component({
+	            selector: 'MyCircleComponent',
+	            template: __webpack_require__(484)
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MyCircle);
+	    return MyCircle;
+	})();
+	exports.MyCircle = MyCircle;
+
+
+/***/ },
+
+/***/ 484:
+/***/ function(module, exports) {
+
+	module.exports = "<Scope3 [var5]=\"message\"></Scope3>\n";
 
 /***/ }
 

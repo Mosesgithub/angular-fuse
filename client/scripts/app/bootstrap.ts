@@ -6,5 +6,6 @@ import {fuseBootstrap} from '../fuse-angular/bootstrap';
 //import {TodoAppComponent} from '../todo/components/todoapp.component';
 import {AppComponent} from '../ngux-example/components/app.component';
 /* beautify ignore:end */
+console.log('bootstrapping app');
 fuseBootstrap(AppComponent);
 //fuseBootstrap(TodoAppComponent);
