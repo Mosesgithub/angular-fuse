@@ -7,5 +7,10 @@
  -->
     <!-- <AngularRenderer ux:Global="AngularRenderer" /> -->
     <JavaScript File="MainView.js" />
-    <RouterApp />
+    <Panel>
+        <Each Items="{children0}">
+            <RouterApp />
+        </Each>
+    </Panel>
+
 </App>

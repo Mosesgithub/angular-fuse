@@ -1,12 +1,5 @@
-    <Circle ux:Name="self" ux:Class="MyCircle" Width="{var2}" Height="{var2}">
-    <Match Value="{var3}">
-        <Case String="Male">
-            <SolidColor Color="#f00" />
-        </Case>
-        <Case String="Female">
-            <SolidColor Color="#ff0" />
-        </Case>
-    </Match>
+<Circle ux:Name="self" ux:Class="MyCircle" Width="{var2}" Height="{var2}">
+    <SolidColor Color="#f00" />
     <AddingAnimation>
         <Scale Factor="0" Duration="1" Easing="BounceIn" />
     </AddingAnimation>

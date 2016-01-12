@@ -153,6 +153,7 @@ webpackJsonp([0],{
 	var page2_component_1 = __webpack_require__(277);
 	var RouterAppComponent = (function () {
 	    function RouterAppComponent() {
+	        this.activePage = '';
 	    }
 	    RouterAppComponent = __decorate([
 	        core_1.Component({
@@ -200,9 +201,11 @@ webpackJsonp([0],{
 	    function Page1(router) {
 	        this.router = router;
 	    }
-	    Page1.prototype.navigate = function () {
+	    Page1.prototype.navigate = function (param) {
 	        console.log('navigating to Page 2');
-	        this.router.parent.navigate(['Page2']);
+	        this.router.parent.navigate(['Page2', {
+	                param: param
+	            }]);
 	    };
 	    Page1 = __decorate([
 	        core_1.Component({
@@ -222,7 +225,7 @@ webpackJsonp([0],{
 /***/ 276:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope1 (callback1)=\"navigate()\"></Scope1>";
+	module.exports = "<Scope2 (callback1)=\"navigate('Button 1')\" (callback2)=\"navigate('Button 2')\"></Scope2>";
 
 /***/ },
 
@@ -241,15 +244,26 @@ webpackJsonp([0],{
 	var core_1 = __webpack_require__(3);
 	var router_1 = __webpack_require__(249);
 	var Page2 = (function () {
-	    function Page2() {
+	    function Page2(router, routeParams) {
+	        this.router = router;
+	        this.routeParams = routeParams;
+	        this.clickedOn = '';
 	    }
+	    Page2.prototype.ngOnInit = function () {
+	        console.log(this.routeParams.get('param'));
+	        this.clickedOn = this.routeParams.get('param');
+	    };
+	    Page2.prototype.navigate = function () {
+	        console.log('navigating to Page 1');
+	        this.router.parent.navigate(['Page1']);
+	    };
 	    Page2 = __decorate([
 	        core_1.Component({
 	            selector: 'Page2',
 	            template: __webpack_require__(278),
 	            directives: [router_1.ROUTER_DIRECTIVES]
 	        }), 
-	        __metadata('design:paramtypes', [])
+	        __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams])
 	    ], Page2);
 	    return Page2;
 	})();
@@ -261,14 +275,14 @@ webpackJsonp([0],{
 /***/ 278:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope2></Scope2>";
+	module.exports = "<Scope3 [var1]=\"clickedOn\" (callback1)=\"navigate()\"></Scope3>\n";
 
 /***/ },
 
 /***/ 279:
 /***/ function(module, exports) {
 
-	module.exports = "<router-outlet></router-outlet>\n\n";
+	module.exports = "<Scope1 [var1]=\"activePage\">\n    <router-outlet></router-outlet>\n</Scope1>\n";
 
 /***/ }
 

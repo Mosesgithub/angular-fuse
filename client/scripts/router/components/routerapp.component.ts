@@ -15,15 +15,15 @@ import {Page2} from './page2.component';
     redirectTo: ['/Page1'],
     name: 'root'
 }, {
-    path: '/page1',
-    name: 'Page1',
-    component: Page1
-}, {
-    path: '/page2',
-    name: 'Page2',
-    component: Page2
-}])
+        path: '/page1',
+        name: 'Page1',
+        component: Page1
+    }, {
+        path: '/page2',
+        name: 'Page2',
+        component: Page2
+    }])
 
 export class RouterAppComponent {
-
+    public activePage: string = '';
 }

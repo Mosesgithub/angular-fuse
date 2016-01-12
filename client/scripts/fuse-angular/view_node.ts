@@ -3,7 +3,7 @@ import {View} from './view';
 //import {ViewClass, getViewClass, isKnownView} from './element-registry';
 /* beautify ignore:end */
 
-class EventData {}
+class EventData { }
 
 type EventHandler = (args: EventData) => void;
 
@@ -12,14 +12,14 @@ export class ViewNode {
     //private static propertyMaps: Map < Function, Map < string, string >> = new Map < Function, Map < string, string >> ();
 
     public nativeView: View;
-    public children: Array < ViewNode > = [];
+    public children: Array<ViewNode> = [];
 
-    private eventListeners: Map < string, EventHandler > = new Map < string, EventHandler > ();
+    private eventListeners: Map<string, EventHandler> = new Map<string, EventHandler>();
 
     private parentView: View;
     private attachedToView: boolean = false;
-    private attributes: Map < string, any > = new Map < string, any > ();
-    private cssClasses: Map < string, boolean > = new Map < string, boolean > ();
+    private attributes: Map<string, any> = new Map<string, any>();
+    private cssClasses: Map<string, boolean> = new Map<string, boolean>();
     private objectCount: number = 1;
 
     constructor(public parentNode: ViewNode, public viewName: string, attrNameAndValues: string[]) {
@@ -276,6 +276,9 @@ export class ViewNode {
     private attachNativeEvent(eventName, callback) {
         if (typeof window.angularRenderer !== 'undefined') {
             this.consoleLog('attachNativeEvent ' + this.nativeView.id + ' ' + eventName);
+            if (callback) {
+                this.consoleLog('callback is defined' + callback.toString());
+            }
             window.angularRenderer.setEventListener(this.nativeView.id, eventName, callback);
         }
         //let resolvedEvent = this.resolveNativeEvent(eventName);
@@ -289,8 +292,8 @@ export class ViewNode {
     }
 
     private syncClasses(): void {
-            //this.consoleLog('ViewNode.syncClasses', arguments);
-            let classValue = (<any>Array).from(this.cssClasses.keys()).join(' ');
+        //this.consoleLog('ViewNode.syncClasses', arguments);
+        let classValue = (<any>Array).from(this.cssClasses.keys()).join(' ');
         if (this.nativeView && classValue) {
             //this.nativeView.cssClass = classValue;
         }

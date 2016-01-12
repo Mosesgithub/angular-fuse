@@ -8,4 +8,5 @@ import {RouterAppComponent} from '../router/components/routerapp.component';
 /* beautify ignore:end */
 //fuseBootstrap(AppComponent);
 //fuseBootstrap(TodoAppComponent);
+//fuseBootstrap(AppComponent);
 fuseBootstrap(RouterAppComponent);

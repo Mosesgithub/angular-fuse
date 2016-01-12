@@ -1,0 +1,22 @@
+using Uno;
+using Uno.UX;
+using Uno.Collections;
+using Fuse;
+
+[UXContentMode("Factory")]
+public class FuseRouter : Behavior {
+	[UXContent]
+	public IList<IFactory> Factories {
+		get {
+		}
+	}
+
+	public void DoSomething() {
+		//Factories[0] == "Page2";
+		if (ParentNode is Panel) {
+			var p = (Panel)ParentNode;
+			p.Children.Add(Factories[0].New() as Node);
+		}
+	}
+}
+

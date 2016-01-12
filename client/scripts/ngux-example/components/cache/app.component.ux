@@ -1,35 +1,30 @@
-<StackPanel ux:Class="MyApp">
-    <!-- <Text Value="{depth}"/> -->
-    <Each Items="{children0}">
-        <StackPanel Width="{var1}" Background="Green" Height="300" Clicked="{callback1}">
-            <Text Value="{greeting}" />
-            <JavaScript>
-                module.exports = { greeting: "Hello databound world!" };
-            </JavaScript>
-            <LayoutAnimation>
-                <Resize X="1" Y="1" RelativeTo="LayoutChange" Duration="0.5" />
-                <Move X="1" Y="1" RelativeTo="LayoutChange" Duration="0.5" />
-            </LayoutAnimation>
-            <Text Value="{var3}" />
-            <Each Items="{children1}">
-                <StackPanel>
-                    <Match Value="{type}">
-                        <Case String="Scope1">
-                            <Text Value="{var2}" />
-                            <StackPanel>
-                                <Each Items="{children2}">
-                                    <MyCircle />
-                                </Each>
-                            </StackPanel>
-                        </Case>
-                        <Case String="Scope2">
-                            <StackPanel>
-                                <Rectangle Width="10" Height="10" Fill="Blue" Margin="10" />
-                            </StackPanel>
-                        </Case>
-                    </Match>
-                </StackPanel>
-            </Each>
+<StackPanel ux:Class="MyApp" Width="{var1}" Background="Green" Height="300" Clicked="{callback1}">
+    <Text Value="{greeting}" />
+    <JavaScript>
+        module.exports = { greeting: "Hello databound world!" };
+    </JavaScript>
+    <LayoutAnimation>
+        <Resize X="1" Y="1" RelativeTo="LayoutChange" Duration="0.5" />
+        <Move X="1" Y="1" RelativeTo="LayoutChange" Duration="0.5" />
+    </LayoutAnimation>
+    <Text Value="{var3}" />
+    <Each Items="{children1}">
+        <StackPanel>
+            <Match Value="{type}">
+                <Case String="Scope1">
+                    <Text Value="{var2}" />
+                    <StackPanel>
+                        <Each Items="{children2}">
+                            <MyCircle />
+                        </Each>
+                    </StackPanel>
+                </Case>
+                <Case String="Scope2">
+                    <StackPanel>
+                        <Rectangle Width="10" Height="10" Fill="Blue" Margin="10" />
+                    </StackPanel>
+                </Case>
+            </Match>
         </StackPanel>
     </Each>
 </StackPanel>

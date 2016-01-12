@@ -1,7 +1,9 @@
-<Panel ux:Class="RouterApp">
-    <PageControl>
-        <Each Items="{children0}">
-            <Page1/>
-        </Each>
-    </PageControl>
-</Panel>
+<DockPanel ux:Class="RouterApp">
+    <DirectNavigation Active="{var1}" />
+    <Page1 ux:Name="Page1" />
+    <Page2 ux:Name="Page2" />
+    <!--  </FuseRouter> -->
+    <Panel Dock="Bottom" Height="60" Background="Purple">
+        <Text Value="{id}" />
+    </Panel>
+</DockPanel>

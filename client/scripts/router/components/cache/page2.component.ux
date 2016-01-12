@@ -1,3 +1,18 @@
-<Page ux:Class="Page2">
-    <Panel Background="Blue"></Panel>
+<Page ux:Name="self" ux:Class="Page2">
+    <Each Items="{children1}">
+        <StackPanel Background="Blue">
+            <!-- <Text Value="{id}" />
+            <Text Value="{type}" />
+            <Text Value="{depth}" /> -->
+            <Text Alignment="Center" FontSize="25" Value="{var1}" />
+
+            <Rectangle Margin="50" Width="200" Height="50" Clicked="{callback1}" Fill="Red">
+                <Text Alignment="Center" Value="Go Back" />
+            </Rectangle>
+        </StackPanel>
+    </Each>
+    <ExitingAnimation>
+        <Move X="0.5" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Change self.Opacity="0" Duration="0.5" />
+    </ExitingAnimation>
 </Page>

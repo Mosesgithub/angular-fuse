@@ -3,7 +3,7 @@ var Observable = require('FuseJS/Observable');
 
 if (!window.angularLoaded) {
     window.isFuse = true;
-    window.context = {
+    window.context =  {
         depth: 0,
         children0: Observable()
     };

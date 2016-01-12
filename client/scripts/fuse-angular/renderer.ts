@@ -112,7 +112,7 @@ export class FuseRenderer extends Renderer {
     }
 
     public on(element: ViewNode, eventName: string, callback: Function) {
-        consoleLog('FuseRenderer.on: ' + eventName, arguments);
+        consoleLog('FuseRenderer.on: ' + element.viewName + '.' + eventName);
         let zonedCallback = global['zone'].bind(callback);
         element.on(eventName, zonedCallback);
     }
@@ -207,6 +207,10 @@ export class FuseRenderer extends Renderer {
         let startIndex = anchorNode.parentNode.getChildIndex(anchorNode) + 1;
         fragmentNodes.forEach((node, index) => {
             consoleLog('attachFragmentAfterElement: child: ' + node.viewName + ' after: ' + anchorNode.viewName + ' startIndex: ' + startIndex + ' index: ' + index);
+            if (anchorNode.viewName === 'router-outlet' && window.angularRenderer) {
+                window.angularRenderer.navigateTo(node.viewName);
+            }
+
             anchorNode.parentNode.insertChildAt(startIndex + index, node);
             node.attachToView(startIndex + index);
         });
