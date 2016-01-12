@@ -4,7 +4,7 @@ var Observable = require('FuseJS/Observable');
 if (!window.angularLoaded) {
     window.context = {
         depth: 0,
-        children: Observable()
+        children0: Observable()
     };
     var AngularRendererClass = require('AngularRenderer');
     window.AngularRenderer = new AngularRendererClass(window.context);

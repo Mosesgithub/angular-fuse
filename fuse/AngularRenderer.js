@@ -13,7 +13,7 @@ function EventFactory() {
 
 function Element(depth) {
     this.depth = depth;
-    this.children = Observable();
+    this['children' + depth] = Observable();
     this.var1 = Observable(1);
     this.var2 = Observable();
     this.var3 = Observable('Default Value ' + depth);
@@ -33,7 +33,7 @@ module.exports = function(context) {
 
     this.addElement = function(type, parentId) {
         console.log('addElement type: ' + type + ' parentId:' + parentId);
-        var id = counter++;
+        var id = type + '_' + counter++;
 
         if (!parentId && parentId !== 0) {
             console.log('no parent');
@@ -68,15 +68,15 @@ module.exports = function(context) {
     this.renderElement = function(id, parentId) {
         console.log('renderElement ' + id + ' parentId ' + parentId);
 
-        if (parentId && parentId > 0) {
+        if (id.indexOf('Scope') !== 0) {
+            console.log('do nothing no scope');
+        } else if (parentId && tree[parentId]) {
             var parentElement = tree[parentId];
             var element = tree[id];
             //console.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
             //context.children.add(new Element(1));
-            console.log('renderElement ' + id + ' parentId ' + parentId);
-            console.log('before add ' + parentElement.children.length);
-            parentElement.children.add(element);
-            console.log('after add ' + parentElement.children.length);
+            console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + parentElement.depth);
+            parentElement['children' + parentElement.depth].add(element);
         } else {
             console.log('do nothing no parent');
         }

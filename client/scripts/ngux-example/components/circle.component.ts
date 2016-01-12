@@ -7,5 +7,10 @@ import {Component} from 'angular2/core';
 })
 
 export class MyCircle {
+    public static count = 0;
     public message = 'Circle binding';
+    constructor() {
+        MyCircle.count += 1;
+        this.message += MyCircle.count;
+    }
 }

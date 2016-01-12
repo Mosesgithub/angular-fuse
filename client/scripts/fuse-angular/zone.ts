@@ -10,7 +10,7 @@
 
 //ZoneScriptPatch.apply();
 
-console.log('manual patching zone');
+//console.log('manual patching zone');
 window.Zone = global.Zone;
 window.zone = global.zone;
 

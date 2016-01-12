@@ -13,19 +13,18 @@ export class AppComponent {
     public background = 'Yellow';
     public textvalue = 'Hello World';
 
-    public foo = [];
+    public foo = [{
+        background: 'Red'
+    }, {
+        background: 'Blue'
+    }, {
+        background: 'Green'
+    }, {
+        background: 'Yellow'
+    }];
 
-    // {
-    // 	background: 'Red'
-    // }, {
-    // 	background: 'Blue'
-    // }, {
-    // 	background: 'Green'
-    // }, {
-    // 	background: 'Yellow'
-    // }
     public clickHandler(amount) {
-        this.amount += amount;
+        this.amount += 30;
         this.textvalue += ' ' + amount;
         console.log('you clicked me ' + amount);
     }

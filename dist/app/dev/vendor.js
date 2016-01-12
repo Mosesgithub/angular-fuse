@@ -522,7 +522,6 @@ webpackJsonp([1],[
 	
 	  // Reflect
 	  if (!globals.Reflect) {
-	    console.log('Reflect not defined');
 	    defineProperty(globals, 'Reflect', {});
 	  }
 	  else {
@@ -16614,8 +16613,7 @@ webpackJsonp([1],[
 /* 481 */
 /***/ function(module, exports) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {console.log('manual patching zone');
-	window.Zone = global.Zone;
+	/* WEBPACK VAR INJECTION */(function(global) {window.Zone = global.Zone;
 	window.zone = global.zone;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))

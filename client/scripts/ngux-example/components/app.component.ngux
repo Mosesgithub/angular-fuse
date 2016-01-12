@@ -1,4 +1,11 @@
 <StackPanel ux:Class="MyApp" [Width]="amount" [Background]="background" Height="300" (Clicked)="clickHandler(amount)">
+    <JavaScript>
+        module.exports = { greeting: "Hello databound world!" };
+    </JavaScript>
+    <LayoutAnimation>
+        <Resize X="1" Y="1" RelativeTo="LayoutChange" Duration="0.5" />
+        <Move X="1" Y="1" RelativeTo="LayoutChange" Duration="0.5" />
+    </LayoutAnimation>
     <Text [Value]="textvalue"></Text>
     <StackPanel *ngFor="#f in foo">
         <Text [Value]="f.background" />

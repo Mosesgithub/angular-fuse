@@ -1,3 +1,6 @@
 <Circle ux:Class="MyCircle" Width="100" Height="100" Fill="Red">
-	<Text Value="{var5}" />
+    <AddingAnimation>
+        <Scale Factor="0" Duration="1" Easing="BounceIn" />
+    </AddingAnimation>
+    <Text Value="{var5}" />
 </Circle>

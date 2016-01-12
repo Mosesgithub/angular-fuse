@@ -110,7 +110,6 @@ export class ViewNode {
     }
 
     public setAttribute(attributeName: string, value: any): void {
-        this.consoleLog('ViewNode.setAttribute', arguments);
         if (!this.nativeView) {
             //this.consoleLog('Native view not created. Delaying attribute set: ' + attributeName);
             this.attributes.set(attributeName, value);
@@ -204,16 +203,16 @@ export class ViewNode {
     }
 
     private createUI(attachAtIndex: number): boolean {
-        this.consoleLog('ViewNode.createUI', this.viewName);
+        //this.consoleLog('ViewNode.createUI', this.viewName);
         let parentId = this.getParentId();
         let id = '';
         if (!this.nativeView) {
             if (typeof window.AngularRenderer !== 'undefined') {
                 //window.AngularRender
-                this.consoleLog('AngularRenderer is defined');
+                //this.consoleLog('AngularRenderer is defined');
                 id = window.AngularRenderer.addElement(this.viewName, parentId);
             } else {
-                this.consoleLog('AngularRenderer cannot be found');
+                //this.consoleLog('AngularRenderer cannot be found');
                 id = '' + this.objectCount++;
             }
             this.nativeView = new View(this.viewName, id);
@@ -298,7 +297,7 @@ export class ViewNode {
     }
 
     private consoleLog(...a: any[]) {
-        if (a && a[0].length > 0 && a[0].toString) {
+        if (false && a && a.length > 0 && a[0] && a[0].toString) {
             console.log(a[0].toString());
         }
     }

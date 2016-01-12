@@ -1,13 +1,23 @@
 <StackPanel ux:Class="MyApp">
-    <Each Items="{children}">
+    <!-- <Text Value="{depth}"/> -->
+    <Each Items="{children0}">
         <StackPanel Width="{var1}" Background="Green" Height="300" Clicked="{callback1}">
-            <Each Items="{children}">
+        	<Text Value="{greeting}" />
+            <JavaScript>
+                module.exports = { greeting: "Hello databound world!" };
+            </JavaScript>
+            <LayoutAnimation>
+                <Resize X="1" Y="1" RelativeTo="LayoutChange" Duration="0.5" />
+                <Move X="1" Y="1" RelativeTo="LayoutChange" Duration="0.5" />
+            </LayoutAnimation>
+            <Text Value="{var3}" />
+            <Each Items="{children1}">
                 <Text Value="{var2}" />
-                <Panel>
-                    <Each Items="{children}">
+                <StackPanel>
+                    <Each Items="{children2}">
                         <MyCircle />
                     </Each>
-                </Panel>
+                </StackPanel>
             </Each>
         </StackPanel>
     </Each>

@@ -93,10 +93,18 @@ webpackJsonp([0],{
 	        this.amount = 30;
 	        this.background = 'Yellow';
 	        this.textvalue = 'Hello World';
-	        this.foo = [];
+	        this.foo = [{
+	                background: 'Red'
+	            }, {
+	                background: 'Blue'
+	            }, {
+	                background: 'Green'
+	            }, {
+	                background: 'Yellow'
+	            }];
 	    }
 	    AppComponent.prototype.clickHandler = function (amount) {
-	        this.amount += amount;
+	        this.amount += 30;
 	        this.textvalue += ' ' + amount;
 	        console.log('you clicked me ' + amount);
 	    };
@@ -118,7 +126,7 @@ webpackJsonp([0],{
 /***/ 482:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope1 [var1]=\"amount\" [var3]=\"textvalue\" (callback1)=\"clickHandler(amount)\">\n    <Scope2 *ngFor=\"#f of foo\" [var2]=\"f.background\">\n    \t<MyCircleComponent></MyCircleComponent>\n    </Scope2>\n</Scope1>\n";
+	module.exports = "<Scope0 [var1]=\"amount\" [var3]=\"textvalue\" (callback1)=\"clickHandler(amount)\">\n    <Scope1 *ngFor=\"#f of foo\" [var2]=\"f.background\">\n    \t<MyCircleComponent></MyCircleComponent>\n    </Scope1>\n</Scope0>\n";
 
 /***/ },
 
@@ -138,7 +146,10 @@ webpackJsonp([0],{
 	var MyCircle = (function () {
 	    function MyCircle() {
 	        this.message = 'Circle binding';
+	        MyCircle.count += 1;
+	        this.message += MyCircle.count;
 	    }
+	    MyCircle.count = 0;
 	    MyCircle = __decorate([
 	        core_1.Component({
 	            selector: 'MyCircleComponent',
@@ -156,7 +167,7 @@ webpackJsonp([0],{
 /***/ 484:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope3 [var5]=\"message\"></Scope3>\n";
+	module.exports = "<Scope2 [var5]=\"message\"></Scope2>\n";
 
 /***/ }
 
