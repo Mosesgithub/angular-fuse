@@ -1,4 +1,4 @@
-<Circle ux:Name="self" ux:Class="MyCircle" Width="{var2}" Height="{var2}">
+    <Circle ux:Name="self" ux:Class="MyCircle" Width="{var2}" Height="{var2}">
     <Match Value="{var3}">
         <Case String="Male">
             <SolidColor Color="#f00" />

@@ -1,1 +1,7 @@
-<Panel></Panel>
+<Panel ux:Class="RouterApp">
+    <PageControl>
+        <Each Items="{children0}">
+            <Page1/>
+        </Each>
+    </PageControl>
+</Panel>

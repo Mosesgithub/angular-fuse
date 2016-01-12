@@ -1,1 +1,3 @@
-<Panel Background="Blue" ></Panel>
+<Page ux:Class="Page2">
+    <Panel Background="Blue"></Panel>
+</Page>

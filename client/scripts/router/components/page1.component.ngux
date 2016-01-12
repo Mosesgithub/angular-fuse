@@ -1,1 +1,1 @@
-<Panel Background="Red" ></Panel>
+<Panel Background="Red" (Clicked)="navigate()" ></Panel>

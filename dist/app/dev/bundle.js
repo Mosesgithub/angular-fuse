@@ -7,7 +7,7 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	var bootstrap_1 = __webpack_require__(1);
-	var routerapp_component_1 = __webpack_require__(273);
+	var routerapp_component_1 = __webpack_require__(274);
 	bootstrap_1.fuseBootstrap(routerapp_component_1.RouterAppComponent);
 
 
@@ -32,6 +32,7 @@ webpackJsonp([0],{
 	var common_1 = __webpack_require__(191);
 	var http_1 = __webpack_require__(234);
 	var router_1 = __webpack_require__(249);
+	var fuse_location_strategy_1 = __webpack_require__(273);
 	function fuseBootstrap(appComponentType, customProviders) {
 	    if (customProviders === void 0) { customProviders = null; }
 	    dom_adapter_2.FuseDomAdapter.makeCurrent();
@@ -60,18 +61,19 @@ webpackJsonp([0],{
 	        platform_common_providers_1.PLATFORM_COMMON_PROVIDERS,
 	        common_1.FORM_PROVIDERS,
 	        http_1.HTTP_PROVIDERS,
-	        http_1.JSONP_PROVIDERS,
+	        http_1.JSONP_PROVIDERS
+	    ];
+	    var appProviders = [
 	        router_1.ROUTER_PROVIDERS,
 	        di_1.provide(router_1.LocationStrategy, {
-	            useClass: router_1.HashLocationStrategy
+	            useClass: fuse_location_strategy_1.FuseLocationStrategy
 	        })
 	    ];
-	    var appProviders = [];
 	    if (lang_1.isPresent(customProviders)) {
 	        appProviders.push(customProviders);
 	    }
 	    var app = core_1.platform(fuseProviders).application(appProviders);
-	    return app.bootstrap(appComponentType);
+	    return app.bootstrap(appComponentType).catch(function (err) { return console.error(err); });
 	}
 	exports.fuseBootstrap = fuseBootstrap;
 
@@ -79,6 +81,61 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 273:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(3);
+	var router_1 = __webpack_require__(249);
+	var FuseLocationStrategy = (function (_super) {
+	    __extends(FuseLocationStrategy, _super);
+	    function FuseLocationStrategy() {
+	        console.log('FuseLocationStrategy');
+	        _super.call(this);
+	        this._baseHref = '/';
+	    }
+	    FuseLocationStrategy.prototype.onPopState = function (fn) { };
+	    FuseLocationStrategy.prototype.getBaseHref = function () {
+	        return this._baseHref;
+	    };
+	    FuseLocationStrategy.prototype.prepareExternalUrl = function (internal) {
+	        return this._baseHref + '/' + internal;
+	    };
+	    FuseLocationStrategy.prototype.path = function () {
+	        return this._baseHref;
+	    };
+	    FuseLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
+	    };
+	    FuseLocationStrategy.prototype.replaceState = function (state, title, url, queryParams) {
+	    };
+	    FuseLocationStrategy.prototype.forward = function () {
+	    };
+	    FuseLocationStrategy.prototype.back = function () {
+	    };
+	    FuseLocationStrategy = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], FuseLocationStrategy);
+	    return FuseLocationStrategy;
+	})(router_1.LocationStrategy);
+	exports.FuseLocationStrategy = FuseLocationStrategy;
+
+
+/***/ },
+
+/***/ 274:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -92,8 +149,8 @@ webpackJsonp([0],{
 	};
 	var core_1 = __webpack_require__(3);
 	var router_1 = __webpack_require__(249);
-	var page1_component_1 = __webpack_require__(274);
-	var page2_component_1 = __webpack_require__(276);
+	var page1_component_1 = __webpack_require__(275);
+	var page2_component_1 = __webpack_require__(277);
 	var RouterAppComponent = (function () {
 	    function RouterAppComponent() {
 	    }
@@ -101,7 +158,7 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: 'app',
 	            directives: [router_1.ROUTER_DIRECTIVES],
-	            template: __webpack_require__(512)
+	            template: __webpack_require__(279)
 	        }),
 	        router_1.RouteConfig([{
 	                path: '/',
@@ -125,7 +182,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 274:
+/***/ 275:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -140,15 +197,20 @@ webpackJsonp([0],{
 	var core_1 = __webpack_require__(3);
 	var router_1 = __webpack_require__(249);
 	var Page1 = (function () {
-	    function Page1() {
+	    function Page1(router) {
+	        this.router = router;
 	    }
+	    Page1.prototype.navigate = function () {
+	        console.log('navigating to Page 2');
+	        this.router.parent.navigate(['Page2']);
+	    };
 	    Page1 = __decorate([
 	        core_1.Component({
 	            selector: 'Page1',
-	            template: __webpack_require__(275),
+	            template: __webpack_require__(276),
 	            directives: [router_1.ROUTER_DIRECTIVES]
 	        }), 
-	        __metadata('design:paramtypes', [])
+	        __metadata('design:paramtypes', [router_1.Router])
 	    ], Page1);
 	    return Page1;
 	})();
@@ -157,14 +219,14 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 275:
+/***/ 276:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope1></Scope1>";
+	module.exports = "<Scope1 (callback1)=\"navigate()\"></Scope1>";
 
 /***/ },
 
-/***/ 276:
+/***/ 277:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -184,7 +246,7 @@ webpackJsonp([0],{
 	    Page2 = __decorate([
 	        core_1.Component({
 	            selector: 'Page2',
-	            template: __webpack_require__(277),
+	            template: __webpack_require__(278),
 	            directives: [router_1.ROUTER_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -196,17 +258,17 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 277:
+/***/ 278:
 /***/ function(module, exports) {
 
 	module.exports = "<Scope2></Scope2>";
 
 /***/ },
 
-/***/ 512:
+/***/ 279:
 /***/ function(module, exports) {
 
-	module.exports = "<router-outlet></router-outlet>\n";
+	module.exports = "<router-outlet></router-outlet>\n\n";
 
 /***/ }
 

@@ -196,6 +196,7 @@ export class FuseRenderer extends Renderer {
     }
 
     private _createView(protoViewRef: RenderProtoViewRef, inplaceElement: HTMLElement): RenderViewWithFragments {
+        consoleLog('FuseRenderer._createView', arguments);
         let dpvr = <DefaultProtoViewRef>protoViewRef;
         let view = createRenderView(dpvr.template, dpvr.cmds, inplaceElement, this);
         return new RenderViewWithFragments(view, view.fragments);
@@ -213,7 +214,7 @@ export class FuseRenderer extends Renderer {
 }
 
 function consoleLog(...a: any[]) {
-    if (false) {
+    if (true) {
         console.log(a[0].toString());
     }
 }

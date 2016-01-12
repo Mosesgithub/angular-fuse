@@ -7,5 +7,5 @@
  -->
     <!-- <AngularRenderer ux:Global="AngularRenderer" /> -->
     <JavaScript File="MainView.js" />
-    <MyApp />
+    <RouterApp />
 </App>

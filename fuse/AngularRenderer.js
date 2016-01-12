@@ -30,6 +30,7 @@ module.exports = function(context) {
 
     var tree = {};
     var counter = 1;
+    var rootId;
 
     this.log = function() {
         console.log.call(arguments);
@@ -41,6 +42,7 @@ module.exports = function(context) {
 
         if (!parentId && parentId !== 0) {
             this.log('no parent');
+            rootId = id;
             tree[id] = context;
         } else {
             var parentElement = tree[parentId];
@@ -83,7 +85,7 @@ module.exports = function(context) {
         } else {
             this.log('do nothing no parent');
         }
-
+        console.log(JSON.stringify(tree[rootId], null, 4));
         //this.log(JSON.stringify(context));
     };
 
@@ -106,9 +108,7 @@ module.exports = function(context) {
         var element = tree[id];
         callback();
         element[eventName.replace('callback', 'event')].callbacks.push(callback);
-        // this.log('setEventListener');
-        // this.log(id);
-        // this.log(eventName);
+        this.log('setEventListener ' + id + eventName + ' ' + typeof callback);
     };
 
 };

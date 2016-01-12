@@ -1,1 +1,6 @@
-<Panel Background="Red" ></Panel>
+<Page ux:Class="Page1" Clicked="{callback1}">
+    <StackPanel Background="Green">
+    	<Text Value="{type}" />
+    	<Text Value="{depth}" />
+    </StackPanel>
+</Page>
