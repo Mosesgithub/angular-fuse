@@ -32,9 +32,7 @@ module.exports = function(context) {
     var counter = 1;
 
     this.log = function() {
-        if (false) {
-            console.log.call(arguments);
-        }
+        console.log.call(arguments);
     };
 
     this.addElement = function(type, parentId) {

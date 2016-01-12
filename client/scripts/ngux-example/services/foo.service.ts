@@ -13,8 +13,10 @@ export class FooService {
             .map((heroes: Array<any>) => {
                 let result: Array<any> = [];
                 if (heroes) {
-                    heroes.forEach((h) => {
+                    heroes.forEach((h, index) => {
                         result.push({
+                            width: 100 * (index + 1),
+                            sexe: index % 2 === 0 ? 'Male' : 'Female',
                             background: h.id
                         });
                     });

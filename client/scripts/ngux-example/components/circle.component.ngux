@@ -1,6 +1,9 @@
-<Circle ux:Class="MyCircle" Width="100" Height="100" Fill="Red">
+<Circle ux:Class="MyCircle" [Width]="width" [Height]="width" Fill="Red">
     <AddingAnimation>
         <Scale Factor="0" Duration="1" Easing="BounceIn" />
     </AddingAnimation>
-    <Text [Value]="message" />
+    <StackPanel>
+        <Text Value="{{message}} {{date | timeAgo}}" />
+        <Text [Value]="sexe" />
+    </StackPanel>
 </Circle>

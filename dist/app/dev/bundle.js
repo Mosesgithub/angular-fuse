@@ -7,9 +7,8 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	var bootstrap_1 = __webpack_require__(1);
-	var app_component_1 = __webpack_require__(249);
-	console.log('bootstrapping app');
-	bootstrap_1.fuseBootstrap(app_component_1.AppComponent);
+	var routerapp_component_1 = __webpack_require__(273);
+	bootstrap_1.fuseBootstrap(routerapp_component_1.RouterAppComponent);
 
 
 /***/ },
@@ -32,6 +31,7 @@ webpackJsonp([0],{
 	var platform_common_providers_1 = __webpack_require__(117);
 	var common_1 = __webpack_require__(191);
 	var http_1 = __webpack_require__(234);
+	var router_1 = __webpack_require__(249);
 	function fuseBootstrap(appComponentType, customProviders) {
 	    if (customProviders === void 0) { customProviders = null; }
 	    dom_adapter_2.FuseDomAdapter.makeCurrent();
@@ -60,7 +60,11 @@ webpackJsonp([0],{
 	        platform_common_providers_1.PLATFORM_COMMON_PROVIDERS,
 	        common_1.FORM_PROVIDERS,
 	        http_1.HTTP_PROVIDERS,
-	        http_1.JSONP_PROVIDERS
+	        http_1.JSONP_PROVIDERS,
+	        router_1.ROUTER_PROVIDERS,
+	        di_1.provide(router_1.LocationStrategy, {
+	            useClass: router_1.HashLocationStrategy
+	        })
 	    ];
 	    var appProviders = [];
 	    if (lang_1.isPresent(customProviders)) {
@@ -74,7 +78,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 249:
+/***/ 273:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -87,59 +91,41 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var circle_component_1 = __webpack_require__(250);
-	var foo_service_1 = __webpack_require__(252);
-	var AppComponent = (function () {
-	    function AppComponent(fooService) {
-	        this.fooService = fooService;
-	        this.amount = 30;
-	        this.background = 'Yellow';
-	        this.textvalue = 'Hello World';
-	        this.foo = [{
-	                background: 'Red'
-	            }, {
-	                background: 'Blue'
-	            }, {
-	                background: 'Green'
-	            }, {
-	                background: 'Yellow'
-	            }];
-	        this.too = [{
-	                background: 'Red'
-	            }, {
-	                background: 'Blue'
-	            }];
+	var router_1 = __webpack_require__(249);
+	var page1_component_1 = __webpack_require__(274);
+	var page2_component_1 = __webpack_require__(276);
+	var RouterAppComponent = (function () {
+	    function RouterAppComponent() {
 	    }
-	    AppComponent.prototype.ngOnInit = function () {
-	        var _this = this;
-	        this.fooService.getFoos().subscribe(function (res) {
-	            console.log('foos updated');
-	            _this.foo = res;
-	            console.log(JSON.stringify(_this.foo));
-	        });
-	    };
-	    AppComponent.prototype.clickHandler = function (amount) {
-	        this.amount += 30;
-	        this.textvalue += ' ' + amount;
-	        console.log('you clicked me ' + amount);
-	    };
-	    AppComponent = __decorate([
+	    RouterAppComponent = __decorate([
 	        core_1.Component({
-	            selector: 'MyApp',
-	            providers: [foo_service_1.FooService],
-	            directives: [circle_component_1.MyCircle],
-	            template: __webpack_require__(253)
-	        }), 
-	        __metadata('design:paramtypes', [foo_service_1.FooService])
-	    ], AppComponent);
-	    return AppComponent;
+	            selector: 'app',
+	            directives: [router_1.ROUTER_DIRECTIVES],
+	            template: __webpack_require__(512)
+	        }),
+	        router_1.RouteConfig([{
+	                path: '/',
+	                redirectTo: ['/Page1'],
+	                name: 'root'
+	            }, {
+	                path: '/page1',
+	                name: 'Page1',
+	                component: page1_component_1.Page1
+	            }, {
+	                path: '/page2',
+	                name: 'Page2',
+	                component: page2_component_1.Page2
+	            }]), 
+	        __metadata('design:paramtypes', [])
+	    ], RouterAppComponent);
+	    return RouterAppComponent;
 	})();
-	exports.AppComponent = AppComponent;
+	exports.RouterAppComponent = RouterAppComponent;
 
 
 /***/ },
 
-/***/ 250:
+/***/ 274:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -152,35 +138,33 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var MyCircle = (function () {
-	    function MyCircle() {
-	        this.message = 'Circle binding';
-	        MyCircle.count += 1;
-	        this.message += MyCircle.count;
+	var router_1 = __webpack_require__(249);
+	var Page1 = (function () {
+	    function Page1() {
 	    }
-	    MyCircle.count = 0;
-	    MyCircle = __decorate([
+	    Page1 = __decorate([
 	        core_1.Component({
-	            selector: 'MyCircleComponent',
-	            template: __webpack_require__(251)
+	            selector: 'Page1',
+	            template: __webpack_require__(275),
+	            directives: [router_1.ROUTER_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [])
-	    ], MyCircle);
-	    return MyCircle;
+	    ], Page1);
+	    return Page1;
 	})();
-	exports.MyCircle = MyCircle;
+	exports.Page1 = Page1;
 
 
 /***/ },
 
-/***/ 251:
+/***/ 275:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope2 [var5]=\"message\"></Scope2>\n";
+	module.exports = "<Scope1></Scope1>";
 
 /***/ },
 
-/***/ 252:
+/***/ 276:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -193,41 +177,36 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var http_1 = __webpack_require__(234);
-	var FooService = (function () {
-	    function FooService(http) {
-	        this.http = http;
+	var router_1 = __webpack_require__(249);
+	var Page2 = (function () {
+	    function Page2() {
 	    }
-	    FooService.prototype.getFoos = function () {
-	        return this.http.get('https://yoobic-ims.herokuapp.com/api/Vehicles?filter=%7B%22limit%22%3A20%7D')
-	            .map(function (res) { return res.json(); })
-	            .map(function (heroes) {
-	            var result = [];
-	            if (heroes) {
-	                heroes.forEach(function (h) {
-	                    result.push({
-	                        background: h.id
-	                    });
-	                });
-	            }
-	            return result;
-	        });
-	    };
-	    FooService = __decorate([
-	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [http_1.Http])
-	    ], FooService);
-	    return FooService;
+	    Page2 = __decorate([
+	        core_1.Component({
+	            selector: 'Page2',
+	            template: __webpack_require__(277),
+	            directives: [router_1.ROUTER_DIRECTIVES]
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], Page2);
+	    return Page2;
 	})();
-	exports.FooService = FooService;
+	exports.Page2 = Page2;
 
 
 /***/ },
 
-/***/ 253:
+/***/ 277:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope0 [var1]=\"amount\" [var3]=\"textvalue\" (callback1)=\"clickHandler(amount)\">\n    <Scope1 *ngFor=\"#f of foo\" [var2]=\"f.background\">\n    \t<MyCircleComponent></MyCircleComponent>\n    </Scope1>\n    <Scope2 *ngFor=\"#t of too\" [var4]=\"t.background\">\n    </Scope2>\n</Scope0>\n";
+	module.exports = "<Scope2></Scope2>";
+
+/***/ },
+
+/***/ 512:
+/***/ function(module, exports) {
+
+	module.exports = "<router-outlet></router-outlet>\n";
 
 /***/ }
 

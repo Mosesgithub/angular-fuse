@@ -72,9 +72,9 @@ export class ViewNode {
 
         let parentId = this.getParentId();
         this.consoleLog('render ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + (parentId || ''));
-        if (typeof window.AngularRenderer !== 'undefined') {
+        if (typeof window.angularRenderer !== 'undefined') {
             //this.consoleLog('AngularRenderer is defined');
-            let retVal = window.AngularRenderer.renderElement(this.nativeView.id, parentId);
+            let retVal = window.angularRenderer.renderElement(this.nativeView.id, parentId);
             this.consoleLog(retVal);
         }
     }
@@ -85,11 +85,11 @@ export class ViewNode {
         this.detachUIEvents();
         let parentId = this.getParentId();
         this.consoleLog('remove ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + parentId);
-        if (typeof window.AngularRenderer !== 'undefined') {
+        if (typeof window.angularRenderer !== 'undefined') {
             //this.consoleLog('AngularRenderer is defined');
             if (this.nativeView) {
                 //this.consoleLog()
-                window.AngularRenderer.removeElement(this.nativeView.id, parentId);
+                window.angularRenderer.removeElement(this.nativeView.id, parentId);
             }
         }
 
@@ -116,9 +116,9 @@ export class ViewNode {
             return;
         }
 
-        if (typeof window.AngularRenderer !== 'undefined') {
+        if (typeof window.angularRenderer !== 'undefined') {
             this.consoleLog('Setting attribute: id:' + this.nativeView.id + ' att:' + attributeName + ' value:' + value);
-            window.AngularRenderer.setAttribute(this.nativeView.id, attributeName, value);
+            window.angularRenderer.setAttribute(this.nativeView.id, attributeName, value);
         }
     }
 
@@ -207,10 +207,10 @@ export class ViewNode {
         let parentId = this.getParentId();
         let id = '';
         if (!this.nativeView) {
-            if (typeof window.AngularRenderer !== 'undefined') {
+            if (typeof window.angularRenderer !== 'undefined') {
                 //window.AngularRender
                 //this.consoleLog('AngularRenderer is defined');
-                id = window.AngularRenderer.addElement(this.viewName, parentId);
+                id = window.angularRenderer.addElement(this.viewName, parentId);
             } else {
                 //this.consoleLog('AngularRenderer cannot be found');
                 id = '' + this.objectCount++;
@@ -274,9 +274,9 @@ export class ViewNode {
     // }
 
     private attachNativeEvent(eventName, callback) {
-        if (typeof window.AngularRenderer !== 'undefined') {
+        if (typeof window.angularRenderer !== 'undefined') {
             this.consoleLog('attachNativeEvent ' + this.nativeView.id + ' ' + eventName);
-            window.AngularRenderer.setEventListener(this.nativeView.id, eventName, callback);
+            window.angularRenderer.setEventListener(this.nativeView.id, eventName, callback);
         }
         //let resolvedEvent = this.resolveNativeEvent(eventName);
         //this.nativeView.addEventListener(resolvedEvent, callback);

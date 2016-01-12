@@ -9,7 +9,7 @@
     <Text [Value]="textvalue"></Text>
     <StackPanel *ngFor="#f in foo">
         <Text [Value]="f.background" />
-        <MyCircle />
+        <MyCircle [width]="f.width" [sexe]="f.sexe" />
     </StackPanel>
     <StackPanel *ngFor="#f in too">
         <Rectangle Width="100" Height="100" Fill="Blue" />

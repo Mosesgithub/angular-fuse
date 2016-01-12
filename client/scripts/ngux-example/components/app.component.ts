@@ -2,8 +2,8 @@
 import {Component, OnInit} from 'angular2/core';
 import {MyCircle} from './circle.component';
 import {FooService} from '../services/foo.service';
-
 /* beautify ignore:end */
+
 @Component({
     selector: 'MyApp',
     providers: [FooService],
@@ -17,20 +17,28 @@ export class AppComponent implements OnInit {
     public textvalue = 'Hello World';
 
     public foo = [{
-        background: 'Red'
+        background: 'Red',
+        sexe: 'Male',
+        width: 100
     }, {
-        background: 'Blue'
-    }, {
-        background: 'Green'
-    }, {
-        background: 'Yellow'
-    }];
+            background: 'Blue',
+            sexe: 'Female',
+            width: 200
+        }, {
+            background: 'Green',
+            sexe: 'Female',
+            width: 300
+        }, {
+            background: 'Yellow',
+            sexe: 'Male',
+            width: 400
+        }];
 
     public too = [{
         background: 'Red'
     }, {
-        background: 'Blue'
-    }];
+            background: 'Blue'
+        }];
 
     constructor(private fooService: FooService) {
         //console.log('AppComponent constructor');

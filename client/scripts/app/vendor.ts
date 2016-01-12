@@ -20,8 +20,11 @@ import 'angular2/src/core/application_common_providers';
 import 'angular2/src/compiler/compiler';
 import 'angular2/src/core/platform_common_providers';
 import 'angular2/common';
+import 'angular2/router';
 
 import '../fuse-angular/renderer';
 import '../fuse-angular/dom_adapter';
 import '../fuse-angular/zone';
 import '../fuse-angular/xhr';
+
+import 'lodash';

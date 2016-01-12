@@ -19,11 +19,12 @@ import {COMPILER_PROVIDERS} from 'angular2/src/compiler/compiler';
 import {PLATFORM_COMMON_PROVIDERS} from 'angular2/src/core/platform_common_providers';
 import {COMMON_DIRECTIVES, COMMON_PIPES, FORM_PROVIDERS} from 'angular2/common';
 import {HTTP_PROVIDERS, JSONP_PROVIDERS} from 'angular2/http';
+import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 /* beautify ignore:end */
 
-export type ProviderArray = Array < Type | Provider | any[] > ;
+export type ProviderArray = Array<Type | Provider | any[]>;
 
-export function fuseBootstrap(appComponentType: any, customProviders: ProviderArray = null): Promise < ComponentRef > {
+export function fuseBootstrap(appComponentType: any, customProviders: ProviderArray = null): Promise<ComponentRef> {
     FuseDomAdapter.makeCurrent();
 
     let fuseProviders: ProviderArray = [
@@ -53,7 +54,12 @@ export function fuseBootstrap(appComponentType: any, customProviders: ProviderAr
         PLATFORM_COMMON_PROVIDERS,
         FORM_PROVIDERS,
         HTTP_PROVIDERS,
-        JSONP_PROVIDERS
+        JSONP_PROVIDERS,
+        ROUTER_PROVIDERS,
+
+        provide(LocationStrategy, {
+            useClass: HashLocationStrategy
+        })
     ];
 
     let appProviders = [];

@@ -7,7 +7,7 @@ interface AngularRenderer {
 }
 
 interface Window {
-    AngularRenderer: AngularRenderer;
+    angularRenderer: AngularRenderer;
     Zone: any;
     zone: any;
     JSON: any;
@@ -18,4 +18,5 @@ interface Window {
     Promise: any;
     Math: any;
     EventTarget: any;
+    isFuse: boolean;
 }

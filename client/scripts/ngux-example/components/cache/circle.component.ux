@@ -1,9 +1,20 @@
-<Circle ux:Class="MyCircle" Width="100" Height="100" Fill="Red">
+<Circle ux:Name="self" ux:Class="MyCircle" Width="{var2}" Height="{var2}">
+    <Match Value="{var3}">
+        <Case String="Male">
+            <SolidColor Color="#f00" />
+        </Case>
+        <Case String="Female">
+            <SolidColor Color="#ff0" />
+        </Case>
+    </Match>
     <AddingAnimation>
         <Scale Factor="0" Duration="1" Easing="BounceIn" />
     </AddingAnimation>
     <RemovingAnimation>
         <Scale Factor="0" Duration="1" Easing="BounceIn" />
     </RemovingAnimation>
-    <Text Value="{var5}" />
+    <StackPanel>
+        <Text Value="{var5}" />
+        <Text Value="{var3}" />
+    </StackPanel>
 </Circle>
