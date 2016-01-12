@@ -12,7 +12,7 @@ import {ViewNode, DummyViewNode} from './view_node';
 //@Injectable()
 export class FuseRenderer extends Renderer {
 
-    private componentTemplates: Map < string, RenderComponentTemplate > = new Map < string, RenderComponentTemplate > ();
+    private componentTemplates: Map<string, RenderComponentTemplate> = new Map<string, RenderComponentTemplate>();
 
     constructor() {
         super();
@@ -113,7 +113,7 @@ export class FuseRenderer extends Renderer {
 
     public on(element: ViewNode, eventName: string, callback: Function) {
         consoleLog('FuseRenderer.on: ' + eventName, arguments);
-        let zonedCallback = global.zone.bind(callback);
+        let zonedCallback = global['zone'].bind(callback);
         element.on(eventName, zonedCallback);
     }
 
@@ -181,7 +181,7 @@ export class FuseRenderer extends Renderer {
         return null;
     }
 
-    invokeElementMethod(location: RenderElementRef, methodName: string, args: Array < any > ) {
+    invokeElementMethod(location: RenderElementRef, methodName: string, args: Array<any>) {
         consoleLog('FuseRenderer.invokeElementMethod ' + methodName + ' ' + args, arguments);
     }
 
@@ -196,7 +196,7 @@ export class FuseRenderer extends Renderer {
     }
 
     private _createView(protoViewRef: RenderProtoViewRef, inplaceElement: HTMLElement): RenderViewWithFragments {
-            let dpvr = <DefaultProtoViewRef>protoViewRef;
+        let dpvr = <DefaultProtoViewRef>protoViewRef;
         let view = createRenderView(dpvr.template, dpvr.cmds, inplaceElement, this);
         return new RenderViewWithFragments(view, view.fragments);
     }
@@ -212,7 +212,7 @@ export class FuseRenderer extends Renderer {
     }
 }
 
-function consoleLog(...a: any []) {
+function consoleLog(...a: any[]) {
     if (false) {
         console.log(a[0].toString());
     }

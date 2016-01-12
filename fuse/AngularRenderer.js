@@ -11,9 +11,11 @@ function EventFactory() {
     };
 }
 
-function Element(depth) {
+function Element(depth, type) {
     this.depth = depth;
+    this.type = type;
     this['children' + depth] = Observable();
+
     this.var1 = Observable(1);
     this.var2 = Observable();
     this.var3 = Observable('Default Value ' + depth);
@@ -26,71 +28,89 @@ function Element(depth) {
 
 module.exports = function(context) {
 
-    console.log('Angular Renderer created');
-
     var tree = {};
     var counter = 1;
 
+    this.log = function() {
+        if (false) {
+            console.log.call(arguments);
+        }
+    };
+
     this.addElement = function(type, parentId) {
-        console.log('addElement type: ' + type + ' parentId:' + parentId);
+        this.log('addElement type: ' + type + ' parentId:' + parentId);
         var id = type + '_' + counter++;
 
         if (!parentId && parentId !== 0) {
-            console.log('no parent');
+            this.log('no parent');
             tree[id] = context;
         } else {
             var parentElement = tree[parentId];
             var elm;
             if (type.indexOf('Scope') === 0) {
-                elm = new Element(parentElement.depth + 1, id);
+                elm = new Element(parentElement.depth + 1, type);
             } else {
                 elm = parentElement;
             }
-            //console.log('parent found parentElement Depth ' + parentElement.depth + ',  child Depth' + (parentElement.depth + 1));
+            //this.log('parent found parentElement Depth ' + parentElement.depth + ',  child Depth' + (parentElement.depth + 1));
             tree[id] = elm;
         }
-        //console.log(type + ' has been added to tree with id: ' + id);
+        //this.log(type + ' has been added to tree with id: ' + id);
         return id;
     };
 
     this.setAttribute = function(id, attribute, value) {
-        console.log('setting node  ' + id + '  in tree for ' + attribute + ' : ' + value);
-        //console.log(tree[id].depth);
+        this.log('setting node  ' + id + '  in tree for ' + attribute + ' : ' + value);
+        //this.log(tree[id].depth);
         // if (!tree[id][attribute]) {
         //     tree[id][attribute] = Observable(value);
         // } else {
         tree[id][attribute].value = value;
-        //console.log('before changing ' + window.context.children.getAt(0).var3.value);
+        //this.log('before changing ' + window.context.children.getAt(0).var3.value);
         //window.context.children.getAt(0).var3.value = 'TOOOOOOO';
         //}
     };
 
     this.renderElement = function(id, parentId) {
-        console.log('renderElement ' + id + ' parentId ' + parentId);
+        this.log('renderElement ' + id + ' parentId ' + parentId);
 
         if (id.indexOf('Scope') !== 0) {
-            console.log('do nothing no scope');
+            this.log('do nothing no scope');
         } else if (parentId && tree[parentId]) {
             var parentElement = tree[parentId];
             var element = tree[id];
-            //console.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
-            //context.children.add(new Element(1));
-            console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + parentElement.depth);
+            //this.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
+            this.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + parentElement.depth);
             parentElement['children' + parentElement.depth].add(element);
         } else {
-            console.log('do nothing no parent');
+            this.log('do nothing no parent');
         }
 
-        //console.log(JSON.stringify(context));
+        //this.log(JSON.stringify(context));
+    };
+
+    this.removeElement = function(id, parentId) {
+        this.log('removeElement ' + id + ' parentId ' + parentId);
+        if (id.indexOf('Scope') !== 0) {
+            this.log('do nothing no scope');
+        } else if (parentId && tree[parentId]) {
+            var parentElement = tree[parentId];
+            var element = tree[id];
+            //this.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
+            this.log('removeElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + parentElement.depth);
+            parentElement['children' + parentElement.depth].tryRemove(element);
+        } else {
+            this.log('do nothing no parent');
+        }
     };
 
     this.setEventListener = function(id, eventName, callback) {
         var element = tree[id];
         callback();
         element[eventName.replace('callback', 'event')].callbacks.push(callback);
-        // console.log('setEventListener');
-        // console.log(id);
-        // console.log(eventName);
+        // this.log('setEventListener');
+        // this.log(id);
+        // this.log(eventName);
     };
 
 };

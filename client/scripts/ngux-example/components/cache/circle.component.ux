@@ -2,5 +2,8 @@
     <AddingAnimation>
         <Scale Factor="0" Duration="1" Easing="BounceIn" />
     </AddingAnimation>
+    <RemovingAnimation>
+        <Scale Factor="0" Duration="1" Easing="BounceIn" />
+    </RemovingAnimation>
     <Text Value="{var5}" />
 </Circle>

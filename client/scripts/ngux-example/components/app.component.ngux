@@ -11,4 +11,7 @@
         <Text [Value]="f.background" />
         <MyCircle />
     </StackPanel>
+    <StackPanel *ngFor="#f in too">
+        <Rectangle Width="100" Height="100" Fill="Blue" />
+    </StackPanel>
 </StackPanel>

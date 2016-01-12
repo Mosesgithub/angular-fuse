@@ -87,9 +87,11 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var circle_component_1 = __webpack_require__(483);
+	var circle_component_1 = __webpack_require__(250);
+	var foo_service_1 = __webpack_require__(252);
 	var AppComponent = (function () {
-	    function AppComponent() {
+	    function AppComponent(fooService) {
+	        this.fooService = fooService;
 	        this.amount = 30;
 	        this.background = 'Yellow';
 	        this.textvalue = 'Hello World';
@@ -102,7 +104,20 @@ webpackJsonp([0],{
 	            }, {
 	                background: 'Yellow'
 	            }];
+	        this.too = [{
+	                background: 'Red'
+	            }, {
+	                background: 'Blue'
+	            }];
 	    }
+	    AppComponent.prototype.ngOnInit = function () {
+	        var _this = this;
+	        this.fooService.getFoos().subscribe(function (res) {
+	            console.log('foos updated');
+	            _this.foo = res;
+	            console.log(JSON.stringify(_this.foo));
+	        });
+	    };
 	    AppComponent.prototype.clickHandler = function (amount) {
 	        this.amount += 30;
 	        this.textvalue += ' ' + amount;
@@ -111,10 +126,11 @@ webpackJsonp([0],{
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'MyApp',
+	            providers: [foo_service_1.FooService],
 	            directives: [circle_component_1.MyCircle],
-	            template: __webpack_require__(482)
+	            template: __webpack_require__(253)
 	        }), 
-	        __metadata('design:paramtypes', [])
+	        __metadata('design:paramtypes', [foo_service_1.FooService])
 	    ], AppComponent);
 	    return AppComponent;
 	})();
@@ -123,14 +139,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 482:
-/***/ function(module, exports) {
-
-	module.exports = "<Scope0 [var1]=\"amount\" [var3]=\"textvalue\" (callback1)=\"clickHandler(amount)\">\n    <Scope1 *ngFor=\"#f of foo\" [var2]=\"f.background\">\n    \t<MyCircleComponent></MyCircleComponent>\n    </Scope1>\n</Scope0>\n";
-
-/***/ },
-
-/***/ 483:
+/***/ 250:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -153,7 +162,7 @@ webpackJsonp([0],{
 	    MyCircle = __decorate([
 	        core_1.Component({
 	            selector: 'MyCircleComponent',
-	            template: __webpack_require__(484)
+	            template: __webpack_require__(251)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], MyCircle);
@@ -164,10 +173,61 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 484:
+/***/ 251:
 /***/ function(module, exports) {
 
 	module.exports = "<Scope2 [var5]=\"message\"></Scope2>\n";
+
+/***/ },
+
+/***/ 252:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(3);
+	var http_1 = __webpack_require__(234);
+	var FooService = (function () {
+	    function FooService(http) {
+	        this.http = http;
+	    }
+	    FooService.prototype.getFoos = function () {
+	        return this.http.get('https://yoobic-ims.herokuapp.com/api/Vehicles?filter=%7B%22limit%22%3A20%7D')
+	            .map(function (res) { return res.json(); })
+	            .map(function (heroes) {
+	            var result = [];
+	            if (heroes) {
+	                heroes.forEach(function (h) {
+	                    result.push({
+	                        background: h.id
+	                    });
+	                });
+	            }
+	            return result;
+	        });
+	    };
+	    FooService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [http_1.Http])
+	    ], FooService);
+	    return FooService;
+	})();
+	exports.FooService = FooService;
+
+
+/***/ },
+
+/***/ 253:
+/***/ function(module, exports) {
+
+	module.exports = "<Scope0 [var1]=\"amount\" [var3]=\"textvalue\" (callback1)=\"clickHandler(amount)\">\n    <Scope1 *ngFor=\"#f of foo\" [var2]=\"f.background\">\n    \t<MyCircleComponent></MyCircleComponent>\n    </Scope1>\n    <Scope2 *ngFor=\"#t of too\" [var4]=\"t.background\">\n    </Scope2>\n</Scope0>\n";
 
 /***/ }
 
