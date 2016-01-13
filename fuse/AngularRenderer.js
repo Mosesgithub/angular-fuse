@@ -119,6 +119,15 @@ module.exports = function(context) {
         element[eventName.replace('callback', 'event')].callbacks.push(callback);
     };
 
+    this.removeEventListener = function(id, eventName, callback) {
+        // console.log('setEventListener'); // + id + eventName);
+        // if (callback) {
+        //     console.log('callback is defined' + callback.toString());
+        // }
+        var element = tree[id];
+        element[eventName.replace('callback', 'event')].callbacks.splice(element[eventName.replace('callback', 'event')].callbacks.indexOf(callback), 1);
+    };
+
     // function findParentRouter(id) {
     //     var element = tree[id];
     //     console.log('findParentRouter' + element.id + ' ' + element.parentId + ' ' + tree[element.parentId].type);

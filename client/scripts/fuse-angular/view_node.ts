@@ -5,8 +5,7 @@ import {View} from './view';
 
 class EventData { }
 
-type EventHandler = (args: EventData) => void;
-
+type EventHandler = (args: EventData) => vo
 export class ViewNode {
     private static whiteSpaceSplitter = /\s+/;
     //private static propertyMaps: Map < Function, Map < string, string >> = new Map < Function, Map < string, string >> ();
@@ -286,7 +285,10 @@ export class ViewNode {
     }
 
     private detachNativeEvent(eventName, callback) {
-        //this.consoleLog('detachNativeEvent ' + eventName);
+        this.consoleLog('detachNativeEvent ' + eventName);
+        if (typeof window.angularRenderer !== 'undefined') {
+            window.angularRenderer.removeEventListener(this.nativeView.id, eventName, callback);
+        }
         //let resolvedEvent = this.resolveNativeEvent(eventName);
         //this.nativeView.removeEventListener(resolvedEvent, callback);
     }
