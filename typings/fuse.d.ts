@@ -4,7 +4,7 @@ interface AngularRenderer {
     renderElement(id: string, parentId: string): void;
     removeElement(id: string, parentId: string): void;
     setEventListener(id: string, eventName: string, callback: () => any): void;
-    navigateTo(page: string): void;
+    navigateTo(page: string, id: string): void;
 }
 
 interface Window {

@@ -1,19 +1,13 @@
-<Page ux:Name="self" ux:Class="Page1">
-    <Each Items="{children1}">
-        <StackPanel Background="Yellow">
-            <!--  <Text Value="{id}" />
-            <Text Value="{type}" />
-            <Text Value="{depth}" /> -->
-            <Rectangle Margin="50" Width="200" Height="50" Clicked="{callback1}" Fill="Red">
-                <Text Alignment="Center" Value="Button 1" />
-            </Rectangle>
-            <Rectangle Margin="50" Width="200" Height="50" Clicked="{callback2}" Fill="Red">
-                <Text Alignment="Center" Value="Button 2" />
-            </Rectangle>
-        </StackPanel>
-    </Each>
-    <ExitingAnimation>
-        <Move X="0.5" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
-        <Change self.Opacity="0" Duration="0.5" />
-    </ExitingAnimation>
+<Page ux:Class="Page1">
+    <StackPanel Background="{var1}">
+        <Text Value="{id}" />
+        <Text Value="{type}" />
+        <Text Value="{depth}" />
+        <Rectangle Margin="50" Width="200" Height="50" Clicked="{callback1}" Fill="Red">
+            <Text Alignment="Center" Value="Button 1" />
+        </Rectangle>
+        <Rectangle Margin="50" Width="200" Height="50" Clicked="{callback2}" Fill="Red">
+            <Text Alignment="Center" Value="Button 2" />
+        </Rectangle>
+    </StackPanel>
 </Page>

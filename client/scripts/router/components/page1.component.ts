@@ -10,8 +10,8 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 })
 
 export class Page1 {
-    constructor(private router: Router) {
-    }
+    public background: string = '#f00';
+    constructor(private router: Router) { }
     public navigate(param) {
         console.log('navigating to Page 2');
         this.router.parent.navigate(['Page2', {

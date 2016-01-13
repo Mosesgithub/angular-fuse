@@ -300,7 +300,7 @@ export class ViewNode {
     }
 
     private consoleLog(...a: any[]) {
-        if (true && a && a.length > 0 && a[0] && a[0].toString) {
+        if (false && a && a.length > 0 && a[0] && a[0].toString) {
             console.log(a[0].toString());
         }
     }

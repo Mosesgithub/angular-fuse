@@ -207,18 +207,17 @@ export class FuseRenderer extends Renderer {
         let startIndex = anchorNode.parentNode.getChildIndex(anchorNode) + 1;
         fragmentNodes.forEach((node, index) => {
             consoleLog('attachFragmentAfterElement: child: ' + node.viewName + ' after: ' + anchorNode.viewName + ' startIndex: ' + startIndex + ' index: ' + index);
-            if (anchorNode.viewName === 'router-outlet' && window.angularRenderer) {
-                window.angularRenderer.navigateTo(node.viewName);
-            }
-
             anchorNode.parentNode.insertChildAt(startIndex + index, node);
             node.attachToView(startIndex + index);
+            if (anchorNode.viewName === 'router-outlet' && window.angularRenderer) {
+                window.angularRenderer.navigateTo(node.viewName, node.nativeView.id);
+            }
         });
     }
 }
 
 function consoleLog(...a: any[]) {
-    if (true) {
+    if (false) {
         console.log(a[0].toString());
     }
 }

@@ -200,6 +200,7 @@ webpackJsonp([0],{
 	var Page1 = (function () {
 	    function Page1(router) {
 	        this.router = router;
+	        this.background = '#f00';
 	    }
 	    Page1.prototype.navigate = function (param) {
 	        console.log('navigating to Page 2');
@@ -225,7 +226,7 @@ webpackJsonp([0],{
 /***/ 276:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope2 (callback1)=\"navigate('Button 1')\" (callback2)=\"navigate('Button 2')\"></Scope2>";
+	module.exports = "<Scope2 [var1]=\"background\" (callback1)=\"navigate('Button 1')\" (callback2)=\"navigate('Button 2')\"></Scope2>";
 
 /***/ },
 
@@ -282,7 +283,7 @@ webpackJsonp([0],{
 /***/ 279:
 /***/ function(module, exports) {
 
-	module.exports = "<Scope1 [var1]=\"activePage\">\n    <router-outlet></router-outlet>\n</Scope1>\n";
+	module.exports = "<ScopeRouter [var1]=\"activePage\">\n    <router-outlet></router-outlet>\n</ScopeRouter>\n";
 
 /***/ }
 

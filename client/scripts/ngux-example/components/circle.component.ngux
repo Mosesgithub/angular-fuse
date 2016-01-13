@@ -1,4 +1,4 @@
-<Circle ux:Class="MyCircle" [Width]="width" [Height]="width" Fill="Red">
+<Circle ng:Selector="MyCircle" [Width]="width" [Height]="width" Fill="Red">
     <AddingAnimation>
         <Scale Factor="0" Duration="1" Easing="BounceIn" />
     </AddingAnimation>

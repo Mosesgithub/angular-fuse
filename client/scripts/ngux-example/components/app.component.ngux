@@ -1,4 +1,4 @@
-<StackPanel ux:Class="MyApp" [Width]="amount" [Background]="background" Height="300" (Clicked)="clickHandler(amount)">
+<StackPanel ng:Selector="MyApp" [Width]="amount" [Background]="background" Height="300" (Clicked)="clickHandler(amount)">
     <JavaScript>
         module.exports = { greeting: "Hello databound world!" };
     </JavaScript>

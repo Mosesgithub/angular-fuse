@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.fooService.getFoos().subscribe(res => {
             console.log('foos updated');
-            this.foo = res;
+           // this.foo = res;
             console.log(JSON.stringify(this.foo));
         });
     }
