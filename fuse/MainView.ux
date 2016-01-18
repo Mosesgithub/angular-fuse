@@ -3,14 +3,11 @@
     <JavaScript File="../dist/app/dev/vendor.js" ux:Global="vendor" />
     <JavaScript File="../dist/app/dev/bundle.js" ux:Global="bundle" />
     <JavaScript File="AngularRenderer.js" ux:Global="AngularRenderer" />
-    <!-- <JavaScript File="AngularContext.js" ux:Global="AngularContext" />
- -->
-    <!-- <AngularRenderer ux:Global="AngularRenderer" /> -->
     <JavaScript File="MainView.js" />
-    <Panel>
-        <Each Items="{children0}">
-            <RouterApp />
+    <StackPanel>
+        <Each Items="{children}">
+            <NGUXApp /> 
         </Each>
-    </Panel>
+    </StackPanel>
 
 </App>

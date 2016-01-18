@@ -17,3 +17,4 @@ window.Promise = Promise;
 window.Math = Math;
 console.warn = console.log;
 console.error = console.log;
+window.requireCache = require.cache;

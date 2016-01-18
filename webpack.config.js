@@ -66,6 +66,10 @@ module.exports = {
                 loader: 'ts',
                 exclude: [/\.(e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
             },
+            {
+                test: /\.ngux$/,
+                loader: 'html-loader!ngux-loader' //+ path.join(__dirname, 'loaders', 'ngux')
+            },
             // Support for *.json files.
             {
                 test: /\.json$/,

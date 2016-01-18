@@ -1,8 +1,8 @@
 /* beautify ignore:start */
 import {isPresent, Type} from 'angular2/src/facade/lang';
-import {Promise} from 'angular2/src/facade/async';
+//import {Promise} from 'angular2/src/facade/async';
 //import {Promise, PromiseWrapper} from 'angular2/src/facade/async';
-import {platform, ComponentRef, PLATFORM_DIRECTIVES, PLATFORM_PIPES} from 'angular2/core';
+import {platform, PLATFORM_DIRECTIVES, PLATFORM_PIPES, ApplicationRef} from 'angular2/core'; //ComponentRef
 import {provide, Provider} from 'angular2/src/core/di';
 //import {bind, provide, Provider} from 'angular2/src/core/di';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
@@ -25,7 +25,7 @@ import {FuseLocationStrategy} from './fuse_location_strategy';
 
 export type ProviderArray = Array<Type | Provider | any[]>;
 
-export function fuseBootstrap(appComponentType: any, customProviders: ProviderArray = null): Promise<ComponentRef> {
+export function fuseBootstraper(customProviders: ProviderArray = null): ApplicationRef { //Promise<ComponentRef> {//appComponentType: any,
     FuseDomAdapter.makeCurrent();
 
     let fuseProviders: ProviderArray = [
@@ -70,5 +70,5 @@ export function fuseBootstrap(appComponentType: any, customProviders: ProviderAr
     }
 
     let app = platform(fuseProviders).application(appProviders);
-    return app.bootstrap(appComponentType).catch(err => console.error(err));
+    return app; //.bootstrap(appComponentType);
 }

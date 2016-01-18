@@ -1,9 +1,0 @@
-<Circle ng:Selector="MyCircle" [Width]="width" [Height]="width" Fill="Red">
-    <AddingAnimation>
-        <Scale Factor="0" Duration="1" Easing="BounceIn" />
-    </AddingAnimation>
-    <StackPanel>
-        <Text Value="{{message}} {{date | timeAgo}}" />
-        <Text [Value]="sexe" />
-    </StackPanel>
-</Circle>

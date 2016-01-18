@@ -1,7 +1,7 @@
 interface AngularRenderer {
     addElement(type: string, parentId: string): string;
     setAttribute(id: string, attribute: string, value: any): void;
-    renderElement(id: string, parentId: string): void;
+    renderElement(id: string, parentId: string, collection: string): void;
     removeElement(id: string, parentId: string): void;
     setEventListener(id: string, eventName: string, callback: () => any): void;
     removeEventListener(id: string, eventName: string, callback: () => any): void;
@@ -10,6 +10,9 @@ interface AngularRenderer {
 
 interface Window {
     angularRenderer: AngularRenderer;
+    applicationRef: any;
+    rootComponent: any;
+    bootstraper: any;
     Zone: any;
     zone: any;
     JSON: any;
@@ -21,4 +24,5 @@ interface Window {
     Math: any;
     EventTarget: any;
     isFuse: boolean;
+    requireCache: any;
 }

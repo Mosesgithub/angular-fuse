@@ -1,35 +1,39 @@
 'use strict';
 var Observable = require('FuseJS/Observable');
+window.ngux_types = window.ngux_types || {};
 
 function EventFactory() {
     this.callbacks = [];
     var cl = this.callbacks;
-    this.raise = function() {
+    this.raise = function(args) {
+        if (args && args.value) {
+            console.log("Value From outside: " + args.value);
+        }
         cl.forEach(function(callback) {
-            callback();
+            callback(args);
         });
     };
 }
 
-function Element(depth, type, id, parentId) {
-    this.depth = depth;
-    this.id = id;
-    this.parentId = parentId;
-    this.type = type;
-    this['children' + depth] = Observable();
+// function Element(depth, type, id, parentId) {
+//     this.depth = depth;
+//     this.id = id;
+//     this.parentId = parentId;
+//     this.type = type;
+//     this['children' + depth] = Observable();
 
-    this.var1 = Observable();
-    this.var2 = Observable();
-    this.var3 = Observable();
-    this.var4 = Observable();
-    this.var5 = Observable();
+//     this.var1 = Observable();
+//     this.var2 = Observable();
+//     this.var3 = Observable();
+//     this.var4 = Observable();
+//     this.var5 = Observable();
 
-    this.event1 = new EventFactory();
-    this.callback1 = this.event1.raise;
+//     this.event1 = new EventFactory();
+//     this.callback1 = this.event1.raise;
 
-    this.event2 = new EventFactory();
-    this.callback2 = this.event2.raise;
-}
+//     this.event2 = new EventFactory();
+//     this.callback2 = this.event2.raise;
+// }
 
 module.exports = function(context) {
 
@@ -52,8 +56,12 @@ module.exports = function(context) {
         } else {
             var parentElement = tree[parentId];
             var elm;
-            if (type.indexOf('Scope') === 0) {
-                elm = new Element(parentElement.depth + 1, type, id, parentId);
+            if (type.indexOf('Scope') >= 0) {
+                //elm = new Element(parentElement.depth + 1, type, id, parentId);
+                elm = new window.ngux_types[type](id, parentId, Observable, EventFactory);
+                //debug only
+                elm.depth = parentElement.depth + 1;
+                elm.type = type;
             } else {
                 elm = parentElement;
             }
@@ -66,27 +74,31 @@ module.exports = function(context) {
 
     this.setAttribute = function(id, attribute, value) {
         console.log('setting node  ' + id + '  in tree for ' + attribute + ' : ' + value);
-        //console.log(tree[id].depth);
-        // if (!tree[id][attribute]) {
-        //     tree[id][attribute] = Observable(value);
-        // } else {
+
+        if (!tree[id][attribute]) {
+            //console.log('couldnt find attribute ' + attribute + ' on object ' + id);
+            return;
+        }
         tree[id][attribute].value = value;
-        //console.log('before changing ' + window.context.children.getAt(0).var3.value);
-        //window.context.children.getAt(0).var3.value = 'TOOOOOOO';
-        //}
+        console.log(JSON.stringify(tree[rootId], null, 4));
     };
 
-    this.renderElement = function(id, parentId) {
-        console.log('renderElement ' + id + ' parentId ' + parentId);
+    this.renderElement = function(id, parentId, collectionName) {
+        //console.log('renderElement ' + id + ' parentId ' + parentId);
 
-        if (id.indexOf('Scope') !== 0) {
+        if (id.indexOf('Scope') < 0) {
             console.log('do nothing no scope');
         } else if (parentId && tree[parentId]) {
             var parentElement = tree[parentId];
             var element = tree[id];
             //console.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
-            console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + parentElement.depth);
-            parentElement['children' + parentElement.depth].add(element);
+            console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + collectionName);
+            if (parentElement[collectionName || 'children']) {
+                parentElement[collectionName || 'children'].add(element);
+            } else {
+                console.log(collectionName + ' not found for object ' + id);
+            }
+            //parentElement['children' + parentElement.depth].add(element);
         } else {
             console.log('do nothing no parent');
         }
@@ -116,7 +128,7 @@ module.exports = function(context) {
         //     console.log('callback is defined' + callback.toString());
         // }
         var element = tree[id];
-        element[eventName.replace('callback', 'event')].callbacks.push(callback);
+        element[eventName + '_event'].callbacks.push(callback);
     };
 
     this.removeEventListener = function(id, eventName, callback) {
@@ -125,7 +137,7 @@ module.exports = function(context) {
         //     console.log('callback is defined' + callback.toString());
         // }
         var element = tree[id];
-        element[eventName.replace('callback', 'event')].callbacks.splice(element[eventName.replace('callback', 'event')].callbacks.indexOf(callback), 1);
+        element[eventName + '_event'].callbacks.splice(element[eventName + '_event'].callbacks.indexOf(callback), 1);
     };
 
     // function findParentRouter(id) {
@@ -144,6 +156,10 @@ module.exports = function(context) {
         if (tree[id]) {
             tree[id].var1.value = page;
         }
+    };
+
+    this.reset = function() {
+        tree = {};
     };
 
 };

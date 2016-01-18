@@ -48,6 +48,7 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-webpack": "1.7.0",
+    "ngux-loader": "mcfly-io/ngux-loader",
     "node-sass": "^3.4.2",
     "phantomjs": "^1.9.18",
     "phantomjs-polyfill": "0.0.1",

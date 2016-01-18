@@ -326,6 +326,7 @@ webpackJsonp([1],[
 	window.Math = Math;
 	console.warn = console.log;
 	console.error = console.log;
+	window.requireCache = __webpack_require__.c;
 
 
 /***/ },

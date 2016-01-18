@@ -1,7 +1,0 @@
-<Panel ux:Class="RouterApp" >
-    <DirectNavigation [Active]="activePage">
-    <Page1 ux:Name="Page1" />
-    <Page2 ux:Name="Page2" />
-    <!--  </FuseRouter> -->
-</Panel>
-

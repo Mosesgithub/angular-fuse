@@ -5,7 +5,7 @@ import {View} from './view';
 
 class EventData { }
 
-type EventHandler = (args: EventData) => vo
+type EventHandler = (args: EventData) => void;
 export class ViewNode {
     private static whiteSpaceSplitter = /\s+/;
     //private static propertyMaps: Map < Function, Map < string, string >> = new Map < Function, Map < string, string >> ();
@@ -73,7 +73,7 @@ export class ViewNode {
         this.consoleLog('render ui ' + this.viewName + ' id:' + this.nativeView.id + ' parentId:' + (parentId || ''));
         if (typeof window.angularRenderer !== 'undefined') {
             //this.consoleLog('AngularRenderer is defined');
-            let retVal = window.angularRenderer.renderElement(this.nativeView.id, parentId);
+            let retVal = window.angularRenderer.renderElement(this.nativeView.id, parentId, this.parentNode ? this.parentNode.attributes.get('collection') : 'children');
             this.consoleLog(retVal);
         }
     }
