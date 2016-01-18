@@ -6,7 +6,7 @@ require('./nguxapp.js');
 @Component({
     selector: 'NGUXApp',
     directives: [NGUXChild],
-    template: require('./nguxapp.ngux')
+    template: require('./nguxapp.html')
     //properties: ['width', 'sexe']
 })
 
@@ -17,8 +17,8 @@ export class NGUXApp {
     public foo: Array<string> = ['First', 'Second', 'Third'];
 
     constructor() {
-        console.log('NGUXApp constructor 1');
-        this.backgroundColor = '#00f';
+        console.log('NGUXApp constructor 2');
+        this.backgroundColor = '#fa1';
         console.log(this.backgroundColor);
     }
 

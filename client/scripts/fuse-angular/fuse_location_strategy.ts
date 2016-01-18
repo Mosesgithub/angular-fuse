@@ -54,34 +54,36 @@ import {LocationStrategy} from 'angular2/router';
  */
 @Injectable()
 export class FuseLocationStrategy extends LocationStrategy {
-    private _baseHref: string;
+    private baseHref: string;
 
     // constructor(private _platformLocation: any,
     //     @Optional() @Inject(APP_BASE_HREF) href ? : string) {
     //     super();
 
-    //     this._baseHref = '/';
+    //     this.baseHref = '/';
     // }
 
     constructor() {
-		console.log('FuseLocationStrategy');
+        console.log('FuseLocationStrategy');
         super();
-        this._baseHref = '/';
+        this.baseHref = '/';
     }
 
-    onPopState(fn: EventListener): void { }
+    onPopState(fn: EventListener): void {
+        //
+    }
 
     getBaseHref(): string {
-        return this._baseHref;
+        return this.baseHref;
     }
 
     prepareExternalUrl(internal: string): string {
-        //return joinWithSlash(this._baseHref, internal);
-        return this._baseHref + '/' + internal;
+        //return joinWithSlash(this.baseHref, internal);
+        return this.baseHref + '/' + internal;
     }
 
     path(): string {
-        return this._baseHref;
+        return this.baseHref;
         //return this._platformLocation.pathname + normalizeQueryParams(this._platformLocation.search);
     }
 

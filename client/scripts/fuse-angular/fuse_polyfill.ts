@@ -18,3 +18,13 @@ window.Math = Math;
 console.warn = console.log;
 console.error = console.log;
 window.requireCache = require.cache;
+window.clearWebpackCache = function() {
+    //     let cache = require.cache;
+    //     delete require.cache[require.resolve('bundle')];
+    //     // for (let moduleId in cache) {
+    //     //     delete cache[moduleId];
+    //     // }
+    console.log('clearWebpackCache');
+    delete require.cache[274];
+    delete require.cache[279];
+};

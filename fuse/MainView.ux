@@ -4,10 +4,9 @@
     <JavaScript File="../dist/app/dev/bundle.js" ux:Global="bundle" />
     <JavaScript File="AngularRenderer.js" ux:Global="AngularRenderer" />
     <JavaScript File="MainView.js" />
-    <StackPanel>
+    <Panel>
         <Each Items="{children}">
             <NGUXApp /> 
-        </Each>
-    </StackPanel>
-
+        </Each> 
+    </Panel>
 </App>

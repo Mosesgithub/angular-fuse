@@ -7,6 +7,12 @@ window.ngux_types = window.ngux_types || {};
 window.ngux_types['NGUXApp_Scope0'] =  function(id, parentId, Observable, EventFactory) {
 	this.var0 = Observable();
 };
+window.ngux_types['NGUXApp_Scope1'] =  function(id, parentId, Observable, EventFactory) {
+	this.children = Observable();
+	this.children0 = Observable();
+};
+window.ngux_types['NGUXApp_Scope2'] =  function(id, parentId, Observable, EventFactory) {
+};
 
 /*jshint ignore:end*/
 /*eslint-enable */

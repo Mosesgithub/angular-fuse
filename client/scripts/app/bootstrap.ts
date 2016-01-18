@@ -17,6 +17,9 @@ window.rootComponent = NGUXApp;
 if (!window.bootstraper) {
     window.bootstraper = fuseBootstraper();
 }
+if (!window.isFuse) {
+    window.bootstraper.bootstrap(window.rootComponent);
+}
 
 //} else {
 //    bootstrap(TodoAppComponent);

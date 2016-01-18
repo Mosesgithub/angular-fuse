@@ -7,11 +7,14 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	var bootstrap_1 = __webpack_require__(1);
-	var nguxapp_1 = __webpack_require__(274);
+	var nguxapp_1 = __webpack_require__(268);
 	console.log('defining root component 1 2 3');
 	window.rootComponent = nguxapp_1.NGUXApp;
 	if (!window.bootstraper) {
 	    window.bootstraper = bootstrap_1.fuseBootstraper();
+	}
+	if (!window.isFuse) {
+	    window.bootstraper.bootstrap(window.rootComponent);
 	}
 
 
@@ -23,20 +26,20 @@ webpackJsonp([0],{
 	var lang_1 = __webpack_require__(2);
 	var core_1 = __webpack_require__(3);
 	var di_1 = __webpack_require__(6);
-	var dom_adapter_1 = __webpack_require__(119);
-	var api_1 = __webpack_require__(87);
-	var renderer_1 = __webpack_require__(120);
-	var dom_adapter_2 = __webpack_require__(125);
-	var xhr_1 = __webpack_require__(163);
-	var xhr_2 = __webpack_require__(164);
+	var dom_adapter_1 = __webpack_require__(113);
+	var api_1 = __webpack_require__(91);
+	var renderer_1 = __webpack_require__(114);
+	var dom_adapter_2 = __webpack_require__(116);
+	var xhr_1 = __webpack_require__(154);
+	var xhr_2 = __webpack_require__(155);
 	var exception_handler_1 = __webpack_require__(15);
-	var application_common_providers_1 = __webpack_require__(118);
-	var compiler_1 = __webpack_require__(165);
-	var platform_common_providers_1 = __webpack_require__(117);
-	var common_1 = __webpack_require__(191);
-	var http_1 = __webpack_require__(234);
-	var router_1 = __webpack_require__(249);
-	var fuse_location_strategy_1 = __webpack_require__(273);
+	var application_common_providers_1 = __webpack_require__(110);
+	var compiler_1 = __webpack_require__(156);
+	var platform_common_providers_1 = __webpack_require__(109);
+	var common_1 = __webpack_require__(185);
+	var http_1 = __webpack_require__(228);
+	var router_1 = __webpack_require__(243);
+	var fuse_location_strategy_1 = __webpack_require__(267);
 	function fuseBootstraper(customProviders) {
 	    if (customProviders === void 0) { customProviders = null; }
 	    dom_adapter_2.FuseDomAdapter.makeCurrent();
@@ -44,6 +47,10 @@ webpackJsonp([0],{
 	        renderer_1.FuseRenderer,
 	        di_1.provide(api_1.Renderer, {
 	            useClass: renderer_1.FuseRenderer
+	        }),
+	        renderer_1.FuseRootRenderer,
+	        di_1.provide(api_1.RootRenderer, {
+	            useClass: renderer_1.FuseRootRenderer
 	        }),
 	        di_1.provide(xhr_1.XHR, {
 	            useClass: xhr_2.FileSystemXHR
@@ -84,7 +91,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 273:
+/***/ 267:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __extends = (this && this.__extends) || function (d, b) {
@@ -102,23 +109,24 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var router_1 = __webpack_require__(249);
+	var router_1 = __webpack_require__(243);
 	var FuseLocationStrategy = (function (_super) {
 	    __extends(FuseLocationStrategy, _super);
 	    function FuseLocationStrategy() {
 	        console.log('FuseLocationStrategy');
 	        _super.call(this);
-	        this._baseHref = '/';
+	        this.baseHref = '/';
 	    }
-	    FuseLocationStrategy.prototype.onPopState = function (fn) { };
+	    FuseLocationStrategy.prototype.onPopState = function (fn) {
+	    };
 	    FuseLocationStrategy.prototype.getBaseHref = function () {
-	        return this._baseHref;
+	        return this.baseHref;
 	    };
 	    FuseLocationStrategy.prototype.prepareExternalUrl = function (internal) {
-	        return this._baseHref + '/' + internal;
+	        return this.baseHref + '/' + internal;
 	    };
 	    FuseLocationStrategy.prototype.path = function () {
-	        return this._baseHref;
+	        return this.baseHref;
 	    };
 	    FuseLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
 	    };
@@ -139,7 +147,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 274:
+/***/ 268:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -152,14 +160,14 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var nguxchild_1 = __webpack_require__(275);
-	__webpack_require__(278);
+	var nguxchild_1 = __webpack_require__(269);
+	__webpack_require__(272);
 	var NGUXApp = (function () {
 	    function NGUXApp() {
 	        this.text = 'Default value';
 	        this.foo = ['First', 'Second', 'Third'];
-	        console.log('NGUXApp constructor 1');
-	        this.backgroundColor = '#00f';
+	        console.log('NGUXApp constructor 2');
+	        this.backgroundColor = '#fa1';
 	        console.log(this.backgroundColor);
 	    }
 	    NGUXApp.prototype.changeColor = function () {
@@ -174,7 +182,7 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: 'NGUXApp',
 	            directives: [nguxchild_1.NGUXChild],
-	            template: __webpack_require__(279)
+	            template: __webpack_require__(273)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], NGUXApp);
@@ -185,7 +193,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 275:
+/***/ 269:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -198,7 +206,7 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	__webpack_require__(276);
+	__webpack_require__(270);
 	var NGUXChild = (function () {
 	    function NGUXChild() {
 	        this.backgroundColor = '#f00';
@@ -208,7 +216,7 @@ webpackJsonp([0],{
 	    NGUXChild = __decorate([
 	        core_1.Component({
 	            selector: 'NGUXChild',
-	            template: __webpack_require__(277),
+	            template: __webpack_require__(271),
 	            properties: ['prop']
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -218,9 +226,9 @@ webpackJsonp([0],{
 	exports.NGUXChild = NGUXChild;
 
 
-/***/ },
+/***/ }, 
 
-/***/ 276:
+/***/ 270:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -237,14 +245,14 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 277:
+/***/ 271:
 /***/ function(module, exports) {
-
+ 
 	module.exports = "<NGUXChild_Scope0 >\n</NGUXChild_Scope0>\n";
 
 /***/ },
 
-/***/ 278:
+/***/ 272:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -256,16 +264,22 @@ webpackJsonp([0],{
 	window.ngux_types['NGUXApp_Scope0'] =  function(id, parentId, Observable, EventFactory) {
 		this.var0 = Observable();
 	};
+	window.ngux_types['NGUXApp_Scope1'] =  function(id, parentId, Observable, EventFactory) {
+		this.children = Observable();
+		this.children0 = Observable();
+	};
+	window.ngux_types['NGUXApp_Scope2'] =  function(id, parentId, Observable, EventFactory) {
+	};
 	
 	/*jshint ignore:end*/
 	/*eslint-enable */
 
 /***/ },
 
-/***/ 279:
+/***/ 273:
 /***/ function(module, exports) {
 
-	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\" >\n</NGUXApp_Scope0>\n";
+	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\" >\n\t<NGUXApp_Scope1 >\n\t\t<NGUXChild collection=\"children0\">\n\t\t</NGUXChild>\n\t\t<NGUXApp_Scope2 *ngFor=\"#f of foo\" >\n\t\t</NGUXApp_Scope2>\n\t</NGUXApp_Scope1>\n</NGUXApp_Scope0>\n";
 
 /***/ }
 

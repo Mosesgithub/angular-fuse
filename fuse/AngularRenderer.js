@@ -7,7 +7,7 @@ function EventFactory() {
     var cl = this.callbacks;
     this.raise = function(args) {
         if (args && args.value) {
-            console.log("Value From outside: " + args.value);
+            console.log('Value From outside: ' + args.value);
         }
         cl.forEach(function(callback) {
             callback(args);
@@ -45,25 +45,26 @@ module.exports = function(context) {
         console.log.call(arguments);
     };
 
-    this.addElement = function(type, parentId) {
-        console.log('addElement type: ' + type + ' parentId:' + parentId);
+    this.createElement = function(type, isRoot) {
         var id = type + '_' + counter++;
 
-        if (!parentId && parentId !== 0) {
-            console.log('no parent');
+        if (isRoot) {
+            console.log('root');
             rootId = id;
             tree[id] = context;
         } else {
-            var parentElement = tree[parentId];
             var elm;
             if (type.indexOf('Scope') >= 0) {
+                console.log('createElement type: ' + type);
                 //elm = new Element(parentElement.depth + 1, type, id, parentId);
-                elm = new window.ngux_types[type](id, parentId, Observable, EventFactory);
+                elm = new window.ngux_types[type](id, null, Observable, EventFactory);
+                // temporary fix
+                if (!elm.children) {
+                    elm.children = new Observable();
+                }
                 //debug only
-                elm.depth = parentElement.depth + 1;
+                elm.id = id;
                 elm.type = type;
-            } else {
-                elm = parentElement;
             }
             //console.log('parent found parentElement Depth ' + parentElement.depth + ',  child Depth' + (parentElement.depth + 1));
             tree[id] = elm;
@@ -74,25 +75,28 @@ module.exports = function(context) {
 
     this.setAttribute = function(id, attribute, value) {
         console.log('setting node  ' + id + '  in tree for ' + attribute + ' : ' + value);
-
         if (!tree[id][attribute]) {
             //console.log('couldnt find attribute ' + attribute + ' on object ' + id);
             return;
         }
         tree[id][attribute].value = value;
-        console.log(JSON.stringify(tree[rootId], null, 4));
+        //console.log(JSON.stringify(tree[rootId], null, 4));
     };
 
     this.renderElement = function(id, parentId, collectionName) {
         //console.log('renderElement ' + id + ' parentId ' + parentId);
 
         if (id.indexOf('Scope') < 0) {
-            console.log('do nothing no scope');
+            if (!tree[id] && tree[parentId]) {
+                tree[id] = tree[parentId];
+            } else {
+                console.log('do nothing no scope');
+            }
         } else if (parentId && tree[parentId]) {
             var parentElement = tree[parentId];
             var element = tree[id];
             //console.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
-            console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + collectionName);
+            console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children: ' + (collectionName || 'children'));
             if (parentElement[collectionName || 'children']) {
                 parentElement[collectionName || 'children'].add(element);
             } else {
@@ -105,17 +109,16 @@ module.exports = function(context) {
         //console.log(JSON.stringify(tree[rootId], null, 4));
     };
 
-    this.removeElement = function(id, parentId) {
+    this.removeElement = function(id, parentId, collectionName) {
         console.log('removeElement ' + id + ' parentId ' + parentId);
-        if (id.indexOf('Scope') !== 0) {
-            console.log('do nothing no scope');
+        if (id.indexOf('Scope') < 0) {
+            //
         } else if (parentId && tree[parentId]) {
             var parentElement = tree[parentId];
             var element = tree[id];
-            //console.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
-            console.log('removeElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + parentElement.depth + parentElement.type);
+            console.log('removeElement ' + id + ' parentId ' + parentId + ' in ' + 'children' + (collectionName || 'children'));
             setTimeout(function() {
-                parentElement['children' + parentElement.depth].tryRemove(element);
+                parentElement[collectionName || 'children'].tryRemove(element);
             }, parentElement.type === 'ScopeRouter' ? 500 : 0);
         } else {
             console.log('do nothing no parent');
@@ -131,13 +134,18 @@ module.exports = function(context) {
         element[eventName + '_event'].callbacks.push(callback);
     };
 
-    this.removeEventListener = function(id, eventName, callback) {
+    this.removeAllListeners = function(id) {
         // console.log('setEventListener'); // + id + eventName);
         // if (callback) {
         //     console.log('callback is defined' + callback.toString());
         // }
         var element = tree[id];
-        element[eventName + '_event'].callbacks.splice(element[eventName + '_event'].callbacks.indexOf(callback), 1);
+        for (var a in element) {
+            if (element[a] instanceof EventFactory) {
+                element[a].callbacks = [];
+            }
+        }
+        // element[eventName + '_event'].callbacks.splice(element[eventName + '_event'].callbacks.indexOf(callback), 1);
     };
 
     // function findParentRouter(id) {
@@ -159,7 +167,13 @@ module.exports = function(context) {
     };
 
     this.reset = function() {
+        console.log('angularRenderer reset');
         tree = {};
+        counter = 1;
+    };
+
+    this.print = function() {
+        console.log(JSON.stringify(tree[rootId], null, 4));
     };
 
 };

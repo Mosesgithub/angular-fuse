@@ -1,12 +1,15 @@
-<Panel ng:Selector="NGUXApp" [Background]="backgroundColor"  Height="500">
-    <!-- <StackPanel> -->
+<Panel ng:Selector="NGUXApp" [Background]="backgroundColor">
+    <StackPanel>
+
+      <!--   <ng:NGUXChild /> -->
+        <!--  -->
         <!-- <ng:NGUXChild *ngFor="#f of foo" />  -->
         <!-- <Panel *ngFor="#f of foo">
             <ng:NGUXChild [prop]="backgroundColor"></ng:NGUXChild>
         </Panel>
 
         <Text [Value]="backgroundColor"></Text> -->
-        
-        <!-- <Rectangle *ngFor="#f of foo" Fill="Red" Height="30" Margin="20"></Rectangle> -->
- <!--    </StackPanel> -->
+
+        <Rectangle *ngFor="#f of foo" Fill="Red" Height="30" Margin="20"></Rectangle>
+    </StackPanel>
 </Panel>

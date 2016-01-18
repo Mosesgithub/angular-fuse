@@ -7,8 +7,8 @@ import {provide, Provider} from 'angular2/src/core/di';
 //import {bind, provide, Provider} from 'angular2/src/core/di';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 
-import {Renderer} from 'angular2/src/core/render/api';
-import {FuseRenderer} from './renderer';
+import {Renderer, RootRenderer} from 'angular2/src/core/render/api';
+import {FuseRenderer, FuseRootRenderer} from './renderer';
 import {FuseDomAdapter} from './dom_adapter';
 import {XHR} from 'angular2/src/compiler/xhr';
 import {FileSystemXHR} from './xhr';
@@ -32,6 +32,10 @@ export function fuseBootstraper(customProviders: ProviderArray = null): Applicat
         FuseRenderer,
         provide(Renderer, {
             useClass: FuseRenderer
+        }),
+        FuseRootRenderer,
+        provide(RootRenderer, {
+            useClass: FuseRootRenderer
         }),
         provide(XHR, {
             useClass: FileSystemXHR
