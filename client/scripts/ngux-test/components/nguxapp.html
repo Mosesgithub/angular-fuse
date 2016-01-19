@@ -1,6 +1,4 @@
-<NGUXApp_Scope0 [var0]="backgroundColor">
-    <NGUXApp_Scope1 *ngFor="#f of foo" collection="children0">
-    </NGUXApp_Scope1>
-    <NGUXChild collection="children0">
-    </NGUXChild>
+<NGUXApp_Scope0 [var0]="backgroundColor" (callback0)="togglePanel()">
+    <NGUXChild_Scope0 *ngIf="showPanel" collection="children0">
+    </NGUXChild_Scope0>
 </NGUXApp_Scope0>

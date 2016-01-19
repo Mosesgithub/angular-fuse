@@ -1,17 +1,17 @@
 <ScrollView ng:Selector="NGUXApp" [Background]="backgroundColor">
     <StackPanel>
 
-        <!-- <Panel Margin="10" Height="220">
+        <Panel Margin="10" Height="220">
             <ng:NGUXChild *ngIf="showPanel">
 
             </ng:NGUXChild>
         </Panel>
         <Rectangle (Clicked)="togglePanel()" Height="60" Background="Green" Margin="10">
             <Text Alignment="Center" TextAlignment="Center" Value="Show" />
-        </Rectangle> -->
-
+        </Rectangle>
+        <!-- 
         <Rectangle *ngFor="#f of foo" Fill="Red" Height="30" Margin="10" />
-       <!--  <Rectangle *ngFor="#f of foo" Fill="Green" Height="30" Margin="10" /> -->
-        <ng:NGUXChild />
+        <Rectangle *ngFor="#f of foo" Fill="Green" Height="30" Margin="10" />
+        <ng:NGUXChild /> -->
     </StackPanel>
 </ScrollView>
