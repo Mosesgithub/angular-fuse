@@ -28,6 +28,20 @@ webpackJsonp([1],[
 	__webpack_require__(504);
 	__webpack_require__(155);
 	__webpack_require__(507);
+	window.requireCache = __webpack_require__.c;
+	window.clearWebpackCache = function (originalCache) {
+	    var cache = __webpack_require__.c;
+	    console.log('deleting cache for module ' + 0);
+	    delete cache[0];
+	    for (var moduleId in cache) {
+	        if (!originalCache[moduleId]) {
+	            console.log('deleting cache for module ' + moduleId);
+	            delete cache[moduleId];
+	        }
+	    }
+	    console.log('clearWebpackCache');
+	    __webpack_require__.c = cache;
+	};
 
 
 /***/ },
@@ -320,12 +334,6 @@ webpackJsonp([1],[
 	window.Math = Math;
 	console.warn = console.log;
 	console.error = console.log;
-	window.requireCache = __webpack_require__.c;
-	window.clearWebpackCache = function () {
-	    console.log('clearWebpackCache');
-	    delete __webpack_require__.c[274];
-	    delete __webpack_require__.c[279];
-	};
 
 
 /***/ },
@@ -16607,7 +16615,7 @@ webpackJsonp([1],[
 	/* WEBPACK VAR INJECTION */(function(global) {var utils = __webpack_require__(505);
 	window.Zone = global['Zone'];
 	window.zone = global['zone'];
-	if (window.isFuse) {
+	if (window.fusejs) {
 	    utils.patchEventTargetMethods(global['XMLHttpRequest'] && global['XMLHttpRequest'].prototype);
 	}
 	

@@ -37,29 +37,29 @@ export class FuseRenderer implements Renderer {
     public selectRootElement(selector: string): Element {
         console.log('selectRootElement', arguments);
         let id = '';
-        if (typeof window.angularRenderer !== 'undefined') {
-            id = window.angularRenderer.createElement(selector, true);
-            window.angularRenderer.renderElement(id, null, null);
+        if (window.fusejs) {
+            id = window.fusejs.angularRenderer.createElement(selector, true);
+            window.fusejs.angularRenderer.renderElement(id, null, null, null);
         } else {
             id = (this.objectCount++).toString();
         }
         return new Element(selector, id, null);
     }
 
-    public createElement(parentElement: Element, name: string): Element {
+    public createElement(parentElement: Element, type: string): Element {
         console.log('createElement', arguments);
         let id = '';
-        if (typeof window.angularRenderer !== 'undefined') {
-            id = window.angularRenderer.createElement(name, false);
+        if (window.fusejs) {
+            id = window.fusejs.angularRenderer.createElement(type, false);
             if (isPresent(parentElement)) {
                 let collection = parentElement.getAttribute('collection');
-                window.angularRenderer.renderElement(id, parentElement.id, collection);
+                window.fusejs.angularRenderer.renderElement(id, type, parentElement.id, collection);
             }
         } else {
             id = '' + this.objectCount++;
         }
-        console.log('Element created : ' + name + ' ' + id);
-        return new Element(name, id, parentElement);
+        console.log('Element created : ' + type + ' ' + id);
+        return new Element(type, id, parentElement);
     }
 
     public createViewRoot(hostElement: Element): Element {
@@ -81,14 +81,15 @@ export class FuseRenderer implements Renderer {
         console.log('projectNodes', arguments);
     }
 
-    public attachViewAfter(node: Element, viewRootNodes: Element[]) {
+    public attachViewAfter(anchorElement: Element, viewRootNodes: Element[]) {
         console.log('attachViewAfter', arguments);
         for (let i = 0; i < viewRootNodes.length; i++) {
-            let n = viewRootNodes[i];
-            n.parent = node.parent;
-            let collection = node.parent.getAttribute('collection');
-            if (typeof window.angularRenderer !== 'undefined') {
-                window.angularRenderer.renderElement(n.id, n.parent.id, collection);
+            let node = viewRootNodes[i];
+            node.parent = anchorElement.parent;
+            let collection = node.getAttribute('collection'); //.parent
+            console.log(collection);
+            if (window.fusejs) {
+                window.fusejs.angularRenderer.renderElement(node.id, node.type, node.parent.id, collection);
             }
         }
     }
@@ -99,9 +100,9 @@ export class FuseRenderer implements Renderer {
         console.log(viewRootNodes[0]);
         for (let i = 0; i < viewRootNodes.length; i++) {
             let node = viewRootNodes[i];
-            if (typeof window.angularRenderer !== 'undefined') {
-                let collection;
-                window.angularRenderer.removeElement(node.id, node.parent ? node.parent.id : null, collection);
+            let collection = node.getAttribute('collection');
+            if (window.fusejs && node.id) {
+                window.fusejs.angularRenderer.removeElement(node.id, node.type, node.parent ? node.parent.id : null, collection);
             }
         }
     }
@@ -109,18 +110,21 @@ export class FuseRenderer implements Renderer {
     public destroyView(hostElement: Element, viewAllNodes: Element[]) {
         console.log('destroyView', arguments);
         for (let i = 0; i < viewAllNodes.length; i++) {
-            let n = viewAllNodes[i];
-            if (typeof window.angularRenderer !== 'undefined') {
-                window.angularRenderer.removeAllListeners(n.id);
+            let node = viewAllNodes[i];
+            let collection = node.getAttribute('collection');
+
+            if (window.fusejs && node.id) {
+                window.fusejs.angularRenderer.removeAllListeners(node.id);
+                window.fusejs.angularRenderer.removeElement(node.id, node.type, node.parent ? node.parent.id : null, collection);
             }
         }
     }
 
     public listen(renderElement: Element, name: string, callback: Function) {
         console.log('listen', arguments);
-
-        if (typeof window.angularRenderer !== 'undefined') {
-            window.angularRenderer.setEventListener(renderElement.id, name, callback);
+        let zonedCallback = global['zone'].bind(callback);
+        if (window.fusejs) {
+            window.fusejs.angularRenderer.setEventListener(renderElement.id, name, zonedCallback);
         }
     }
 
@@ -132,13 +136,14 @@ export class FuseRenderer implements Renderer {
     public setElementProperty(renderElement: Element, propertyName: string, propertyValue: any) {
         console.log('setElementProperty', arguments);
         renderElement.setAttribute(propertyName, propertyValue);
-        if (typeof window.angularRenderer !== 'undefined') {
-            window.angularRenderer.setAttribute(renderElement.id, propertyName, propertyValue);
+        if (window.fusejs) {
+            window.fusejs.angularRenderer.setAttribute(renderElement.id, propertyName, propertyValue);
         }
     }
 
     public setElementAttribute(renderElement: Element, attributeName: string, attributeValue: string) {
         console.log('setElementAttribute', arguments);
+        renderElement.setAttribute(attributeName, attributeValue);
     }
 
     /**

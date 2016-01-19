@@ -4,7 +4,7 @@ require('./nguxchild.js');
 /* beautify ignore:end */
 @Component({
     selector: 'NGUXChild',
-    template: require('./nguxchild.html'),
+    template: require('./nguxchild.ngux'),
     properties: ['prop']
 })
 

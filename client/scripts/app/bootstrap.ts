@@ -12,15 +12,14 @@ import {NGUXApp} from '../ngux-test/components/nguxapp';
 //fuseBootstrap(TodoAppComponent);
 //fuseBootstrap(AppComponent);
 //if (window.isFuse) {
-console.log('defining root component 1 2 3');
-window.rootComponent = NGUXApp;
-if (!window.bootstraper) {
-    window.bootstraper = fuseBootstraper();
-}
-if (!window.isFuse) {
-    window.bootstraper.bootstrap(window.rootComponent);
-}
+console.log('defining root component');
 
-//} else {
-//    bootstrap(TodoAppComponent);
-//}
+if (!window.fusejs) {
+    fuseBootstraper().bootstrap(NGUXApp);
+} else {
+    console.log('loading NGUXApp ' + NGUXApp.version);
+    window.fusejs.rootComponent = NGUXApp;
+    if (!window.fusejs.bootstraper) {
+        window.fusejs.bootstraper = fuseBootstraper();
+    }
+}

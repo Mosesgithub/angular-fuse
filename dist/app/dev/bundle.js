@@ -8,13 +8,16 @@ webpackJsonp([0],{
 
 	var bootstrap_1 = __webpack_require__(1);
 	var nguxapp_1 = __webpack_require__(268);
-	console.log('defining root component 1 2 3');
-	window.rootComponent = nguxapp_1.NGUXApp;
-	if (!window.bootstraper) {
-	    window.bootstraper = bootstrap_1.fuseBootstraper();
+	console.log('defining root component');
+	if (!window.fusejs) {
+	    bootstrap_1.fuseBootstraper().bootstrap(nguxapp_1.NGUXApp);
 	}
-	if (!window.isFuse) {
-	    window.bootstraper.bootstrap(window.rootComponent);
+	else {
+	    console.log('loading NGUXApp ' + nguxapp_1.NGUXApp.version);
+	    window.fusejs.rootComponent = nguxapp_1.NGUXApp;
+	    if (!window.fusejs.bootstraper) {
+	        window.fusejs.bootstraper = bootstrap_1.fuseBootstraper();
+	    }
 	}
 
 
@@ -160,14 +163,16 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
+	var common_1 = __webpack_require__(185);
 	var nguxchild_1 = __webpack_require__(269);
 	__webpack_require__(272);
 	var NGUXApp = (function () {
 	    function NGUXApp() {
+	        this.showPanel = false;
 	        this.text = 'Default value';
 	        this.foo = ['First', 'Second', 'Third'];
-	        console.log('NGUXApp constructor 2');
-	        this.backgroundColor = '#fa1';
+	        console.log('NGUXApp_constructor 1');
+	        this.backgroundColor = '#ff5';
 	        console.log(this.backgroundColor);
 	    }
 	    NGUXApp.prototype.changeColor = function () {
@@ -178,10 +183,15 @@ webpackJsonp([0],{
 	            this.text = args.value;
 	        }
 	    };
+	    NGUXApp.prototype.togglePanel = function () {
+	        console.log('togglePanel ' + this.showPanel);
+	        this.showPanel = !this.showPanel;
+	    };
+	    NGUXApp.version = '1.0.0.4';
 	    NGUXApp = __decorate([
 	        core_1.Component({
 	            selector: 'NGUXApp',
-	            directives: [nguxchild_1.NGUXChild],
+	            directives: [nguxchild_1.NGUXChild, common_1.NgIf],
 	            template: __webpack_require__(273)
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -226,7 +236,7 @@ webpackJsonp([0],{
 	exports.NGUXChild = NGUXChild;
 
 
-/***/ }, 
+/***/ },
 
 /***/ 270:
 /***/ function(module, exports) {
@@ -237,18 +247,19 @@ webpackJsonp([0],{
 	
 	window.ngux_types = window.ngux_types || {};
 	
-	window.ngux_types['NGUXChild_Scope0'] =  function(id, parentId, Observable, EventFactory) {
+	window.ngux_types['NGUXChild_Scope0'] = function(id, parentId, Observable, EventFactory) {
 	};
 	
 	/*jshint ignore:end*/
 	/*eslint-enable */
 
+
 /***/ },
 
 /***/ 271:
 /***/ function(module, exports) {
- 
-	module.exports = "<NGUXChild_Scope0 >\n</NGUXChild_Scope0>\n";
+
+	module.exports = "<NGUXChild_Scope0>\n</NGUXChild_Scope0>\n";
 
 /***/ },
 
@@ -261,25 +272,23 @@ webpackJsonp([0],{
 	
 	window.ngux_types = window.ngux_types || {};
 	
-	window.ngux_types['NGUXApp_Scope0'] =  function(id, parentId, Observable, EventFactory) {
-		this.var0 = Observable();
+	window.ngux_types['NGUXApp_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.children0 = Observable();
 	};
-	window.ngux_types['NGUXApp_Scope1'] =  function(id, parentId, Observable, EventFactory) {
-		this.children = Observable();
-		this.children0 = Observable();
-	};
-	window.ngux_types['NGUXApp_Scope2'] =  function(id, parentId, Observable, EventFactory) {
+	window.ngux_types['NGUXApp_Scope1'] = function(id, parentId, Observable, EventFactory) {
 	};
 	
 	/*jshint ignore:end*/
 	/*eslint-enable */
+
 
 /***/ },
 
 /***/ 273:
 /***/ function(module, exports) {
 
-	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\" >\n\t<NGUXApp_Scope1 >\n\t\t<NGUXChild collection=\"children0\">\n\t\t</NGUXChild>\n\t\t<NGUXApp_Scope2 *ngFor=\"#f of foo\" >\n\t\t</NGUXApp_Scope2>\n\t</NGUXApp_Scope1>\n</NGUXApp_Scope0>\n";
+	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\">\n    <NGUXApp_Scope1 *ngFor=\"#f of foo\" collection=\"children0\">\n    </NGUXApp_Scope1>\n    <NGUXChild collection=\"children0\">\n    </NGUXChild>\n</NGUXApp_Scope0>\n";
 
 /***/ }
 

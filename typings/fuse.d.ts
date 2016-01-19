@@ -1,18 +1,22 @@
 interface AngularRenderer {
     createElement(type: string, isRoot: boolean): string;
     setAttribute(id: string, attribute: string, value: any): void;
-    renderElement(id: string, parentId: string, collection: string): void;
-    removeElement(id: string, parentId: string, collection: string): void;
+    renderElement(id: string, type: string, parentId: string, collection: string): void;
+    removeElement(id: string, type: string, parentId: string, collection: string): void;
     setEventListener(id: string, eventName: string, callback: Function): void;
     removeAllListeners(id: string): void;
     navigateTo(page: string, id: string): void;
+    print(): void;
 }
 
-interface Window {
+interface FuseJS {
     angularRenderer: AngularRenderer;
     applicationRef: any;
     rootComponent: any;
     bootstraper: any;
+}
+
+interface Window {
     Zone: any;
     zone: any;
     JSON: any;
@@ -23,7 +27,7 @@ interface Window {
     Promise: any;
     Math: any;
     EventTarget: any;
-    isFuse: boolean;
     requireCache: any;
     clearWebpackCache: any;
+    fusejs: FuseJS;
 }

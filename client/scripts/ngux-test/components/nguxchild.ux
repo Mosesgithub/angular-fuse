@@ -1,6 +1,12 @@
-<Panel Margin="20" Height="200" ux:Class="NGUXChild" Background="Red" >
-	<Circle Width="150" Height="150" Fill="Blue" >
-		<!--  <Text Value="{type}" /> 
+<Panel Margin="20" Height="200" ux:Class="NGUXChild" Background="Red">
+    <Circle Width="150" Height="150" Fill="Blue">
+        <!--  <Text Value="{type}" /> 
         <Text Value="{{backgroundColor}}" /> -->
-	</Circle>
+    </Circle>
+    <AddingAnimation>
+        <Move RelativeTo="ParentSize" X="1" Duration="1" Easing="BounceIn" />
+    </AddingAnimation>
+    <RemovingAnimation>
+        <Move RelativeTo="ParentSize" X="-1" Duration="0.5" />
+    </RemovingAnimation>
 </Panel>

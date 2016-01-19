@@ -1,15 +1,15 @@
-<Panel ux:Class="NGUXApp" Background="{var0}" >
-	<StackPanel Items="{children}" >
-		<Panel Items="{children0}">
-			<NGUXChild ux:Generate="Factory" />
-		</Panel>
-		<!--  -->
-		<!-- <ng:NGUXChild *ngFor="#f of foo" />  -->
-		<!-- <Panel *ngFor="#f of foo">
-            <ng:NGUXChild [prop]="backgroundColor"></ng:NGUXChild>
-        </Panel>
+<ScrollView ux:Class="NGUXApp" Background="{var0}">
+    <StackPanel Items="{children0}">
+        <!-- <Panel Margin="10" Height="220">
+            <ng:NGUXChild *ngIf="showPanel">
 
-        <Text [Value]="backgroundColor"></Text> -->
-		<Rectangle ux:Case="NGUXApp_Scope2" Fill="Red" Height="30" Margin="20" />
-	</StackPanel>
-</Panel>
+            </ng:NGUXChild>
+        </Panel>
+        <Rectangle (Clicked)="togglePanel()" Height="60" Background="Green" Margin="10">
+            <Text Alignment="Center" TextAlignment="Center" Value="Show" />
+        </Rectangle> -->
+        <Rectangle ux:Case="NGUXApp_Scope1" Fill="Red" Height="30" Margin="10" />
+        <!--  <Rectangle *ngFor="#f of foo" Fill="Green" Height="30" Margin="10" /> -->
+        <NGUXChild ux:Case="NGUXChild" />
+    </StackPanel>
+</ScrollView>

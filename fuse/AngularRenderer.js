@@ -45,6 +45,10 @@ module.exports = function(context) {
         console.log.call(arguments);
     };
 
+    this.isScope = function(type) {
+        return type && window.ngux_types[type];
+    };
+
     this.createElement = function(type, isRoot) {
         var id = type + '_' + counter++;
 
@@ -54,7 +58,7 @@ module.exports = function(context) {
             tree[id] = context;
         } else {
             var elm;
-            if (type.indexOf('Scope') >= 0) {
+            if (this.isScope(type)) {
                 console.log('createElement type: ' + type);
                 //elm = new Element(parentElement.depth + 1, type, id, parentId);
                 elm = new window.ngux_types[type](id, null, Observable, EventFactory);
@@ -83,10 +87,10 @@ module.exports = function(context) {
         //console.log(JSON.stringify(tree[rootId], null, 4));
     };
 
-    this.renderElement = function(id, parentId, collectionName) {
+    this.renderElement = function(id, type, parentId, collectionName) {
         //console.log('renderElement ' + id + ' parentId ' + parentId);
 
-        if (id.indexOf('Scope') < 0) {
+        if (!this.isScope(type)) {
             if (!tree[id] && tree[parentId]) {
                 tree[id] = tree[parentId];
             } else {
@@ -109,9 +113,9 @@ module.exports = function(context) {
         //console.log(JSON.stringify(tree[rootId], null, 4));
     };
 
-    this.removeElement = function(id, parentId, collectionName) {
+    this.removeElement = function(id, type, parentId, collectionName) {
         console.log('removeElement ' + id + ' parentId ' + parentId);
-        if (id.indexOf('Scope') < 0) {
+        if (!this.isScope(type)) {
             //
         } else if (parentId && tree[parentId]) {
             var parentElement = tree[parentId];

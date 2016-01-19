@@ -4,7 +4,7 @@
 
 window.ngux_types = window.ngux_types || {};
 
-window.ngux_types['NGUXChild_Scope0'] =  function(id, parentId, Observable, EventFactory) {
+window.ngux_types['NGUXChild_Scope0'] = function(id, parentId, Observable, EventFactory) {
 };
 
 /*jshint ignore:end*/
