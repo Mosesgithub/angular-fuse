@@ -13,17 +13,17 @@ require('./nguxapp.js');
 
 export class NGUXApp {
 
-    public static version: string = '1.0.0.4';
+    public static version: string = '1.0.0.5';
     public backgroundColor: string;
     public showPanel: boolean = false;
     public text: string = 'Default value';
-    public foo: Array<string> = ['First', 'Second', 'Third'];
+    public foo: Array<string> = ['First', 'Second', 'Third',' Fourth'];
 
     constructor() {
         console.log('NGUXApp_constructor 1');
-        this.backgroundColor = '#ff5';
+        this.backgroundColor = '#df5';
         console.log(this.backgroundColor);
-        //setTimeout(() => this.togglePanel(), 3000);
+        //setTimeout(() => this.togglePanel(), 300    0);
         //setTimeout(() => this.togglePanel(), 6000);
     }
 

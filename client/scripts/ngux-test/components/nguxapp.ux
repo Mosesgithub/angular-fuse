@@ -1,14 +1,6 @@
 <ScrollView ux:Class="NGUXApp" Background="{var0}">
-    <StackPanel>
-        <Panel Items="{children0}" MatchKey="type" Margin="10" Height="220">
-            <NGUXChild ux:Case="NGUXChild_Scope0" />
-        </Panel>
-        <Rectangle Clicked="{callback0}" Height="60" Background="Green" Margin="10">
-            <Text Alignment="Center" TextAlignment="Center" Value="Show" />
-        </Rectangle>
-        <!-- 
-        <Rectangle *ngFor="#f of foo" Fill="Red" Height="30" Margin="10" />
-        <Rectangle *ngFor="#f of foo" Fill="Green" Height="30" Margin="10" />
-        <ng:NGUXChild /> -->
+    <StackPanel Items="{children0}" MatchKey="type">
+        <Rectangle ux:Case="NGUXApp_Scope1" Fill="Red" Height="30" Margin="10" />
+        <NGUXChild ux:Case="NGUXChild_Scope0" />
     </StackPanel>
 </ScrollView>

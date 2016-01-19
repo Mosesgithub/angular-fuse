@@ -170,9 +170,9 @@ webpackJsonp([0],{
 	    function NGUXApp() {
 	        this.showPanel = false;
 	        this.text = 'Default value';
-	        this.foo = ['First', 'Second', 'Third'];
+	        this.foo = ['First', 'Second', 'Third', ' Fourth'];
 	        console.log('NGUXApp_constructor 1');
-	        this.backgroundColor = '#ff5';
+	        this.backgroundColor = '#df5';
 	        console.log(this.backgroundColor);
 	    }
 	    NGUXApp.prototype.changeColor = function () {
@@ -187,7 +187,7 @@ webpackJsonp([0],{
 	        console.log('togglePanel ' + this.showPanel);
 	        this.showPanel = !this.showPanel;
 	    };
-	    NGUXApp.version = '1.0.0.4';
+	    NGUXApp.version = '1.0.0.5';
 	    NGUXApp = __decorate([
 	        core_1.Component({
 	            selector: 'NGUXApp',
@@ -275,10 +275,8 @@ webpackJsonp([0],{
 	window.ngux_types['NGUXApp_Scope0'] = function(id, parentId, Observable, EventFactory) {
 	    this.var0 = Observable();
 	    this.children0 = Observable();
-	    this.callback0_event = new EventFactory();
-	    this.callback0 = this.callback0_event.raise;
 	};
-	window.ngux_types['NGUXChild_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	window.ngux_types['NGUXApp_Scope1'] = function(id, parentId, Observable, EventFactory) {
 	};
 	
 	/*jshint ignore:end*/
@@ -290,9 +288,10 @@ webpackJsonp([0],{
 /***/ 273:
 /***/ function(module, exports) {
 
-	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\" (callback0)=\"togglePanel()\">\n    <NGUXChild_Scope0 *ngIf=\"showPanel\" collection=\"children0\">\n    </NGUXChild_Scope0>\n</NGUXApp_Scope0>\n";
+	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\">\n    <NGUXApp_Scope1 *ngFor=\"#f of foo\" collection=\"children0\">\n    </NGUXApp_Scope1>\n    <NGUXChild collection=\"children0\">\n    </NGUXChild>\n</NGUXApp_Scope0>\n";
 
 /***/ }
 
 });
 //# sourceMappingURL=bundle.js.map
+/***/

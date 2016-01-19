@@ -6,6 +6,7 @@ var gulpMux = require('gulp-mux');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 //var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
+var PostCompilePlugin = require('./plugins/PostCompilePlugin');
 
 var target = process.env.TARGET || 'app';
 var port = process.env.PORT || 5000;
@@ -65,8 +66,7 @@ module.exports = {
                 test: /\.ts$/,
                 loader: 'ts',
                 exclude: [/\.(e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
-            },
-            {
+            }, {
                 test: /\.ngux$/,
                 loader: 'html-loader!ngux-loader' //+ path.join(__dirname, 'loaders', 'ngux')
             },
@@ -196,6 +196,9 @@ module.exports = {
             title: 'App - ' + target,
             template: clientFolder + '/index' + suffix + '.html',
             inject: 'body'
+        }),
+        new PostCompilePlugin({
+            filename: path.join(distFolder, 'bundle.js')
         })
     ].concat(pluginsProd)
 };

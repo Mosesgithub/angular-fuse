@@ -11,7 +11,7 @@ window.fusejs = window.fusejs || {
         depth: 0,
         children: Observable()
     }
-};
+}; 
 
 function debounce(fn, delay) {
     return function() {
@@ -86,6 +86,6 @@ function reloadAngular() {
     });
 }
 
-debounce(reloadAngular, 3000)();
+debounce(reloadAngular, 1000)();
 
 module.exports = window.fusejs.context;
