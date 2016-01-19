@@ -17,12 +17,12 @@ export class NGUXApp {
     public backgroundColor: string;
     public showPanel: boolean = false;
     public text: string = 'Default value';
-    public foo: Array<string> = ['First', 'Second', 'Third',' Fourth'];
+    public foo: Array<string> = ['First']; //, 'Second', 'Third', 'Fourth'
 
     constructor() {
-        console.log('NGUXApp_constructor 1');
+        //console.log('NGUXApp_constructor 1');
         this.backgroundColor = '#df5';
-        console.log(this.backgroundColor);
+        //console.log(this.backgroundColor);
         //setTimeout(() => this.togglePanel(), 300    0);
         //setTimeout(() => this.togglePanel(), 6000);
     }

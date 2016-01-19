@@ -8,8 +8,6 @@ window.ngux_types['NGUXApp_Scope0'] = function(id, parentId, Observable, EventFa
     this.var0 = Observable();
     this.children0 = Observable();
 };
-window.ngux_types['NGUXApp_Scope1'] = function(id, parentId, Observable, EventFactory) {
-};
 
 /*jshint ignore:end*/
 /*eslint-enable */

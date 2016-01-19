@@ -57,21 +57,22 @@ module.exports = function(context) {
             rootId = id;
             tree[id] = context;
         } else {
-            var elm;
             if (this.isScope(type)) {
+                var elm;
                 console.log('createElement type: ' + type);
                 //elm = new Element(parentElement.depth + 1, type, id, parentId);
                 elm = new window.ngux_types[type](id, null, Observable, EventFactory);
                 // temporary fix
-                if (!elm.children) {
-                    elm.children = new Observable();
-                }
+                // if (!elm.children) {
+                //     elm.children = new Observable();
+                // }
                 //debug only
                 elm.id = id;
                 elm.type = type;
+                tree[id] = elm;
             }
             //console.log('parent found parentElement Depth ' + parentElement.depth + ',  child Depth' + (parentElement.depth + 1));
-            tree[id] = elm;
+
         }
         //console.log(type + ' has been added to tree with id: ' + id);
         return id;
@@ -87,8 +88,8 @@ module.exports = function(context) {
         //console.log(JSON.stringify(tree[rootId], null, 4));
     };
 
-    this.renderElement = function(id, type, parentId, collectionName) {
-        //console.log('renderElement ' + id + ' parentId ' + parentId);
+    this.renderElement = function(id, type, parentId, collectionName, scope) {
+        console.log('renderElement ' + id + ' parentId ' + parentId);
 
         if (!this.isScope(type)) {
             if (!tree[id] && tree[parentId]) {
@@ -99,6 +100,9 @@ module.exports = function(context) {
         } else if (parentId && tree[parentId]) {
             var parentElement = tree[parentId];
             var element = tree[id];
+            if (scope) {
+                element.type = scope;
+            }
             //console.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
             console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children: ' + (collectionName || 'children'));
             if (parentElement[collectionName || 'children']) {

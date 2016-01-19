@@ -170,10 +170,8 @@ webpackJsonp([0],{
 	    function NGUXApp() {
 	        this.showPanel = false;
 	        this.text = 'Default value';
-	        this.foo = ['First', 'Second', 'Third', ' Fourth'];
-	        console.log('NGUXApp_constructor 1');
+	        this.foo = ['First'];
 	        this.backgroundColor = '#df5';
-	        console.log(this.backgroundColor);
 	    }
 	    NGUXApp.prototype.changeColor = function () {
 	        this.backgroundColor = this.backgroundColor !== '#0f0' ? '#0f0' : '#00f';
@@ -276,8 +274,6 @@ webpackJsonp([0],{
 	    this.var0 = Observable();
 	    this.children0 = Observable();
 	};
-	window.ngux_types['NGUXApp_Scope1'] = function(id, parentId, Observable, EventFactory) {
-	};
 	
 	/*jshint ignore:end*/
 	/*eslint-enable */
@@ -288,7 +284,7 @@ webpackJsonp([0],{
 /***/ 273:
 /***/ function(module, exports) {
 
-	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\">\n    <NGUXApp_Scope1 *ngFor=\"#f of foo\" collection=\"children0\">\n    </NGUXApp_Scope1>\n    <NGUXChild collection=\"children0\">\n    </NGUXChild>\n</NGUXApp_Scope0>\n";
+	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\">\n    <NGUXChild  *ngFor=\"#f of foo\" collection=\"children0\" scope=\"NGUXApp_Scope1\">\n    </NGUXChild>\n</NGUXApp_Scope0>\n";
 
 /***/ }
 

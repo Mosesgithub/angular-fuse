@@ -30,16 +30,16 @@ export class FuseRenderer implements Renderer {
     constructor(private _rootRenderer: FuseRootRenderer, private componentProto: RenderComponentType) { }
 
     public renderComponent(componentType: RenderComponentType): Renderer {
-        console.log('renderComponent', arguments);
+        //this.consoleLog('renderComponent', arguments);
         return this._rootRenderer.renderComponent(componentType);
     }
 
     public selectRootElement(selector: string): Element {
-        console.log('selectRootElement', arguments);
+        this.consoleLog('selectRootElement', arguments);
         let id = '';
         if (window.fusejs) {
             id = window.fusejs.angularRenderer.createElement(selector, true);
-            window.fusejs.angularRenderer.renderElement(id, null, null, null);
+            window.fusejs.angularRenderer.renderElement(id, null, null, null, null);
         } else {
             id = (this.objectCount++).toString();
         }
@@ -47,57 +47,63 @@ export class FuseRenderer implements Renderer {
     }
 
     public createElement(parentElement: Element, type: string): Element {
-        console.log('createElement', arguments);
+        this.consoleLog('createElement', arguments);
         let id = '';
         if (window.fusejs) {
             id = window.fusejs.angularRenderer.createElement(type, false);
-            if (isPresent(parentElement)) {
-                let collection = parentElement.getAttribute('collection');
-                window.fusejs.angularRenderer.renderElement(id, type, parentElement.id, collection);
-            }
         } else {
             id = '' + this.objectCount++;
         }
-        console.log('Element created : ' + type + ' ' + id);
+        if (isPresent(parentElement)) {
+            let collection = parentElement.getAttribute('collection');
+            let scope = parentElement.getAttribute('scope');
+            this.consoleLog('renderElement', arguments);
+            if (window.fusejs) {
+                window.fusejs.angularRenderer.renderElement(id, type, parentElement.id, collection, scope);
+            }
+
+        }
+        //this.consoleLog('Element created : ' + type + ' ' + id);
         return new Element(type, id, parentElement);
     }
 
     public createViewRoot(hostElement: Element): Element {
-        console.log('createViewRoot', arguments);
+        this.consoleLog('createViewRoot', arguments);
         return hostElement;
     }
 
     public createTemplateAnchor(parentElement: Element): Element {
-        console.log('createTemplateAnchor', arguments);
+        this.consoleLog('createTemplateAnchor', arguments);
         return new Element('#comment', null, parentElement);
     }
 
     public createText(parentElement: Element, value: string): any {
-        // console.log('createText', arguments);
+        // this.consoleLog('createText', arguments);
         return new Element(null, null, parentElement);
     }
 
     public projectNodes(parentElement: Element, nodes: Element[]) {
-        console.log('projectNodes', arguments);
+        this.consoleLog('projectNodes', arguments);
     }
 
     public attachViewAfter(anchorElement: Element, viewRootNodes: Element[]) {
-        console.log('attachViewAfter', arguments);
+        this.consoleLog('attachViewAfter', arguments);
         for (let i = 0; i < viewRootNodes.length; i++) {
             let node = viewRootNodes[i];
             node.parent = anchorElement.parent;
             let collection = node.getAttribute('collection'); //.parent
-            console.log(collection);
+            //this.consoleLog(collection);
+            this.consoleLog('renderElement', arguments);
             if (window.fusejs) {
-                window.fusejs.angularRenderer.renderElement(node.id, node.type, node.parent.id, collection);
+                window.fusejs.angularRenderer.renderElement(node.id, node.type, node.parent.id, collection, null);
             }
         }
     }
 
     public detachView(viewRootNodes: Element[]) {
-        console.log('detachView', arguments);
+        this.consoleLog('detachView', arguments);
 
-        console.log(viewRootNodes[0]);
+        //this.consoleLog(viewRootNodes[0]);
         for (let i = 0; i < viewRootNodes.length; i++) {
             let node = viewRootNodes[i];
             let collection = node.getAttribute('collection');
@@ -108,7 +114,7 @@ export class FuseRenderer implements Renderer {
     }
 
     public destroyView(hostElement: Element, viewAllNodes: Element[]) {
-        console.log('destroyView', arguments);
+        this.consoleLog('destroyView', arguments);
         for (let i = 0; i < viewAllNodes.length; i++) {
             let node = viewAllNodes[i];
             let collection = node.getAttribute('collection');
@@ -121,7 +127,7 @@ export class FuseRenderer implements Renderer {
     }
 
     public listen(renderElement: Element, name: string, callback: Function) {
-        console.log('listen', arguments);
+        this.consoleLog('listen', arguments);
         let zonedCallback = global['zone'].bind(callback);
         if (window.fusejs) {
             window.fusejs.angularRenderer.setEventListener(renderElement.id, name, zonedCallback);
@@ -129,12 +135,12 @@ export class FuseRenderer implements Renderer {
     }
 
     public listenGlobal(target: string, name: string, callback: Function): Function {
-        console.log('listenGlobal', arguments);
+        this.consoleLog('listenGlobal', arguments);
         return null;
     }
 
     public setElementProperty(renderElement: Element, propertyName: string, propertyValue: any) {
-        console.log('setElementProperty', arguments);
+        this.consoleLog('setElementProperty', arguments);
         renderElement.setAttribute(propertyName, propertyValue);
         if (window.fusejs) {
             window.fusejs.angularRenderer.setAttribute(renderElement.id, propertyName, propertyValue);
@@ -142,7 +148,7 @@ export class FuseRenderer implements Renderer {
     }
 
     public setElementAttribute(renderElement: Element, attributeName: string, attributeValue: string) {
-        console.log('setElementAttribute', arguments);
+        this.consoleLog('setElementAttribute', arguments);
         renderElement.setAttribute(attributeName, attributeValue);
     }
 
@@ -151,22 +157,30 @@ export class FuseRenderer implements Renderer {
      * such as <template> placeholders.
      */
     public setBindingDebugInfo(renderElement: Element, propertyName: string, propertyValue: string) {
-        console.log('setBindingDebugInfo', arguments);
+        this.consoleLog('setBindingDebugInfo', arguments);
     }
 
     public setElementClass(renderElement: Element, className: string, isAdd: boolean) {
-        console.log('setElementClass', arguments);
+        this.consoleLog('setElementClass', arguments);
     }
 
     public setElementStyle(renderElement: Element, styleName: string, styleValue: string) {
-        console.log('setElementStyle', arguments);
+        this.consoleLog('setElementStyle', arguments);
     }
 
     public invokeElementMethod(renderElement: Element, methodName: string, args: any[]) {
-        console.log('invokeElementMethod', arguments);
+        this.consoleLog('invokeElementMethod', arguments);
     }
 
     public setText(renderNode: Element, text: string) {
-        console.log('setText', arguments);
+        this.consoleLog('setText', arguments);
+    }
+
+    private consoleLog(text: string, arguments: any) {
+        if (window.fusejs) {
+            console.log(text);
+        } else {
+            console.log(text, arguments);
+        }
     }
 }
