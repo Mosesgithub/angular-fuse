@@ -1,0 +1,17 @@
+<App Theme="Basic">
+    <JavaScript File="../dist/yoobic/dev/common.js" ux:Global="common" />
+    <JavaScript File="../dist/yoobic/dev/vendor.js" ux:Global="vendor" />
+    <JavaScript File="../dist/yoobic/dev/bundle.js" ux:Global="bundle" />
+    <JavaScript File="../fuse/AngularRenderer.js" ux:Global="AngularRenderer" />
+    <JavaScript File="../fuse/AngularBootstrap.js" />
+   <!--  <NGUXApp /> -->
+   <Main/>
+</App>
+<!--
+ <App Theme="Basic">
+    <Angular Files="../dist/vendor.js,common,">
+
+        <NGUXApp />
+    </Angular>
+</App>
+-->

@@ -1,0 +1,14 @@
+<Panel ux:Class="MissionsList">
+    <ScrollView>
+        <StackPanel Items="{children0}" MatchKey="type">
+            <Text Value="{var0}" Height="40" />
+            <Rectangle ux:Case="MissionsList_Scope1" Height="200" Margin="10" Fill="DarkBg" />
+        </StackPanel>
+    </ScrollView>
+    <AddingAnimation>
+        <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+    </AddingAnimation>
+    <RemovingAnimation>
+        <Move X="1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+    </RemovingAnimation>
+</Panel>

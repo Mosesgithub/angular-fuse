@@ -14,15 +14,15 @@ public class Angular: Fuse.Controls.Panel {
 		if (!isInitialized) {
 			isInitialized = true;
 			var common = new JavaScript() {
-				File = new global::Uno.UX.BundleFileSource(import global::Uno.BundleFile("../dist/app/dev/common.js"))
+				File = new global::Uno.UX.BundleFileSource(import global::Uno.BundleFile("../dist/yoobic/dev/common.js"))
 			};
 			global::Uno.UX.Resource.SetGlobalKey(common, "common");
 			var vendor = new JavaScript() {
-				File = new global::Uno.UX.BundleFileSource(import global::Uno.BundleFile("../dist/app/dev/vendor.js"))
+				File = new global::Uno.UX.BundleFileSource(import global::Uno.BundleFile("../dist/yoobic/dev/vendor.js"))
 			};
 			global::Uno.UX.Resource.SetGlobalKey(vendor, "vendor");
 			var bundle = new JavaScript() {
-				File = new global::Uno.UX.BundleFileSource(import global::Uno.BundleFile("../dist/app/dev/bundle.js"))
+				File = new global::Uno.UX.BundleFileSource(import global::Uno.BundleFile("../dist/yoobic/dev/bundle.js"))
 			};
 			global::Uno.UX.Resource.SetGlobalKey(bundle, "bundle");
 			var AngularRenderer = new JavaScript() {
