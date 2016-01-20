@@ -1,0 +1,6 @@
+<Panel ng:Selector="Page1" ux:Name="self" [Background]="background" (Clicked)="navigate()">
+    <ExitingAnimation>
+        <Move X="0.5" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Change self.Opacity="0" Duration="0.5" />
+    </ExitingAnimation>
+</Panel>

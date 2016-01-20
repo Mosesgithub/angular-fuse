@@ -21,7 +21,7 @@ export class NGUXApp {
 
     constructor() {
         //console.log('NGUXApp_constructor 1');
-        this.backgroundColor = '#df5';
+        this.backgroundColor = '#0f5';
         //console.log(this.backgroundColor);
         //setTimeout(() => this.togglePanel(), 300    0);
         //setTimeout(() => this.togglePanel(), 6000);

@@ -7,14 +7,13 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	var bootstrap_1 = __webpack_require__(1);
-	var nguxapp_1 = __webpack_require__(268);
+	var routerapp_component_1 = __webpack_require__(508);
 	console.log('defining root component');
 	if (!window.fusejs) {
-	    bootstrap_1.fuseBootstraper().bootstrap(nguxapp_1.NGUXApp);
+	    bootstrap_1.fuseBootstraper().bootstrap(routerapp_component_1.RouterAppComponent);
 	}
 	else {
-	    console.log('loading NGUXApp ' + nguxapp_1.NGUXApp.version);
-	    window.fusejs.rootComponent = nguxapp_1.NGUXApp;
+	    window.fusejs.rootComponent = routerapp_component_1.RouterAppComponent;
 	    if (!window.fusejs.bootstraper) {
 	        window.fusejs.bootstraper = bootstrap_1.fuseBootstraper();
 	    }
@@ -150,7 +149,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 268:
+/***/ 508:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -163,45 +162,43 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var common_1 = __webpack_require__(185);
-	var nguxchild_1 = __webpack_require__(269);
-	__webpack_require__(272);
-	var NGUXApp = (function () {
-	    function NGUXApp() {
-	        this.showPanel = false;
-	        this.text = 'Default value';
-	        this.foo = ['First', 'Second', 'Third', 'Fourth'];
-	        this.backgroundColor = '#df5';
+	var router_1 = __webpack_require__(243);
+	var page1_component_1 = __webpack_require__(509);
+	var page2_component_1 = __webpack_require__(510);
+	__webpack_require__(513);
+	var RouterAppComponent = (function () {
+	    function RouterAppComponent() {
+	        this.activePage = '';
 	    }
-	    NGUXApp.prototype.changeColor = function () {
-	        this.backgroundColor = this.backgroundColor !== '#0f0' ? '#0f0' : '#00f';
-	    };
-	    NGUXApp.prototype.valueChanged = function (args) {
-	        if (args && args.value && this.text !== args.value) {
-	            this.text = args.value;
-	        }
-	    };
-	    NGUXApp.prototype.togglePanel = function () {
-	        console.log('togglePanel ' + this.showPanel);
-	        this.showPanel = !this.showPanel;
-	    };
-	    NGUXApp.version = '1.0.0.5';
-	    NGUXApp = __decorate([
+	    RouterAppComponent = __decorate([
 	        core_1.Component({
-	            selector: 'NGUXApp',
-	            directives: [nguxchild_1.NGUXChild, common_1.NgIf],
-	            template: __webpack_require__(273)
-	        }), 
+	            selector: 'app',
+	            directives: [router_1.ROUTER_DIRECTIVES],
+	            template: __webpack_require__(512)
+	        }),
+	        router_1.RouteConfig([{
+	                path: '/',
+	                redirectTo: ['/Page1'],
+	                name: 'root'
+	            }, {
+	                path: '/page1',
+	                name: 'Page1',
+	                component: page1_component_1.Page1
+	            }, {
+	                path: '/page2',
+	                name: 'Page2',
+	                component: page2_component_1.Page2
+	            }]), 
 	        __metadata('design:paramtypes', [])
-	    ], NGUXApp);
-	    return NGUXApp;
+	    ], RouterAppComponent);
+	    return RouterAppComponent;
 	})();
-	exports.NGUXApp = NGUXApp;
+	exports.RouterAppComponent = RouterAppComponent;
 
 
 /***/ },
 
-/***/ 269:
+/***/ 509:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -214,29 +211,86 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	__webpack_require__(270);
-	var NGUXChild = (function () {
-	    function NGUXChild() {
-	        this.backgroundColor = '#f00';
+	var router_1 = __webpack_require__(243);
+	__webpack_require__(517);
+	var Page1 = (function () {
+	    function Page1(router) {
+	        this.router = router;
+	        this.background = '#f00';
 	    }
-	    NGUXChild.prototype.changeColor = function () {
+	    Page1.prototype.navigate = function (param) {
+	        console.log('navigating to Page 2');
+	        this.router.parent.navigate(['Page2', {
+	                param: param
+	            }]);
 	    };
-	    NGUXChild = __decorate([
+	    Page1 = __decorate([
 	        core_1.Component({
-	            selector: 'NGUXChild',
-	            template: __webpack_require__(271),
-	            properties: ['prop']
+	            selector: 'Page1',
+	            template: __webpack_require__(514),
+	            directives: [router_1.ROUTER_DIRECTIVES]
 	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], NGUXChild);
-	    return NGUXChild;
+	        __metadata('design:paramtypes', [router_1.Router])
+	    ], Page1);
+	    return Page1;
 	})();
-	exports.NGUXChild = NGUXChild;
+	exports.Page1 = Page1;
 
 
 /***/ },
 
-/***/ 270:
+/***/ 510:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(3);
+	var router_1 = __webpack_require__(243);
+	__webpack_require__(516);
+	var Page2 = (function () {
+	    function Page2(router, routeParams) {
+	        this.router = router;
+	        this.routeParams = routeParams;
+	        this.clickedOn = '';
+	    }
+	    Page2.prototype.ngOnInit = function () {
+	        console.log(this.routeParams.get('param'));
+	        this.clickedOn = this.routeParams.get('param');
+	    };
+	    Page2.prototype.navigate = function () {
+	        console.log('navigating to Page 1');
+	        this.router.parent.navigate(['Page1']);
+	    };
+	    Page2 = __decorate([
+	        core_1.Component({
+	            selector: 'Page2',
+	            template: __webpack_require__(515),
+	            directives: [router_1.ROUTER_DIRECTIVES]
+	        }), 
+	        __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams])
+	    ], Page2);
+	    return Page2;
+	})();
+	exports.Page2 = Page2;
+
+
+/***/ },
+
+/***/ 512:
+/***/ function(module, exports) {
+
+	module.exports = "<RouterApp_Scope0 [var0]=\"activePage\">\n    <router-outlet >\n    </router-outlet>\n</RouterApp_Scope0>\n";
+
+/***/ },
+
+/***/ 513:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -245,7 +299,9 @@ webpackJsonp([0],{
 	
 	window.ngux_types = window.ngux_types || {};
 	
-	window.ngux_types['NGUXChild_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	window.ngux_types['RouterApp_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.children0 = Observable();
 	};
 	
 	/*jshint ignore:end*/
@@ -254,14 +310,21 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 271:
+/***/ 514:
 /***/ function(module, exports) {
 
-	module.exports = "<NGUXChild_Scope0>\n</NGUXChild_Scope0>\n";
+	module.exports = "<Page1_Scope0 [var0]=\"background\" (callback0)=\"navigate()\">\n</Page1_Scope0>\n";
 
 /***/ },
 
-/***/ 272:
+/***/ 515:
+/***/ function(module, exports) {
+
+	module.exports = "<Page2_Scope0>\n</Page2_Scope0>\n";
+
+/***/ },
+
+/***/ 516:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -270,28 +333,33 @@ webpackJsonp([0],{
 	
 	window.ngux_types = window.ngux_types || {};
 	
-	window.ngux_types['NGUXApp_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	window.ngux_types['Page2_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	};
+	
+	/*jshint ignore:end*/
+	/*eslint-enable */
+
+
+/***/ },
+
+/***/ 517:
+/***/ function(module, exports) {
+
+	/*eslint-disable */
+	/*jshint ignore:start*/
+	'use strict';
+	
+	window.ngux_types = window.ngux_types || {};
+	
+	window.ngux_types['Page1_Scope0'] = function(id, parentId, Observable, EventFactory) {
 	    this.var0 = Observable();
-	    this.children0 = Observable();
-	    this.children1 = Observable();
 	    this.callback0_event = new EventFactory();
 	    this.callback0 = this.callback0_event.raise;
 	};
-	window.ngux_types['NGUXApp_Scope3'] = function(id, parentId, Observable, EventFactory) {
-	};
-	window.ngux_types['NGUXApp_Scope5'] = function(id, parentId, Observable, EventFactory) {
-	};
 	
 	/*jshint ignore:end*/
 	/*eslint-enable */
 
-
-/***/ },
-
-/***/ 273:
-/***/ function(module, exports) {
-
-	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\" (callback0)=\"togglePanel()\">\n    <NGUXChild  *ngIf=\"showPanel\" collection=\"children0\" scope=\"NGUXApp_Scope1\">\n    </NGUXChild>\n    <NGUXChild  *ngFor=\"#f of foo\" collection=\"children1\" scope=\"NGUXApp_Scope2\">\n    </NGUXChild>\n    <NGUXApp_Scope3 *ngFor=\"#f of foo\" collection=\"children1\">\n    </NGUXApp_Scope3>\n    <NGUXChild  collection=\"children1\" scope=\"NGUXApp_Scope4\">\n    </NGUXChild>\n    <NGUXApp_Scope5 *ngFor=\"#f of foo\" collection=\"children1\">\n    </NGUXApp_Scope5>\n    <NGUXChild  collection=\"children1\" scope=\"NGUXApp_Scope6\">\n    </NGUXChild>\n</NGUXApp_Scope0>\n";
 
 /***/ }
 

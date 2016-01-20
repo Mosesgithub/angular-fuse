@@ -1,0 +1,7 @@
+<Panel ng:Selector="RouterApp">
+    <ng:router-outlet></ng:router-outlet>
+    <DirectNavigation [Active]="activePage" />
+    <Page1 ux:Name="Page1"></Page1>
+    <Page2 ux:Name="Page2"></Page2>
+
+</Panel>

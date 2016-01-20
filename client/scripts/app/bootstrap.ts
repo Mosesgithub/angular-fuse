@@ -5,8 +5,8 @@ import {fuseBootstraper} from '../fuse-angular/bootstrap';
 //import {AppComponent} from '../heroes/components/app.component';
 //import {TodoAppComponent} from '../todo/components/todoapp.component';
 //import {AppComponent} from '../ngux-example/components/app.component';
-//import {RouterAppComponent} from '../router/components/routerapp.component';
-import {NGUXApp} from '../ngux-test/components/nguxapp';
+import {RouterAppComponent} from '../router/components/routerapp.component';
+//import {NGUXApp} from '../ngux-test/components/nguxapp';
 /* beautify ignore:end */
 //fuseBootstrap(AppComponent);
 //fuseBootstrap(TodoAppComponent);
@@ -15,10 +15,9 @@ import {NGUXApp} from '../ngux-test/components/nguxapp';
 console.log('defining root component');
 
 if (!window.fusejs) {
-    fuseBootstraper().bootstrap(NGUXApp);
+    fuseBootstraper().bootstrap(RouterAppComponent);
 } else {
-    console.log('loading NGUXApp ' + NGUXApp.version);
-    window.fusejs.rootComponent = NGUXApp;
+    window.fusejs.rootComponent = RouterAppComponent;
     if (!window.fusejs.bootstraper) {
         window.fusejs.bootstraper = fuseBootstraper();
     }

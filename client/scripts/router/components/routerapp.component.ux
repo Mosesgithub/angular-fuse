@@ -1,0 +1,6 @@
+<Panel Items="{children0}" MatchKey="type" ux:Class="RouterApp">
+    
+    <DirectNavigation Active="{var0}" />
+    <Page1 ux:Name="Page1" />
+    <Page2 ux:Name="Page2" />
+</Panel>

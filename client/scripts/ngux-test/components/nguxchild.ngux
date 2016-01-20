@@ -1,5 +1,5 @@
 <Panel Margin="20" Height="200" ng:Selector="NGUXChild" Background="Red">
-    <Circle Width="150" Height="150" Fill="Blue">
+    <Circle Width="150" Height="150" Fill="Green">
         <!--  <Text Value="{type}" /> 
         <Text Value="{{backgroundColor}}" /> -->
     </Circle>

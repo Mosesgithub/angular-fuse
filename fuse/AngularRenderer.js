@@ -69,7 +69,9 @@ module.exports = function(context) {
     };
 
     var addToCollection = function(parentElement, collectionName, element) {
-        if (parentElement[collectionName || 'children']) {
+        if (parentElement === context) {
+            parentElement.value = element;
+        } else if (parentElement[collectionName || 'children']) {
             parentElement[collectionName || 'children'].add(element);
         } else {
             consoleLog(collectionName + ' not found for object');
@@ -77,7 +79,9 @@ module.exports = function(context) {
     };
 
     var removeFromCollection = function(parentElement, collectionName, element) {
-        if (parentElement[collectionName || 'children']) {
+        if (parentElement === context) {
+            parentElement.clear();
+        } else if (parentElement[collectionName || 'children']) {
             parentElement[collectionName || 'children'].tryRemove(element);
         } else {
             consoleLog(collectionName + ' not found for object');

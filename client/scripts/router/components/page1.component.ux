@@ -1,0 +1,6 @@
+<Panel ux:Class="Page1" ux:Name="self" Background="{var0}" Clicked="{callback0}">
+    <ExitingAnimation>
+        <Move X="0.5" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Change self.Opacity="0" Duration="0.5" />
+    </ExitingAnimation>
+</Panel>

@@ -85,6 +85,13 @@ export class FuseRenderer implements Renderer {
 
     public projectNodes(parentElement: Element, nodes: Element[]) {
         this.consoleLog('projectNodes', arguments);
+        nodes.forEach((node) => {
+            node.parent = parentElement;
+            let collection = node.getAttribute('collection'); //.parent
+            if (window.fusejs) {
+                window.fusejs.angularRenderer.renderElement(node.id, node.type, node.parent.id, collection, null);
+            }
+        });
     }
 
     public attachViewAfter(anchorElement: Element, viewRootNodes: Element[]) {
