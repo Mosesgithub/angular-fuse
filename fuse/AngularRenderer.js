@@ -15,29 +15,10 @@ function EventFactory() {
     };
 }
 
-// function Element(depth, type, id, parentId) {
-//     this.depth = depth;
-//     this.id = id;
-//     this.parentId = parentId;
-//     this.type = type;
-//     this['children' + depth] = Observable();
-
-//     this.var1 = Observable();
-//     this.var2 = Observable();
-//     this.var3 = Observable();
-//     this.var4 = Observable();
-//     this.var5 = Observable();
-
-//     this.event1 = new EventFactory();
-//     this.callback1 = this.event1.raise;
-
-//     this.event2 = new EventFactory();
-//     this.callback2 = this.event2.raise;
-// }
-
 module.exports = function(context) {
 
     var tree = {};
+    var toBeAttached = {};
     var counter = 1;
     var rootId;
 
@@ -60,15 +41,14 @@ module.exports = function(context) {
             if (this.isScope(type)) {
                 var elm;
                 console.log('createElement type: ' + type);
-                //elm = new Element(parentElement.depth + 1, type, id, parentId);
                 elm = new window.ngux_types[type](id, null, Observable, EventFactory);
+                elm.type = type;
                 // temporary fix
                 // if (!elm.children) {
                 //     elm.children = new Observable();
                 // }
                 //debug only
                 elm.id = id;
-                elm.type = type;
                 tree[id] = elm;
             }
             //console.log('parent found parentElement Depth ' + parentElement.depth + ',  child Depth' + (parentElement.depth + 1));
@@ -88,29 +68,45 @@ module.exports = function(context) {
         //console.log(JSON.stringify(tree[rootId], null, 4));
     };
 
+    this.addToCollection = function(parentElement, collectionName, element) {
+        if (parentElement[collectionName || 'children']) {
+            parentElement[collectionName || 'children'].add(element);
+        } else {
+            console.log(collectionName + ' not found for object');
+        }
+    };
+
     this.renderElement = function(id, type, parentId, collectionName, scope) {
         console.log('renderElement ' + id + ' parentId ' + parentId);
-
         if (!this.isScope(type)) {
-            if (!tree[id] && tree[parentId]) {
+            console.log(id + 'is not a scope');
+            if (toBeAttached[id] && toBeAttached[id].length > 0 && tree[parentId]) {
+                console.log('found to be attached childs for  ' + id + 'in  parentId ' + parentId);
+                var parentEl = tree[parentId];
+                toBeAttached[id].forEach(function(el) {
+                    this.addToCollection(parentEl, collectionName, el);
+                });
+                //delete toBeAttached[id];
+            } else if (!tree[id] && tree[parentId]) {
+                console.log('go up');
                 tree[id] = tree[parentId];
             } else {
                 console.log('do nothing no scope');
             }
-        } else if (parentId && tree[parentId]) {
-            var parentElement = tree[parentId];
+        } else if (parentId) {
             var element = tree[id];
             if (scope) {
                 element.type = scope;
             }
-            //console.log('parentElement.children parentdepth: ' + parentElement.depth + ', element depth:' + element.depth);
-            console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children: ' + (collectionName || 'children'));
-            if (parentElement[collectionName || 'children']) {
-                parentElement[collectionName || 'children'].add(element);
+            if (tree[parentId]) {
+                var parentElement = tree[parentId];
+                console.log('renderElement ' + id + ' parentId ' + parentId + ' in ' + 'children: ' + (collectionName || 'children'));
+                this.addToCollection(parentElement, collectionName, element);
             } else {
-                console.log(collectionName + ' not found for object ' + id);
+                console.log('renderElement ' + id + 'waiting to be attached to ' + parentId);
+                toBeAttached[parentId] = toBeAttached[parentId] || [];
+                toBeAttached[parentId].push(element);
             }
-            //parentElement['children' + parentElement.depth].add(element);
         } else {
             console.log('do nothing no parent');
         }
@@ -120,7 +116,18 @@ module.exports = function(context) {
     this.removeElement = function(id, type, parentId, collectionName) {
         console.log('removeElement ' + id + ' parentId ' + parentId);
         if (!this.isScope(type)) {
-            //
+            if (toBeAttached[id] && toBeAttached[id].length > 0 && tree[parentId]) {
+                console.log('found to be removed childs for  ' + id + 'in  parentId ' + parentId);
+                var parentEl = tree[parentId];
+                toBeAttached[id].forEach(function(el) {
+                    if (parentEl[collectionName || 'children']) {
+                        parentEl[collectionName || 'children'].tryRemove(el);
+                    } else {
+                        console.log(collectionName + ' not found for object ' + id);
+                    }
+                });
+                //delete toBeAttached[id];
+            }
         } else if (parentId && tree[parentId]) {
             var parentElement = tree[parentId];
             var element = tree[id];
@@ -177,6 +184,7 @@ module.exports = function(context) {
     this.reset = function() {
         console.log('angularRenderer reset');
         tree = {};
+        toBeAttached = {};
         counter = 1;
     };
 

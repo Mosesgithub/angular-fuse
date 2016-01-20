@@ -17,7 +17,7 @@ export class NGUXApp {
     public backgroundColor: string;
     public showPanel: boolean = false;
     public text: string = 'Default value';
-    public foo: Array<string> = ['First']; //, 'Second', 'Third', 'Fourth'
+    public foo: Array<string> = ['First', 'Second', 'Third', 'Fourth']; //,
 
     constructor() {
         //console.log('NGUXApp_constructor 1');

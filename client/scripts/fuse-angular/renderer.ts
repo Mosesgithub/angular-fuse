@@ -35,29 +35,30 @@ export class FuseRenderer implements Renderer {
     }
 
     public selectRootElement(selector: string): Element {
-        this.consoleLog('selectRootElement', arguments);
+        this.consoleLog('selectRootElement ' + selector, arguments);
         let id = '';
         if (window.fusejs) {
             id = window.fusejs.angularRenderer.createElement(selector, true);
             window.fusejs.angularRenderer.renderElement(id, null, null, null, null);
         } else {
-            id = (this.objectCount++).toString();
+            id = selector + '_' + (this.objectCount++).toString();
         }
+        this.consoleLog('createElement ' + id + ' of type ' + selector, arguments);
         return new Element(selector, id, null);
     }
 
     public createElement(parentElement: Element, type: string): Element {
-        this.consoleLog('createElement', arguments);
         let id = '';
         if (window.fusejs) {
             id = window.fusejs.angularRenderer.createElement(type, false);
         } else {
-            id = '' + this.objectCount++;
+            id = type + '_' + this.objectCount++;
         }
+        this.consoleLog('createElement ' + id + ' of type ' + type, arguments);
         if (isPresent(parentElement)) {
             let collection = parentElement.getAttribute('collection');
             let scope = parentElement.getAttribute('scope');
-            this.consoleLog('renderElement', arguments);
+            this.consoleLog('renderElement ' + id + ' in ' + parentElement.id, arguments);
             if (window.fusejs) {
                 window.fusejs.angularRenderer.renderElement(id, type, parentElement.id, collection, scope);
             }
@@ -93,6 +94,7 @@ export class FuseRenderer implements Renderer {
             node.parent = anchorElement.parent;
             let collection = node.getAttribute('collection'); //.parent
             //this.consoleLog(collection);
+            this.consoleLog('renderElement ' + node.id + ' in ' + node.parent.id, arguments);
             this.consoleLog('renderElement', arguments);
             if (window.fusejs) {
                 window.fusejs.angularRenderer.renderElement(node.id, node.type, node.parent.id, collection, null);
@@ -176,11 +178,11 @@ export class FuseRenderer implements Renderer {
         this.consoleLog('setText', arguments);
     }
 
-    private consoleLog(text: string, arguments: any) {
+    private consoleLog(text: string, args: any) {
         if (window.fusejs) {
             console.log(text);
         } else {
-            console.log(text, arguments);
+            console.log(text, args);
         }
     }
 }

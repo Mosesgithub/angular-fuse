@@ -170,7 +170,7 @@ webpackJsonp([0],{
 	    function NGUXApp() {
 	        this.showPanel = false;
 	        this.text = 'Default value';
-	        this.foo = ['First'];
+	        this.foo = ['First', 'Second', 'Third', 'Fourth'];
 	        this.backgroundColor = '#df5';
 	    }
 	    NGUXApp.prototype.changeColor = function () {
@@ -273,6 +273,13 @@ webpackJsonp([0],{
 	window.ngux_types['NGUXApp_Scope0'] = function(id, parentId, Observable, EventFactory) {
 	    this.var0 = Observable();
 	    this.children0 = Observable();
+	    this.children1 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['NGUXApp_Scope3'] = function(id, parentId, Observable, EventFactory) {
+	};
+	window.ngux_types['NGUXApp_Scope5'] = function(id, parentId, Observable, EventFactory) {
 	};
 	
 	/*jshint ignore:end*/
@@ -284,7 +291,7 @@ webpackJsonp([0],{
 /***/ 273:
 /***/ function(module, exports) {
 
-	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\">\n    <NGUXChild  *ngFor=\"#f of foo\" collection=\"children0\" scope=\"NGUXApp_Scope1\">\n    </NGUXChild>\n</NGUXApp_Scope0>\n";
+	module.exports = "<NGUXApp_Scope0 [var0]=\"backgroundColor\" (callback0)=\"togglePanel()\">\n    <NGUXChild  *ngIf=\"showPanel\" collection=\"children0\" scope=\"NGUXApp_Scope1\">\n    </NGUXChild>\n    <NGUXChild  *ngFor=\"#f of foo\" collection=\"children1\" scope=\"NGUXApp_Scope2\">\n    </NGUXChild>\n    <NGUXApp_Scope3 *ngFor=\"#f of foo\" collection=\"children1\">\n    </NGUXApp_Scope3>\n    <NGUXChild  collection=\"children1\" scope=\"NGUXApp_Scope4\">\n    </NGUXChild>\n    <NGUXApp_Scope5 *ngFor=\"#f of foo\" collection=\"children1\">\n    </NGUXApp_Scope5>\n    <NGUXChild  collection=\"children1\" scope=\"NGUXApp_Scope6\">\n    </NGUXChild>\n</NGUXApp_Scope0>\n";
 
 /***/ }
 
