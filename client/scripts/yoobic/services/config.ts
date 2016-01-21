@@ -1,4 +1,4 @@
 export class Config {
-	public apiUrl = 'https://yoo-lb.herokuapp.com';
+	public apiUrl = 'http://yoo-lb.herokuapp.com';
 
 }

@@ -73,6 +73,8 @@ module.exports = function(context) {
             parentElement.value = element;
         } else if (parentElement[collectionName || 'children']) {
             parentElement[collectionName || 'children'].add(element);
+        } else if (parentElement.router_outlet) {
+            parentElement.router_outlet.add(element);
         } else {
             consoleLog(collectionName + ' not found for object');
         }
@@ -83,6 +85,8 @@ module.exports = function(context) {
             parentElement.clear();
         } else if (parentElement[collectionName || 'children']) {
             parentElement[collectionName || 'children'].tryRemove(element);
+        } else if (parentElement.router_outlet) {
+            parentElement.router_outlet.tryRemove(element);
         } else {
             consoleLog(collectionName + ' not found for object');
         }

@@ -1,6 +1,6 @@
 <DockPanel ng:Selector="Login">
     <Rectangle Height="200">
-        <Image File="../../../../ressources/images/logo_collective_w.png"></Image>
+        <Image File="../ressources/logo_collective_w.png"></Image>
     </Rectangle>
     <StackPanel Dock="Bottom" Margin="30">
         <Grid RowCount="2" ColumnCount="2" Margin="0">
@@ -12,7 +12,7 @@
             </Button>
         </Grid>
     </StackPanel>
-    <Video File="../../../../ressources/videos/market.mp4" Layer="Background" AutoPlay="true" IsLooping="true" StretchMode="UniformToFill" Background="DarkBg" Opacity="0.3" Padding="-10"></Video>
+    <Video File="../ressources/market.mp4" Layer="Background" AutoPlay="true" IsLooping="true" StretchMode="UniformToFill" Background="DarkBg" Opacity="0.3" Padding="-10"></Video>
     <Rectangle Layer="Background" Fill="DarkBg" />
     <AddingAnimation>
         <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />

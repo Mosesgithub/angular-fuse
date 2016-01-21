@@ -68,8 +68,12 @@ function bootstrapAngular() {
         window.fusejs.context.clear();
         if (window.fusejs.applicationRef) {
             console.log('APPLICATIONREF DISPOSE');
-            window.fusejs.applicationRef.dispose();
-        }   
+            try {
+                window.fusejs.applicationRef.dispose();
+            } catch (err) {
+                console.log('ERROR IN DISPOSE' + err);
+            }
+        }
     }
     /// BOOTSTRAP APPLICATION : ON EVERY CHANGE
     console.log('BOOSTRAP');
@@ -85,7 +89,9 @@ function reloadAngular() {
         window.fusejs.angularRenderer.print();
     });
 }
-
-debounce(reloadAngular, 1000)();
-
+try {
+    debounce(reloadAngular, 1000)();
+} catch (err) {
+    console.log(err);
+}
 module.exports = window.fusejs.context;

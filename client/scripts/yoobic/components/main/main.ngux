@@ -2,6 +2,6 @@
     <YooStyle/>
     <router-outlet>
         <ng:Login></ng:Login>
-        <ng:MissionsList></ng:MissionsList>
+        <ng:Menu></ng:Menu>
     </router-outlet>
 </Panel>

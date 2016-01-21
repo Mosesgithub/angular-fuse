@@ -1,0 +1,23 @@
+<Panel ng:Selector="MissionCard" Height="320" Width="100%" ClipToBounds="true">
+    <DockPanel ux:Name="missionCard" Padding="0,0,0,20">
+        <Rectangle Layer="Background" Fill="LightBg" CornerRadius="2" ClipToBounds="true">
+            <Stroke Width="1" Brush="BorderGreyBg" />
+        </Rectangle>
+        <Rectangle Dock="Top" Height="180" Background="DarkBg" CornerRadius="2" ClipToBounds="true">
+            <Grid RowData="1" ColumnData="17,1*" Alignment="TopLeft" Width="76" Height="36" Padding="10" Margin="10">
+                <Rectangle Layer="Background" Fill="BalancedBg" CornerRadius="25" />
+            </Grid>
+            <Panel Alignment="Bottom">
+                <Text Visibility="Collapsed" TextColor="{Resource Light}" Alignment="CenterLeft" FontSize="16" Font="BoldF" Margin="10,0,10,0" [Value]="mission.title"></Text>
+                <Rectangle Height="50" Alignment="Bottom" Fill="BlackBg" Opacity="0.5" />
+            </Panel>
+            <Clicky [BackgroundUrl]="mission.description.background._downloadURL"></Clicky>
+            <!--     <ImageFill ux:Name="Background" [Url]= StretchMode="UniformToFill" Opacity="0.5" /> -->
+        </Rectangle>
+        <StackPanel Height="120" ClipToBounds="true" Padding="10">
+
+            <Text TextWrapping="Wrap" Font="BoldF" FontSize="15" Margin="0,3,0,6" TextColor="{Resource Dark}" ClipToBounds="true" [Value]="mission.address" />
+            <Text TextWrapping="Wrap" FontSize="13" TextColor="{Resource Dark}" ClipToBounds="true" [Value]="mission.description.text" />
+        </StackPanel>
+    </DockPanel>
+</Panel>

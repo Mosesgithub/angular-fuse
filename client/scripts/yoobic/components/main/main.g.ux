@@ -1,7 +1,0 @@
-<Panel ux:Class="Main">
-    <YooStyle />
-    <Panel Items="{children}" MatchKey="type">
-        <Login ux:Case="Login_Scope0" />
-        <MissionsList ux:Case="MissionsList_Scope0" />
-    </Panel>
-</Panel>

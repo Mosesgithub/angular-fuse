@@ -1,0 +1,5 @@
+<Panel ux:Class="Clicky" ux:Name="Myself">
+    <string ux:Property="BackgroundUrl" />
+    <ImageFill ux:Name="TheImage" Url="{Property Myself.BackgroundUrl}" StretchMode="UniformToFill" Opacity="0.5" />
+    <Clicked Handler="OnClicked" />
+</Panel>

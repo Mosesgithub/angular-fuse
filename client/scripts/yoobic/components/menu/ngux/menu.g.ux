@@ -1,0 +1,24 @@
+<Panel ux:Class="Menu">
+    <EdgeNavigator Active="{var0}" HitTestMode="LocalBoundsAndChildren">
+        <DockPanel ux:Name="main" ClipToBounds="true">
+            <Panel Items="{router_outlet}" MatchKey="type">
+                <MissionsList ux:Case="MissionsList_Scope0" />
+            </Panel>
+            <Translation ux:Name="mainAppTranslation" />
+        </DockPanel>
+        <Panel Items="{children1}" MatchKey="type" Width="250" ux:Name="menu" Background="DarkBg" Clicked="{callback0}" EdgeNavigation.Edge="Left">
+            <StackPanel ux:Case="Menu_Scope2" ux:Name="user">
+                <Panel Height="30" />
+                <Circle Width="85" Height="85">
+                    <ImageFill Url="{var0}" />
+                    <Stroke Width="1" Brush="BalancedBg" />
+                </Circle>
+                <Text Value="{var1}" />
+                <Text Value="Logout" Clicked="{callback0}" />
+            </StackPanel>
+            <ActivatingAnimation>
+                <Change mainAppTranslation.X="250" />
+            </ActivatingAnimation>
+        </Panel>
+    </EdgeNavigator>
+</Panel>

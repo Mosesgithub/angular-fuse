@@ -1,0 +1,5 @@
+<Menu_Scope0 [var0]="menuState" (callback0)="toggleMenu(false)">
+    <router-outlet></router-outlet>
+    <Menu_Scope2 *ngIf="user" var0="{{user.imageData}}" var1="{{user.username}}" (callback0)="logout()" collection="children1">
+    </Menu_Scope2>
+</Menu_Scope0>

@@ -1,0 +1,7 @@
+<Grid ux:Class="HeaderBar" RowData="1*,1" ColumnData="auto,1*,auto" >
+    <StackPanel ux:Name="leftIcons" />
+    <Text ux:Name="title" TextColor="{Resource TextColor}" Font="{Resource Font}"  TextAlignment="Center" Alignment="VerticalCenter" />
+    <StackPanel ux:Name="rightIcons" />
+    <Rectangle Height="1" ColumnSpan="3" Fill="{Resource BorderColor}" />
+    <Rectangle Layer="Background" Fill="{Resource Background}"/>
+</Grid>

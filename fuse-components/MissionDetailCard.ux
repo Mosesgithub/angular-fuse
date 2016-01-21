@@ -1,0 +1,25 @@
+<Panel ux:Class="MissionDetailCard" ux:Name="MySelf" Height="250" Visibility="Collapsed">
+
+    <Rectangle ux:Name="BigImageR">
+        <ImageFill ux:Name="BigImage" StretchMode="UniformToFill" />
+        <LayoutAnimation>
+            <Move Vector="1" RelativeTo="WorldPositionChange" Duration="0.3" Easing="SinusoidalInOut" />
+            <Resize Vector="1" RelativeTo="SizeChange" Duration="0.3" Easing="SinusoidalInOut" />
+            <Change BackImageR.Opacity="1" Duration="0.3" />
+        </LayoutAnimation>
+    </Rectangle>
+
+    <!-- outgoing transitional image -->
+    <Rectangle Opacity="0" ux:Name="BackImageR">
+        <ImageFill ux:Name="BackImage" StretchMode="UniformToFill" />
+    </Rectangle>
+
+    <!-- the background when no image -->
+    <Rectangle Fill="1,1,1,1" />
+
+    <OnUserEvent Name="SelectItem" Handler="SelectItem">
+    	<Set MySelf.Visibility="Visible"/>
+        <TransitionLayout TargetNode="BigImageR" ux:Name="BigTrans" />
+    </OnUserEvent>
+
+</Panel>

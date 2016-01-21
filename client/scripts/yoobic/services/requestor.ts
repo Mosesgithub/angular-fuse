@@ -65,7 +65,9 @@ export class Requestor {
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
         if (this.authToken.token) {
-            headers.append('Authorizaton', 'Bearer ' + this.authToken.token);
+            headers.append('Authorization', 'Bearer ' + this.authToken.token);
+        } else {
+            headers.append('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMC4wLjAuMDo1MDIyMS8iLCJzdWIiOiI1NGY0NjBkMzFlOTNkZmY4M2QwMDQ2MzgiLCJleHAiOjE0NTU5MjA0OTcsImlhdCI6MTQ1MzMyODQ5NywidXNlcm5hbWUiOiJrZXZpbnRlYW1AeW9vYmljLmNvbSIsImVtYWlsIjoiYWJyaWxsaW9uQHlvb2JpYy5jIiwiX2lkIjoiNTRmNDYwZDMxZTkzZGZmODNkMDA0NjM4In0.sZjHUxQkOa9WAZ0w7IBWQts6Rdt_oQeSAiSdDVf_85A');
         }
         return headers;
     }

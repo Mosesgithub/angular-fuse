@@ -1,0 +1,20 @@
+<DockPanel ux:Class="Login">
+    <Rectangle Height="200">
+        <Image File="../ressources/logo_collective_w.png" />
+    </Rectangle>
+    <StackPanel Dock="Bottom" Margin="30">
+        <Grid RowCount="2" ColumnCount="2" Margin="0">
+            <Button Clicked="{callback0}" Text="Sign Up here" Height="45" Margin="10,0,10,15" ColumnSpan="2" />
+            <Button Clicked="{callback1}" Text="Login" Height="45" Margin="10,0,5,10" />
+            <Button Clicked="{callback2}" Name="SignUpButton" Text="Sign up" Height="45" Margin="5,0,10,10" />
+        </Grid>
+    </StackPanel>
+    <Video File="../ressources/market.mp4" Layer="Background" AutoPlay="true" IsLooping="true" StretchMode="UniformToFill" Background="DarkBg" Opacity="0.3" Padding="-10" />
+    <Rectangle Layer="Background" Fill="DarkBg" />
+    <AddingAnimation>
+        <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+    </AddingAnimation>
+    <RemovingAnimation>
+        <Move X="1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+    </RemovingAnimation>
+</DockPanel>

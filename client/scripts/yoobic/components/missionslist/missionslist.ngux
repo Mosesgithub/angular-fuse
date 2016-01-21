@@ -1,14 +1,30 @@
-<Panel ng:Selector="MissionsList">
-    <ScrollView>
+<DockPanel ng:Selector="MissionsList" Background="StableBg">
+    <HeaderBar Title="My Missions" Dock="Top">
+        <SolidColor ux:Key="Background" ux:Ref="LightBg" />
+        <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
+        <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
+            <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-menu}" (Clicked)="showMenu()"></Text>
+        </Rectangle>
+        <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
+            <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}" (Clicked)="refreshData()"></Text>
+        </Rectangle>
+    </HeaderBar>
+    <UserEvent Name="SelectItem" />
+
+    <MissionDetailCard Dock="Top"></MissionDetailCard>
+
+    <ScrollView ux:Name="mainLayout">
         <StackPanel>
-            <Text Value="Hello {{user.email}}" Height="40"></Text>
-            <Rectangle *ngFor="#m of missions" Height="200" Margin="10" Fill="DarkBg" />
+            <Panel *ngFor="#m of missions" Margin="10,10,10,5">
+                <ng:MissionCard [ng:mission]="m"></ng:MissionCard>
+            </Panel>
         </StackPanel>
     </ScrollView>
+
     <AddingAnimation>
         <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
     </AddingAnimation>
     <RemovingAnimation>
         <Move X="1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
     </RemovingAnimation>
-</Panel>
+</DockPanel>
