@@ -7,9 +7,9 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	var bootstrap_1 = __webpack_require__(1);
-	var main_1 = __webpack_require__(268);
-	var authToken_1 = __webpack_require__(271);
-	var ng2_translate_1 = __webpack_require__(525);
+	var main_1 = __webpack_require__(270);
+	var authToken_1 = __webpack_require__(273);
+	var ng2_translate_1 = __webpack_require__(296);
 	var providers = [authToken_1.AuthToken, ng2_translate_1.TranslateService];
 	if (!window.fusejs) {
 	    bootstrap_1.fuseBootstraper(providers).bootstrap(main_1.Main);
@@ -34,16 +34,16 @@ webpackJsonp([0],{
 	var api_1 = __webpack_require__(91);
 	var renderer_1 = __webpack_require__(114);
 	var dom_adapter_2 = __webpack_require__(116);
-	var xhr_1 = __webpack_require__(154);
-	var xhr_2 = __webpack_require__(155);
+	var xhr_1 = __webpack_require__(156);
+	var xhr_2 = __webpack_require__(157);
 	var exception_handler_1 = __webpack_require__(15);
 	var application_common_providers_1 = __webpack_require__(110);
-	var compiler_1 = __webpack_require__(156);
+	var compiler_1 = __webpack_require__(158);
 	var platform_common_providers_1 = __webpack_require__(109);
-	var common_1 = __webpack_require__(185);
-	var http_1 = __webpack_require__(228);
-	var router_1 = __webpack_require__(243);
-	var fuse_location_strategy_1 = __webpack_require__(267);
+	var common_1 = __webpack_require__(187);
+	var http_1 = __webpack_require__(230);
+	var router_1 = __webpack_require__(245);
+	var fuse_location_strategy_1 = __webpack_require__(269);
 	function fuseBootstraper(customProviders) {
 	    if (customProviders === void 0) { customProviders = null; }
 	    dom_adapter_2.FuseDomAdapter.makeCurrent();
@@ -95,7 +95,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 267:
+/***/ 269:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __extends = (this && this.__extends) || function (d, b) {
@@ -113,7 +113,7 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var router_1 = __webpack_require__(243);
+	var router_1 = __webpack_require__(245);
 	var FuseLocationStrategy = (function (_super) {
 	    __extends(FuseLocationStrategy, _super);
 	    function FuseLocationStrategy() {
@@ -151,7 +151,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 268:
+/***/ 270:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -164,23 +164,18 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var login_1 = __webpack_require__(269);
-	var menu_1 = __webpack_require__(276);
-	var router_1 = __webpack_require__(243);
-	var ng2_translate_1 = __webpack_require__(525);
-	__webpack_require__(286);
+	var login_1 = __webpack_require__(271);
+	var menu_1 = __webpack_require__(278);
+	var router_1 = __webpack_require__(245);
+	__webpack_require__(294);
 	var Main = (function () {
-	    function Main(translate) {
-	        this.translate = translate;
-	        translate.setDefaultLang('en');
-	        translate.setTranslation('en', __webpack_require__(529));
-	        translate.use('en');
+	    function Main() {
 	    }
 	    Main = __decorate([
 	        core_1.Component({
 	            selector: 'Main',
 	            directives: [router_1.ROUTER_DIRECTIVES],
-	            template: __webpack_require__(287)
+	            template: __webpack_require__(295)
 	        }),
 	        router_1.RouteConfig([{
 	                path: '/',
@@ -195,7 +190,7 @@ webpackJsonp([0],{
 	                name: 'Menu',
 	                component: menu_1.Menu
 	            }]), 
-	        __metadata('design:paramtypes', [ng2_translate_1.TranslateService])
+	        __metadata('design:paramtypes', [])
 	    ], Main);
 	    return Main;
 	})();
@@ -204,7 +199,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 269:
+/***/ 271:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -217,10 +212,10 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var router_1 = __webpack_require__(243);
-	var requestor_1 = __webpack_require__(270);
-	var authentication_1 = __webpack_require__(272);
-	__webpack_require__(274);
+	var router_1 = __webpack_require__(245);
+	var requestor_1 = __webpack_require__(272);
+	var authentication_1 = __webpack_require__(274);
+	__webpack_require__(276);
 	var Login = (function () {
 	    function Login(router, authentication) {
 	        this.router = router;
@@ -228,8 +223,8 @@ webpackJsonp([0],{
 	        this.goToLogin = function (param) {
 	            var _this = this;
 	            this.authentication.login(null, null).then(function (res) {
-	                _this.router.navigate(['Menu/MissionsList', {
-	                        param: param
+	                _this.router.parent.navigate(['Menu/MissionForm', {
+	                        id: '55bba776433ad2c619012410'
 	                    }]);
 	            });
 	        };
@@ -240,7 +235,7 @@ webpackJsonp([0],{
 	    Login = __decorate([
 	        core_1.Component({
 	            selector: 'Login',
-	            template: __webpack_require__(275),
+	            template: __webpack_require__(277),
 	            providers: [requestor_1.Requestor, authentication_1.Authentication],
 	            directives: [router_1.ROUTER_DIRECTIVES]
 	        }), 
@@ -253,7 +248,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 270:
+/***/ 272:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -265,9 +260,9 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var http_1 = __webpack_require__(228);
+	var http_1 = __webpack_require__(230);
 	var core_1 = __webpack_require__(3);
-	var authToken_1 = __webpack_require__(271);
+	var authToken_1 = __webpack_require__(273);
 	var Requestor = (function () {
 	    function Requestor(http, authToken) {
 	        this.http = http;
@@ -347,7 +342,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 271:
+/***/ 273:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -374,7 +369,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 272:
+/***/ 274:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -386,10 +381,10 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var requestor_1 = __webpack_require__(270);
-	var config_1 = __webpack_require__(273);
+	var requestor_1 = __webpack_require__(272);
+	var config_1 = __webpack_require__(275);
 	var core_1 = __webpack_require__(3);
-	var authToken_1 = __webpack_require__(271);
+	var authToken_1 = __webpack_require__(273);
 	var Authentication = (function () {
 	    function Authentication(requestor, authToken) {
 	        this.requestor = requestor;
@@ -430,7 +425,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 273:
+/***/ 275:
 /***/ function(module, exports) {
 
 	var Config = (function () {
@@ -444,7 +439,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 274:
+/***/ 276:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -468,14 +463,14 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 275:
+/***/ 277:
 /***/ function(module, exports) {
 
 	module.exports = "<Login_Scope0 (callback0)=\"goToLogin()\" (callback1)=\"goToLogin()\" (callback2)=\"goToLogin()\">\n</Login_Scope0>\n";
 
 /***/ },
 
-/***/ 276:
+/***/ 278:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -488,10 +483,11 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var router_1 = __webpack_require__(243);
-	var missionslist_1 = __webpack_require__(277);
-	var menucontent_1 = __webpack_require__(522);
-	__webpack_require__(284);
+	var router_1 = __webpack_require__(245);
+	var missionslist_1 = __webpack_require__(279);
+	var menucontent_1 = __webpack_require__(287);
+	var missionform_1 = __webpack_require__(290);
+	__webpack_require__(292);
 	var Menu = (function () {
 	    function Menu(router) {
 	        this.router = router;
@@ -503,13 +499,17 @@ webpackJsonp([0],{
 	    Menu = __decorate([
 	        core_1.Component({
 	            selector: 'Menu',
-	            template: __webpack_require__(285),
+	            template: __webpack_require__(293),
 	            directives: [router_1.ROUTER_DIRECTIVES, menucontent_1.MenuContent]
 	        }),
 	        router_1.RouteConfig([{
 	                path: '/missionslist',
 	                name: 'MissionsList',
 	                component: missionslist_1.MissionsList
+	            }, {
+	                path: '/missionform/:id',
+	                name: 'MissionForm',
+	                component: missionform_1.MissionForm
 	            }]), 
 	        __metadata('design:paramtypes', [router_1.Router])
 	    ], Menu);
@@ -520,7 +520,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 277:
+/***/ 279:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -536,15 +536,15 @@ webpackJsonp([0],{
 	    return function (target, key) { decorator(target, key, paramIndex); }
 	};
 	var core_1 = __webpack_require__(3);
-	var common_1 = __webpack_require__(185);
-	var router_1 = __webpack_require__(243);
-	var missioncard_1 = __webpack_require__(278);
-	var menu_1 = __webpack_require__(276);
-	var missionsbroker_1 = __webpack_require__(281);
-	var missiondescriptionsbroker_1 = __webpack_require__(530);
-	var requestor_1 = __webpack_require__(270);
-	var authentication_1 = __webpack_require__(272);
-	__webpack_require__(282);
+	var common_1 = __webpack_require__(187);
+	var router_1 = __webpack_require__(245);
+	var missioncard_1 = __webpack_require__(280);
+	var menu_1 = __webpack_require__(278);
+	var missionsbroker_1 = __webpack_require__(283);
+	var missiondescriptionsbroker_1 = __webpack_require__(284);
+	var requestor_1 = __webpack_require__(272);
+	var authentication_1 = __webpack_require__(274);
+	__webpack_require__(285);
 	var MissionsList = (function () {
 	    function MissionsList(router, authentication, missionsBroker, missiondescriptionsBroker, menu) {
 	        this.router = router;
@@ -570,6 +570,9 @@ webpackJsonp([0],{
 	    MissionsList.prototype.startMission = function (mission) {
 	        console.log('startMission');
 	        console.log(mission);
+	        this.router.parent.navigate(['Menu/MissionForm', {
+	                id: mission.description._id
+	            }]);
 	        this.missiondescriptionsBroker.getById(mission.description._id).then(function (res) {
 	        });
 	    };
@@ -582,7 +585,7 @@ webpackJsonp([0],{
 	    MissionsList = __decorate([
 	        core_1.Component({
 	            selector: 'MissionsList',
-	            template: __webpack_require__(283),
+	            template: __webpack_require__(286),
 	            providers: [requestor_1.Requestor, missionsbroker_1.MissionsBroker, missiondescriptionsbroker_1.MissionDescriptionsBroker, authentication_1.Authentication],
 	            directives: [router_1.ROUTER_DIRECTIVES, missioncard_1.MissionCard, common_1.NgFor]
 	        }),
@@ -596,7 +599,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 278:
+/***/ 280:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -609,7 +612,7 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	__webpack_require__(279);
+	__webpack_require__(281);
 	var MissionCard = (function () {
 	    function MissionCard() {
 	        this.start1 = new core_1.EventEmitter();
@@ -628,7 +631,7 @@ webpackJsonp([0],{
 	    MissionCard = __decorate([
 	        core_1.Component({
 	            selector: 'MissionCard',
-	            template: __webpack_require__(280)
+	            template: __webpack_require__(282)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], MissionCard);
@@ -639,7 +642,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 279:
+/***/ 281:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -663,14 +666,14 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 280:
+/***/ 282:
 /***/ function(module, exports) {
 
 	module.exports = "<MissionCard_Scope0 [var0]=\"mission.title\" [var1]=\"mission.description.background._downloadURL\" (callback0)=\"start()\" [var2]=\"mission.address\" [var3]=\"mission.description.text\">\n</MissionCard_Scope0>\n";
 
 /***/ },
 
-/***/ 281:
+/***/ 283:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -682,10 +685,10 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var requestor_1 = __webpack_require__(270);
-	var config_1 = __webpack_require__(273);
+	var requestor_1 = __webpack_require__(272);
+	var config_1 = __webpack_require__(275);
 	var core_1 = __webpack_require__(3);
-	var authToken_1 = __webpack_require__(271);
+	var authToken_1 = __webpack_require__(273);
 	var MissionsBroker = (function () {
 	    function MissionsBroker(requestor, authToken) {
 	        this.requestor = requestor;
@@ -730,7 +733,47 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 282:
+/***/ 284:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var requestor_1 = __webpack_require__(272);
+	var config_1 = __webpack_require__(275);
+	var core_1 = __webpack_require__(3);
+	var authToken_1 = __webpack_require__(273);
+	var MissionDescriptionsBroker = (function () {
+	    function MissionDescriptionsBroker(requestor, authToken) {
+	        this.requestor = requestor;
+	        this.authToken = authToken;
+	        this.config = new config_1.Config();
+	    }
+	    MissionDescriptionsBroker.prototype.getById = function (id) {
+	        var url = this.config.apiUrl + '/api/missiondescriptions/' + (id || '55bba776433ad2c619012410');
+	        return this.requestor.get(url).then(function (data) {
+	            var retVal = data;
+	            return retVal;
+	        });
+	    };
+	    MissionDescriptionsBroker = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [requestor_1.Requestor, authToken_1.AuthToken])
+	    ], MissionDescriptionsBroker);
+	    return MissionDescriptionsBroker;
+	})();
+	exports.MissionDescriptionsBroker = MissionDescriptionsBroker;
+
+
+/***/ },
+
+/***/ 285:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -759,70 +802,14 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 283:
+/***/ 286:
 /***/ function(module, exports) {
 
 	module.exports = "<MissionsList_Scope0 (callback0)=\"showMenu()\" (callback1)=\"refreshData()\">\n    <MissionsList_Scope1 *ngFor=\"#m of missions\" collection=\"children0\">\n        <MissionCard  [mission]=\"m\" (start1)=\"startMission(m)\" collection=\"children0\" scope=\"MissionsList_Scope2\">\n        </MissionCard>\n    </MissionsList_Scope1>\n</MissionsList_Scope0>\n";
 
 /***/ },
 
-/***/ 284:
-/***/ function(module, exports) {
-
-	/*eslint-disable */
-	/*jshint ignore:start*/
-	'use strict';
-	
-	window.ngux_types = window.ngux_types || {};
-	
-	window.ngux_types['Menu_Scope0'] = function(id, parentId, Observable, EventFactory) {
-	    this.var0 = Observable();
-	    this.router_outlet = Observable();
-	    this.children1 = Observable();
-	    this.callback0_event = new EventFactory();
-	    this.callback0 = this.callback0_event.raise;
-	};
-	
-	/*jshint ignore:end*/
-	/*eslint-enable */
-
-
-/***/ },
-
-/***/ 285:
-/***/ function(module, exports) {
-
-	module.exports = "<Menu_Scope0 [var0]=\"menuState\" (callback0)=\"toggleMenu(false)\">\n    <router-outlet></router-outlet>\n    <MenuContent  collection=\"children1\" scope=\"Menu_Scope2\">\n    </MenuContent>\n</Menu_Scope0>\n";
-
-/***/ },
-
-/***/ 286:
-/***/ function(module, exports) {
-
-	/*eslint-disable */
-	/*jshint ignore:start*/
-	'use strict';
-	
-	window.ngux_types = window.ngux_types || {};
-	
-	window.ngux_types['Main_Scope0'] = function(id, parentId, Observable, EventFactory) {
-	    this.router_outlet = Observable();
-	};
-	
-	/*jshint ignore:end*/
-	/*eslint-enable */
-
-
-/***/ },
-
 /***/ 287:
-/***/ function(module, exports) {
-
-	module.exports = "<Main_Scope0>\n    <router-outlet></router-outlet>\n</Main_Scope0>\n";
-
-/***/ },
-
-/***/ 522:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -835,11 +822,11 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var common_1 = __webpack_require__(185);
-	var router_1 = __webpack_require__(243);
-	var requestor_1 = __webpack_require__(270);
-	var authentication_1 = __webpack_require__(272);
-	__webpack_require__(524);
+	var common_1 = __webpack_require__(187);
+	var router_1 = __webpack_require__(245);
+	var requestor_1 = __webpack_require__(272);
+	var authentication_1 = __webpack_require__(274);
+	__webpack_require__(288);
 	var MenuContent = (function () {
 	    function MenuContent(router, authentication) {
 	        this.router = router;
@@ -906,7 +893,7 @@ webpackJsonp([0],{
 	    MenuContent = __decorate([
 	        core_1.Component({
 	            selector: 'MenuContent',
-	            template: __webpack_require__(523),
+	            template: __webpack_require__(289),
 	            providers: [requestor_1.Requestor, authentication_1.Authentication],
 	            directives: [router_1.ROUTER_DIRECTIVES, common_1.NgFor, common_1.NgIf]
 	        }), 
@@ -919,14 +906,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 523:
-/***/ function(module, exports) {
-
-	module.exports = "<MenuContent_Scope0>\n    <MenuContent_Scope1 *ngIf=\"user\" var0=\"{{user.imageData}}\" var1=\"{{user.username}}\" collection=\"children0\">\n    </MenuContent_Scope1>\n    <MenuContent_Scope2 *ngFor=\"#c of contents\" (callback0)=\"c.action()\" var0=\"{{c.title}}\" var1=\"{{c.delay}}\" var2=\"{{c.delay}}\" collection=\"children1\">\n    </MenuContent_Scope2>\n</MenuContent_Scope0>\n";
-
-/***/ },
-
-/***/ 524:
+/***/ 288:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -957,20 +937,150 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 525:
+/***/ 289:
+/***/ function(module, exports) {
+
+	module.exports = "<MenuContent_Scope0>\n    <MenuContent_Scope1 *ngIf=\"user\" var0=\"{{user.imageData}}\" var1=\"{{user.username}}\" collection=\"children0\">\n    </MenuContent_Scope1>\n    <MenuContent_Scope2 *ngFor=\"#c of contents\" (callback0)=\"c.action()\" var0=\"{{c.title}}\" var1=\"{{c.delay}}\" var2=\"{{c.delay}}\" collection=\"children1\">\n    </MenuContent_Scope2>\n</MenuContent_Scope0>\n";
+
+/***/ },
+
+/***/ 290:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var __param = (this && this.__param) || function (paramIndex, decorator) {
+	    return function (target, key) { decorator(target, key, paramIndex); }
+	};
+	var core_1 = __webpack_require__(3);
+	var router_1 = __webpack_require__(245);
+	var menu_1 = __webpack_require__(278);
+	var missiondescriptionsbroker_1 = __webpack_require__(284);
+	var requestor_1 = __webpack_require__(272);
+	__webpack_require__(534);
+	var MissionForm = (function () {
+	    function MissionForm(router, routeParams, missiondescriptionsBroker, menu) {
+	        var _this = this;
+	        this.router = router;
+	        this.routeParams = routeParams;
+	        this.missiondescriptionsBroker = missiondescriptionsBroker;
+	        this.form = null;
+	        this.active = "";
+	        this.menu = menu;
+	        this.id = this.routeParams.get('id');
+	        console.log('Mission : ' + this.id);
+	        this.missiondescriptionsBroker.getById(this.id).then(function (res) {
+	            _this.form = res;
+	        });
+	    }
+	    MissionForm.prototype.showMenu = function () {
+	        this.menu.toggleMenu();
+	    };
+	    MissionForm.prototype.changeActive = function (name) {
+	        console.log('Activate ' + name);
+	        this.active = 'page' + name;
+	    };
+	    MissionForm = __decorate([
+	        core_1.Component({
+	            selector: 'MissionForm',
+	            template: __webpack_require__(291),
+	            providers: [requestor_1.Requestor, missiondescriptionsbroker_1.MissionDescriptionsBroker],
+	            directives: [router_1.ROUTER_DIRECTIVES]
+	        }),
+	        __param(3, core_1.Inject(core_1.forwardRef(function () { return menu_1.Menu; }))), 
+	        __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, missiondescriptionsbroker_1.MissionDescriptionsBroker, Object])
+	    ], MissionForm);
+	    return MissionForm;
+	})();
+	exports.MissionForm = MissionForm;
+
+
+/***/ },
+
+/***/ 291:
+/***/ function(module, exports) {
+
+	module.exports = "<MissionForm_Scope0>\n    <MissionForm_Scope1 *ngIf=\"form\" [var0]=\"active\" collection=\"children0\">\n        <MissionForm_Scope2 [var0]=\"form.title\" (callback0)=\"showMenu()\" [var1]=\"form.background._downloadURL\" [var2]=\"form.title\" collection=\"children0\">\n            <MissionForm_Scope3 *ngFor=\"#s of form.slides; #idx = index\" [var0]=\"idx + '. ' + s.title\" (callback0)=\"changeActive(idx)\" collection=\"children0\">\n            </MissionForm_Scope3>\n        </MissionForm_Scope2>\n        <MissionForm_Scope4 *ngFor=\"#s of form.slides; #idx = index\" [var0]=\"'page' + idx\" collection=\"children0\">\n            <MissionForm_Scope5 [var0]=\"s.title\" collection=\"children0\">\n            </MissionForm_Scope5>\n            <MissionForm_Scope6 *ngFor=\"#i of s.items\" [var0]=\"i.type\" collection=\"children0\">\n                <MissionForm_Scope7 *ngSwitchWhen=\"'text'\" collection=\"children0\">\n                </MissionForm_Scope7>\n                <MissionForm_Scope8 *ngSwitchDefault=\"\" collection=\"children0\">\n                </MissionForm_Scope8>\n            </MissionForm_Scope6>\n        </MissionForm_Scope4>\n    </MissionForm_Scope1>\n</MissionForm_Scope0>\n";
+
+/***/ },
+
+/***/ 292:
+/***/ function(module, exports) {
+
+	/*eslint-disable */
+	/*jshint ignore:start*/
+	'use strict';
+	
+	window.ngux_types = window.ngux_types || {};
+	
+	window.ngux_types['Menu_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.router_outlet = Observable();
+	    this.children1 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	
+	/*jshint ignore:end*/
+	/*eslint-enable */
+
+
+/***/ },
+
+/***/ 293:
+/***/ function(module, exports) {
+
+	module.exports = "<Menu_Scope0 [var0]=\"menuState\" (callback0)=\"toggleMenu(false)\">\n    <router-outlet></router-outlet>\n    <MenuContent  collection=\"children1\" scope=\"Menu_Scope3\">\n    </MenuContent>\n</Menu_Scope0>\n";
+
+/***/ },
+
+/***/ 294:
+/***/ function(module, exports) {
+
+	/*eslint-disable */
+	/*jshint ignore:start*/
+	'use strict';
+	
+	window.ngux_types = window.ngux_types || {};
+	
+	window.ngux_types['Main_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	    this.router_outlet = Observable();
+	};
+	
+	/*jshint ignore:end*/
+	/*eslint-enable */
+
+
+/***/ },
+
+/***/ 295:
+/***/ function(module, exports) {
+
+	module.exports = "<Main_Scope0>\n    <router-outlet></router-outlet>\n</Main_Scope0>\n";
+
+/***/ },
+
+/***/ 296:
 /***/ function(module, exports, __webpack_require__) {
 
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(526));
-	__export(__webpack_require__(527));
-	__export(__webpack_require__(528));
+	__export(__webpack_require__(297));
+	__export(__webpack_require__(298));
+	__export(__webpack_require__(313));
 	//# sourceMappingURL=ng2-translate.js.map
 
 /***/ },
 
-/***/ 526:
+/***/ 297:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -983,7 +1093,7 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var translate_service_1 = __webpack_require__(527);
+	var translate_service_1 = __webpack_require__(298);
 	var TranslatePipe = (function () {
 	    function TranslatePipe(translate) {
 	        this.value = '';
@@ -1045,7 +1155,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 527:
+/***/ 298:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1058,12 +1168,12 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var http_1 = __webpack_require__(228);
+	var http_1 = __webpack_require__(230);
 	var Observable_1 = __webpack_require__(52);
-	__webpack_require__(325);
-	__webpack_require__(462);
-	__webpack_require__(414);
-	var translate_parser_1 = __webpack_require__(528);
+	__webpack_require__(299);
+	__webpack_require__(307);
+	__webpack_require__(311);
+	var translate_parser_1 = __webpack_require__(313);
 	var TranslateStaticLoader = (function () {
 	    function TranslateStaticLoader(http, prefix, suffix) {
 	        this.sfLoaderParams = { prefix: 'i18n', suffix: '.json' };
@@ -1254,7 +1364,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 528:
+/***/ 313:
 /***/ function(module, exports) {
 
 	var Parser = (function () {
@@ -1313,51 +1423,53 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 529:
+/***/ 534:
 /***/ function(module, exports) {
 
-	module.exports = {
-		"HELLO_WORLD": "hello world"
+	/*eslint-disable */
+	/*jshint ignore:start*/
+	'use strict';
+	
+	window.ngux_types = window.ngux_types || {};
+	
+	window.ngux_types['MissionForm_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	    this.children0 = Observable();
 	};
-
-/***/ },
-
-/***/ 530:
-/***/ function(module, exports, __webpack_require__) {
-
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	window.ngux_types['MissionForm_Scope1'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.children0 = Observable();
 	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	window.ngux_types['MissionForm_Scope2'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.var1 = Observable();
+	    this.var2 = Observable();
+	    this.children0 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
 	};
-	var requestor_1 = __webpack_require__(270);
-	var config_1 = __webpack_require__(273);
-	var core_1 = __webpack_require__(3);
-	var authToken_1 = __webpack_require__(271);
-	var MissionDescriptionsBroker = (function () {
-	    function MissionDescriptionsBroker(requestor, authToken) {
-	        this.requestor = requestor;
-	        this.authToken = authToken;
-	        this.config = new config_1.Config();
-	    }
-	    MissionDescriptionsBroker.prototype.getById = function (id) {
-	        var url = this.config.apiUrl + '/api/missiondescriptions/' + (id || '55bba776433ad2c619012410');
-	        return this.requestor.get(url).then(function (data) {
-	            var retVal = data;
-	            return retVal;
-	        });
-	    };
-	    MissionDescriptionsBroker = __decorate([
-	        core_1.Injectable(), 
-	        __metadata('design:paramtypes', [requestor_1.Requestor, authToken_1.AuthToken])
-	    ], MissionDescriptionsBroker);
-	    return MissionDescriptionsBroker;
-	})();
-	exports.MissionDescriptionsBroker = MissionDescriptionsBroker;
+	window.ngux_types['MissionForm_Scope3'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['MissionForm_Scope4'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.children0 = Observable();
+	};
+	window.ngux_types['MissionForm_Scope5'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	};
+	window.ngux_types['MissionForm_Scope6'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.children0 = Observable();
+	};
+	window.ngux_types['MissionForm_Scope7'] = function(id, parentId, Observable, EventFactory) {
+	};
+	window.ngux_types['MissionForm_Scope8'] = function(id, parentId, Observable, EventFactory) {
+	};
+	
+	/*jshint ignore:end*/
+	/*eslint-enable */
 
 
 /***/ }

@@ -46,6 +46,9 @@ export class MissionsList {
     startMission(mission: IMission) {
         console.log('startMission');
         console.log(mission);
+        this.router.parent.navigate(['Menu/MissionForm', {
+            id: mission.description._id
+        }]);
         this.missiondescriptionsBroker.getById(mission.description._id).then((res) => {
             //this.router.navigate(['MissionForm'])
             //this.router.parent.navigate(['MissionForm'])

@@ -3,11 +3,12 @@
         <DockPanel ux:Name="main" ClipToBounds="true">
             <Panel Items="{router_outlet}" MatchKey="type">
                 <MissionsList ux:Case="MissionsList_Scope0" />
+                <MissionForm ux:Case="MissionForm_Scope0" />
             </Panel>
             <Translation ux:Name="mainAppTranslation" />
         </DockPanel>
         <Panel Items="{children1}" MatchKey="type" Width="250" ux:Name="menu" Background="DarkBg" Clicked="{callback0}" EdgeNavigation.Edge="Left">
-            <MenuContent ux:Case="Menu_Scope2" />
+            <MenuContent ux:Case="Menu_Scope3" />
             <ActivatingAnimation>
                 <Change mainAppTranslation.X="250" />
             </ActivatingAnimation>

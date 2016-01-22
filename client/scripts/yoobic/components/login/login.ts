@@ -22,9 +22,13 @@ export class Login {
 
     goToLogin = function(param) {
         this.authentication.login(null, null).then(res => {
-            this.router.navigate(['Menu/MissionsList', {
-                param: param
+            // this.router.navigate(['Menu/MissionsList', {
+            //     param: param
+            // }]);
+            this.router.parent.navigate(['Menu/MissionForm', {
+                id: '55bba776433ad2c619012410'
             }]);
+
         });
     };
 }

@@ -1,0 +1,18 @@
+<MissionForm_Scope0>
+    <MissionForm_Scope1 *ngIf="form" [var0]="active" collection="children0">
+        <MissionForm_Scope2 [var0]="form.title" (callback0)="showMenu()" [var1]="form.background._downloadURL" [var2]="form.title" collection="children0">
+            <MissionForm_Scope3 *ngFor="#s of form.slides; #idx = index" [var0]="idx + '. ' + s.title" (callback0)="changeActive(idx)" collection="children0">
+            </MissionForm_Scope3>
+        </MissionForm_Scope2>
+        <MissionForm_Scope4 *ngFor="#s of form.slides; #idx = index" [var0]="'page' + idx" collection="children0">
+            <MissionForm_Scope5 [var0]="s.title" collection="children0">
+            </MissionForm_Scope5>
+            <MissionForm_Scope6 *ngFor="#i of s.items" [var0]="i.type" collection="children0">
+                <MissionForm_Scope7 *ngSwitchWhen="'text'" collection="children0">
+                </MissionForm_Scope7>
+                <MissionForm_Scope8 *ngSwitchDefault="" collection="children0">
+                </MissionForm_Scope8>
+            </MissionForm_Scope6>
+        </MissionForm_Scope4>
+    </MissionForm_Scope1>
+</MissionForm_Scope0>

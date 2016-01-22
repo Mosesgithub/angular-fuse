@@ -1,0 +1,56 @@
+<Panel Items="{children0}" MatchKey="type" ux:Class="MissionForm" Background="StableBg">
+    <Rectangle Layer="Background" Fill="DarkBg" />
+    <PageControl ux:Case="MissionForm_Scope1" Items="{children0}" MatchKey="type" Active="{var0}">
+        <MyPage ux:Case="MissionForm_Scope2" ux:Name="summary">
+            <DockPanel>
+                <HeaderBar Title="{var0}" Dock="Top">
+                    <SolidColor ux:Key="Background" ux:Ref="LightBg" />
+                    <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
+                    <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
+                        <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-menu}" Clicked="{callback0}" />
+                    </Rectangle>
+                    <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
+                        <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}" />
+                    </Rectangle>
+                </HeaderBar>
+                <Panel Dock="Top">
+                    <Rectangle ux:Name="headerOverlayMask" Fill="BlackBg" Opacity="0.6" />
+                    <Image ux:Name="headerImage" Url="{var1}" />
+                    <Text ux:Name="headerText" Value="{var2}" TextColor="#fff" Alignment="Center" Layer="Overlay" />
+                </Panel>
+                <Panel Dock="Fill">
+                    <ScrollView>
+                        <StackPanel Items="{children0}" MatchKey="type">
+                            <Rectangle ux:Case="MissionForm_Scope3" Fill="LightBg" Height="30" Margin="10">
+                                <Stroke Width="1" Brush="#eaeaea" />
+                                <Text Value="{var0}" Margin="3" Alignment="VerticalCenter" Clicked="{callback0}" />
+                            </Rectangle>
+                        </StackPanel>
+                        <ScrollingAnimation From="0" To="-1000">
+                            <Scale Target="headerImage" Factor="4" />
+                            <Scale Target="headerOverlayMask" Factor="4" />
+                            <Move Target="headerImage" Y="200" />
+                            <Move Target="headerOverlayMask" Y="200" />
+                            <Move Target="headerText" Y="200" />
+                        </ScrollingAnimation>
+                    </ScrollView>
+                </Panel>
+            </DockPanel>
+        </MyPage>
+        <MyPage ux:Case="MissionForm_Scope4" Name="{var0}">
+            <Panel>
+                <StackPanel Items="{children0}" MatchKey="type">
+                    <Text ux:Case="MissionForm_Scope5" Value="{var0}" />
+                    <Panel ux:Case="MissionForm_Scope6" Background="Yellow">
+                        <StackPanel>
+                            <Panel Items="{children0}" MatchKey="type" ngSwitch="{var0}">
+                                <Text ux:Case="MissionForm_Scope7">text</Text>
+                                <Text ux:Case="MissionForm_Scope8">default</Text>
+                            </Panel>
+                        </StackPanel>
+                    </Panel>
+                </StackPanel>
+            </Panel>
+        </MyPage>
+    </PageControl>
+</Panel>

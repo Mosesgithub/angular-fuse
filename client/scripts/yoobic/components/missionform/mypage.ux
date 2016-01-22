@@ -1,0 +1,18 @@
+<Page ux:Class="MyPage" ux:Name="self" Width="100%" Height="100%" Alignment="Center">
+    <Rectangle Layer="Background" Fill="StableBg"></Rectangle>
+
+    <WhileTrue Value="True" ux:Name="scaled">
+        <Scale Target="self" Factor="0.5" />
+
+        <EnteringAnimation Scale="0.01">
+            <Move X="-2" RelativeTo="Size" Easing="CubicOut" />
+        </EnteringAnimation>
+        <ExitingAnimation Scale="0.01">
+            <Move X="2" RelativeTo="Size" Easing="CubicOut" />
+        </ExitingAnimation>
+    </WhileTrue>
+
+    <Clicked>
+		<Toggle Target="scaled"/>
+    </Clicked>
+</Page>

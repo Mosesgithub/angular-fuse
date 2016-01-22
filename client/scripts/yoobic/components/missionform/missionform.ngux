@@ -1,0 +1,65 @@
+<Panel ng:Selector="MissionForm" Background="StableBg">
+    <Rectangle Layer="Background" Fill="DarkBg" />
+    <PageControl *ngIf="form" [Active]="active">
+
+        <MyPage ux:Name="summary" *ngFixed="true">
+
+            <DockPanel>
+
+                <HeaderBar [Title]="form.title" Dock="Top">
+                    <SolidColor ux:Key="Background" ux:Ref="LightBg" />
+                    <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
+                    <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
+                        <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-menu}" (Clicked)="showMenu()"></Text>
+                    </Rectangle>
+                    <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
+                        <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}"></Text>
+                    </Rectangle>
+                </HeaderBar>
+
+                <Panel Dock="Top">
+                    <Rectangle ux:Name="headerOverlayMask" Fill="BlackBg" Opacity="0.6"></Rectangle>
+                    <Image ux:Name="headerImage" [Url]="form.background._downloadURL">
+                    </Image>
+                    <Text ux:Name="headerText" [Value]="form.title" TextColor="#fff" Alignment="Center" Layer="Overlay">
+                    </Text>
+                </Panel>
+                <Panel Dock="Fill">
+                    <ScrollView>
+                        <StackPanel>
+                            <Rectangle Fill="LightBg" Height="30" Margin="10" *ngFor="#s of form.slides; #idx = index">
+                                <Stroke Width="1" Brush="#eaeaea"></Stroke>
+                                <Text [Value]="idx + '. ' + s.title" Margin="3" Alignment="VerticalCenter" (Clicked)="changeActive(idx)">
+                                </Text>
+                            </Rectangle>
+                        </StackPanel>
+                        <ScrollingAnimation From="0" To="-1000">
+                            <Scale Target="headerImage" Factor="4" />
+                            <Scale Target="headerOverlayMask" Factor="4" />
+                            <Move Target="headerImage" Y="200" />
+                            <Move Target="headerOverlayMask" Y="200" />
+                            <Move Target="headerText" Y="200" />
+                        </ScrollingAnimation>
+                    </ScrollView>
+                </Panel>
+            </DockPanel>
+
+        </MyPage>
+        <MyPage *ngFor="#s of form.slides; #idx = index" [Name]="'page' + idx">
+
+            <Panel>
+                <StackPanel>
+                    <Text [Value]="s.title" *ngFixed="true"></Text>
+                    <Panel *ngFor="#i of s.items" Background="Yellow">
+                        <StackPanel>
+                            <Panel [ngSwitch]="i.type">
+                                <Text *ngSwitchWhen="'text'">text</Text>
+                                <Text *ngSwitchDefault>default</Text>
+                            </Panel>
+                        </StackPanel>
+                    </Panel>
+                </StackPanel>
+            </Panel>
+        </MyPage>
+    </PageControl>
+</Panel>

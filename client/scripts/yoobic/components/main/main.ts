@@ -28,11 +28,11 @@ require('./ngux/main.js');
     }])
 
 export class Main {
-    constructor(public translate: TranslateService) {
-        translate.setDefaultLang('en');
-        //translate.useStaticFilesLoader('../translate', '.json');
-        translate.setTranslation('en', require('../../translate/en.json'));
-        translate.use('en');
+    constructor() {
+        //translate.setDefaultLang('en');
+        ////translate.useStaticFilesLoader('../translate', '.json');
+        //translate.setTranslation('en', require('../../translate/en.json'));
+        //translate.use('en');
         // translate.get('HELLO_WORLD').subscribe((res: string) => {
         //      console.log(res);
         // });

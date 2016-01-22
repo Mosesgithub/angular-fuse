@@ -3,6 +3,7 @@
         <DockPanel ux:Name="main" ClipToBounds="true">
             <router-outlet>
                 <ng:MissionsList></ng:MissionsList>
+                <ng:MissionForm></ng:MissionForm>
             </router-outlet>
             <Translation ux:Name="mainAppTranslation" />
         </DockPanel>
