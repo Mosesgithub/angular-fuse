@@ -8,19 +8,10 @@
         </DockPanel>
 
         <Panel Width="250" ux:Name="menu" Background="DarkBg" (Clicked)="toggleMenu(false)" EdgeNavigation.Edge="Left">
-            <StackPanel ux:Name="user" *ngIf="user">
-                <Panel Height="30" />
-                <Circle Width="85" Height="85">
-                    <ImageFill Url="{{user.imageData}}" />
-                    <Stroke Width="1" Brush="BalancedBg" />
-                </Circle>
-                <Text Value="{{user.username}}"></Text>
-                <Text Value="Logout" (Clicked)="logout()" /></Text>
-            </StackPanel>
+            <ng:MenuContent></ng:MenuContent>
             <ActivatingAnimation>
                 <Change mainAppTranslation.X="250" />
             </ActivatingAnimation>
         </Panel>
-
     </EdgeNavigator>
 </Panel>

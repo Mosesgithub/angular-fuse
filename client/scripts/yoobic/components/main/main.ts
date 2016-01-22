@@ -3,6 +3,7 @@ import {Component} from 'angular2/core';
 import {Login} from '../login/login';
 import {Menu} from '../menu/menu';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {TranslateService} from 'ng2-translate';
 
 require('./ngux/main.js');
 /* beautify ignore:end */
@@ -26,4 +27,14 @@ require('./ngux/main.js');
         component: Menu
     }])
 
-export class Main { }
+export class Main {
+    constructor(public translate: TranslateService) {
+        translate.setDefaultLang('en');
+        //translate.useStaticFilesLoader('../translate', '.json');
+        translate.setTranslation('en', require('../../translate/en.json'));
+        translate.use('en');
+        // translate.get('HELLO_WORLD').subscribe((res: string) => {
+        //      console.log(res);
+        // });
+    }
+}

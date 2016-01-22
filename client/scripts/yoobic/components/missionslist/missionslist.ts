@@ -1,9 +1,11 @@
 /* beautify ignore:start */
 import {Component, Inject, forwardRef} from 'angular2/core';
+import {NgFor} from 'angular2/common';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {MissionCard} from '../missioncard/missioncard';
 import {Menu} from '../menu/menu';
 import {MissionsBroker} from '../../services/missionsbroker';
+import {MissionDescriptionsBroker} from '../../services/missiondescriptionsbroker';
 import {Requestor} from '../../services/requestor';
 import {Authentication} from '../../services/authentication';
 import {IMission} from '../../interfaces/imission';
@@ -13,8 +15,8 @@ require('./ngux/missionslist.js');
 @Component({
     selector: 'MissionsList',
     template: require('./missionslist.ngux'),
-    providers: [Requestor, MissionsBroker, Authentication],
-    directives: [ROUTER_DIRECTIVES, MissionCard]
+    providers: [Requestor, MissionsBroker, MissionDescriptionsBroker, Authentication],
+    directives: [ROUTER_DIRECTIVES, MissionCard, NgFor]
 })
 
 export class MissionsList {
@@ -22,9 +24,12 @@ export class MissionsList {
     public selectedMission: IMission;
     private menu: Menu;
 
-    constructor(private router: Router, private authentication: Authentication, private missionsBroker: MissionsBroker, @Inject(forwardRef(() => Menu)) menu) { //, @Inject(Menu) menu: Menu
-        this.refreshData();
+    constructor(private router: Router, private authentication: Authentication, private missionsBroker: MissionsBroker, private missiondescriptionsBroker: MissionDescriptionsBroker, @Inject(forwardRef(() => Menu)) menu) { //, @Inject(Menu) menu: Menu
         this.menu = menu;
+    }
+
+    ngAfterContentInit() {
+        setTimeout(() => this.refreshData(), 500);
     }
 
     showMenu() {
@@ -32,7 +37,16 @@ export class MissionsList {
     }
 
     refreshData() {
-        this.missionsBroker.getAll().then(data => this.missions = data);
+        this.missionsBroker.getAll().then(data => {
+            this.missions = data;
+
+        });
+    }
+
+    startMission(mission: IMission) {
+        console.log('startMission');
+        console.log(mission);
+        this.missiondescriptionsBroker.getById(mission.description._id).then((res) => console.log(res.slides));
     }
 
     selectMission(mission: IMission) {

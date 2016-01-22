@@ -7,15 +7,7 @@
             <Translation ux:Name="mainAppTranslation" />
         </DockPanel>
         <Panel Items="{children1}" MatchKey="type" Width="250" ux:Name="menu" Background="DarkBg" Clicked="{callback0}" EdgeNavigation.Edge="Left">
-            <StackPanel ux:Case="Menu_Scope2" ux:Name="user">
-                <Panel Height="30" />
-                <Circle Width="85" Height="85">
-                    <ImageFill Url="{var0}" />
-                    <Stroke Width="1" Brush="BalancedBg" />
-                </Circle>
-                <Text Value="{var1}" />
-                <Text Value="Logout" Clicked="{callback0}" />
-            </StackPanel>
+            <MenuContent ux:Case="Menu_Scope2" />
             <ActivatingAnimation>
                 <Change mainAppTranslation.X="250" />
             </ActivatingAnimation>

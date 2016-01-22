@@ -42,10 +42,15 @@ export class MissionsBroker {
                     'nin': ['booked', 'finished']
                 }
             },
-            'limit': 10,
+            'limit': 30,
             'skip': 0,
             'fields': {},
-            'include': ['description'],
+            'include': {
+                'relation': 'description',
+                'scope': {
+                    'fields': ['_id', 'title', 'background', 'icon', 'text']
+                }
+            },
             'order': []
         };
         let url = this.config.apiUrl + '/api/missions?filter=' + encodeURIComponent(JSON.stringify(query));

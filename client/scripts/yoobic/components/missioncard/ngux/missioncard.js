@@ -9,6 +9,8 @@ window.ngux_types['MissionCard_Scope0'] = function(id, parentId, Observable, Eve
     this.var1 = Observable();
     this.var2 = Observable();
     this.var3 = Observable();
+    this.callback0_event = new EventFactory();
+    this.callback0 = this.callback0_event.raise;
 };
 
 /*jshint ignore:end*/

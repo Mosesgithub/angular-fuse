@@ -1,24 +1,76 @@
-<Panel ux:Class="MissionDetailCard" ux:Name="MySelf" Height="250" Visibility="Collapsed">
+<Panel ux:Class="MissionDetailCard" ux:Name="MySelf" Height="100%" Visibility="Hidden" Layer="Overlay" Alignment="Top" Background="#FFF">
 
-    <Rectangle ux:Name="BigImageR">
-        <ImageFill ux:Name="BigImage" StretchMode="UniformToFill" />
-        <LayoutAnimation>
-            <Move Vector="1" RelativeTo="WorldPositionChange" Duration="0.3" Easing="SinusoidalInOut" />
-            <Resize Vector="1" RelativeTo="SizeChange" Duration="0.3" Easing="SinusoidalInOut" />
-            <Change BackImageR.Opacity="1" Duration="0.3" />
-        </LayoutAnimation>
-    </Rectangle>
+    <Panel ux:Name="title" Height="44" Alignment="Top">
+        <Text FontSize="17" Alignment="Center" TextAlignment="Center" Value="{title}" />
+        <Translation Y="245" />
+    </Panel>
 
-    <!-- outgoing transitional image -->
-    <Rectangle Opacity="0" ux:Name="BackImageR">
-        <ImageFill ux:Name="BackImage" StretchMode="UniformToFill" />
-    </Rectangle>
+    <Panel ux:Name="icon" Alignment="Top">
+        <Circle Alignment="Center" Height="70" Width="70">
+            <ImageFill Url="{icon}" StretchMode="UniformToFill" Opacity="1" />
+        </Circle>
+        <Circle Alignment="Center" Height="80" Width="80">
 
-    <!-- the background when no image -->
-    <Rectangle Fill="1,1,1,1" />
+        </Circle>
+        <Circle Alignment="Center" Height="90" Width="90" />
+        <Translation Y="155" />
+    </Panel>
+
+    <Panel ux:Name="topImage" Height="200" Alignment="Top" ClipToBounds="true">
+        <Rectangle ux:Name="BigImageR" Height="200" Opacity="0.5">
+            <ImageFill ux:Name="BigImage" StretchMode="UniformToFill" />
+            <Blur ux:Name="imageBlur" Radius="0" />
+            <LayoutAnimation>
+                <Move Vector="1" RelativeTo="WorldPositionChange" Duration="0.3" Easing="SinusoidalInOut" />
+                <Resize Vector="1" RelativeTo="SizeChange" Duration="0.3" Easing="SinusoidalInOut" />
+                <Change BackImageR.Opacity="1" Duration="0.3" />
+            </LayoutAnimation>
+        </Rectangle>
+
+        <!-- outgoing transitional image -->
+        <Rectangle Opacity="0" ux:Name="BackImageR">
+            <ImageFill ux:Name="BackImage" StretchMode="UniformToFill" />
+        </Rectangle>
+
+        <Clicked>
+            <Set MySelf.Visibility="Hidden" />
+        </Clicked>
+
+    </Panel>
+
+    <ScrollView>
+        <StackPanel>
+            <Rectangle ux:Name="placeHolder" Height="300" />
+            <Rectangle Height="1" Opacity="0.5" />
+            <Text FontSize="14" Margin="10">Location</Text>
+            <Text FontSize="14" TextWrapping="Wrap" Margin="20, 0 ,10,10" Value="{address}" />
+            <Rectangle Height="1" Opacity="0.5" />
+            <Text FontSize="14" Margin="10">Brief</Text>
+            <Text TextWrapping="Wrap" Margin="20, 0 ,10,10" FontSize="14" Value="{description.text}" />
+            <Rectangle Height="420" />
+        </StackPanel>
+        <ScrollingAnimation From="-1" To="-200">
+            <Move Target="title" Y="200" />
+            <Move Target="icon" Y="200" />
+            <Scale Target="topImage" Factor="3" />
+            <Change imageBlur.Radius="50" />
+        </ScrollingAnimation>
+        <ScrollingAnimation From="0" To="145">
+            <Move Target="topImage" Y="-155" />
+            <Move Target="icon" Y="-205" />
+            <Scale Target="icon" Factor="0" />
+            <Move Target="title" Y="-245" />
+            <Change icon.Opacity="0" />
+            <Change BigImageR.Opacity="0" />
+            <Change placeHolder.Height="200" />
+        </ScrollingAnimation>
+        <ScrollingAnimation From="400" To="0">
+            <Move Target="topImage" Y="0" />
+        </ScrollingAnimation>
+    </ScrollView>
 
     <OnUserEvent Name="SelectItem" Handler="SelectItem">
-    	<Set MySelf.Visibility="Visible"/>
+        <Set MySelf.Visibility="Visible" />
         <TransitionLayout TargetNode="BigImageR" ux:Name="BigTrans" />
     </OnUserEvent>
 

@@ -51,3 +51,17 @@ sealed class yoobic_FuseTranslation_float_X_Property: Uno.UX.Property<float>
     protected override float OnGet() { return _obj.X; }
     protected override void OnSet(float v, object origin) { _obj.X = v; }
 }
+sealed class yoobic_FuseElementsElement_float_Opacity_Property: Uno.UX.Property<float>
+{
+    Fuse.Elements.Element _obj;
+    public yoobic_FuseElementsElement_float_Opacity_Property(Fuse.Elements.Element obj) { _obj = obj;  }
+    protected override float OnGet() { return _obj.Opacity; }
+    protected override void OnSet(float v, object origin) { _obj.Opacity = v; }
+}
+sealed class yoobic_FuseElementsElement_FuseElementsVisibility_Visibility_Property: Uno.UX.Property<Fuse.Elements.Visibility>
+{
+    Fuse.Elements.Element _obj;
+    public yoobic_FuseElementsElement_FuseElementsVisibility_Visibility_Property(Fuse.Elements.Element obj) { _obj = obj;  }
+    protected override Fuse.Elements.Visibility OnGet() { return _obj.Visibility; }
+    protected override void OnSet(Fuse.Elements.Visibility v, object origin) { _obj.Visibility = v; }
+}

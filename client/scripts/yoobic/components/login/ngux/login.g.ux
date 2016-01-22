@@ -1,4 +1,4 @@
-<DockPanel ux:Class="Login">
+<DockPanel ux:Class="Login" ux:Name="MySelf">
     <Rectangle Height="200">
         <Image File="../ressources/logo_collective_w.png" />
     </Rectangle>
@@ -15,6 +15,7 @@
         <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
     </AddingAnimation>
     <RemovingAnimation>
-        <Move X="1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Move X="-0.5" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Change MySelf.Opacity="0" Duration="0.5" Easing="CircularInOut" />
     </RemovingAnimation>
 </DockPanel>

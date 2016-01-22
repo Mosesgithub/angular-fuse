@@ -11,12 +11,12 @@
     </HeaderBar>
     <UserEvent Name="SelectItem" />
 
-    <MissionDetailCard Dock="Top"></MissionDetailCard>
+    <MissionDetailCard></MissionDetailCard>
 
     <ScrollView ux:Name="mainLayout">
         <StackPanel>
             <Panel *ngFor="#m of missions" Margin="10,10,10,5">
-                <ng:MissionCard [ng:mission]="m"></ng:MissionCard>
+                <ng:MissionCard [ng:mission]="m" (ng:start1)="startMission(m)"></ng:MissionCard>
             </Panel>
         </StackPanel>
     </ScrollView>

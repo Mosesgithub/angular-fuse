@@ -59,7 +59,7 @@ module.exports = function(context) {
     };
 
     this.setAttribute = function(id, attribute, value) {
-        consoleLog('setting node  ' + id + '  in tree for ' + attribute + ' : ' + value);
+        //consoleLog('setting node  ' + id + '  in tree for ' + attribute + ' : ' + value);
         if (!tree[id][attribute]) {
             //consoleLog('couldnt find attribute ' + attribute + ' on object ' + id);
             return;
@@ -152,24 +152,32 @@ module.exports = function(context) {
         }
     };
 
-    this.setEventListener = function(id, eventName, callback) {
+    this.setEventListener = function(id, type, eventName, callback) {
         // consoleLog('setEventListener'); // + id + eventName);
         // if (callback) {
         //     consoleLog('callback is defined' + callback.toString());
         // }
-        var element = tree[id];
-        element[eventName + '_event'].callbacks.push(callback);
+        if (this.isScope(type)) {
+            var element = tree[id];
+            if (element[eventName + '_event']) {
+                element[eventName + '_event'].callbacks.push(callback);
+            } else {
+                consoleLog('event not defined ' + eventName + '_event' + ' for id: ' + id);
+            }
+        }
     };
 
-    this.removeAllListeners = function(id) {
+    this.removeAllListeners = function(id, type) {
         // consoleLog('setEventListener'); // + id + eventName);
         // if (callback) {
         //     consoleLog('callback is defined' + callback.toString());
         // }
-        var element = tree[id];
-        for (var a in element) {
-            if (element[a] instanceof EventFactory) {
-                element[a].callbacks = [];
+        if (this.isScope(type)) {
+            var element = tree[id];
+            for (var a in element) {
+                if (element[a] instanceof EventFactory) {
+                    element[a].callbacks = [];
+                }
             }
         }
         // element[eventName + '_event'].callbacks.splice(element[eventName + '_event'].callbacks.indexOf(callback), 1);

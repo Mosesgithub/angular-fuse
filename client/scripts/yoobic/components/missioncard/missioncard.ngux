@@ -14,7 +14,7 @@
             <Clicky [BackgroundUrl]="mission.description.background._downloadURL"></Clicky>
             <!--     <ImageFill ux:Name="Background" [Url]= StretchMode="UniformToFill" Opacity="0.5" /> -->
         </Rectangle>
-        <StackPanel Height="120" ClipToBounds="true" Padding="10">
+        <StackPanel Height="120" ClipToBounds="true" Padding="10" (Clicked)="start()">
 
             <Text TextWrapping="Wrap" Font="BoldF" FontSize="15" Margin="0,3,0,6" TextColor="{Resource Dark}" ClipToBounds="true" [Value]="mission.address" />
             <Text TextWrapping="Wrap" FontSize="13" TextColor="{Resource Dark}" ClipToBounds="true" [Value]="mission.description.text" />

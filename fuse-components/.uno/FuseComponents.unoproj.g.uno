@@ -26,6 +26,15 @@ sealed class FuseComponents_FuseControlsShape_FuseDrawingBrush_Fill_Property: Un
     protected override Fuse.Drawing.Brush OnGet() { return _obj.Fill; }
     protected override void OnSet(Fuse.Drawing.Brush v, object origin) { _obj.Fill = v; }
 }
+sealed class FuseComponents_FuseControlsTextControl_string_Value_Property: Uno.UX.Property<string>
+{
+    Fuse.Controls.TextControl _obj;
+    public FuseComponents_FuseControlsTextControl_string_Value_Property(Fuse.Controls.TextControl obj) { _obj = obj; obj.ValueChanged += this.OnValueChanged; }
+    protected override string OnGet() { return _obj.Value; }
+    protected override void OnSet(string v, object origin) { _obj.SetValue(v, origin); }
+    protected override void OnAddListener(Uno.UX.ValueChangedHandler<string> listener) { _obj.ValueChanged += listener; }
+    protected override void OnRemoveListener(Uno.UX.ValueChangedHandler<string> listener) { _obj.ValueChanged -= listener; }
+}
 sealed class FuseComponents_Clicky_string_BackgroundUrl_Property: Uno.UX.Property<string>
 {
     Clicky _obj;
@@ -48,4 +57,18 @@ sealed class FuseComponents_FuseElementsElement_FuseElementsVisibility_Visibilit
     public FuseComponents_FuseElementsElement_FuseElementsVisibility_Visibility_Property(Fuse.Elements.Element obj) { _obj = obj;  }
     protected override Fuse.Elements.Visibility OnGet() { return _obj.Visibility; }
     protected override void OnSet(Fuse.Elements.Visibility v, object origin) { _obj.Visibility = v; }
+}
+sealed class FuseComponents_FuseEffectsBlur_float_Radius_Property: Uno.UX.Property<float>
+{
+    Fuse.Effects.Blur _obj;
+    public FuseComponents_FuseEffectsBlur_float_Radius_Property(Fuse.Effects.Blur obj) { _obj = obj;  }
+    protected override float OnGet() { return _obj.Radius; }
+    protected override void OnSet(float v, object origin) { _obj.Radius = v; }
+}
+sealed class FuseComponents_FuseElementsElement_float_Height_Property: Uno.UX.Property<float>
+{
+    Fuse.Elements.Element _obj;
+    public FuseComponents_FuseElementsElement_float_Height_Property(Fuse.Elements.Element obj) { _obj = obj;  }
+    protected override float OnGet() { return _obj.Height; }
+    protected override void OnSet(float v, object origin) { _obj.Height = v; }
 }

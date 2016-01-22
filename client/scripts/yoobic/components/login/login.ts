@@ -15,7 +15,9 @@ require('./ngux/login.js');
 export class Login {
 
     constructor(private router: Router, private authentication: Authentication) {
-
+        if (!window.fusejs) {
+            this.router.navigate(['Menu/MissionsList']);
+        }
     }
 
     goToLogin = function(param) {

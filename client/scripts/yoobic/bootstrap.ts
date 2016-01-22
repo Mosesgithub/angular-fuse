@@ -9,12 +9,13 @@ import {fuseBootstraper} from '../fuse-angular/bootstrap';
 //import {NGUXApp} from '../ngux-test/components/nguxapp';
 import {Main} from './components/main/main';
 import {AuthToken} from './services/authToken';
+import {TranslateService} from 'ng2-translate';
 /* beautify ignore:end */
 //fuseBootstrap(AppComponent);
 //fuseBootstrap(TodoAppComponent);
 //fuseBootstrap(AppComponent);
 //if (window.isFuse) {
-let providers = [AuthToken];
+let providers = [AuthToken, TranslateService];
 if (!window.fusejs) {
     fuseBootstraper(providers).bootstrap(Main);
 } else {

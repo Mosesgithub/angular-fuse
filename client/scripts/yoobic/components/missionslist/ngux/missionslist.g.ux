@@ -10,7 +10,7 @@
         </Rectangle>
     </HeaderBar>
     <UserEvent Name="SelectItem" />
-    <MissionDetailCard Dock="Top" />
+    <MissionDetailCard />
     <ScrollView ux:Name="mainLayout">
         <StackPanel Items="{children0}" MatchKey="type">
             <Panel ux:Case="MissionsList_Scope1" Items="{children0}" MatchKey="type" Margin="10,10,10,5">

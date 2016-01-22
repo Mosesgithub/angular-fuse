@@ -129,7 +129,7 @@ export class FuseRenderer implements Renderer {
             let collection = node.getAttribute('collection');
 
             if (window.fusejs && node.id) {
-                window.fusejs.angularRenderer.removeAllListeners(node.id);
+                window.fusejs.angularRenderer.removeAllListeners(node.id, node.type);
                 window.fusejs.angularRenderer.removeElement(node.id, node.type, node.parent ? node.parent.id : null, collection);
             }
         }
@@ -139,7 +139,7 @@ export class FuseRenderer implements Renderer {
         this.consoleLog('listen', arguments);
         let zonedCallback = global['zone'].bind(callback);
         if (window.fusejs) {
-            window.fusejs.angularRenderer.setEventListener(renderElement.id, name, zonedCallback);
+            window.fusejs.angularRenderer.setEventListener(renderElement.id, renderElement.type, name, zonedCallback);
         }
     }
 
@@ -187,7 +187,7 @@ export class FuseRenderer implements Renderer {
 
     private consoleLog(text: string, args: any) {
         if (window.fusejs) {
-            console.log(text);
+            //console.log(text);
         } else {
             console.log(text, args);
         }

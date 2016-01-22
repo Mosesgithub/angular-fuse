@@ -14,7 +14,7 @@
             <Clicky BackgroundUrl="{var1}" />
             <!--     <ImageFill ux:Name="Background" [Url]= StretchMode="UniformToFill" Opacity="0.5" /> -->
         </Rectangle>
-        <StackPanel Height="120" ClipToBounds="true" Padding="10">
+        <StackPanel Height="120" ClipToBounds="true" Padding="10" Clicked="{callback0}">
             <Text TextWrapping="Wrap" Font="BoldF" FontSize="15" Margin="0,3,0,6" TextColor="{Resource Dark}" ClipToBounds="true" Value="{var2}" />
             <Text TextWrapping="Wrap" FontSize="13" TextColor="{Resource Dark}" ClipToBounds="true" Value="{var3}" />
         </StackPanel>

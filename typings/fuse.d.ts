@@ -3,8 +3,8 @@ interface AngularRenderer {
     setAttribute(id: string, attribute: string, value: any): void;
     renderElement(id: string, type: string, parentId: string, collection: string, scope: string): void;
     removeElement(id: string, type: string, parentId: string, collection: string): void;
-    setEventListener(id: string, eventName: string, callback: Function): void;
-    removeAllListeners(id: string): void;
+    setEventListener(id: string, type: string, eventName: string, callback: Function): void;
+    removeAllListeners(id: string, type: string): void;
     navigateTo(page: string, id: string): void;
     print(): void;
 }
