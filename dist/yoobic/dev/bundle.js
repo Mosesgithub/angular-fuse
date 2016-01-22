@@ -570,7 +570,8 @@ webpackJsonp([0],{
 	    MissionsList.prototype.startMission = function (mission) {
 	        console.log('startMission');
 	        console.log(mission);
-	        this.missiondescriptionsBroker.getById(mission.description._id).then(function (res) { return console.log(res.slides); });
+	        this.missiondescriptionsBroker.getById(mission.description._id).then(function (res) {
+	        });
 	    };
 	    MissionsList.prototype.selectMission = function (mission) {
 	        this.selectedMission = mission;

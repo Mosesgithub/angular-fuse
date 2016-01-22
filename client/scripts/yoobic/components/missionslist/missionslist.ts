@@ -46,7 +46,11 @@ export class MissionsList {
     startMission(mission: IMission) {
         console.log('startMission');
         console.log(mission);
-        this.missiondescriptionsBroker.getById(mission.description._id).then((res) => console.log(res.slides));
+        this.missiondescriptionsBroker.getById(mission.description._id).then((res) => {
+            //this.router.navigate(['MissionForm'])
+            //this.router.parent.navigate(['MissionForm'])
+            //console.log(res.slides)
+        });
     }
 
     selectMission(mission: IMission) {
