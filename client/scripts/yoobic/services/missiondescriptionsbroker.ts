@@ -18,7 +18,7 @@ export class MissionDescriptionsBroker {
     }
 
     getById(id: string): Promise<IMissionDescription> {
-        let url = this.config.apiUrl + '/api/missiondescriptions/' + (id || '55bba776433ad2c619012410'));
+        let url = this.config.apiUrl + '/api/missiondescriptions/' + (id || '55bba776433ad2c619012410');
         return this.requestor.get(url).then(data => {
             let retVal: IMissionDescription = data;
             return retVal;

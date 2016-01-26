@@ -1,0 +1,82 @@
+@import "../../../../styles/analytics/_colors.scss";
+.login {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: $menu;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    > form {
+        width: 300px;
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 35px;
+        .logo {
+            width: 180px;
+            margin-bottom: 40px;
+        }
+        .field {
+            border: none;
+            border-radius: 2px;
+            outline: none;
+            width: 100%;
+            height: 45px;
+            margin-bottom: 14px;
+            padding: 0px 10px 0px 10px;
+            color: $dark;
+            &::-webkit-input-placeholder {
+                color: $menu;
+            }
+            &:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0 1000px #fff inset;
+            }
+            .icon {
+                position: relative;
+                color: $lightgrey;
+                left: 175px;
+                top: 22.5px;
+                line-height: 0 !important;
+                font-size: 24px;
+            }
+        }
+    }
+    .submit {
+        border: none;
+        border-radius: 2px;
+        width: 100%;
+        height: 45px;
+        color: $light;
+        background-color: $balanced;
+    }
+    .signup {
+        color: $light !important;
+        cursor: pointer;
+        font-size: 13px;
+        width: 100%;
+        margin-top: 30px;
+        text-align: center;
+    }
+    .error {
+        margin-top: 30px;
+        padding: 5px;
+        text-align: center;
+        border-radius: 2px;
+        color: $assertive;
+        min-height: 31px;
+    }
+    .footer {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 11px;
+        color: $light;
+    }
+}

@@ -1,0 +1,17 @@
+@mixin text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+@mixin text-line-clamp($line, $font-size, $factor:1.2) {
+    font-size: $font-size;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+    line-height: $font-size*$factor;
+    max-height: $font-size*$line*$factor;
+}

@@ -1,0 +1,117 @@
+@import "../../../../styles/analytics/_colors.scss";
+@import "../../../../styles/analytics/_mixins.scss";
+.menucontent {
+    $image_size: 40px;
+    height: 100%;
+    width:250px;
+    background: $menu;
+    text-align: right;
+    position: relative;
+    padding: 20px 0 30px 0;
+    .profile {
+        text-align: center;
+        .border {
+            width: 76px;
+            height: 76px;
+            border: 3px solid $balanced;
+            margin: auto;
+            padding: 5px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        .image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        .text {
+            @include text-truncate;
+            margin-bottom: 80px;
+            color: $light;
+            font-size: 15px;
+        }
+    }
+    .logo {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        width: $image_size;
+        height: $image_size;
+    }
+    .close {
+        position: absolute;
+        right: 25px;
+        top: 25px;
+        color: $light;
+        font-size: 20px;
+    }
+    .header {
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        width: 100%;
+        color: $light;
+        letter-spacing: 1px;
+        position: relative;
+        padding: 5px;
+        padding-right: 30px;
+        margin-top: 30px;
+        @include text-truncate;
+        .chevron {
+            position: absolute;
+            left: 20px;
+            top: 8px;
+        }
+    }
+    .item {
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 200;
+        color: $lightgrey;
+        padding: 5px;
+        padding-right: 30px;
+        letter-spacing: 1px;
+        margin-bottom: 3px;
+        &.active {
+            border-left: 4px solid $balanced;
+            color: $balanced;
+            background: $darker;
+            font-weight: 500;
+        }
+        &:hover {
+            background: $dark;
+        }
+    }
+    .footer {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        color: $light;
+        font-weight: 400;
+        display: inline-flex;
+        lline-height: 40px;
+        .image {
+            width: $image_size;
+            height: $image_size;
+            border-radius: 50%;
+        }
+        .text {
+            @include text-truncate;
+            padding-left: 20px;
+        }
+    }
+    .logofooter {
+        height: 35px;
+        width: 130px;
+        z-index: 100;
+        position: absolute;
+        bottom: 13px;
+        left: 10px;
+        .center {
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    }
+}

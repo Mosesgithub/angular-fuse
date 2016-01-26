@@ -1,7 +1,0 @@
-<Panel ux:Class="Main">
-    <YooStyle />
-    <Panel Items="{router_outlet}" MatchKey="type">
-        <Login ux:Case="Login_Scope0" />
-        <Menu ux:Case="Menu_Scope0" />
-    </Panel>
-</Panel>

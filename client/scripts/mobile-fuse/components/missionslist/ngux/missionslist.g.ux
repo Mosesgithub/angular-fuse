@@ -1,0 +1,27 @@
+<DockPanel ux:Class="MissionsList" Background="StableBg">
+    <HeaderBar Title="My Missions" Dock="Top">
+        <SolidColor ux:Key="Background" ux:Ref="LightBg" />
+        <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
+        <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
+            <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-menu}" Clicked="{callback0}" />
+        </Rectangle>
+        <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
+            <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}" Clicked="{callback1}" />
+        </Rectangle>
+    </HeaderBar>
+    <UserEvent Name="SelectItem" />
+    <MissionDetailCard />
+    <ScrollView ux:Name="mainLayout">
+        <StackPanel Items="{children0}" MatchKey="type">
+            <Panel ux:Case="MissionsList_Scope1" Items="{children0}" MatchKey="type" Margin="10,10,10,5">
+                <MissionCard ux:Case="MissionsList_Scope2" />
+            </Panel>
+        </StackPanel>
+    </ScrollView>
+    <AddingAnimation>
+        <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+    </AddingAnimation>
+    <RemovingAnimation>
+        <Move X="1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+    </RemovingAnimation>
+</DockPanel>

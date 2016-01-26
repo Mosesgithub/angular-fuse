@@ -1,0 +1,71 @@
+<!-- LEFT MENU -->
+
+<div class="menucontent">
+    <!-- <div class="logo" back-img="images/logo.png" url="true" (click)="toggleLeftMenu()"></div> -->
+    <div class="profile" *ngIf="user">
+        <div class="border">
+          <div class="image" [backImg]="user.imageData" [cloudinary]="'w_120,h_120,c_fill'"></div>
+        </div>
+        <div class="text">{{user|username}}</div>
+    </div>
+
+    <!--  <div class="close" (click)="toggleLeftMenu()"><i class="yo-close"></i></div> -->
+    <div class="header" (click)="overviewCollapsed=!overviewCollapsed">
+        <i class="chevron" [ngClass]="{'yo-chevron-bottom':overviewCollapsed,'yo-chevron-top':!overviewCollapsed} "></i>{{'OVERVIEW'|translate}}
+    </div>
+    <section uib-collapse="overviewCollapsed">
+        <div class="item" [routerLink]="['CampaignsOverview']" [ngClass]="{'active': isActive('campaigns-overview')}">
+            {{'CAMPAIGNS'|translate}}
+        </div>
+        <div class="item" (click)="goTo('missions')" [ngClass]="{'active': isActive('missions')}">
+            {{'MISSIONS'|translate}}
+        </div>
+        <div class="item" (click)="goTo('admin')" [ngClass]="{'active': isActive('admin')}">
+            {{'ADMIN'|translate}}
+        </div>
+    </section>
+    <div class="header" (click)="createCollapsed=!createCollapsed">
+        <i class="chevron" [ngClass]="{'yo-chevron-bottom':createCollapsed,'yo-chevron-top':!createCollapsed} "></i>{{'CREATE'|translate}}
+    </div>
+    <section uib-collapse="createCollapsed">
+        <div class="item" [routerLink]="['FormCreator']" [ngClass]="{'active': isActive('form-creator')}">
+            {{'CAMPAIGNS'|translate}}
+        </div>
+    </section>
+
+    <div class="header" (click)="statsCollapsed=!statsCollapsed">
+        <i class="chevron" [ngClass]="{'yo-chevron-bottom':statsCollapsed,'yo-chevron-top':!statsCollapsed} "></i>{{'STATS'|translate}}
+    </div>
+    <section uib-collapse="statsCollapsed">
+        <div class="item" (click)="goTo('missionstats')" [ngClass]="{'active': isActive('missionstats')}">
+            {{'MISSIONS'|translate}}
+        </div>
+        <div class="item" (click)="goTo('userstats')" [ngClass]="{'active': isActive('userstats')}">
+            {{'USERS'|translate}}
+        </div>
+    </section>
+
+    <div class="header" (click)="socialCollapsed=!socialCollapsed">
+        <i class="chevron" [ngClass]="{'yo-chevron-bottom':socialCollapsed,'yo-chevron-top':!socialCollapsed} "></i>{{'SOCIAL'|translate}}
+    </div>
+    <section uib-collapse="socialCollapsed">
+        <div class="item" (click)="goTo('feeds')" [ngClass]="{'active': isActive('feeds')}">
+            {{'FEED'|translate}}
+        </div>
+
+        <div class="item" ng-if="!hasAccess('admin') && hasAccess('team')" ui-sref="chat({mode:''})" [ngClass]="{'active': isActive('chat',{mode:''})}">
+            {{'CHAT'|translate}}
+        </div>
+
+        <div class="item" ng-if="hasAccess('admin') || isPrivateCrowd" ui-sref="chat({mode:'support'})" [ngClass]="{'active': isActive('chat',{mode:'support'})}">
+            {{'SUPPORT'|translate}}
+        </div>
+    </section>
+
+    <div class="footer">
+        <div class="header" (click)="logout()">
+            <i class="chevron yo-logout"></i>{{'LOGOUT'|translate}}
+        </div>
+    </div>
+
+</div>

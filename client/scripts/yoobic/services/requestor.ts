@@ -16,15 +16,11 @@ export class Requestor {
             this.http.post(url, body ? JSON.stringify(body) : null, {
                 headers: this._buildHeaders()
             })
-				.map(res => res.json())
-				.subscribe(res => {
-					if (res.error) {
-						reject(res.error);
-					} else {
-						resolve(res);
-					}
-				});
-
+                .map(res => res.json())
+                .subscribe(
+                res => resolve(res),
+                err => reject(err.json())
+                );
         });
     }
 
@@ -33,14 +29,11 @@ export class Requestor {
             this.http.get(url, {
                 headers: this._buildHeaders()
             })
-				.map(res => res.json())
-				.subscribe(res => {
-					if (res.error) {
-						reject(res.error);
-					} else {
-						resolve(res);
-					}
-				});
+                .map(res => res.json())
+                .subscribe(
+                res => resolve(res),
+                err => reject(err.json())
+                );
         });
     }
 
@@ -49,14 +42,11 @@ export class Requestor {
             this.http.put(url, body ? JSON.stringify(body) : null, {
                 headers: this._buildHeaders()
             })
-				.map(res => res.json())
-				.subscribe(res => {
-					if (res.error) {
-						reject(res.error);
-					} else {
-						resolve(res);
-					}
-				});
+                .map(res => res.json())
+                .subscribe(
+                res => resolve(res),
+                err => reject(err.json())
+                );
         });
     }
 

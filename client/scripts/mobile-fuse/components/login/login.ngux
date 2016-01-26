@@ -1,0 +1,24 @@
+<DockPanel ng:Selector="Login" ux:Name="MySelf">
+    <Rectangle Height="200">
+        <Image File="../resources/logo_collective_w.png"></Image>
+    </Rectangle>
+    <StackPanel Dock="Bottom" Margin="30">
+        <Grid RowCount="2" ColumnCount="2" Margin="0">
+            <Button (Clicked)="goToLogin()" Text="Sign Up here" Height="45" Margin="10,0,10,15" ColumnSpan="2">
+            </Button>
+            <Button (Clicked)="goToLogin()" Text="Login" Height="45" Margin="10,0,5,10">
+            </Button>
+            <Button (Clicked)="goToLogin()" Name="SignUpButton" Text="Sign up" Height="45" Margin="5,0,10,10">
+            </Button>
+        </Grid>
+    </StackPanel>
+    <Video File="../resources/market.mp4" Layer="Background" AutoPlay="true" IsLooping="true" StretchMode="UniformToFill" Background="DarkBg" Opacity="0.3" Padding="-10"></Video>
+    <Rectangle Layer="Background" Fill="DarkBg" />
+    <AddingAnimation>
+        <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+    </AddingAnimation>
+    <RemovingAnimation>
+        <Move X="-0.5" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Change MySelf.Opacity="0" Duration="0.5" Easing="CircularInOut" />
+    </RemovingAnimation>
+</DockPanel>

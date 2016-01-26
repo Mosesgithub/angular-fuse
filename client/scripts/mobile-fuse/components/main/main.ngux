@@ -1,0 +1,7 @@
+<Panel ng:Selector="Main">
+    <YooStyle/>
+    <router-outlet>
+        <ng:Login></ng:Login>
+        <ng:Menu></ng:Menu>
+    </router-outlet>
+</Panel>

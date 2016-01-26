@@ -1,0 +1,25 @@
+<div class="login">
+    <form name="vm.formSignIn" role="form" (submit)="doLogin()">
+        <div class="form">
+            <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px  ;" />
+            <img class="logo" src="resources/logo_analytics.png" />
+            <input class="field" name="username" type="email" [(ngModel)]="username" placeholder="{{'EMAIL'|translate}}">
+            <span class="icon fa fa-question-circle"></span>
+            <input class="field" name="password" [(ngModel)]="password" placeholder="{{'PASSWORD'|translate}}">
+        </div>
+        <button class="submit" type="submit" (click)="doLogin()">
+            {{'LOGIN'|translate}}
+        </button>
+        <div class="signup" (click)="doSignup()">
+            {{'SIGNUP'|translate}}
+        </div>
+        <div class="error">
+            {{error|translate}}
+        </div>
+
+    </form>
+
+    <div class="footer">
+        Yoobic © 2015
+    </div>
+</div>
