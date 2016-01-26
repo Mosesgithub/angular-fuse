@@ -9,7 +9,7 @@ webpackJsonp([0],{
 	var bootstrap_1 = __webpack_require__(1);
 	var main_1 = __webpack_require__(270);
 	var authToken_1 = __webpack_require__(273);
-	var ng2_translate_1 = __webpack_require__(296);
+	var ng2_translate_1 = __webpack_require__(300);
 	var providers = [authToken_1.AuthToken, ng2_translate_1.TranslateService];
 	if (!window.fusejs) {
 	    bootstrap_1.fuseBootstraper(providers).bootstrap(main_1.Main);
@@ -167,7 +167,7 @@ webpackJsonp([0],{
 	var login_1 = __webpack_require__(271);
 	var menu_1 = __webpack_require__(278);
 	var router_1 = __webpack_require__(245);
-	__webpack_require__(294);
+	__webpack_require__(298);
 	var Main = (function () {
 	    function Main() {
 	    }
@@ -175,7 +175,7 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: 'Main',
 	            directives: [router_1.ROUTER_DIRECTIVES],
-	            template: __webpack_require__(295)
+	            template: __webpack_require__(299)
 	        }),
 	        router_1.RouteConfig([{
 	                path: '/',
@@ -487,7 +487,7 @@ webpackJsonp([0],{
 	var missionslist_1 = __webpack_require__(279);
 	var menucontent_1 = __webpack_require__(287);
 	var missionform_1 = __webpack_require__(290);
-	__webpack_require__(292);
+	__webpack_require__(296);
 	var Menu = (function () {
 	    function Menu(router) {
 	        this.router = router;
@@ -499,7 +499,7 @@ webpackJsonp([0],{
 	    Menu = __decorate([
 	        core_1.Component({
 	            selector: 'Menu',
-	            template: __webpack_require__(293),
+	            template: __webpack_require__(297),
 	            directives: [router_1.ROUTER_DIRECTIVES, menucontent_1.MenuContent]
 	        }),
 	        router_1.RouteConfig([{
@@ -964,38 +964,89 @@ webpackJsonp([0],{
 	var menu_1 = __webpack_require__(278);
 	var missiondescriptionsbroker_1 = __webpack_require__(284);
 	var requestor_1 = __webpack_require__(272);
-	__webpack_require__(534);
+	var camera_1 = __webpack_require__(291);
+	var htmlparser_1 = __webpack_require__(292);
+	__webpack_require__(293);
+	var _ = __webpack_require__(294);
 	var MissionForm = (function () {
-	    function MissionForm(router, routeParams, missiondescriptionsBroker, menu) {
+	    function MissionForm(htmlParser, camera, router, routeParams, missiondescriptionsBroker, menu) {
 	        var _this = this;
+	        this.htmlParser = htmlParser;
+	        this.camera = camera;
 	        this.router = router;
 	        this.routeParams = routeParams;
 	        this.missiondescriptionsBroker = missiondescriptionsBroker;
 	        this.form = null;
-	        this.active = "";
+	        this.active = '';
 	        this.menu = menu;
 	        this.id = this.routeParams.get('id');
 	        console.log('Mission : ' + this.id);
+	        console.log('Camera loaded : ', this.camera);
+	        var htmlParserLocal = this.htmlParser;
 	        this.missiondescriptionsBroker.getById(this.id).then(function (res) {
+	            if (res.slides) {
+	                _.forEach(res.slides, function (s) {
+	                    if (s.items) {
+	                        _.forEach(s.items, function (i) {
+	                            i.description = htmlParserLocal.parse(i.description);
+	                        });
+	                    }
+	                });
+	            }
+	            console.log(JSON.stringify(res, null, 4));
 	            _this.form = res;
 	        });
 	    }
 	    MissionForm.prototype.showMenu = function () {
 	        this.menu.toggleMenu();
 	    };
+	    MissionForm.prototype.goSummary = function () {
+	        console.log('goSummary');
+	        this.active = 'summary';
+	    };
 	    MissionForm.prototype.changeActive = function (name) {
 	        console.log('Activate ' + name);
 	        this.active = 'page' + name;
 	    };
+	    MissionForm.prototype.selectUnique = function (v, i) {
+	        i.value = [v];
+	    };
+	    MissionForm.prototype.toggle = function (v, i) {
+	        if (i.value) {
+	            var idx = i.value.indexOf(v);
+	            if (idx > -1) {
+	                i.value.splice(idx, 1);
+	            }
+	            else {
+	                i.value.push(v);
+	            }
+	        }
+	        else {
+	            i.value = [];
+	            i.value.push(v);
+	        }
+	    };
+	    MissionForm.prototype.isSelected = function (v, i) {
+	        return (i.value) && (i.value.indexOf(v) > -1);
+	    };
+	    MissionForm.prototype.parseDescription = function (d) {
+	        return this.htmlParser.parse(d);
+	    };
+	    MissionForm.prototype.takePicture = function (i) {
+	        this.camera.takePicture().then(function (file) {
+	            i.photo = file;
+	            return file;
+	        });
+	    };
 	    MissionForm = __decorate([
 	        core_1.Component({
 	            selector: 'MissionForm',
-	            template: __webpack_require__(291),
-	            providers: [requestor_1.Requestor, missiondescriptionsbroker_1.MissionDescriptionsBroker],
+	            template: __webpack_require__(295),
+	            providers: [requestor_1.Requestor, missiondescriptionsbroker_1.MissionDescriptionsBroker, camera_1.Camera, htmlparser_1.HtmlParser],
 	            directives: [router_1.ROUTER_DIRECTIVES]
 	        }),
-	        __param(3, core_1.Inject(core_1.forwardRef(function () { return menu_1.Menu; }))), 
-	        __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, missiondescriptionsbroker_1.MissionDescriptionsBroker, Object])
+	        __param(5, core_1.Inject(core_1.forwardRef(function () { return menu_1.Menu; }))), 
+	        __metadata('design:paramtypes', [htmlparser_1.HtmlParser, camera_1.Camera, router_1.Router, router_1.RouteParams, missiondescriptionsbroker_1.MissionDescriptionsBroker, Object])
 	    ], MissionForm);
 	    return MissionForm;
 	})();
@@ -1005,13 +1056,209 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 291:
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<MissionForm_Scope0>\n    <MissionForm_Scope1 *ngIf=\"form\" [var0]=\"active\" collection=\"children0\">\n        <MissionForm_Scope2 [var0]=\"form.title\" (callback0)=\"showMenu()\" [var1]=\"form.background._downloadURL\" [var2]=\"form.title\" collection=\"children0\">\n            <MissionForm_Scope3 *ngFor=\"#s of form.slides; #idx = index\" [var0]=\"idx + '. ' + s.title\" (callback0)=\"changeActive(idx)\" collection=\"children0\">\n            </MissionForm_Scope3>\n        </MissionForm_Scope2>\n        <MissionForm_Scope4 *ngFor=\"#s of form.slides; #idx = index\" [var0]=\"'page' + idx\" collection=\"children0\">\n            <MissionForm_Scope5 [var0]=\"s.title\" collection=\"children0\">\n            </MissionForm_Scope5>\n            <MissionForm_Scope6 *ngFor=\"#i of s.items\" [var0]=\"i.type\" collection=\"children0\">\n                <MissionForm_Scope7 *ngSwitchWhen=\"'text'\" collection=\"children0\">\n                </MissionForm_Scope7>\n                <MissionForm_Scope8 *ngSwitchDefault=\"\" collection=\"children0\">\n                </MissionForm_Scope8>\n            </MissionForm_Scope6>\n        </MissionForm_Scope4>\n    </MissionForm_Scope1>\n</MissionForm_Scope0>\n";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(3);
+	var Camera = (function () {
+	    function Camera() {
+	    }
+	    Camera.prototype.takePicture = function () {
+	        if (window.fusejs && window.fusejs.camera) {
+	            return window.fusejs.camera.takePicture({
+	                targetWidth: 640,
+	                targetHeight: 360,
+	                correctOrientation: true
+	            });
+	        }
+	    };
+	    Camera = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], Camera);
+	    return Camera;
+	})();
+	exports.Camera = Camera;
+
 
 /***/ },
 
 /***/ 292:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(3);
+	var HtmlParser = (function () {
+	    function HtmlParser() {
+	    }
+	    HtmlParser.prototype.getSrc = function (toParse) {
+	        console.log('finding src from : ' + toParse);
+	        var re = new RegExp('(.*)src="(.*?)"(.*)');
+	        console.log('which gives : ' + re.exec(toParse)[2]);
+	        return re.exec(toParse)[2];
+	    };
+	    HtmlParser.prototype.removeTags = function (toParse) {
+	        console.log('removing tags from : ' + toParse);
+	        var re = new RegExp('(.*?)<(.*?)>(.*)');
+	        var retVal = '';
+	        var parsed = re.exec(toParse);
+	        while (parsed) {
+	            retVal += parsed[1];
+	            toParse = parsed[3];
+	            parsed = re.exec(toParse);
+	        }
+	        retVal += toParse;
+	        console.log('which gives : ' + retVal);
+	        return retVal;
+	    };
+	    HtmlParser.prototype.parse = function (toParse) {
+	        console.log('PARSING : ' + toParse);
+	        var re = new RegExp('(.*)<img(.*)>(.*)');
+	        var retVal = [];
+	        toParse = toParse.replace(/[\n]/gi, "");
+	        var parsed = re.exec(toParse);
+	        while (parsed) {
+	            retVal.push({
+	                type: 'text',
+	                value: this.removeTags(parsed[1])
+	            });
+	            retVal.push({
+	                type: 'image',
+	                value: this.getSrc(parsed[2])
+	            });
+	            toParse = parsed[3];
+	            parsed = re.exec(toParse);
+	        }
+	        retVal.push({
+	            type: 'text',
+	            value: this.removeTags(toParse)
+	        });
+	        return retVal;
+	    };
+	    HtmlParser = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], HtmlParser);
+	    return HtmlParser;
+	})();
+	exports.HtmlParser = HtmlParser;
+
+
+/***/ },
+
+/***/ 293:
+/***/ function(module, exports) {
+
+	/*eslint-disable */
+	/*jshint ignore:start*/
+	'use strict';
+	
+	window.ngux_types = window.ngux_types || {};
+	
+	window.ngux_types['MissionForm_Scope0'] = function(id, parentId, Observable, EventFactory) {
+	    this.children0 = Observable();
+	};
+	window.ngux_types['MissionForm_Scope1'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.children0 = Observable();
+	};
+	window.ngux_types['MissionForm_Scope2'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.var1 = Observable();
+	    this.var2 = Observable();
+	    this.children0 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['MissionForm_Scope3'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['MissionForm_Scope4'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.var1 = Observable();
+	    this.children0 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['MissionForm_Scope5'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.children0 = Observable();
+	    this.children1 = Observable();
+	    this.children2 = Observable();
+	    this.children3 = Observable();
+	    this.children4 = Observable();
+	};
+	window.ngux_types['MissionForm_Scope6'] = function(id, parentId, Observable, EventFactory) {
+	};
+	window.ngux_types['MissionForm_Scope7'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.var1 = Observable();
+	    this.var2 = Observable();
+	};
+	window.ngux_types['MissionForm_Scope8'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.var1 = Observable();
+	    this.var2 = Observable();
+	    this.var3 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['MissionForm_Scope9'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.var1 = Observable();
+	    this.var2 = Observable();
+	    this.var3 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['MissionForm_Scope10'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	    this.var1 = Observable();
+	    this.var2 = Observable();
+	    this.var3 = Observable();
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['MissionForm_Scope11'] = function(id, parentId, Observable, EventFactory) {
+	    this.callback0_event = new EventFactory();
+	    this.callback0 = this.callback0_event.raise;
+	};
+	window.ngux_types['MissionForm_Scope12'] = function(id, parentId, Observable, EventFactory) {
+	    this.var0 = Observable();
+	};
+	
+	/*jshint ignore:end*/
+	/*eslint-enable */
+
+
+/***/ },
+
+/***/ 295:
+/***/ function(module, exports) {
+
+	module.exports = "<MissionForm_Scope0>\n    <MissionForm_Scope1 *ngIf=\"form\" [var0]=\"active\" collection=\"children0\">\n        <MissionForm_Scope2 [var0]=\"form.title\" (callback0)=\"showMenu()\" [var1]=\"form.background._downloadURL\" [var2]=\"form.title\" collection=\"children0\">\n            <MissionForm_Scope3 *ngFor=\"#s of form.slides; #idx = index\" [var0]=\"idx + '. ' + s.title\" (callback0)=\"changeActive(idx)\" collection=\"children0\">\n            </MissionForm_Scope3>\n        </MissionForm_Scope2>\n        <MissionForm_Scope4 *ngFor=\"#s of form.slides; #idx = index\" [var0]=\"'page' + idx\" [var1]=\"s.title\" (callback0)=\"goSummary()\" collection=\"children0\">\n            <MissionForm_Scope5 *ngFor=\"#i of s.items\" [var0]=\"i.type\" collection=\"children0\">\n                <MissionForm_Scope6 *ngIf=\"i.required\" collection=\"children0\">\n                </MissionForm_Scope6>\n                <MissionForm_Scope7 *ngFor=\"#pd of i.description\" [var0]=\"pd.type\" [var1]=\"pd.value\" [var2]=\"pd.value\" collection=\"children0\">\n                </MissionForm_Scope7>\n                <MissionForm_Scope8 *ngFor=\"#v of i.values; #idx = index\" [var0]=\"isSelected(v, i) ? '#32d2b6' : '#fff'\" (callback0)=\"selectUnique(v, i)\" [var1]=\"-idx\" [var2]=\"isSelected(v, i) ? '#fff' : '#555555'\" [var3]=\"v\" collection=\"children1\">\n                </MissionForm_Scope8>\n                <MissionForm_Scope9 *ngFor=\"#v of i.values; #idx = index\" [var0]=\"isSelected(v, i) ? '#32d2b6' : '#fff'\" (callback0)=\"selectUnique(v, i)\" [var1]=\"-idx\" [var2]=\"isSelected(v, i) ? '#fff' : '#555555'\" [var3]=\"v\" collection=\"children2\">\n                </MissionForm_Scope9>\n                <MissionForm_Scope10 *ngFor=\"#v of i.values; #idx = index\" [var0]=\"isSelected(v, i) ? '#32d2b6' : '#fff'\" (callback0)=\"toggle(v, i)\" [var1]=\"-idx\" [var2]=\"isSelected(v, i) ? '#fff' : '#555555'\" [var3]=\"v\" collection=\"children3\">\n                </MissionForm_Scope10>\n                <MissionForm_Scope11 *ngIf=\"!i.photo\" (callback0)=\"takePicture(i)\" collection=\"children4\">\n                </MissionForm_Scope11>\n                <MissionForm_Scope12 *ngIf=\"i.photo\" [var0]=\"i.photo\" collection=\"children4\">\n                </MissionForm_Scope12>\n            </MissionForm_Scope5>\n        </MissionForm_Scope4>\n    </MissionForm_Scope1>\n</MissionForm_Scope0>\n";
+
+/***/ },
+
+/***/ 296:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -1034,14 +1281,14 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 293:
+/***/ 297:
 /***/ function(module, exports) {
 
 	module.exports = "<Menu_Scope0 [var0]=\"menuState\" (callback0)=\"toggleMenu(false)\">\n    <router-outlet></router-outlet>\n    <MenuContent  collection=\"children1\" scope=\"Menu_Scope3\">\n    </MenuContent>\n</Menu_Scope0>\n";
 
 /***/ },
 
-/***/ 294:
+/***/ 298:
 /***/ function(module, exports) {
 
 	/*eslint-disable */
@@ -1060,27 +1307,27 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 295:
+/***/ 299:
 /***/ function(module, exports) {
 
 	module.exports = "<Main_Scope0>\n    <router-outlet></router-outlet>\n</Main_Scope0>\n";
 
 /***/ },
 
-/***/ 296:
+/***/ 300:
 /***/ function(module, exports, __webpack_require__) {
 
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(297));
-	__export(__webpack_require__(298));
-	__export(__webpack_require__(313));
+	__export(__webpack_require__(301));
+	__export(__webpack_require__(302));
+	__export(__webpack_require__(317));
 	//# sourceMappingURL=ng2-translate.js.map
 
 /***/ },
 
-/***/ 297:
+/***/ 301:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1093,7 +1340,7 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(3);
-	var translate_service_1 = __webpack_require__(298);
+	var translate_service_1 = __webpack_require__(302);
 	var TranslatePipe = (function () {
 	    function TranslatePipe(translate) {
 	        this.value = '';
@@ -1155,7 +1402,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 298:
+/***/ 302:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1170,10 +1417,10 @@ webpackJsonp([0],{
 	var core_1 = __webpack_require__(3);
 	var http_1 = __webpack_require__(230);
 	var Observable_1 = __webpack_require__(52);
-	__webpack_require__(299);
-	__webpack_require__(307);
+	__webpack_require__(303);
 	__webpack_require__(311);
-	var translate_parser_1 = __webpack_require__(313);
+	__webpack_require__(315);
+	var translate_parser_1 = __webpack_require__(317);
 	var TranslateStaticLoader = (function () {
 	    function TranslateStaticLoader(http, prefix, suffix) {
 	        this.sfLoaderParams = { prefix: 'i18n', suffix: '.json' };
@@ -1364,7 +1611,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 313:
+/***/ 317:
 /***/ function(module, exports) {
 
 	var Parser = (function () {
@@ -1420,57 +1667,6 @@ webpackJsonp([0],{
 	})();
 	exports.Parser = Parser;
 	//# sourceMappingURL=translate.parser.js.map
-
-/***/ },
-
-/***/ 534:
-/***/ function(module, exports) {
-
-	/*eslint-disable */
-	/*jshint ignore:start*/
-	'use strict';
-	
-	window.ngux_types = window.ngux_types || {};
-	
-	window.ngux_types['MissionForm_Scope0'] = function(id, parentId, Observable, EventFactory) {
-	    this.children0 = Observable();
-	};
-	window.ngux_types['MissionForm_Scope1'] = function(id, parentId, Observable, EventFactory) {
-	    this.var0 = Observable();
-	    this.children0 = Observable();
-	};
-	window.ngux_types['MissionForm_Scope2'] = function(id, parentId, Observable, EventFactory) {
-	    this.var0 = Observable();
-	    this.var1 = Observable();
-	    this.var2 = Observable();
-	    this.children0 = Observable();
-	    this.callback0_event = new EventFactory();
-	    this.callback0 = this.callback0_event.raise;
-	};
-	window.ngux_types['MissionForm_Scope3'] = function(id, parentId, Observable, EventFactory) {
-	    this.var0 = Observable();
-	    this.callback0_event = new EventFactory();
-	    this.callback0 = this.callback0_event.raise;
-	};
-	window.ngux_types['MissionForm_Scope4'] = function(id, parentId, Observable, EventFactory) {
-	    this.var0 = Observable();
-	    this.children0 = Observable();
-	};
-	window.ngux_types['MissionForm_Scope5'] = function(id, parentId, Observable, EventFactory) {
-	    this.var0 = Observable();
-	};
-	window.ngux_types['MissionForm_Scope6'] = function(id, parentId, Observable, EventFactory) {
-	    this.var0 = Observable();
-	    this.children0 = Observable();
-	};
-	window.ngux_types['MissionForm_Scope7'] = function(id, parentId, Observable, EventFactory) {
-	};
-	window.ngux_types['MissionForm_Scope8'] = function(id, parentId, Observable, EventFactory) {
-	};
-	
-	/*jshint ignore:end*/
-	/*eslint-enable */
-
 
 /***/ }
 

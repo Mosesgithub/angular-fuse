@@ -1,7 +1,7 @@
 <Page ux:Class="MyPage" ux:Name="self" Width="100%" Height="100%" Alignment="Center">
     <Rectangle Layer="Background" Fill="StableBg"></Rectangle>
 
-    <WhileTrue Value="True" ux:Name="scaled">
+<!--     <WhileTrue Value="True" ux:Name="scaled">
         <Scale Target="self" Factor="0.5" />
 
         <EnteringAnimation Scale="0.01">
@@ -14,5 +14,5 @@
 
     <Clicked>
 		<Toggle Target="scaled"/>
-    </Clicked>
+    </Clicked> -->
 </Page>

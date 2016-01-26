@@ -4,15 +4,23 @@
             <MissionForm_Scope3 *ngFor="#s of form.slides; #idx = index" [var0]="idx + '. ' + s.title" (callback0)="changeActive(idx)" collection="children0">
             </MissionForm_Scope3>
         </MissionForm_Scope2>
-        <MissionForm_Scope4 *ngFor="#s of form.slides; #idx = index" [var0]="'page' + idx" collection="children0">
-            <MissionForm_Scope5 [var0]="s.title" collection="children0">
-            </MissionForm_Scope5>
-            <MissionForm_Scope6 *ngFor="#i of s.items" [var0]="i.type" collection="children0">
-                <MissionForm_Scope7 *ngSwitchWhen="'text'" collection="children0">
+        <MissionForm_Scope4 *ngFor="#s of form.slides; #idx = index" [var0]="'page' + idx" [var1]="s.title" (callback0)="goSummary()" collection="children0">
+            <MissionForm_Scope5 *ngFor="#i of s.items" [var0]="i.type" collection="children0">
+                <MissionForm_Scope6 *ngIf="i.required" collection="children0">
+                </MissionForm_Scope6>
+                <MissionForm_Scope7 *ngFor="#pd of i.description" [var0]="pd.type" [var1]="pd.value" [var2]="pd.value" collection="children0">
                 </MissionForm_Scope7>
-                <MissionForm_Scope8 *ngSwitchDefault="" collection="children0">
+                <MissionForm_Scope8 *ngFor="#v of i.values; #idx = index" [var0]="isSelected(v, i) ? '#32d2b6' : '#fff'" (callback0)="selectUnique(v, i)" [var1]="-idx" [var2]="isSelected(v, i) ? '#fff' : '#555555'" [var3]="v" collection="children1">
                 </MissionForm_Scope8>
-            </MissionForm_Scope6>
+                <MissionForm_Scope9 *ngFor="#v of i.values; #idx = index" [var0]="isSelected(v, i) ? '#32d2b6' : '#fff'" (callback0)="selectUnique(v, i)" [var1]="-idx" [var2]="isSelected(v, i) ? '#fff' : '#555555'" [var3]="v" collection="children2">
+                </MissionForm_Scope9>
+                <MissionForm_Scope10 *ngFor="#v of i.values; #idx = index" [var0]="isSelected(v, i) ? '#32d2b6' : '#fff'" (callback0)="toggle(v, i)" [var1]="-idx" [var2]="isSelected(v, i) ? '#fff' : '#555555'" [var3]="v" collection="children3">
+                </MissionForm_Scope10>
+                <MissionForm_Scope11 *ngIf="!i.photo" (callback0)="takePicture(i)" collection="children4">
+                </MissionForm_Scope11>
+                <MissionForm_Scope12 *ngIf="i.photo" [var0]="i.photo" collection="children4">
+                </MissionForm_Scope12>
+            </MissionForm_Scope5>
         </MissionForm_Scope4>
     </MissionForm_Scope1>
 </MissionForm_Scope0>

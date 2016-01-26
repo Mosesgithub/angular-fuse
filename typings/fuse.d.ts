@@ -9,11 +9,16 @@ interface AngularRenderer {
     print(): void;
 }
 
+interface FuseJSCamera {
+    takePicture: any;
+}
+
 interface FuseJS {
     angularRenderer: AngularRenderer;
     applicationRef: any;
     rootComponent: any;
     bootstraper: any;
+    camera: FuseJSCamera;
 }
 
 interface Window {

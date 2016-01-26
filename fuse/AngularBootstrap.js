@@ -6,6 +6,7 @@ window.fusejs = window.fusejs || {
     renderer: null,
     requireCacheAfterVendor: {},
     timers: [],
+    camera: require('FuseJS/Camera'),
     context: Observable() // {
         //id: 'root',
         //depth: 0,

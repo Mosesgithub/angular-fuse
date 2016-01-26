@@ -21,9 +21,9 @@
                 <Panel Dock="Fill">
                     <ScrollView>
                         <StackPanel Items="{children0}" MatchKey="type">
-                            <Rectangle ux:Case="MissionForm_Scope3" Fill="LightBg" Height="30" Margin="10">
+                            <Rectangle ux:Case="MissionForm_Scope3" Fill="LightBg" Height="50" Margin="10, 5">
                                 <Stroke Width="1" Brush="#eaeaea" />
-                                <Text Value="{var0}" Margin="3" Alignment="VerticalCenter" Clicked="{callback0}" />
+                                <Text Margin="10" TextColor="#555555" Value="{var0}" Alignment="VerticalCenter" Clicked="{callback0}" />
                             </Rectangle>
                         </StackPanel>
                         <ScrollingAnimation From="0" To="-1000">
@@ -38,19 +38,91 @@
             </DockPanel>
         </MyPage>
         <MyPage ux:Case="MissionForm_Scope4" Name="{var0}">
-            <Panel>
-                <StackPanel Items="{children0}" MatchKey="type">
-                    <Text ux:Case="MissionForm_Scope5" Value="{var0}" />
-                    <Panel ux:Case="MissionForm_Scope6" Background="Yellow">
-                        <StackPanel>
-                            <Panel Items="{children0}" MatchKey="type" ngSwitch="{var0}">
-                                <Text ux:Case="MissionForm_Scope7">text</Text>
-                                <Text ux:Case="MissionForm_Scope8">default</Text>
-                            </Panel>
-                        </StackPanel>
-                    </Panel>
-                </StackPanel>
-            </Panel>
+            <DockPanel>
+                <HeaderBar Title="{var1}" Dock="Top">
+                    <SolidColor ux:Key="Background" ux:Ref="LightBg" />
+                    <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
+                    <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
+                        <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-left-arrow}" Clicked="{callback0}" />
+                    </Rectangle>
+                    <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
+                        <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}" />
+                    </Rectangle>
+                </HeaderBar>
+                <ScrollView>
+                    <StackPanel Items="{children0}" MatchKey="type">
+                        <Panel ux:Case="MissionForm_Scope5">
+                            <StackPanel Items="{children0}" MatchKey="type">
+                                <!-- <Panel [ngSwitch]="i.type">
+                                <Text *ngSwitchWhen="'text'">text</Text>
+                                <Text *ngSwitchDefault>default</Text>
+                            </Panel> -->
+                                <Text ux:Case="MissionForm_Scope6" Value="*" />
+                                <Panel ux:Case="MissionForm_Scope7">
+                                    <Match Value="{var0}">
+                                        <Case String="text">
+                                            <Text Margin="10,0" TextColor="#555555" Value="{var1}" />
+                                        </Case>
+                                        <Case String="image">
+                                            <Image Margin="2" Height="100" Url="{var2}" />
+                                        </Case>
+                                    </Match>
+                                </Panel>
+                                <Match Value="{var0}">
+                                    <Case String="text">
+                                        <Panel Height="50" Margin="10">
+                                            <Rectangle Fill="#fff" Layer="Background">
+                                                <Stroke Width="1" Brush="#eaeaea" />
+                                            </Rectangle>
+                                            <TextEdit Width="100%" Margin="10,0" TextColor="#555555" Alignment="Center" />
+                                        </Panel>
+                                    </Case>
+                                    <Case String="select">
+                                        <StackPanel Items="{children1}" MatchKey="type" Margin="10">
+                                            <Rectangle ux:Case="MissionForm_Scope8" Height="50" Fill="{var0}" Clicked="{callback0}">
+                                                <Translation Y="{var1}" />
+                                                <Stroke Width="1" Brush="#eaeaea" />
+                                                <Text Margin="5" TextColor="{var2}" Alignment="VerticalCenter" Value="{var3}" />
+                                            </Rectangle>
+                                        </StackPanel>
+                                    </Case>
+                                    <Case String="selectbuttons">
+                                        <StackPanel Items="{children2}" MatchKey="type" Margin="10">
+                                            <Rectangle ux:Case="MissionForm_Scope9" Height="50" Fill="{var0}" Clicked="{callback0}">
+                                                <Translation Y="{var1}" />
+                                                <Stroke Width="1" Brush="#eaeaea" />
+                                                <Text Margin="5" TextColor="{var2}" Alignment="VerticalCenter" Value="{var3}" />
+                                            </Rectangle>
+                                        </StackPanel>
+                                    </Case>
+                                    <Case String="selectmulti">
+                                        <StackPanel Items="{children3}" MatchKey="type" Margin="10">
+                                            <Rectangle ux:Case="MissionForm_Scope10" Height="50" Fill="{var0}" Clicked="{callback0}" Margin="0,-2,0,0">
+                                                <Translation Y="{var1}" />
+                                                <Stroke Width="1" Brush="#eaeaea" />
+                                                <Text Margin="10" TextColor="{var2}" Alignment="VerticalCenter" Value="{var3}" />
+                                            </Rectangle>
+                                        </StackPanel>
+                                    </Case>
+                                    <Case String="photo">
+                                        <StackPanel Items="{children4}" MatchKey="type">
+                                            <Rectangle ux:Case="MissionForm_Scope11" CornerRadius="150" Height="150" Width="150" Fill="#32d2b6">
+                                                <Text Font="YoobicF" TextAlignment="Center" FontSize="100" TextColor="#fff" Alignment="VerticalCenter" Value="&#xe6fc;" Clicked="{callback0}" />
+                                            </Rectangle>
+                                            <Rectangle ux:Case="MissionForm_Scope12" CornerRadius="150" Height="150" Width="150">
+                                                <ImageFill File="{var0}" />
+                                            </Rectangle>
+                                        </StackPanel>
+                                    </Case>
+                                </Match>
+                            </StackPanel>
+                        </Panel>
+                    </StackPanel>
+                </ScrollView>
+                <Panel Dock="Bottom" Height="50" Background="#7E7AE7">
+                    <Text TextColor="#fff" Alignment="Center" Value="Suivant" />
+                </Panel>
+            </DockPanel>
         </MyPage>
     </PageControl>
 </Panel>
