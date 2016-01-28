@@ -1,8 +1,9 @@
-<div class="wrapper">
-    <div class="sidebar-wrapper">
+<div class="wrapper" [ngClass]="{'toggled':isActive}">
+    <div class="sidebar-wrapper" >
         <menu-content></menu-content>
     </div>
     <div class="page-content-wrapper">
+    	<navbar (toggleMenu)="toggleMenu()" [title]="navbarTitle" (refreshData)="refreshData()"></navbar>
         <router-outlet></router-outlet>
     </div>
 </div>

@@ -7,9 +7,9 @@ import {IMissionDescription} from '../interfaces/imissiondescription';
 /* beautify ignore:end */
 @Injectable()
 export class MissionDescriptionsBroker {
-    config: Config;
-    requestor: Requestor;
-    authToken: AuthToken;
+    private config: Config;
+    private requestor: Requestor;
+    private authToken: AuthToken;
 
     constructor(requestor: Requestor, authToken: AuthToken) {
         this.requestor = requestor;

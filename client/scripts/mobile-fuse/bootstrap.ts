@@ -1,6 +1,7 @@
 /* beautify ignore:start */
 //import './vendor';
 import {fuseBootstraper} from '../fuse-angular/bootstrap';
+//import {enableProdMode} from 'angular2/core';
 //import {bootstrap} from 'angular2/platform/browser';
 //import {AppComponent} from '../heroes/components/app.component';
 //import {TodoAppComponent} from '../todo/components/todoapp.component';
@@ -15,6 +16,7 @@ import {TranslateService} from 'ng2-translate';
 //fuseBootstrap(TodoAppComponent);
 //fuseBootstrap(AppComponent);
 //if (window.isFuse) {
+//enableProdMode();
 let providers = [AuthToken, TranslateService];
 if (!window.fusejs) {
     fuseBootstraper(providers).bootstrap(Main);

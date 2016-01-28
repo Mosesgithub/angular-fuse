@@ -7,9 +7,9 @@ import {IUser} from '../interfaces/iuser';
 /* beautify ignore:end */
 @Injectable()
 export class Authentication {
-    config: Config;
-    requestor: Requestor;
-    authToken: AuthToken;
+    private config: Config;
+    private requestor: Requestor;
+    private authToken: AuthToken;
 
     constructor(requestor: Requestor, authToken: AuthToken) {
         this.requestor = requestor;

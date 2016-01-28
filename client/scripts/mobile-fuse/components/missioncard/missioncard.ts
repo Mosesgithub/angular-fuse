@@ -7,18 +7,18 @@ require('./ngux/missioncard.js');
 @Component({
     selector: 'MissionCard',
     template: require('./missioncard.ngux') //,
-	//inputs: ['mission']
+    //inputs: ['mission']
 })
 
 export class MissionCard {
-    @Output() start1 = new EventEmitter(); //<IMission>
+    @Output() select = new EventEmitter(); //<IMission>
     @Input() mission: IMission;
     constructor() {
         //
     }
 
-    start() {
-        //console.log(this.mission);
-        this.start1.emit(null);
+    selectEmit() {
+        console.log('selectEmit');
+        this.select.emit(null);
     }
 }

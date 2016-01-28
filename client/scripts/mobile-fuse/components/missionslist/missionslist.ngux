@@ -1,30 +1,62 @@
-<DockPanel ng:Selector="MissionsList" Background="StableBg">
-    <HeaderBar Title="My Missions" Dock="Top">
-        <SolidColor ux:Key="Background" ux:Ref="LightBg" />
-        <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
-        <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
-            <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-menu}" (Clicked)="showMenu()"></Text>
-        </Rectangle>
-        <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
-            <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}" (Clicked)="refreshData()"></Text>
-        </Rectangle>
-    </HeaderBar>
-    <UserEvent Name="SelectItem" />
+<Panel ng:Selector="MissionsList" Background="StableBg">
+    <DockPanel>
+        <HeaderBar Title="My Missions" Dock="Top">
+            <SolidColor ux:Key="Background" ux:Ref="LightBg" />
+            <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
+            <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
+                <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-menu}" (Clicked)="showMenu()"></Text>
+            </Rectangle>
+            <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
+                <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}" (Clicked)="refreshData()"></Text>
+            </Rectangle>
+        </HeaderBar>
+        <!--     <UserEvent Name="SelectItem" />
+ -->
+        <!--  <MissionDetailCard></MissionDetailCard> -->
 
-    <MissionDetailCard></MissionDetailCard>
-
-    <ScrollView ux:Name="mainLayout">
-        <StackPanel>
-            <Panel *ngFor="#m of missions" Margin="10,10,10,5">
-                <ng:MissionCard [ng:mission]="m" (ng:start1)="startMission(m)"></ng:MissionCard>
+        <StackPanel Dock="Top" Background="LightBg" Height="44">
+            <!--  <MultiLayoutPanel Height="50" Name="tabBar" [LayoutElement]="page{{activeTab}}Tab"> -->
+            <GridLayout [ColumnCount]="getTabsCount()" Rows="1*"></GridLayout>
+            <Panel Name="page{{i}}Tab" *ngFor="#t of tabs; #i=index" Height="44" (Clicked)="setActivePage(i)" [Visibility]="data[t+'Count']>0?'Visible':'Collapsed'">
+                <Rectangle Alignment="Bottom" Height="4" Fill="BalancedBg" *ngIf="i==activePage">
+                    <AddingAnimation>
+                        <Move RelativeTo="Size" X="-1" Duration="0.3" Easing="BounceIn"></Move>
+                    </AddingAnimation>
+                </Rectangle>
+                <Text Value="{{t}} {{data[t+'Count']}}" TextAlignment="Center" Alignment="Center" FontSize="13"> </Text>
             </Panel>
         </StackPanel>
-    </ScrollView>
+
+        <PageControl Name="navigation" [Active]="page{{activePage}}">
+            <Page Name="page{{i}}" Background="StableBg" *ngFor="#t of tabs; #i=index" [Visibility]="data[t+'Count']>0?'Visible':'Collapsed'">
+                <WhileActive Threshold="0.5">
+                    <Callback (Handler)="setActivePage(i)"></Callback>
+                </WhileActive>
+                <ScrollView SnapMinTransform="false">
+                    <StackPanel>
+                        <Panel *ngFor="#m of data[t]" Margin="10,10,10,5">
+                            <ng:MissionCard [ng:mission]="m" (ng:select)="selectMission(m)"></ng:MissionCard>
+                        </Panel>
+                    </StackPanel>
+                </ScrollView>
+            </Page>
+        </PageControl>
+
+    </DockPanel>
+
+    <ng:MissionDetail [ng:mission]="selectedMission" *ngIf="selectedMission" (ng:close)="unselectMission()" Alignment="Top">
+        <AddingAnimation>
+            <Move Y="1" RelativeTo="Size" Duration="0.3" Easing="CircularIn" />
+        </AddingAnimation>
+        <RemovingAnimation>
+            <Move Y="1" RelativeTo="Size" Duration="0.3" Easing="CircularIn" />
+        </RemovingAnimation>
+    </ng:MissionDetail>
 
     <AddingAnimation>
-        <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Move X="-1" RelativeTo="Size" Duration="0.3" />
     </AddingAnimation>
     <RemovingAnimation>
-        <Move X="1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Move X="1" RelativeTo="Size" Duration="0.3" />
     </RemovingAnimation>
-</DockPanel>
+</Panel>

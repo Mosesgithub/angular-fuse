@@ -1,0 +1,25 @@
+<nav class="navbar navbar-default navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text">
+                <i class="icon yo-menu" (click)="toggle()"></i>
+                <a>{{title}}</a>
+            </p>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a (click)="refresh()">
+                        <i class="icon yo-refresh"></i>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="vm.toggleIconsFilter()">
+                        <i class="icon" ng-class="{'yo-chevron-bottom':!vm.showIconsFilter, 'yo-chevron-top':vm.showIconsFilter}"></i>
+                    </a>
+                </li>
+                <li><a ng-click="master.toggleFilterMenu()"><i class="icon yo-filter" ></i> </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

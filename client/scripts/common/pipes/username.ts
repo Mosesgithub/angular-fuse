@@ -6,7 +6,7 @@ import {Pipe, PipeTransform} from 'angular2/core';
     name: 'username'
 })
 export class UserName implements PipeTransform {
-    transform(user: any, showUsername): any {
+    transform(user: any, args: any[]): any {
         let displayName = '';
         if (typeof user !== 'undefined' && user) {
             displayName = user.username;
@@ -23,7 +23,7 @@ export class UserName implements PipeTransform {
             }
         }
 
-        if (showUsername) {
+        if (args && args.length > 0 && args[0]) {
             displayName = user.username + '  (' + displayName + ')';
         }
         return displayName;

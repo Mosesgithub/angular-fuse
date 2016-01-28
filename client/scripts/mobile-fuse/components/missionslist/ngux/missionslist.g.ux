@@ -1,27 +1,57 @@
-<DockPanel ux:Class="MissionsList" Background="StableBg">
-    <HeaderBar Title="My Missions" Dock="Top">
-        <SolidColor ux:Key="Background" ux:Ref="LightBg" />
-        <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
-        <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
-            <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-menu}" Clicked="{callback0}" />
-        </Rectangle>
-        <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
-            <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}" Clicked="{callback1}" />
-        </Rectangle>
-    </HeaderBar>
-    <UserEvent Name="SelectItem" />
-    <MissionDetailCard />
-    <ScrollView ux:Name="mainLayout">
-        <StackPanel Items="{children0}" MatchKey="type">
-            <Panel ux:Case="MissionsList_Scope1" Items="{children0}" MatchKey="type" Margin="10,10,10,5">
-                <MissionCard ux:Case="MissionsList_Scope2" />
+<Panel Items="{children2}" MatchKey="type" ux:Class="MissionsList" Background="StableBg">
+    <DockPanel>
+        <HeaderBar Title="My Missions" Dock="Top">
+            <SolidColor ux:Key="Background" ux:Ref="LightBg" />
+            <!-- <SolidColor ux:Key="BorderColor" ux:Ref="BalancedBg" /> -->
+            <Rectangle ux:Binding="LeftIcons" Width="45" Height="45">
+                <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-menu}" Clicked="{callback0}" />
+            </Rectangle>
+            <Rectangle ux:Binding="RightIcons" Width="45" Height="45">
+                <Text Dock="Left" Padding="5" Alignment="Center" Font="YoobicF" FontSize="24" TextColor="{Resource Balanced}" Value="{Resource yo-refresh}" Clicked="{callback1}" />
+            </Rectangle>
+        </HeaderBar>
+        <!--     <UserEvent Name="SelectItem" />
+ -->
+        <!--  <MissionDetailCard></MissionDetailCard> -->
+        <StackPanel Items="{children0}" MatchKey="type" Dock="Top" Background="LightBg" Height="44">
+            <!--  <MultiLayoutPanel Height="50" Name="tabBar" [LayoutElement]="page{{activeTab}}Tab"> -->
+            <GridLayout ColumnCount="{var0}" Rows="1*" />
+            <Panel ux:Case="MissionsList_Scope1" Items="{children0}" MatchKey="type" Name="{var0}" Height="44" Clicked="{callback0}" Visibility="{var1}">
+                <Rectangle ux:Case="MissionsList_Scope2" Alignment="Bottom" Height="4" Fill="BalancedBg">
+                    <AddingAnimation>
+                        <Move RelativeTo="Size" X="-1" Duration="0.3" Easing="BounceIn" />
+                    </AddingAnimation>
+                </Rectangle>
+                <Text Value="{var2}" TextAlignment="Center" Alignment="Center" FontSize="13" />
             </Panel>
         </StackPanel>
-    </ScrollView>
+        <PageControl Items="{children1}" MatchKey="type" Name="navigation" Active="{var1}">
+            <Page ux:Case="MissionsList_Scope3" Name="{var0}" Background="StableBg" Visibility="{var1}">
+                <WhileActive Threshold="0.5">
+                    <Callback Handler="{callback0}" />
+                </WhileActive>
+                <ScrollView SnapMinTransform="false">
+                    <StackPanel Items="{children0}" MatchKey="type">
+                        <Panel ux:Case="MissionsList_Scope4" Items="{children0}" MatchKey="type" Margin="10,10,10,5">
+                            <MissionCard ux:Case="MissionsList_Scope5" />
+                        </Panel>
+                    </StackPanel>
+                </ScrollView>
+            </Page>
+        </PageControl>
+    </DockPanel>
+    <MissionDetail ux:Case="MissionsList_Scope6" Alignment="Top">
+        <AddingAnimation>
+            <Move Y="1" RelativeTo="Size" Duration="0.3" Easing="CircularIn" />
+        </AddingAnimation>
+        <RemovingAnimation>
+            <Move Y="1" RelativeTo="Size" Duration="0.3" Easing="CircularIn" />
+        </RemovingAnimation>
+    </MissionDetail>
     <AddingAnimation>
-        <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Move X="-1" RelativeTo="Size" Duration="0.3" />
     </AddingAnimation>
     <RemovingAnimation>
-        <Move X="1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Move X="1" RelativeTo="Size" Duration="0.3" />
     </RemovingAnimation>
-</DockPanel>
+</Panel>

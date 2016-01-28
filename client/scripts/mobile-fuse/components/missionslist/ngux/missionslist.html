@@ -1,6 +1,14 @@
-<MissionsList_Scope0 (callback0)="showMenu()" (callback1)="refreshData()">
-    <MissionsList_Scope1 *ngFor="#m of missions" collection="children0">
-        <MissionCard  [mission]="m" (start1)="startMission(m)" collection="children0" scope="MissionsList_Scope2">
-        </MissionCard>
+<MissionsList_Scope0 (callback0)="showMenu()" (callback1)="refreshData()" [var0]="getTabsCount()" var1="page{{activePage}}">
+    <MissionsList_Scope1 var0="page{{i}}Tab" *ngFor="#t of tabs; #i=index" (callback0)="setActivePage(i)" [var1]="data[t+'Count']>0?'Visible':'Collapsed'" var2="{{t}} {{data[t+'Count']}}" collection="children0">
+        <MissionsList_Scope2 *ngIf="i==activePage" collection="children0">
+        </MissionsList_Scope2>
     </MissionsList_Scope1>
+    <MissionsList_Scope3 var0="page{{i}}" *ngFor="#t of tabs; #i=index" [var1]="data[t+'Count']>0?'Visible':'Collapsed'" (callback0)="setActivePage(i)" collection="children1">
+        <MissionsList_Scope4 *ngFor="#m of data[t]" collection="children0">
+            <MissionCard  [mission]="m" (select)="selectMission(m)" collection="children0" scope="MissionsList_Scope5">
+            </MissionCard>
+        </MissionsList_Scope4>
+    </MissionsList_Scope3>
+    <MissionDetail  [mission]="selectedMission" *ngIf="selectedMission" (close)="unselectMission()" Alignment="Top" collection="children2" scope="MissionsList_Scope6">
+    </MissionDetail>
 </MissionsList_Scope0>

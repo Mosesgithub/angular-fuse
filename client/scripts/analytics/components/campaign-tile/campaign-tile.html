@@ -1,0 +1,23 @@
+<div class="campaign-tile">
+    <!-- <div id="{{svgId}}" class="svg"></div> -->
+    <div class="logo" [backImg]="data.icon" cloudinary="w_300,h_240,c_fill"> </div>
+    <div class="body" cloudinary="w_{{data.size}},h_{{data.size}},c_fill,e_blur:1000" [backImg]="data.backgroundImage" [rgbaStart]="'rgba(62,70,102,0.8)'" [rgbaStop]="'rgba(62,70,102,0.8)'">
+        <div class="title">
+            {{data.title}}
+        </div>
+        <div class="subtitle">
+            <span *ngIf="data.latest.length>3">{{data.latest|timeAgo}}</span>
+        </div>
+        <div class="badge-count">
+            <span>{{data.count|number}}</span>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-row">
+            <div class='column' *ngFor="#b of data.badges">
+                <div class="value">{{b.value|number}}</div>
+                <div class="title">{{b.tooltip|uppercase|translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>

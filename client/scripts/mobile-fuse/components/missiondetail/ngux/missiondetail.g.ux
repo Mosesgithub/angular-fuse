@@ -1,0 +1,52 @@
+<Panel ux:Class="MissionDetail" ClipToBounds="true" Clicked="{callback0}">
+    <Panel ux:Name="title" Height="44" Alignment="Top">
+        <Text FontSize="17" TextColor="{Resource Balanced}" Font="DemiBoldF" Alignment="Center" TextAlignment="Center" Value="{var0}" />
+        <Translation Y="245" />
+    </Panel>
+    <Panel ux:Name="icon" Alignment="Top">
+        <Circle Alignment="Center" Height="70" Width="70">
+            <ImageFill Url="{var1}" StretchMode="UniformToFill" Opacity="1" />
+        </Circle>
+        <Circle Alignment="Center" Height="80" Width="80">
+            <Stroke Width="3" Brush="BalancedBg" />
+        </Circle>
+        <Circle Alignment="Center" Height="90" Width="90" Fill="LightBg" />
+        <Translation Y="155" />
+    </Panel>
+    <Panel ux:Name="topImage" Height="200" Alignment="Top" Background="DarkBg" ClipToBounds="true">
+        <Rectangle ux:Name="topImageRectangle" Height="200" Opacity="0.5">
+            <ImageFill Url="{var2}" StretchMode="UniformToFill" />
+            <Blur ux:Name="imageBlur" Radius="0" />
+        </Rectangle>
+    </Panel>
+    <ScrollView Background="LightBg">
+        <StackPanel>
+            <Rectangle ux:Name="placeHolder" Height="300" />
+            <Rectangle Height="1" Fill="DarkBg" Opacity="0.5" />
+            <Text FontSize="14" TextColor="{Resource Dark}" Font="DemiBoldF" Margin="10">Location</Text>
+            <Text FontSize="14" TextColor="{Resource Dark}" TextWrapping="Wrap" Margin="20, 0 ,10,10" Value="{var3}" />
+            <Rectangle Height="1" Fill="DarkBg" Opacity="0.5" />
+            <Text FontSize="14" TextColor="{Resource Dark}" Font="DemiBoldF" Margin="10">Brief</Text>
+            <Text TextWrapping="Wrap" Margin="20, 0 ,10,10" FontSize="14" TextColor="{Resource Dark}" Value="{var4}" />
+            <Rectangle Height="420" />
+        </StackPanel>
+        <ScrollingAnimation From="-1" To="-200">
+            <Move Target="title" Y="200" />
+            <Move Target="icon" Y="200" />
+            <Scale Target="topImage" Factor="3" />
+            <Change imageBlur.Radius="50" />
+        </ScrollingAnimation>
+        <ScrollingAnimation From="0" To="145">
+            <Move Target="topImage" Y="-155" />
+            <Move Target="icon" Y="-205" />
+            <Scale Target="icon" Factor="0" />
+            <Move Target="title" Y="-245" />
+            <Change icon.Opacity="0" />
+            <Change topImageRectangle.Opacity="0" />
+            <Change placeHolder.Height="200" />
+        </ScrollingAnimation>
+        <ScrollingAnimation From="400" To="0">
+            <Move Target="topImage" Y="0" />
+        </ScrollingAnimation>
+    </ScrollView>
+</Panel>

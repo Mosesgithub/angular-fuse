@@ -1,9 +1,10 @@
 /* beautify ignore:start */
 import {Directive, ElementRef, Renderer, Input} from 'angular2/core';
+/* beautify ignore:end */
+
 @Directive({
     selector: '[backImg]'
 })
-/* beautify ignore:end */
 
 export class BackImg {
     private _emptyImage: string = 'data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw==';
@@ -63,6 +64,7 @@ export class BackImg {
     }
 
     @Input('backImg') set url(value) {
+        let backgroundImage = '';
         if (value) {
             let prefix = 'data:image/jpg;base64,';
             if (value.indexOf('http') === 0 || value.indexOf('data:') === 0) {
@@ -76,14 +78,15 @@ export class BackImg {
                     value = [value.slice(0, position), this._cloudinary + '/', value.slice(position)].join('');
                 }
             }
-
-            let backgroundImage = 'url(\'' + prefix + value + '\')';
-            if (this._rgbaStart && this._rgbaStop) {
-                backgroundImage = 'linear-gradient(' + this._rgbaStart + ',' + this._rgbaStop + '), ' + backgroundImage;
-            }
-
+            backgroundImage = 'url(\'' + prefix + value + '\')';
+        }
+        if (this._rgbaStart && this._rgbaStop) {
+            backgroundImage = 'linear-gradient(' + this._rgbaStart + ',' + this._rgbaStop + '), ' + backgroundImage;
+        }
+        if (backgroundImage) {
             this.renderer.setElementStyle(this.el.nativeElement, 'background-image', backgroundImage);
         }
+
         this.renderer.setElementStyle(this.el.nativeElement, 'src', this._emptyImage);
     }
 

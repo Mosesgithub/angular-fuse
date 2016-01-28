@@ -1,1 +1,3 @@
-<H1>Campaigns</H1>
+ <section *ngIf="campaigns" class="tiles-container">
+    <campaign-tile *ngFor="#c of campaigns" [data]="c"></campaign-tile>
+</section>

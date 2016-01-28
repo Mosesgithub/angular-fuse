@@ -1,0 +1,525 @@
+$yoobicons-font-path: "../../resources/fonts/Yoobicons" !default;
+
+.yo-map-marker, .yo-time {
+    padding-right: 2px;
+}
+
+@font-face {
+    font-family: 'yoobicons';
+    src: url("#{$yoobicons-font-path}/yoobicons.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+[class^="yo-"], [class*=" yo-"] {
+    font-family: 'yoobicons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.yo-filter:before {
+    line-height: 26px !important;
+}
+
+.yo-undo {
+    margin-right: 5px;
+}
+
+
+.yo-sw-profile .path1:before {
+    content: "\e901";
+    color: rgb(83, 83, 83);
+}
+.yo-sw-profile .path2:before {
+    content: "\e903";
+    margin-left: -1em;
+    color: rgb(83, 83, 83);
+}
+.yo-sw-profile .path3:before {
+    content: "\e904";
+    margin-left: -1em;
+    color: rgb(216, 216, 216);
+}
+.yo-sw-profile .path4:before {
+    content: "\e906";
+    margin-left: -1em;
+    color: rgb(83, 83, 83);
+}
+.yo-wide-file:before {
+    content: "\e601";
+}
+.yo-documents:before {
+    content: "\e60c";
+}
+.yo-group:before {
+    content: "\e60d";
+}
+.yo-overview:before {
+    content: "\e60e";
+}
+.yo-photo:before {
+    content: "\e60f";
+}
+.yo-talk-female:before {
+    content: "\e610";
+}
+.yo-settings-user:before {
+    content: "\e611";
+}
+.yo-skycrapers:before {
+    content: "\e612";
+}
+.yo-two-files:before {
+    content: "\e613";
+}
+.yo-diamond:before {
+    content: "\e64b";
+}
+.yo-walk:before {
+    content: "\e650";
+}
+.yo-euro:before {
+    content: "\e654";
+}
+.yo-pound:before {
+    content: "\e655";
+}
+.yo-tag:before {
+    content: "\e66a";
+}
+.yo-cash:before {
+    content: "\e66d";
+}
+.yo-credit-card:before {
+    content: "\e673";
+}
+.yo-basket:before {
+    content: "\e687";
+}
+.yo-store:before {
+    content: "\e688";
+}
+.yo-settings:before {
+    content: "\e6bc";
+}
+.yo-support:before {
+    content: "\e6db";
+}
+.yo-video:before {
+    content: "\e6e5";
+}
+.yo-imac:before {
+    content: "\e6ed";
+}
+.yo-mobile:before {
+    content: "\e6f3";
+}
+.yo-camera2:before {
+    content: "\e6f8";
+}
+.yo-camera:before {
+    content: "\e6fc";
+}
+.yo-redo:before {
+    content: "\e700";
+}
+.yo-undo:before {
+    content: "\e701";
+}
+.yo-draw:before {
+    content: "\e702";
+}
+.yo-trash:before {
+    content: "\e705";
+}
+.yo-edit:before {
+    content: "\e70a";
+}
+.yo-feed:before {
+    content: "\e716";
+}
+.yo-key:before {
+    content: "\e718";
+}
+.yo-password:before {
+    content: "\e71f";
+}
+.yo-profile:before {
+    content: "\e721";
+}
+.yo-people:before {
+    content: "\e724";
+}
+.yo-user:before {
+    content: "\e72c";
+}
+.yo-cog:before {
+    content: "\e74b";
+}
+.yo-config:before {
+    content: "\e74d";
+}
+.yo-share:before {
+    content: "\e753";
+}
+.yo-code:before {
+    content: "\e756";
+}
+.yo-flag:before {
+    content: "\e75b";
+}
+.yo-danger:before {
+    content: "\e762";
+}
+.yo-import:before {
+    content: "\e763";
+}
+.yo-upload:before {
+    content: "\e764";
+}
+.yo-chart-bar:before {
+    content: "\e770";
+}
+.yo-geoloc:before {
+    content: "\e77d";
+}
+.yo-list2:before {
+    content: "\e789";
+}
+.yo-check-square:before {
+    content: "\e79f";
+}
+.yo-menu:before {
+    content: "\e7aa";
+}
+.yo-card:before {
+    content: "\e7b1";
+}
+.yo-refresh:before {
+    content: "\e7b2";
+}
+.yo-refresh-a:before {
+    content: "\e7b4";
+}
+.yo-logout:before {
+    content: "\e7b6";
+}
+.yo-eye:before {
+    content: "\e7b9";
+}
+.yo-collapse:before {
+    content: "\e7c8";
+}
+.yo-expand:before {
+    content: "\e7c9";
+}
+.yo-chevron-bottom:before {
+    content: "\e7cc";
+}
+.yo-chevron-right:before {
+    content: "\e7cd";
+}
+.yo-chevron-top:before {
+    content: "\e7ce";
+}
+.yo-chevron-left:before {
+    content: "\e7cf";
+}
+.yo-locate-me:before {
+    content: "\e7d1";
+}
+.yo-circle:before {
+    content: "\e7d5";
+}
+.yo-check:before {
+    content: "\e7d6";
+}
+.yo-close:before {
+    content: "\e7d7";
+}
+.yo-minus:before {
+    content: "\e7d8";
+}
+.yo-plus:before {
+    content: "\e7d9";
+}
+.yo-more:before {
+    content: "\e7e4";
+}
+.yo-bell:before {
+    content: "\e7e8";
+}
+.yo-google:before {
+    content: "\e7e9";
+}
+.yo-chart-gauge:before {
+    content: "\e7f1";
+}
+.yo-check-circle:before {
+    content: "\e7f4";
+}
+.yo-close-circle:before {
+    content: "\e7f5";
+}
+.yo-chevron-right-circle:before {
+    content: "\e7fd";
+}
+.yo-right-arrow:before {
+    content: "\e807";
+}
+.yo-up-arrow:before {
+    content: "\e808";
+}
+.yo-left-arrow:before {
+    content: "\e809";
+}
+.yo-export:before {
+    content: "\e80a";
+}
+.yo-medal:before {
+    content: "\e80d";
+}
+.yo-filter:before {
+    content: "\e811";
+}
+.yo-degree:before {
+    content: "\e81b";
+}
+.yo-trophee:before {
+    content: "\e81f";
+}
+.yo-tetris:before {
+    content: "\e822";
+}
+.yo-bicycle:before {
+    content: "\e832";
+}
+.yo-car:before {
+    content: "\e837";
+}
+.yo-building:before {
+    content: "\e85f";
+}
+.yo-week:before {
+    content: "\e867";
+}
+.yo-dashboard:before {
+    content: "\e86b";
+}
+.yo-alarmclock:before {
+    content: "\e86e";
+}
+.yo-wait:before {
+    content: "\e86f";
+}
+.yo-time:before {
+    content: "\e873";
+}
+.yo-calendar:before {
+    content: "\e875";
+}
+.yo-info:before {
+    content: "\e879";
+}
+.yo-map:before {
+    content: "\e877";
+}
+.yo-map-marker2:before {
+    content: "\e878";
+}
+.yo-map-marker:before {
+    content: "\e87c";
+}
+.yo-signature:before {
+    content: "\e887";
+}
+.yo-male:before {
+    content: "\e88a";
+}
+.yo-female:before {
+    content: "\e88b";
+}
+.yo-smiley:before {
+    content: "\e893";
+}
+.yo-videocall:before {
+    content: "\e8a4";
+}
+.yo-briefcase:before {
+    content: "\e8aa";
+}
+.yo-document:before {
+    content: "\e8b3";
+}
+.yo-clipboard:before {
+    content: "\e8b5";
+}
+.yo-editform:before {
+    content: "\e8bc";
+}
+.yo-chart-pie:before {
+    content: "\e8c6";
+}
+.yo-mission-list:before {
+    content: "\e8c8";
+}
+.yo-archive:before {
+    content: "\e8d7";
+}
+.yo-folder:before {
+    content: "\e8dd";
+}
+.yo-learn:before {
+    content: "\e8e8";
+}
+.yo-file:before {
+    content: "\e8ee";
+}
+.yo-mission:before {
+    content: "\e8f9";
+}
+.yo-feed2:before {
+    content: "\e8fb";
+}
+.yo-gallery:before {
+    content: "\e8fe";
+}
+.yo-phone:before {
+    content: "\e902";
+}
+.yo-audio:before {
+    content: "\e905";
+}
+.yo-enveloppe:before {
+    content: "\e909";
+}
+.yo-mail:before {
+    content: "\e90a";
+}
+.yo-question:before {
+    content: "\e915";
+}
+.yo-chat:before {
+    content: "\e917";
+}
+.yo-comment:before {
+    content: "\e91c";
+}
+.yo-paypal:before {
+    content: "\e93e";
+}
+.yo-doc-folder-a:before {
+    content: "\e874";
+}
+.yo-doc-folder-cross-a:before {
+    content: "\e876";
+}
+.yo-doc-folder-plus-a:before {
+    content: "\e87a";
+}
+.yo-list:before {
+    content: "\e87e";
+}
+.yo-media-image:before {
+    content: "\e898";
+}
+.yo-image:before {
+    content: "\e89c";
+}
+.yo-barcode:before {
+    content: "\e8a9";
+}
+.yo-ecommerce-creditcard-b:before {
+    content: "\e8b1";
+}
+.yo-shoppingcart:before {
+    content: "\e8c9";
+}
+.yo-longtext:before {
+    content: "\e8fd";
+}
+.yo-shorttext:before {
+    content: "\e8ff";
+}
+.yo-environment-sign:before {
+    content: "\e919";
+}
+.yo-fire:before {
+    content: "\e954";
+}
+.yo-toggle:before {
+    content: "\e96e";
+}
+.yo-sliders:before {
+    content: "\e973";
+}
+.yo-tovalidate:before {
+    content: "\e979";
+}
+.yo-security:before {
+    content: "\e9af";
+}
+.yo-magic:before {
+    content: "\e9ca";
+}
+.yo-circle-plus:before {
+    content: "\ead9";
+}
+.yo-number:before {
+    content: "\eb05";
+}
+.yo-star:before {
+    content: "\eb20";
+}
+.yo-selectbuttons:before {
+    content: "\eb22";
+}
+.yo-selectbuttonsmulti:before {
+    content: "\eb2f";
+}
+.yo-deploy:before {
+    content: "\e900";
+}
+.yo-more-full:before {
+    content: "\e60a";
+}
+.yo-question-add:before {
+    content: "\e607";
+}
+.yo-filter-active:before {
+    content: "\e614";
+}
+.yo-more-v:before {
+    content: "\e609";
+}
+.yo-eye-01:before {
+    content: "\e605";
+}
+.yo-eye-full:before {
+    content: "\e606";
+}
+.yo-yoobic-line:before {
+    content: "\e602";
+}
+.yo-yoobic:before {
+    content: "\e600";
+}
+.yo-target:before {
+    content: "\e608";
+}
+.yo-like:before {
+    content: "\e604";
+}
+.yo-study:before {
+    content: "\e603";
+}
+
+

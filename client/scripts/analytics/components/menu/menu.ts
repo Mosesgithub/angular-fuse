@@ -1,7 +1,8 @@
 /* beautify ignore:start */
-import {Component} from 'angular2/core';
+import {Component, Output, EventEmitter} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 //import {Grid} from '../grid/grid';
+import {NavBar} from '../navbar/navbar';
 import {MenuContent} from '../menucontent/menucontent';
 import {CampaignsOverview} from '../campaigns-overview/campaigns-overview';
 import {FormCreator} from '../form-creator/form-creator';
@@ -10,7 +11,7 @@ import {FormCreator} from '../form-creator/form-creator';
     selector: 'menu',
     template: require('./menu.html'),
     styles: [require('./menu.scss').toString()],
-    directives: [ROUTER_DIRECTIVES, MenuContent] //,
+    directives: [ROUTER_DIRECTIVES, MenuContent, NavBar] //,
 })
 
 @RouteConfig([{
@@ -24,13 +25,23 @@ import {FormCreator} from '../form-creator/form-creator';
     }])
 
 export class Menu {
-    public menuState: string = 'main';
+    public isActive: boolean = false;
+    public navbarTitle: string;
+    @Output() refresh = new EventEmitter();
 
     constructor(private router: Router) {
         //
     }
 
     toggleMenu() {
-        this.menuState = this.menuState === 'menu' ? 'main' : 'menu';
+        this.isActive = !this.isActive;
+    }
+
+    setTitle(title) {
+        this.navbarTitle = title;
+    }
+
+    refreshData() {
+        this.refresh.emit(null);
     }
 }

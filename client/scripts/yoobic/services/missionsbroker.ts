@@ -7,14 +7,24 @@ import {IMission} from '../interfaces/imission';
 /* beautify ignore:end */
 @Injectable()
 export class MissionsBroker {
-    config: Config;
-    requestor: Requestor;
-    authToken: AuthToken;
+    private config: Config;
+    private requestor: Requestor;
+    private authToken: AuthToken;
 
     constructor(requestor: Requestor, authToken: AuthToken) {
         this.requestor = requestor;
         this.authToken = authToken;
         this.config = new Config();
+    }
+
+    getAvailable(): Promise<any> {
+        let url = this.config.apiUrl + '/api/businesslogic/getAvailableMissions';
+        return this.requestor.post(url, {
+            geoloc: [-0.2379271, 51.5314939],
+            radius: 400
+        }).then(res => {
+            return res.data;
+        });
     }
 
     getAll(): Promise<IMission[]> {

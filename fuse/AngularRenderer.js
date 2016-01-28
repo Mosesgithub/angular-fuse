@@ -23,7 +23,7 @@ module.exports = function(context) {
     var rootId;
 
     var consoleLog = function(text) {
-        console.log(text);
+        // console.log(text);
     };
 
     this.isScope = function(type) {

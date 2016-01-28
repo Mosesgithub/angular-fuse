@@ -12,10 +12,9 @@
     <Video File="../resources/market.mp4" Layer="Background" AutoPlay="true" IsLooping="true" StretchMode="UniformToFill" Background="DarkBg" Opacity="0.3" Padding="-10" />
     <Rectangle Layer="Background" Fill="DarkBg" />
     <AddingAnimation>
-        <Move X="-1" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
+        <Move X="1" RelativeTo="Size" Duration="0.3" />
     </AddingAnimation>
     <RemovingAnimation>
-        <Move X="-0.5" RelativeTo="Size" Duration="0.5" Easing="CircularInOut" />
-        <Change MySelf.Opacity="0" Duration="0.5" Easing="CircularInOut" />
+        <Move X="1" RelativeTo="Size" Duration="0.3" />
     </RemovingAnimation>
 </DockPanel>
