@@ -18,10 +18,11 @@ import 'lodash';
 (<any>window).ag = require('ag-grid');
 //window.jQuery = require('jquery');
 //require('bootstrap');
-
+(<any>window).dragula = require('dragula');
 // css
 require('../../styles/analytics/index.scss');
 require('ag-grid/dist/ag-grid.css');
 require('ag-grid/dist/theme-blue.css');
 require('normalize.css/normalize.css');
 require('bootstrap/dist/css/bootstrap.css');
+require('dragula/dist/dragula.css');

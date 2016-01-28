@@ -41,14 +41,14 @@ webpackJsonp([0],{
 	    function App(translate) {
 	        this.translate = translate;
 	        translate.setDefaultLang('en');
-	        translate.setTranslation('en', __webpack_require__(296));
+	        translate.setTranslation('en', __webpack_require__(307));
 	        translate.use('en');
 	    }
 	    App = __decorate([
 	        core_1.Component({
 	            selector: 'app',
 	            directives: [router_1.ROUTER_DIRECTIVES],
-	            template: __webpack_require__(297)
+	            template: __webpack_require__(308)
 	        }),
 	        router_1.RouteConfig([{
 	                path: '/',
@@ -717,9 +717,9 @@ webpackJsonp([0],{
 	};
 	var core_1 = __webpack_require__(1);
 	var router_1 = __webpack_require__(218);
-	var menucontent_1 = __webpack_require__(290);
-	var campaigns_overview_1 = __webpack_require__(545);
-	var form_creator_1 = __webpack_require__(549);
+	var menucontent_1 = __webpack_require__(288);
+	var campaigns_overview_1 = __webpack_require__(294);
+	var form_creator_1 = __webpack_require__(298);
 	var Menu = (function () {
 	    function Menu(router) {
 	        this.router = router;
@@ -731,8 +731,8 @@ webpackJsonp([0],{
 	    Menu = __decorate([
 	        core_1.Component({
 	            selector: 'menu',
-	            template: __webpack_require__(295),
-	            styles: [__webpack_require__(542).toString()],
+	            template: __webpack_require__(304),
+	            styles: [__webpack_require__(305).toString()],
 	            directives: [router_1.ROUTER_DIRECTIVES, menucontent_1.MenuContent]
 	        }),
 	        router_1.RouteConfig([{
@@ -753,7 +753,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 290:
+/***/ 288:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -771,8 +771,8 @@ webpackJsonp([0],{
 	var requestor_1 = __webpack_require__(259);
 	var authentication_1 = __webpack_require__(261);
 	var ng2_translate_1 = __webpack_require__(263);
-	var username_1 = __webpack_require__(291);
-	var backimg_1 = __webpack_require__(544);
+	var username_1 = __webpack_require__(289);
+	var backimg_1 = __webpack_require__(290);
 	var MenuContent = (function () {
 	    function MenuContent(router, authentication, location) {
 	        this.router = router;
@@ -799,8 +799,8 @@ webpackJsonp([0],{
 	    MenuContent = __decorate([
 	        core_1.Component({
 	            selector: 'menu-content',
-	            template: __webpack_require__(292),
-	            styles: [__webpack_require__(293).toString()],
+	            template: __webpack_require__(291),
+	            styles: [__webpack_require__(292).toString()],
 	            providers: [requestor_1.Requestor, authentication_1.Authentication],
 	            directives: [router_1.ROUTER_DIRECTIVES, common_1.NgFor, common_1.NgIf, backimg_1.BackImg],
 	            pipes: [ng2_translate_1.TranslatePipe, username_1.UserName]
@@ -814,7 +814,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 291:
+/***/ 289:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -868,20 +868,195 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 292:
+/***/ 290:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var BackImg = (function () {
+	    function BackImg(el, renderer) {
+	        this.el = el;
+	        this.renderer = renderer;
+	        this._emptyImage = 'data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw==';
+	        this.renderer.setElementStyle(this.el.nativeElement, 'background-image', 'none');
+	        this.renderer.setElementStyle(this.el.nativeElement, 'background-repeat', 'no-repeat');
+	        this.renderer.setElementStyle(this.el.nativeElement, 'background-attachment', 'center');
+	        this.renderer.setElementStyle(this.el.nativeElement, 'background-size', 'cover');
+	        this.renderer.setElementStyle(this.el.nativeElement, 'background-position-x', '50%');
+	    }
+	    Object.defineProperty(BackImg.prototype, "color", {
+	        set: function (value) {
+	            if (value) {
+	                this.renderer.setElementStyle(this.el.nativeElement, 'background-color', value);
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(BackImg.prototype, "contain", {
+	        set: function (value) {
+	            if (value) {
+	                this.renderer.setElementStyle(this.el.nativeElement, 'background-color', 'contain');
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(BackImg.prototype, "positionX", {
+	        set: function (value) {
+	            if (value) {
+	                this.renderer.setElementStyle(this.el.nativeElement, 'background-position-x', value);
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(BackImg.prototype, "positionY", {
+	        set: function (value) {
+	            if (value) {
+	                this.renderer.setElementStyle(this.el.nativeElement, 'background-position-y', value);
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(BackImg.prototype, "opacity", {
+	        set: function (value) {
+	            if (value) {
+	                this.renderer.setElementStyle(this.el.nativeElement, 'opacity', value);
+	                this.renderer.setElementStyle(this.el.nativeElement, 'filter', 'alpha(opacity=' + value + ')');
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(BackImg.prototype, "cloudinary", {
+	        set: function (value) {
+	            this._cloudinary = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(BackImg.prototype, "rgbaStart", {
+	        set: function (value) {
+	            this._rgbaStart = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(BackImg.prototype, "rgbaStop", {
+	        set: function (value) {
+	            this._rgbaStop = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(BackImg.prototype, "url", {
+	        set: function (value) {
+	            if (value) {
+	                var prefix = 'data:image/jpg;base64,';
+	                if (value.indexOf('http') === 0 || value.indexOf('data:') === 0) {
+	                    prefix = '';
+	                }
+	                value = value.replace(/[']/g, '%27');
+	                if (this._cloudinary && value.indexOf('res.cloudinary') >= 0) {
+	                    var position = value.indexOf('upload/');
+	                    if (position > 0) {
+	                        position += 7;
+	                        value = [value.slice(0, position), this._cloudinary + '/', value.slice(position)].join('');
+	                    }
+	                }
+	                var backgroundImage = 'url(\'' + prefix + value + '\')';
+	                if (this._rgbaStart && this._rgbaStop) {
+	                    backgroundImage = 'linear-gradient(' + this._rgbaStart + ',' + this._rgbaStop + '), ' + backgroundImage;
+	                }
+	                this.renderer.setElementStyle(this.el.nativeElement, 'background-image', backgroundImage);
+	            }
+	            this.renderer.setElementStyle(this.el.nativeElement, 'src', this._emptyImage);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "color", null);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "contain", null);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "positionX", null);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "positionY", null);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "opacity", null);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "cloudinary", null);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "rgbaStart", null);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "rgbaStop", null);
+	    __decorate([
+	        core_1.Input('backImg'), 
+	        __metadata('design:type', Object), 
+	        __metadata('design:paramtypes', [Object])
+	    ], BackImg.prototype, "url", null);
+	    BackImg = __decorate([
+	        core_1.Directive({
+	            selector: '[backImg]'
+	        }), 
+	        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
+	    ], BackImg);
+	    return BackImg;
+	})();
+	exports.BackImg = BackImg;
+
+
+/***/ },
+
+/***/ 291:
 /***/ function(module, exports) {
 
 	module.exports = "<!-- LEFT MENU -->\n\n<div class=\"menucontent\">\n    <!-- <div class=\"logo\" back-img=\"images/logo.png\" url=\"true\" (click)=\"toggleLeftMenu()\"></div> -->\n    <div class=\"profile\" *ngIf=\"user\">\n        <div class=\"border\">\n          <div class=\"image\" [backImg]=\"user.imageData\" [cloudinary]=\"'w_120,h_120,c_fill'\"></div>\n        </div>\n        <div class=\"text\">{{user|username}}</div>\n    </div>\n\n    <!--  <div class=\"close\" (click)=\"toggleLeftMenu()\"><i class=\"yo-close\"></i></div> -->\n    <div class=\"header\" (click)=\"overviewCollapsed=!overviewCollapsed\">\n        <i class=\"chevron\" [ngClass]=\"{'yo-chevron-bottom':overviewCollapsed,'yo-chevron-top':!overviewCollapsed} \"></i>{{'OVERVIEW'|translate}}\n    </div>\n    <section uib-collapse=\"overviewCollapsed\">\n        <div class=\"item\" [routerLink]=\"['CampaignsOverview']\" [ngClass]=\"{'active': isActive('campaigns-overview')}\">\n            {{'CAMPAIGNS'|translate}}\n        </div>\n        <div class=\"item\" (click)=\"goTo('missions')\" [ngClass]=\"{'active': isActive('missions')}\">\n            {{'MISSIONS'|translate}}\n        </div>\n        <div class=\"item\" (click)=\"goTo('admin')\" [ngClass]=\"{'active': isActive('admin')}\">\n            {{'ADMIN'|translate}}\n        </div>\n    </section>\n    <div class=\"header\" (click)=\"createCollapsed=!createCollapsed\">\n        <i class=\"chevron\" [ngClass]=\"{'yo-chevron-bottom':createCollapsed,'yo-chevron-top':!createCollapsed} \"></i>{{'CREATE'|translate}}\n    </div>\n    <section uib-collapse=\"createCollapsed\">\n        <div class=\"item\" [routerLink]=\"['FormCreator']\" [ngClass]=\"{'active': isActive('form-creator')}\">\n            {{'CAMPAIGNS'|translate}}\n        </div>\n    </section>\n\n    <div class=\"header\" (click)=\"statsCollapsed=!statsCollapsed\">\n        <i class=\"chevron\" [ngClass]=\"{'yo-chevron-bottom':statsCollapsed,'yo-chevron-top':!statsCollapsed} \"></i>{{'STATS'|translate}}\n    </div>\n    <section uib-collapse=\"statsCollapsed\">\n        <div class=\"item\" (click)=\"goTo('missionstats')\" [ngClass]=\"{'active': isActive('missionstats')}\">\n            {{'MISSIONS'|translate}}\n        </div>\n        <div class=\"item\" (click)=\"goTo('userstats')\" [ngClass]=\"{'active': isActive('userstats')}\">\n            {{'USERS'|translate}}\n        </div>\n    </section>\n\n    <div class=\"header\" (click)=\"socialCollapsed=!socialCollapsed\">\n        <i class=\"chevron\" [ngClass]=\"{'yo-chevron-bottom':socialCollapsed,'yo-chevron-top':!socialCollapsed} \"></i>{{'SOCIAL'|translate}}\n    </div>\n    <section uib-collapse=\"socialCollapsed\">\n        <div class=\"item\" (click)=\"goTo('feeds')\" [ngClass]=\"{'active': isActive('feeds')}\">\n            {{'FEED'|translate}}\n        </div>\n\n        <div class=\"item\" ng-if=\"!hasAccess('admin') && hasAccess('team')\" ui-sref=\"chat({mode:''})\" [ngClass]=\"{'active': isActive('chat',{mode:''})}\">\n            {{'CHAT'|translate}}\n        </div>\n\n        <div class=\"item\" ng-if=\"hasAccess('admin') || isPrivateCrowd\" ui-sref=\"chat({mode:'support'})\" [ngClass]=\"{'active': isActive('chat',{mode:'support'})}\">\n            {{'SUPPORT'|translate}}\n        </div>\n    </section>\n\n    <div class=\"footer\">\n        <div class=\"header\" (click)=\"logout()\">\n            <i class=\"chevron yo-logout\"></i>{{'LOGOUT'|translate}}\n        </div>\n    </div>\n\n</div>\n";
 
 /***/ },
 
-/***/ 293:
+/***/ 292:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(294);
+	var content = __webpack_require__(293);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(286)(content, {});
@@ -902,7 +1077,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 294:
+/***/ 293:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(285)();
@@ -917,14 +1092,531 @@ webpackJsonp([0],{
 
 /***/ },
 
+/***/ 294:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var router_1 = __webpack_require__(218);
+	var CampaignsOverview = (function () {
+	    function CampaignsOverview(router) {
+	        this.router = router;
+	    }
+	    CampaignsOverview = __decorate([
+	        core_1.Component({
+	            selector: 'campaigns-overview',
+	            template: __webpack_require__(295),
+	            styles: [__webpack_require__(296).toString()],
+	            directives: [router_1.ROUTER_DIRECTIVES]
+	        }), 
+	        __metadata('design:paramtypes', [router_1.Router])
+	    ], CampaignsOverview);
+	    return CampaignsOverview;
+	})();
+	exports.CampaignsOverview = CampaignsOverview;
+
+
+/***/ },
+
 /***/ 295:
+/***/ function(module, exports) {
+
+	module.exports = "<H1>Campaigns</H1>";
+
+/***/ },
+
+/***/ 296:
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(297);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(286)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./campaigns-overview.scss", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./campaigns-overview.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+
+/***/ 297:
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(285)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "", ""]);
+	
+	// exports
+
+
+/***/ },
+
+/***/ 298:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var router_1 = __webpack_require__(218);
+	var dragula_1 = __webpack_require__(299);
+	var dragula_provider_1 = __webpack_require__(300);
+	var FormCreator = (function () {
+	    function FormCreator(router, dragulaService) {
+	        var _this = this;
+	        this.router = router;
+	        this.dragulaService = dragulaService;
+	        this.components = [{
+	                title: 'COMP1'
+	            }, {
+	                title: 'COMP2'
+	            }, {
+	                title: 'COMP3'
+	            }, {
+	                title: 'COMP4'
+	            }, {
+	                title: 'COMP5'
+	            }, {
+	                title: 'COMP6'
+	            }, {
+	                title: 'COMP7'
+	            }, {
+	                title: 'COMP8'
+	            }, {
+	                title: 'COMP9'
+	            }, {
+	                title: 'COMP10'
+	            }];
+	        this.activeSlide = 0;
+	        this.page1 = {
+	            title: 'page1',
+	            items: [{
+	                    title: 'FIELD1'
+	                }, {
+	                    title: 'FIELD2'
+	                }, {
+	                    title: 'FIELD3'
+	                }, {
+	                    title: 'FIELD4'
+	                }, {
+	                    title: 'FIELD5'
+	                }, {
+	                    title: 'FIELD6'
+	                }, {
+	                    title: 'FIELD7'
+	                }, {
+	                    title: 'FIELD8'
+	                }, {
+	                    title: 'FIELD9'
+	                }, {
+	                    title: 'FIELD10'
+	                }]
+	        };
+	        this.page2 = {
+	            title: 'page2',
+	            items: [{
+	                    title: 'FIELD1'
+	                }, {
+	                    title: 'FIELD2'
+	                }, {
+	                    title: 'FIELD3'
+	                }, {
+	                    title: 'FIELD4'
+	                }, {
+	                    title: 'FIELD5'
+	                }, {
+	                    title: 'FIELD6'
+	                }, {
+	                    title: 'FIELD7'
+	                }, {
+	                    title: 'FIELD8'
+	                }, {
+	                    title: 'FIELD9'
+	                }, {
+	                    title: 'FIELD10'
+	                }]
+	        };
+	        this.slides = [this.page1, this.page2];
+	        dragulaService.setOptions('first-bag', {
+	            copy: function (el, source) {
+	                return source.className.indexOf('components') > -1;
+	            },
+	            accepts: function (el, target) {
+	                return target.className.indexOf('form') > -1;
+	            }
+	        });
+	        dragulaService.dropModel.subscribe(function (value) {
+	            _this.onDropModel(value.slice(1));
+	        });
+	        dragulaService.removeModel.subscribe(function (value) {
+	            _this.onRemoveModel(value.slice(1));
+	        });
+	    }
+	    FormCreator.prototype.onDropModel = function (args) {
+	        var el = args[0], target = args[1], source = args[2];
+	        console.dir(this.slides);
+	    };
+	    FormCreator.prototype.onRemoveModel = function (args) {
+	        var el = args[0], source = args[1];
+	    };
+	    FormCreator = __decorate([
+	        core_1.Component({
+	            selector: 'form-creator',
+	            template: __webpack_require__(301),
+	            styles: [__webpack_require__(302).toString()],
+	            viewProviders: [dragula_provider_1.DragulaService],
+	            directives: [router_1.ROUTER_DIRECTIVES, dragula_1.Dragula]
+	        }), 
+	        __metadata('design:paramtypes', [router_1.Router, dragula_provider_1.DragulaService])
+	    ], FormCreator);
+	    return FormCreator;
+	})();
+	exports.FormCreator = FormCreator;
+
+
+/***/ },
+
+/***/ 299:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var dragula_provider_1 = __webpack_require__(300);
+	var Dragula = (function () {
+	    function Dragula(el, dragulaService) {
+	        this.el = el;
+	        this.dragulaService = dragulaService;
+	        this.container = el.nativeElement;
+	    }
+	    Dragula.prototype.ngOnInit = function () {
+	        var _this = this;
+	        var bag = this.dragulaService.find(this.bag);
+	        var checkModel = function () {
+	            if (_this.dragulaModel) {
+	                if (_this.drake.models) {
+	                    _this.drake.models.push(_this.dragulaModel);
+	                }
+	                else {
+	                    _this.drake.models = [_this.dragulaModel];
+	                }
+	            }
+	        };
+	        if (bag) {
+	            this.drake = bag.drake;
+	            checkModel();
+	            this.drake.containers.push(this.container);
+	        }
+	        else {
+	            this.drake = window['dragula']({
+	                containers: [this.container]
+	            });
+	            checkModel();
+	            this.dragulaService.add(this.bag, this.drake);
+	        }
+	    };
+	    Dragula.prototype.ngOnChanges = function (changes) {
+	        if (changes && changes['dragulaModel']) {
+	            if (this.drake) {
+	                if (this.drake.models) {
+	                    var modelIndex = this.drake.models.indexOf(changes['dragulaModel'].previousValue);
+	                    this.drake.models.splice(modelIndex, 1, changes['dragulaModel'].currentValue);
+	                }
+	                else {
+	                    this.drake.models = [changes['dragulaModel'].currentValue];
+	                }
+	            }
+	        }
+	    };
+	    __decorate([
+	        core_1.Input('dragula'), 
+	        __metadata('design:type', String)
+	    ], Dragula.prototype, "bag", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Object)
+	    ], Dragula.prototype, "dragulaModel", void 0);
+	    Dragula = __decorate([
+	        core_1.Directive({
+	            selector: '[dragula]'
+	        }), 
+	        __metadata('design:paramtypes', [core_1.ElementRef, dragula_provider_1.DragulaService])
+	    ], Dragula);
+	    return Dragula;
+	})();
+	exports.Dragula = Dragula;
+
+
+/***/ },
+
+/***/ 300:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var DragulaService = (function () {
+	    function DragulaService() {
+	        this.cancel = new core_1.EventEmitter();
+	        this.cloned = new core_1.EventEmitter();
+	        this.drag = new core_1.EventEmitter();
+	        this.dragend = new core_1.EventEmitter();
+	        this.drop = new core_1.EventEmitter();
+	        this.out = new core_1.EventEmitter();
+	        this.over = new core_1.EventEmitter();
+	        this.remove = new core_1.EventEmitter();
+	        this.shadow = new core_1.EventEmitter();
+	        this.dropModel = new core_1.EventEmitter();
+	        this.removeModel = new core_1.EventEmitter();
+	        this.events = ['cancel', 'cloned', 'drag', 'dragend', 'drop', 'out', 'over', 'remove', 'shadow', 'dropModel', 'removeModel'];
+	        this.bags = [];
+	    }
+	    DragulaService.prototype.add = function (name, drake) {
+	        var bag = this.find(name);
+	        if (bag) {
+	            throw new Error('Bag named: "' + name + '" already exists.');
+	        }
+	        bag = {
+	            name: name,
+	            drake: drake
+	        };
+	        this.bags.push(bag);
+	        if (drake.models) {
+	            this.handleModels(name, drake);
+	        }
+	        if (!bag.initEvents) {
+	            this.setupEvents(bag);
+	        }
+	        return bag;
+	    };
+	    DragulaService.prototype.find = function (name) {
+	        for (var i = 0; i < this.bags.length; i++) {
+	            if (this.bags[i].name === name) {
+	                return this.bags[i];
+	            }
+	        }
+	    };
+	    DragulaService.prototype.destroy = function (name) {
+	        var bag = this.find(name);
+	        var i = this.bags.indexOf(bag);
+	        this.bags.splice(i, 1);
+	        bag.drake.destroy();
+	    };
+	    DragulaService.prototype.setOptions = function (name, options) {
+	        var bag = this.add(name, window['dragula'](options));
+	        this.handleModels(name, bag.drake);
+	    };
+	    DragulaService.prototype.handleModels = function (name, drake) {
+	        var _this = this;
+	        var dragElm;
+	        var dragIndex;
+	        var dropIndex;
+	        var sourceModel;
+	        drake.on('remove', function removeModel(el, source) {
+	            if (!drake.models) {
+	                return;
+	            }
+	            sourceModel = drake.models[drake.containers.indexOf(source)];
+	            sourceModel.splice(dragIndex, 1);
+	            console.log('REMOVE');
+	            console.log(sourceModel);
+	            this.removeModel.emit([name, el, source]);
+	        });
+	        drake.on('drag', function (el, source) {
+	            dragElm = el;
+	            dragIndex = _this.domIndexOf(el, source);
+	        });
+	        drake.on('drop', function (dropElm, target, source) {
+	            if (!drake.models) {
+	                return;
+	            }
+	            dropIndex = _this.domIndexOf(dropElm, target);
+	            sourceModel = drake.models[drake.containers.indexOf(source)];
+	            if (target === source) {
+	                sourceModel.splice(dropIndex, 0, sourceModel.splice(dragIndex, 1)[0]);
+	            }
+	            else {
+	                var notCopy = dragElm === dropElm;
+	                var targetModel = drake.models[drake.containers.indexOf(target)];
+	                var dropElmModel = notCopy ? sourceModel[dragIndex] : JSON.parse(JSON.stringify(sourceModel[dragIndex]));
+	                if (notCopy) {
+	                    sourceModel.splice(dragIndex, 1);
+	                }
+	                targetModel.splice(dropIndex, 0, dropElmModel);
+	                target.removeChild(dropElm);
+	            }
+	            _this.dropModel.emit([name, dropElm, target, source]);
+	        });
+	    };
+	    DragulaService.prototype.setupEvents = function (bag) {
+	        bag.initEvents = true;
+	        var that = this;
+	        var emitter = function (type) {
+	            function replicate() {
+	                var args = Array.prototype.slice.call(arguments);
+	                that[type].emit([bag.name].concat(args));
+	            }
+	            bag.drake.on(type, replicate);
+	        };
+	        this.events.forEach(emitter);
+	    };
+	    DragulaService.prototype.domIndexOf = function (child, parent) {
+	        return Array.prototype.indexOf.call(parent.children, child);
+	    };
+	    DragulaService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], DragulaService);
+	    return DragulaService;
+	})();
+	exports.DragulaService = DragulaService;
+
+
+/***/ },
+
+/***/ 301:
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"yoo-form-creator\">\n    <div class=\"left\">\n        <div class=\"pages\">\n            <div class=\"panelheader\">\n                PAGES\n                <i class=\"icon yo-circle-plus balanced font-large\"></i>\n            </div>\n            <div class=\"yoo-formcreator__panelbody\">\n                <ul *ngFor=\"#p of slides\">\n                    <li>\n                        <div>{{p.title}}\n                        </div>\n                        <ul>\n                            <li *ngFor=\"#f of p.items\">\n                                <div>{{f.title}}</div>\n                            </li>\n                        </ul>\n                    </li>\n                </ul>\n            </div>\n        </div>\n        <div class=\"components\">\n            <div class=\"panelheader\">\n                COMPONENTS\n                <i class=\"icon yo-circle-plus balanced font-large\"></i>\n            </div>\n            <div class=\"componentslist\" [dragula]=\"'first-bag'\" [dragulaModel]=\"components\">\n\n                <div *ngFor=\"#c of components\" class=\"component\">\n                    {{c.title}}\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"center\">\n        <div class=\"form\" [dragula]=\"'first-bag'\" [dragulaModel]=\"slides[activeSlide].items\">\n            <div *ngFor=\"#f of slides[activeSlide].items\" class=\"field\">\n                {{f.title}}\n            </div>\n        </div>\n    </div>\n    <div class=\"right\">\n        things on the right\n    </div>\n</div>\n";
+
+/***/ },
+
+/***/ 302:
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(303);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(286)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./form-creator.scss", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./form-creator.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+
+/***/ 303:
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(285)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".yoo-form-creator {\n  height: 100%;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n      -ms-flex-pack: justify;\n          justify-content: space-between; }\n  .yoo-form-creator .panelheader {\n    font-size: 13px;\n    border-bottom: 1px solid #eaeaea;\n    padding: 10px;\n    line-height: 16px;\n    height: 36px;\n    text-transform: uppercase;\n    position: relative;\n    width: 100%; }\n    .yoo-form-creator .panelheader .icon {\n      position: absolute;\n      right: 10px;\n      top: 8px; }\n  .yoo-form-creator .left {\n    border: 1px solid #eaeaea;\n    border-left: none; }\n    .yoo-form-creator .left .pages {\n      height: 20%;\n      overflow: scroll;\n      border-bottom: 1px solid #eaeaea; }\n    .yoo-form-creator .left .components .componentslist {\n      width: 300px;\n      display: -webkit-box;\n      display: -webkit-flex;\n      display: -ms-flexbox;\n      display: flex;\n      box-orient: horizontal;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n      -webkit-flex-direction: row;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      box-lines: multiple;\n      -webkit-flex-wrap: wrap;\n          -ms-flex-wrap: wrap;\n              flex-wrap: wrap; }\n      .yoo-form-creator .left .components .componentslist .component {\n        background: blue !important;\n        max-width: 122px;\n        background: white;\n        width: 122px;\n        height: 106px;\n        margin-right: 2px;\n        list-style: none;\n        line-height: 45px;\n        margin-left: 0px;\n        cursor: pointer; }\n      .yoo-form-creator .left .components .componentslist .field {\n        background: red !important;\n        max-width: 122px;\n        background: white;\n        width: 122px;\n        height: 106px;\n        margin-right: 2px;\n        list-style: none;\n        line-height: 45px;\n        margin-left: 0px; }\n  .yoo-form-creator .right {\n    border-right: none;\n    border: 1px solid #eaeaea; }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+
+/***/ 304:
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"wrapper\">\n    <div class=\"sidebar-wrapper\">\n        <menu-content></menu-content>\n    </div>\n    <div class=\"page-content-wrapper\">\n        <router-outlet></router-outlet>\n    </div>\n</div>\n";
 
 /***/ },
 
-/***/ 296:
+/***/ 305:
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(306);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(286)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./menu.scss", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./menu.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+
+/***/ 306:
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(285)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "menu {\n  height: 100%;\n  -webkit-padding-start: 0;\n  -webkit-margin-before: 0;\n  -webkit-margin-after: 0; }\n\n.wrapper {\n  height: 100%;\n  padding-left: 0;\n  -webkit-transition: all 0.5s ease;\n  transition: all 0.5s ease; }\n\n.wrapper.toggled {\n  padding-left: 250px; }\n\n.sidebar-wrapper {\n  z-index: 1000;\n  position: fixed;\n  left: 250px;\n  width: 0;\n  height: 100%;\n  margin-left: -250px;\n  overflow-y: auto;\n  background: .000;\n  -webkit-transition: all 0.5s ease;\n  transition: all 0.5s ease; }\n\n.wrapper.toggled .sidebar-wrapper {\n  width: 250px; }\n\n.page-content-wrapper {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  padding: 0; }\n\n.wrapper.toggled .page-content-wrapper {\n  position: absolute;\n  margin-right: -250px; }\n\n@media (min-width: 768px) {\n  .wrapper {\n    padding-left: 250px; }\n  .wrapper.toggled {\n    padding-left: 0; }\n  .sidebar-wrapper {\n    width: 250px; }\n  .wrapper.toggled .sidebar-wrapper {\n    width: 0; }\n  .page-content-wrapper {\n    padding: 0;\n    position: relative; }\n  .wrapper.toggled .page-content-wrapper {\n    position: relative;\n    margin-right: 0; } }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+
+/***/ 307:
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2005,393 +2697,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 297:
+/***/ 308:
 /***/ function(module, exports) {
 
 	module.exports = " <router-outlet></router-outlet>";
-
-/***/ },
-
-/***/ 542:
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(543);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(286)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./menu.scss", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./menu.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-
-/***/ 543:
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(285)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "menu {\n  height: 100%;\n  -webkit-padding-start: 0;\n  -webkit-margin-before: 0;\n  -webkit-margin-after: 0; }\n\n.wrapper {\n  padding-left: 0;\n  -webkit-transition: all 0.5s ease;\n  transition: all 0.5s ease; }\n\n.wrapper.toggled {\n  padding-left: 250px; }\n\n.sidebar-wrapper {\n  z-index: 1000;\n  position: fixed;\n  left: 250px;\n  width: 0;\n  height: 100%;\n  margin-left: -250px;\n  overflow-y: auto;\n  background: .000;\n  -webkit-transition: all 0.5s ease;\n  transition: all 0.5s ease; }\n\n.wrapper.toggled .sidebar-wrapper {\n  width: 250px; }\n\n.page-content-wrapper {\n  width: 100%;\n  position: absolute;\n  padding: 15px; }\n\n.wrapper.toggled .page-content-wrapper {\n  position: absolute;\n  margin-right: -250px; }\n\n@media (min-width: 768px) {\n  .wrapper {\n    padding-left: 250px; }\n  .wrapper.toggled {\n    padding-left: 0; }\n  .sidebar-wrapper {\n    width: 250px; }\n  .wrapper.toggled .sidebar-wrapper {\n    width: 0; }\n  .page-content-wrapper {\n    padding: 20px;\n    position: relative; }\n  .wrapper.toggled .page-content-wrapper {\n    position: relative;\n    margin-right: 0; } }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-
-/***/ 544:
-/***/ function(module, exports, __webpack_require__) {
-
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(1);
-	var BackImg = (function () {
-	    function BackImg(el, renderer) {
-	        this.el = el;
-	        this.renderer = renderer;
-	        this._emptyImage = 'data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw==';
-	        this.renderer.setElementStyle(this.el.nativeElement, 'background-image', 'none');
-	        this.renderer.setElementStyle(this.el.nativeElement, 'background-repeat', 'no-repeat');
-	        this.renderer.setElementStyle(this.el.nativeElement, 'background-attachment', 'center');
-	        this.renderer.setElementStyle(this.el.nativeElement, 'background-size', 'cover');
-	        this.renderer.setElementStyle(this.el.nativeElement, 'background-position-x', '50%');
-	    }
-	    Object.defineProperty(BackImg.prototype, "color", {
-	        set: function (value) {
-	            if (value) {
-	                this.renderer.setElementStyle(this.el.nativeElement, 'background-color', value);
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(BackImg.prototype, "contain", {
-	        set: function (value) {
-	            if (value) {
-	                this.renderer.setElementStyle(this.el.nativeElement, 'background-color', 'contain');
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(BackImg.prototype, "positionX", {
-	        set: function (value) {
-	            if (value) {
-	                this.renderer.setElementStyle(this.el.nativeElement, 'background-position-x', value);
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(BackImg.prototype, "positionY", {
-	        set: function (value) {
-	            if (value) {
-	                this.renderer.setElementStyle(this.el.nativeElement, 'background-position-y', value);
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(BackImg.prototype, "opacity", {
-	        set: function (value) {
-	            if (value) {
-	                this.renderer.setElementStyle(this.el.nativeElement, 'opacity', value);
-	                this.renderer.setElementStyle(this.el.nativeElement, 'filter', 'alpha(opacity=' + value + ')');
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(BackImg.prototype, "cloudinary", {
-	        set: function (value) {
-	            this._cloudinary = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(BackImg.prototype, "rgbaStart", {
-	        set: function (value) {
-	            this._rgbaStart = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(BackImg.prototype, "rgbaStop", {
-	        set: function (value) {
-	            this._rgbaStop = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(BackImg.prototype, "url", {
-	        set: function (value) {
-	            if (value) {
-	                var prefix = 'data:image/jpg;base64,';
-	                if (value.indexOf('http') === 0 || value.indexOf('data:') === 0) {
-	                    prefix = '';
-	                }
-	                value = value.replace(/[']/g, '%27');
-	                if (this._cloudinary && value.indexOf('res.cloudinary') >= 0) {
-	                    var position = value.indexOf('upload/');
-	                    if (position > 0) {
-	                        position += 7;
-	                        value = [value.slice(0, position), this._cloudinary + '/', value.slice(position)].join('');
-	                    }
-	                }
-	                var backgroundImage = 'url(\'' + prefix + value + '\')';
-	                if (this._rgbaStart && this._rgbaStop) {
-	                    backgroundImage = 'linear-gradient(' + this._rgbaStart + ',' + this._rgbaStop + '), ' + backgroundImage;
-	                }
-	                this.renderer.setElementStyle(this.el.nativeElement, 'background-image', backgroundImage);
-	            }
-	            this.renderer.setElementStyle(this.el.nativeElement, 'src', this._emptyImage);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "color", null);
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "contain", null);
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "positionX", null);
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "positionY", null);
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "opacity", null);
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "cloudinary", null);
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "rgbaStart", null);
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "rgbaStop", null);
-	    __decorate([
-	        core_1.Input('backImg'), 
-	        __metadata('design:type', Object), 
-	        __metadata('design:paramtypes', [Object])
-	    ], BackImg.prototype, "url", null);
-	    BackImg = __decorate([
-	        core_1.Directive({
-	            selector: '[backImg]'
-	        }), 
-	        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
-	    ], BackImg);
-	    return BackImg;
-	})();
-	exports.BackImg = BackImg;
-
-
-/***/ },
-
-/***/ 545:
-/***/ function(module, exports, __webpack_require__) {
-
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(1);
-	var router_1 = __webpack_require__(218);
-	var CampaignsOverview = (function () {
-	    function CampaignsOverview(router) {
-	        this.router = router;
-	    }
-	    CampaignsOverview = __decorate([
-	        core_1.Component({
-	            selector: 'campaigns-overview',
-	            template: __webpack_require__(546),
-	            styles: [__webpack_require__(547).toString()],
-	            directives: [router_1.ROUTER_DIRECTIVES]
-	        }), 
-	        __metadata('design:paramtypes', [router_1.Router])
-	    ], CampaignsOverview);
-	    return CampaignsOverview;
-	})();
-	exports.CampaignsOverview = CampaignsOverview;
-
-
-/***/ },
-
-/***/ 546:
-/***/ function(module, exports) {
-
-	module.exports = "<H1>Campaigns</H1>";
-
-/***/ },
-
-/***/ 547:
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(548);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(286)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./campaigns-overview.scss", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./campaigns-overview.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-
-/***/ 548:
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(285)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "", ""]);
-	
-	// exports
-
-
-/***/ },
-
-/***/ 549:
-/***/ function(module, exports, __webpack_require__) {
-
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(1);
-	var router_1 = __webpack_require__(218);
-	var FormCreator = (function () {
-	    function FormCreator(router) {
-	        this.router = router;
-	    }
-	    FormCreator = __decorate([
-	        core_1.Component({
-	            selector: 'form-creator',
-	            template: __webpack_require__(550),
-	            styles: [__webpack_require__(551).toString()],
-	            directives: [router_1.ROUTER_DIRECTIVES]
-	        }), 
-	        __metadata('design:paramtypes', [router_1.Router])
-	    ], FormCreator);
-	    return FormCreator;
-	})();
-	exports.FormCreator = FormCreator;
-
-
-/***/ },
-
-/***/ 550:
-/***/ function(module, exports) {
-
-	module.exports = "<H1>Form creator</H1>";
-
-/***/ },
-
-/***/ 551:
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(552);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(286)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./form-creator.scss", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/postcss-loader/index.js!./../../../../../node_modules/sass-loader/index.js?sourceMap!./form-creator.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-
-/***/ 552:
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(285)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "", ""]);
-	
-	// exports
-
 
 /***/ }
 

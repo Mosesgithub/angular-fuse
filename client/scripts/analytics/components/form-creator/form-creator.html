@@ -1,1 +1,45 @@
-<H1>Form creator</H1>
+<div class="yoo-form-creator">
+    <div class="left">
+        <div class="pages">
+            <div class="panelheader">
+                PAGES
+                <i class="icon yo-circle-plus balanced font-large"></i>
+            </div>
+            <div class="yoo-formcreator__panelbody">
+                <ul *ngFor="#p of slides">
+                    <li>
+                        <div>{{p.title}}
+                        </div>
+                        <ul>
+                            <li *ngFor="#f of p.items">
+                                <div>{{f.title}}</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="components">
+            <div class="panelheader">
+                COMPONENTS
+                <i class="icon yo-circle-plus balanced font-large"></i>
+            </div>
+            <div class="componentslist" [dragula]="'first-bag'" [dragulaModel]="components">
+
+                <div *ngFor="#c of components" class="component">
+                    {{c.title}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="form" [dragula]="'first-bag'" [dragulaModel]="slides[activeSlide].items">
+            <div *ngFor="#f of slides[activeSlide].items" class="field">
+                {{f.title}}
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        things on the right
+    </div>
+</div>

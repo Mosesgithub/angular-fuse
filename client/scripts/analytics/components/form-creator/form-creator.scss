@@ -1,0 +1,71 @@
+@import "../../../../styles/analytics/_colors.scss";
+@import "../../../../styles/analytics/_mixins.scss";
+.yoo-form-creator {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    .panelheader {
+        font-size: 13px;
+        border-bottom: 1px solid $bordergrey;
+        padding: 10px;
+        line-height: 16px;
+        height: 36px;
+        text-transform: uppercase;
+        position: relative;
+        width: 100%;
+        .icon {
+            position: absolute;
+            right: 10px;
+            top: 8px;
+        }
+    }
+    .left {
+        border: 1px solid $bordergrey;
+        border-left: none;
+        .pages {
+            height: 20%;
+            overflow: scroll;
+            border-bottom: 1px solid $bordergrey;
+        }
+        .components {
+            .componentslist {
+                width: 300px;
+                display: flex;
+                box-orient: horizontal;
+                flex-direction: row;
+                box-lines: multiple;
+                flex-wrap: wrap;
+                .component {
+                    background: blue !important;
+                    max-width: 122px;
+                    background: $light;
+                    width: 122px;
+                    height: 106px;
+                    margin-right: 2px;
+                    list-style: none;
+                    line-height: 45px;
+                    margin-left: 0px;
+                    cursor: pointer;
+                }
+                .field {
+                    background: red !important;
+                    max-width: 122px;
+                    background: $light;
+                    width: 122px;
+                    height: 106px;
+                    margin-right: 2px;
+                    list-style: none;
+                    line-height: 45px;
+                    margin-left: 0px;
+                }
+            }
+        }
+    }
+    .center {
+        .form {}
+    }
+    .right {
+        border-right: none;
+        border: 1px solid $bordergrey;
+    }
+}
