@@ -1,7 +1,7 @@
 /* beautify ignore:start */
 import {Injectable} from 'angular2/src/core/di';
 //import {createRenderView} from 'angular2/src/core/render/view_factory'; //NodeFactory
-import {Renderer, RenderComponentType, RootRenderer} from 'angular2/src/core/render/api';
+import {Renderer, RenderComponentType, RootRenderer, RenderDebugInfo} from 'angular2/src/core/render/api';
 import {isBlank, isPresent} from 'angular2/src/facade/lang';
 //import {DefaultProtoViewRef, DefaultRenderView, DefaultRenderFragmentRef} from 'angular2/src/core/render/view';
 //import {DOM} from 'angular2/src/platform/dom/dom_adapter';
@@ -135,12 +135,15 @@ export class FuseRenderer implements Renderer {
         }
     }
 
-    public listen(renderElement: Element, name: string, callback: Function) {
+    public listen(renderElement: Element, name: string, callback: Function): Function {
         this.consoleLog('listen', arguments);
         let zonedCallback = global['zone'].bind(callback);
         if (window.fusejs) {
             window.fusejs.angularRenderer.setEventListener(renderElement.id, renderElement.type, name, zonedCallback);
         }
+        return function() {
+            console.log('fuse renderer needs to implement the listen remove function ' + name);
+        };
     }
 
     public listenGlobal(target: string, name: string, callback: Function): Function {
@@ -183,6 +186,10 @@ export class FuseRenderer implements Renderer {
 
     public setText(renderNode: Element, text: string) {
         this.consoleLog('setText', arguments);
+    }
+
+    public setElementDebugInfo(renderElement: Element, info: RenderDebugInfo) {
+        //
     }
 
     private consoleLog(text: string, args: any) {

@@ -1,3 +1,6 @@
- <section *ngIf="campaigns" class="tiles-container">
+<!-- <div slimscroll background="#333" opacity="0.6" position="right" width="7px" border-radius="5px" style="height:600px">
+ -->
+<div class="tiles-container">
     <campaign-tile *ngFor="#c of campaigns" [data]="c"></campaign-tile>
-</section>
+</div>
+<!-- </div> -->

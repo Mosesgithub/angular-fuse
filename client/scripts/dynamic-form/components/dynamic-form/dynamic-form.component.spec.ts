@@ -6,15 +6,15 @@ import {
 	beforeEachProviders,
 	TestComponentBuilder
 } from 'angular2/testing';
-import {LoginComponent} from './login.component.ts';
+import {DynamicFormComponent} from './dynamic-form.component.ts';
 /* beautify ignore:end */
 
-describe('Component: LoginComponent', () => {
+describe('Component: DynamicFormComponent', () => {
 
     beforeEachProviders(() => []);
 
     it('should be defined', injectAsync([TestComponentBuilder], (tcb) => {
-        return tcb.createAsync(LoginComponent)
+        return tcb.createAsync(DynamicFormComponent)
             .then((fixture) => {
                 fixture.detectChanges();
                 let compiled = fixture.debugElement.nativeElement;

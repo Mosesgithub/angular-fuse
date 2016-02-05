@@ -1,7 +1,7 @@
 /* beautify ignore:start */
 import {Component, Output, EventEmitter} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
-//import {Grid} from '../grid/grid';
+import {Grid} from '../grid/grid';
 import {NavBar} from '../navbar/navbar';
 import {MenuContent} from '../menucontent/menucontent';
 import {CampaignsOverview} from '../campaigns-overview/campaigns-overview';
@@ -22,6 +22,10 @@ import {FormCreator} from '../form-creator/form-creator';
         path: '/form-creator',
         name: 'FormCreator',
         component: FormCreator
+    }, {
+        path: '/grid',
+        name: 'Grid',
+        component: Grid
     }])
 
 export class Menu {

@@ -30,4 +30,15 @@ export class DashboardBroker {
             return res.data;
         });
     }
+
+    getAllTags(collectionName: string, search: string): Promise<any> {
+        let url = this.config.apiUrl + '/api/businesslogic/getCurrentSession';
+        return this.requestor.post(url, {
+            collectionName: collectionName,
+            search: search
+        }).then(res => {
+            return res.data;
+        });
+    }
+
 }

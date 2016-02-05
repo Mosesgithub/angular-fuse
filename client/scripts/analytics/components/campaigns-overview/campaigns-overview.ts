@@ -7,13 +7,16 @@ import {MissionsBroker} from '../../../yoobic/services/missionsbroker';
 import {Requestor} from '../../../yoobic/services/requestor';
 import {CampaignTile} from '../campaign-tile/campaign-tile';
 import {Menu} from '../menu/menu';
+
+import {SlimScroll} from 'ng2-slimscroll';
+
 /* beautify ignore:end */
 
 @Component({
     selector: 'campaigns-overview',
     template: require('./campaigns-overview.html'),
     styles: [require('./campaigns-overview.scss').toString()],
-    directives: [ROUTER_DIRECTIVES, CampaignTile],
+    directives: [ROUTER_DIRECTIVES, CampaignTile, SlimScroll],
     providers: [DashboardBroker, MissionsBroker, Requestor, NgFor]
 })
 
@@ -30,7 +33,7 @@ export class CampaignsOverview {
     }
 
     ngOnDestroy() {
-        this.subscription.dispose();
+        this.subscription.unsubscribe();
     }
 
     refreshData() {

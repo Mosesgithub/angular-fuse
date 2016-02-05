@@ -14,8 +14,9 @@ import 'angular2/http';
 
 // Other vendors for example jQuery or Lodash
 import 'lodash';
-(<any>window).ng = { core: core };
-(<any>window).ag = require('ag-grid');
+//(<any>window).ng = { core: core };
+(<any>window).agGrid = require('ag-grid');
+(<any>window).agGrid.initialiseAgGridWithAngular2({ core: core });
 //window.jQuery = require('jquery');
 //require('bootstrap');
 

@@ -4,7 +4,7 @@ import {Component} from 'angular2/core';
 @Component({
     selector: 'grid',
     template: require('./grid.html'),
-    directives: [(<any>window).ag.grid.AgGridNg2]
+    directives: [(<any>window).agGrid.AgGridNg2]
 })
 
 export class Grid {
@@ -45,7 +45,7 @@ export class Grid {
 
     onReady() {
         this.gridOptions.api.sizeColumnsToFit();
-        this.gridOptions.api.showLoadingOverlay();
+        //this.gridOptions.api.showLoadingOverlay();
     }
 
 }

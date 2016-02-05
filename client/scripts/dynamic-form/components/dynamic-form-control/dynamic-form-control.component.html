@@ -1,0 +1,33 @@
+<div *ngIf="isVisible">
+    <div class="form-group">
+        <span [ngSwitch]="htmlElementType">
+            <template ngSwitchWhen="input">
+                <label [attr.for]="field.name">{{field.title||field.name}}</label>
+                <input id="field.name"  class="form-control" [attr.type]="computeInputSubType()" [(ngModel)]="data[field.name]" [ngFormControl]="form.controls[field.name]" [attr.placeholder]="field.display">
+            </template>
+            <template ngSwitchWhen="checkbox">
+                <div class="checkbox">
+                    <label for="field.name">
+                        <input id="field.name" class="form-control" type="checkbox" [(ngModel)]="data[field.name]" [ngFormControl]="form.controls[field.name]" >{{field.title||field.name}}
+                    </label>
+                </div>
+            </template>
+            <template ngSwitchWhen="option">
+                <label [attr.for]="field.name">{{field.title||field.name}}</label>
+                <select class="form-control" [(ngModel)]="data[field.name]" [ngFormControl]="form.controls[field.name]" >
+                    <option *ngFor="#key of field.values" [value]="key">{{key}}</option>
+                </select>
+            </template>
+            <template ngSwitchDefault>
+                <span>Oops! This control type is unknown. Contact the creator</span>
+            </template>
+        </span>
+    </div>
+    <div [hidden]="form.controls[field.name].valid || form.controls[field.name].pristine" class="alert alert-danger">
+        {{field.name}} is required
+    </div>
+</div>
+<!-- <div *ngIf="!field.visible">
+    There is a hidden control here because the field is set to invisible
+    <input type="hidden" [(ngModel)]="data[field.name]" />
+</div> -->

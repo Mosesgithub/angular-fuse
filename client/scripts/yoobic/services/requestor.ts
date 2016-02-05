@@ -13,9 +13,11 @@ export class Requestor {
 
     post(url, body): any {
         return new Promise((resolve, reject) => {
-            this.http.post(url, body ? JSON.stringify(body) : null, {
-                headers: this._buildHeaders()
-            })
+            this.http.post(url, body ? JSON.stringify({
+                params: body
+            }) : null, {
+                    headers: this._buildHeaders()
+                })
                 .map(res => res.json())
                 .subscribe(
                 res => resolve(res),

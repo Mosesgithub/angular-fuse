@@ -6,15 +6,15 @@ import {
 	beforeEachProviders,
 	TestComponentBuilder
 } from 'angular2/testing';
-import {AppComponent} from './app.component.ts';
+import {DynamicFormControlComponent} from './dynamic-form-control.component.ts';
 /* beautify ignore:end */
 
-describe('Component: AppComponent', () => {
+describe('Component: DynamicFormControlComponent', () => {
 
     beforeEachProviders(() => []);
 
     it('should be defined', injectAsync([TestComponentBuilder], (tcb) => {
-        return tcb.createAsync(AppComponent)
+        return tcb.createAsync(DynamicFormControlComponent)
             .then((fixture) => {
                 fixture.detectChanges();
                 let compiled = fixture.debugElement.nativeElement;
